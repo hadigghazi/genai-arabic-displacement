@@ -1,0 +1,11 @@
+# The environment that produced results/ (Anaconda, Python 3.13.5). SPSS 23 runs spss/*.sps.
+numpy==2.2.4
+scipy==1.15.3
+pandas==2.2.3
+statsmodels==0.14.4
+patsy==1.0.1
+scikit-learn==1.6.1
+imbalanced-learn==0.13.0
+joblib==1.4.2
+matplotlib==3.10.0
+openpyxl

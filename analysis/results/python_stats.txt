@@ -1,0 +1,401 @@
+================================================================================================
+Python statistics. Primary sample: core sample (n=37). Covariates: Age25, EventMove.
+Decisions and their alternatives: analysis/ANALYSIS-DECISIONS.md
+p-values are two-sided except Page's trend test (one-sided: the order is predicted).
+================================================================================================
+
+PARTICIPANTS
+    submitted 40 -> consented 40 -> eligible 40 -> analysed 37
+    outside the primary sample: ids [21, 25, 38] (21 grew up and lives outside the Arab world; 25 moved country since 2022; 38 moved and now lives outside)
+    analysed sample: grew up in Lebanon 35, the Gulf 2; live in Lebanon 37; under 25: 32; computing/IT: 26; wrote Fusha before AI (yes or sometimes): 28
+    EventMove in the analysed sample = started studying or working in English: n=8 (nobody ticked "moved")
+    same work/study setting throughout the AI period: strict n=8; counting graduation as the same setting n=16
+    straight-liners (every change row "much less"): ids [13, 29]. Id 29 has only 5 applicable domains (work/study, formal texts and religion marked not applicable), so it has no displacement score and no work/study or Fusha change: it enters no confirmatory test.
+    power: with n=37, the smallest correlation detectable at 80% power (alpha .05, two-sided) is r = 0.45
+
+RQ1 DOMAIN PROFILE (core sample), descriptive. d_X = AI-attributed change.
+    z carries direction (negative = less Arabic); r = z / sqrt(n). The 8-domain Holm column is a strict
+    check on the profile, not a confirmatory family.
+    domain       n  less% [95% CI]   same%   more%   mean       z        p  p_Holm8      r
+    WorkStudy   36   69 [53, 82]      31       0  -0.92   -4.56   <.0001   <.0001  -0.76
+    Writing     37   57 [41, 71]      41       3  -0.84   -4.03   <.0001   0.0004  -0.66
+    Self        37   46 [31, 62]      54       0  -0.62   -3.76   0.0002   0.0010  -0.62
+    Personal    36   33 [20, 50]      67       0  -0.44   -3.18   0.0005   0.0023  -0.53
+    Family      36   19 [10, 35]      78       3  -0.22   -2.13   0.0547   0.1094  -0.35
+    Fusha       33   48 [33, 65]      42       9  -0.52   -3.04   0.0024   0.0071  -0.53
+    Religion    32    9 [ 3, 24]      81       9  +0.00   +0.00   1.0000   1.0000  +0.00
+    Consume     36   50 [34, 66]      44       6  -0.58   -3.50   0.0005   0.0023  -0.58
+    substitution (did something in English although Arabic was possible, at least sometimes): 25/37 = 68% [51, 80]
+    domains lost per person (applicable domains only): {0: 6, 1: 6, 2: 4, 3: 3, 4: 8, 5: 3, 6: 3, 7: 1, 8: 3} (mean 3.22)
+
+================================================================================================
+CONFIRMATORY
+================================================================================================
+
+FAMILY A (core sample) (Holm across H1a, H1b, H2a, H2b)
+    H1a Fusha       Wilcoxon z=-3.04 p=0.0024 (asymptotic) r=-0.53 n=33 | exact sign test 16 less vs 3 more p=0.0044
+    H1b work/study  Wilcoxon z=-4.56 p=<.0001 (asymptotic) r=-0.76 n=36 | exact sign test 25 less vs 0 more p=<.0001
+    H2a Fishman order, predicted rising loss: family < personal < work/study
+    Page                          n=34  L=441.0  one-sided exact p=<.0001   (complete-case means: Disp_Family +0.15, Disp_Personal +0.41, Disp_WorkStudy +0.97)
+        Friedman chi2(2)=30.16 p=<.0001 Kendall W=0.44 n=34 | work/study vs family Wilcoxon z=+4.32 p=<.0001 (asymptotic)
+    H2b Fusha vs dialect Wilcoxon on (Fusha loss - dialect loss) z=+1.14 p=0.2560 (asymptotic) r=+0.20 n=33 (mean difference +0.12)
+    Holm: H1a p=0.0024 -> 0.0048   H1b p=<.0001 -> <.0001   H2a p=<.0001 -> <.0001   H2b p=0.2560 -> 0.2560
+
+H3 (core sample, HC3)
+    n=36  R2=0.272  adj R2=0.151  | HC3 Wald F(5,30)=3.79 p=0.0088
+    Intercept      b=+0.044  HC3 SE=0.507  t(30)=+0.09  p=0.9311  95% CI [-0.991, +1.079]
+    AI_Intensity   b=-0.006  HC3 SE=0.099  t(30)=-0.07  p=0.9482  95% CI [-0.208, +0.195]  beta=-0.01
+    EnglishShare   b=+0.218  HC3 SE=0.104  t(30)=+2.09  p=0.0454  95% CI [+0.005, +0.430]  beta=+0.37
+    QualityGap     b=-0.116  HC3 SE=0.139  t(30)=-0.83  p=0.4115  95% CI [-0.400, +0.168]  beta=-0.14
+    Age25          b=-0.653  HC3 SE=0.181  t(30)=-3.60  p=0.0011  95% CI [-1.023, -0.282]  beta=-0.44
+    EventMove      b=+0.183  HC3 SE=0.207  t(30)=+0.88  p=0.3835  95% CI [-0.240, +0.606]  beta=+0.14
+    joint test of the three H3 predictors (HC3): F(3,30)=1.46 p=0.2444
+
+H4 (core sample, HC3)
+    n=36  R2=0.347  adj R2=0.286  | HC3 Wald F(3,32)=3.71 p=0.0214
+    Intercept      b=-0.004  HC3 SE=0.067  t(32)=-0.07  p=0.9473  95% CI [-0.141, +0.132]
+    Displacement   b=+0.444  HC3 SE=0.151  t(32)=+2.94  p=0.0060  95% CI [+0.136, +0.751]  beta=+0.58
+    Age25          b=+0.327  HC3 SE=0.246  t(32)=+1.33  p=0.1921  95% CI [-0.173, +0.827]  beta=+0.29
+    EventMove      b=-0.335  HC3 SE=0.134  t(32)=-2.49  p=0.0182  95% CI [-0.608, -0.061]  beta=-0.33
+    Holm family B: intensity p=0.9482 -> 0.9482   English share p=0.0454 -> 0.1363   quality gap p=0.4115 -> 0.8231   H4 p=0.0060 -> 0.0242
+    wild bootstrap (restricted, Rademacher, HC3-t, 9999 reps): intensity p=0.9429 -> Holm 0.9429   English share p=0.0275 -> Holm 0.0825   quality gap p=0.3375 -> Holm 0.6750   H4 p=0.0124 -> Holm 0.0496
+
+H5  X = AI_Intensity, M = Displacement, Y = AbilityDecline (PROCESS model 4 logic). Underpowered at this n.
+
+    primary
+    n=36  covariates: Age25, EventMove
+    a  (X->M)     = -0.056  HC3 p=0.5548
+    b  (M->Y | X) = +0.433  HC3 p=0.0048
+    c' (direct)   = -0.080  HC3 p=0.4166   c (total) = -0.104
+    indirect a*b  = -0.0242  95% percentile CI [-0.1380, +0.0408]  (5000 resamples, seed 20261002)  -> includes 0
+    standardized indirect = -0.050
+
+================================================================================================
+ROBUSTNESS
+================================================================================================
+
+(a) AI or technology in general? Social media is ONE overall question; the AI scores average domains,
+    so the comparison is a bracket, not a verdict. SocialLoss = -SocialMedia (higher = more loss).
+    Displacement  AI +0.49 vs social media +0.72 | Spearman rho=0.56 p=0.0004 | paired Wilcoxon z=-2.46 p=0.0140 n=36
+    FormalLoss    AI +0.72 vs social media +0.72 | Spearman rho=0.49 p=0.0024 | paired Wilcoxon z=-0.46 p=0.6477 n=36
+    exploratory split: displacement among those who also blame social media n=21 mean +0.74 | who do not n=15 mean +0.14 (vs 0: z=+1.25 p=0.2510) | Mann-Whitney Z=+3.70 p=0.0002
+
+    H3 + social-media attribution as a covariate
+    n=36  R2=0.337  adj R2=0.199  | HC3 Wald F(6,29)=4.34 p=0.0031
+    Intercept      b=-0.204  HC3 SE=0.512  t(29)=-0.40  p=0.6930  95% CI [-1.251, +0.843]
+    AI_Intensity   b=-0.002  HC3 SE=0.091  t(29)=-0.03  p=0.9799  95% CI [-0.189, +0.184]  beta=-0.00
+    EnglishShare   b=+0.195  HC3 SE=0.114  t(29)=+1.71  p=0.0982  95% CI [-0.039, +0.429]  beta=+0.33
+    QualityGap     b=-0.054  HC3 SE=0.143  t(29)=-0.38  p=0.7073  95% CI [-0.346, +0.238]  beta=-0.07
+    Age25          b=-0.490  HC3 SE=0.260  t(29)=-1.88  p=0.0698  95% CI [-1.023, +0.042]  beta=-0.33
+    EventMove      b=+0.078  HC3 SE=0.172  t(29)=+0.45  p=0.6528  95% CI [-0.274, +0.430]  beta=+0.06
+    SocialLoss     b=+0.165  HC3 SE=0.184  t(29)=+0.89  p=0.3786  95% CI [-0.212, +0.542]  beta=+0.28
+
+(b) Binary robustness: Firth logistic regression of NetLoss (displacement above 0) on the H3 predictors and covariates
+    Intercept      b=+0.662  OR=1.94  penalised-LR p=1.0000
+    AI_Intensity   b=+0.116  OR=1.12  penalised-LR p=0.3548
+    EnglishShare   b=+0.133  OR=1.14  penalised-LR p=0.2576
+    QualityGap     b=+0.061  OR=1.06  penalised-LR p=0.6124
+    Age25          b=-3.211  OR=0.04  penalised-LR p=0.0097
+    EventMove      b=+1.567  OR=4.79  penalised-LR p=0.6361
+    n=36  NetLoss=1 for 28, 0 for 8  (events per predictor 1.6: indicative only)
+
+(c) The other sample: all respondents, n=40 (same models)
+
+FAMILY A (all respondents) (Holm across H1a, H1b, H2a, H2b)
+    H1a Fusha       Wilcoxon z=-2.48 p=0.0131 (asymptotic) r=-0.41 n=36 | exact sign test 16 less vs 4 more p=0.0118
+    H1b work/study  Wilcoxon z=-4.15 p=<.0001 (asymptotic) r=-0.67 n=39 | exact sign test 26 less vs 1 more p=<.0001
+    H2a Fishman order, predicted rising loss: family < personal < work/study
+    Page                          n=37  L=477.0  one-sided exact p=<.0001   (complete-case means: Disp_Family +0.16, Disp_Personal +0.32, Disp_WorkStudy +0.86)
+        Friedman chi2(2)=28.43 p=<.0001 Kendall W=0.38 n=37 | work/study vs family Wilcoxon z=+3.77 p=0.0002 (asymptotic)
+    H2b Fusha vs dialect Wilcoxon on (Fusha loss - dialect loss) z=+0.71 p=0.4749 (asymptotic) r=+0.12 n=36 (mean difference +0.07)
+    Holm: H1a p=0.0131 -> 0.0262   H1b p=<.0001 -> <.0001   H2a p=<.0001 -> <.0001   H2b p=0.4749 -> 0.4749
+
+H3 (all respondents, HC3)
+    n=39  R2=0.290  adj R2=0.182  | HC3 Wald F(5,33)=3.27 p=0.0166
+    Intercept      b=-0.300  HC3 SE=0.671  t(33)=-0.45  p=0.6574  95% CI [-1.664, +1.064]
+    AI_Intensity   b=-0.031  HC3 SE=0.112  t(33)=-0.28  p=0.7818  95% CI [-0.260, +0.197]  beta=-0.04
+    EnglishShare   b=+0.300  HC3 SE=0.145  t(33)=+2.06  p=0.0473  95% CI [+0.004, +0.596]  beta=+0.47
+    QualityGap     b=-0.141  HC3 SE=0.149  t(33)=-0.95  p=0.3501  95% CI [-0.443, +0.162]  beta=-0.15
+    Age25          b=-0.608  HC3 SE=0.197  t(33)=-3.09  p=0.0040  95% CI [-1.008, -0.208]  beta=-0.34
+    EventMove      b=+0.265  HC3 SE=0.209  t(33)=+1.27  p=0.2139  95% CI [-0.160, +0.689]  beta=+0.17
+    joint test of the three H3 predictors (HC3): F(3,33)=1.55 p=0.2205
+
+H4 (all respondents, HC3)
+    n=39  R2=0.088  adj R2=0.009  | HC3 Wald F(3,35)=3.11 p=0.0389
+    Intercept      b=+0.213  HC3 SE=0.209  t(35)=+1.02  p=0.3145  95% CI [-0.211, +0.638]
+    Displacement   b=+0.120  HC3 SE=0.340  t(35)=+0.35  p=0.7260  95% CI [-0.571, +0.811]  beta=+0.17
+    Age25          b=+0.108  HC3 SE=0.317  t(35)=+0.34  p=0.7354  95% CI [-0.535, +0.751]  beta=+0.09
+    EventMove      b=-0.311  HC3 SE=0.124  t(35)=-2.50  p=0.0174  95% CI [-0.563, -0.058]  beta=-0.28
+    Holm family B: intensity p=0.7818 -> 1.0000   English share p=0.0473 -> 0.1892   quality gap p=0.3501 -> 1.0000   H4 p=0.7260 -> 1.0000
+
+    H5 (all respondents)
+    n=39  covariates: Age25, EventMove
+    a  (X->M)     = -0.061  HC3 p=0.5481
+    b  (M->Y | X) = +0.109  HC3 p=0.7464
+    c' (direct)   = -0.106  HC3 p=0.3450   c (total) = -0.113
+    indirect a*b  = -0.0067  95% percentile CI [-0.1102, +0.0183]  (5000 resamples, seed 20261002)  -> includes 0
+    standardized indirect = -0.013
+
+    H4 influence (core sample): largest Cook's distances (rule of thumb 4/n = 0.11): id 3: 0.39, id 28: 0.39, id 32: 0.09
+      without id(s) 3              b=+0.320 p=0.0175 n=35
+      without id(s) 28             b=+0.438 p=0.0080 n=35
+      without id(s) 3,28           b=+0.313 p=0.0267 n=34
+    H4 influence (all respondents): largest Cook's distances (rule of thumb 4/n = 0.10): id 21: 1.78, id 3: 0.29, id 28: 0.25
+      without id(s) 21             b=+0.427 p=0.0076 n=38
+      without id(s) 3              b=+0.013 p=0.9696 n=38
+      without id(s) 21,3,28,13     b=+0.182 p=0.0888 n=35
+
+(d) Change of setting as a rival explanation for the work/study loss
+    work/study, same setting (strict, stable)              n= 8 mean -0.50 | Wilcoxon z=-1.63 p=0.2500 (exact) | sign 3 less vs 0 more p=0.2500
+    work/study, same setting (graduation counted as same)  n=16 mean -0.69 | Wilcoxon z=-2.60 p=0.0078 (exact) | sign 8 less vs 0 more p=0.0078
+    work/study, setting changed (strict)                   n=28 mean -1.04 | Wilcoxon z=-4.28 p=<.0001 (asymptotic) | sign 22 less vs 0 more p=<.0001
+    work/study, did not start English study/work           n=29 mean -0.83 | Wilcoxon z=-4.02 p=<.0001 (asymptotic) | sign 19 less vs 0 more p=<.0001
+    stable vs changed, Mann-Whitney: all Z=+1.87 p=0.0613 | under 25 only (means -1.00, n=4 vs -1.04, n=28) Z=+0.10 p=0.9229
+    (4 of the 8 strictly stable respondents are aged 25+, and those report no change in any domain)
+
+    work/study change on stable setting, adjusted for age
+    n=36  R2=0.170  adj R2=0.119  | HC3 Wald F(2,33)=7.60 p=0.0019
+    Intercept      b=-1.060  HC3 SE=0.138  t(33)=-7.71  p=<.0001  95% CI [-1.340, -0.780]
+    stable         b=+0.217  HC3 SE=0.429  t(33)=+0.51  p=0.6166  95% CI [-0.656, +1.090]  beta=+0.12
+    Age25          b=+0.687  HC3 SE=0.447  t(33)=+1.54  p=0.1343  95% CI [-0.223, +1.597]  beta=+0.33
+    Page (strictly stable only)   n= 7  L=88.5  one-sided exact p=0.0617   (complete-case means: Disp_Family +0.00, Disp_Personal +0.29, Disp_WorkStudy +0.57)
+
+(e) Without the straight-liners (in practice id 13: id 29 is already outside every confirmatory test)
+    H1a Fusha: Wilcoxon z=-2.88 p=0.0040 n=32
+
+H3 (without straight-liners, HC3)
+    n=35  R2=0.271  adj R2=0.145  | HC3 Wald F(5,29)=4.15 p=0.0058
+    Intercept      b=-0.036  HC3 SE=0.486  t(29)=-0.07  p=0.9414  95% CI [-1.029, +0.957]
+    AI_Intensity   b=-0.014  HC3 SE=0.101  t(29)=-0.13  p=0.8945  95% CI [-0.221, +0.194]  beta=-0.02
+    EnglishShare   b=+0.160  HC3 SE=0.086  t(29)=+1.87  p=0.0714  95% CI [-0.015, +0.335]  beta=+0.31
+    QualityGap     b=-0.041  HC3 SE=0.102  t(29)=-0.41  p=0.6871  95% CI [-0.250, +0.167]  beta=-0.06
+    Age25          b=-0.569  HC3 SE=0.143  t(29)=-3.97  p=0.0004  95% CI [-0.863, -0.276]  beta=-0.44
+    EventMove      b=+0.211  HC3 SE=0.208  t(29)=+1.01  p=0.3186  95% CI [-0.215, +0.637]  beta=+0.19
+    joint test of the three H3 predictors (HC3): F(3,29)=1.17 p=0.3372
+
+H4 (without straight-liners, HC3)
+    n=35  R2=0.263  adj R2=0.192  | HC3 Wald F(3,31)=1.81 p=0.1652
+    Intercept      b=+0.005  HC3 SE=0.078  t(31)=+0.07  p=0.9453  95% CI [-0.154, +0.165]
+    Displacement   b=+0.414  HC3 SE=0.227  t(31)=+1.82  p=0.0779  95% CI [-0.049, +0.877]  beta=+0.50
+    Age25          b=+0.314  HC3 SE=0.256  t(31)=+1.23  p=0.2297  95% CI [-0.209, +0.836]  beta=+0.29
+    EventMove      b=-0.324  HC3 SE=0.149  t(31)=-2.18  p=0.0369  95% CI [-0.627, -0.021]  beta=-0.34
+    Holm family B: intensity p=0.8945 -> 1.0000   English share p=0.0714 -> 0.2854   quality gap p=0.6871 -> 1.0000   H4 p=0.0779 -> 0.2854
+
+(f) Covariate sets
+
+H3 (no covariates, HC3)
+    n=36  R2=0.123  adj R2=0.040  | HC3 Wald F(3,32)=1.60 p=0.2080
+    Intercept      b=-0.498  HC3 SE=0.516  t(32)=-0.97  p=0.3414  95% CI [-1.549, +0.553]
+    AI_Intensity   b=-0.035  HC3 SE=0.099  t(32)=-0.35  p=0.7290  95% CI [-0.237, +0.167]  beta=-0.05
+    EnglishShare   b=+0.186  HC3 SE=0.107  t(32)=+1.74  p=0.0909  95% CI [-0.031, +0.404]  beta=+0.32
+    QualityGap     b=+0.056  HC3 SE=0.128  t(32)=+0.44  p=0.6627  95% CI [-0.204, +0.317]  beta=+0.07
+    joint test of the three H3 predictors (HC3): F(3,32)=1.60 p=0.2080
+
+H4 (no covariates, HC3)
+    n=36  R2=0.208  adj R2=0.185  | HC3 Wald F(1,34)=4.37 p=0.0440
+    Intercept      b=+0.022  HC3 SE=0.075  t(34)=+0.30  p=0.7678  95% CI [-0.130, +0.175]
+    Displacement   b=+0.349  HC3 SE=0.167  t(34)=+2.09  p=0.0440  95% CI [+0.010, +0.689]  beta=+0.46
+    Holm family B: intensity p=0.7290 -> 1.0000   English share p=0.0909 -> 0.2727   quality gap p=0.6627 -> 1.0000   H4 p=0.0440 -> 0.1762
+
+H3 (age only: the 27 Sep plan's small-sample rule, HC3)
+    n=36  R2=0.257  adj R2=0.162  | HC3 Wald F(4,31)=4.10 p=0.0088
+    Intercept      b=+0.001  HC3 SE=0.498  t(31)=+0.00  p=0.9986  95% CI [-1.014, +1.016]
+    AI_Intensity   b=+0.028  HC3 SE=0.086  t(31)=+0.32  p=0.7483  95% CI [-0.147, +0.202]  beta=+0.04
+    EnglishShare   b=+0.224  HC3 SE=0.103  t(31)=+2.17  p=0.0379  95% CI [+0.013, +0.436]  beta=+0.38
+    QualityGap     b=-0.103  HC3 SE=0.134  t(31)=-0.77  p=0.4471  95% CI [-0.376, +0.170]  beta=-0.13
+    Age25          b=-0.606  HC3 SE=0.189  t(31)=-3.21  p=0.0031  95% CI [-0.991, -0.221]  beta=-0.41
+    joint test of the three H3 predictors (HC3): F(3,31)=1.70 p=0.1881
+
+H4 (age only: the 27 Sep plan's small-sample rule, HC3)
+    n=36  R2=0.242  adj R2=0.196  | HC3 Wald F(2,33)=3.04 p=0.0616
+    Intercept      b=-0.036  HC3 SE=0.071  t(33)=-0.51  p=0.6135  95% CI [-0.180, +0.108]
+    Displacement   b=+0.404  HC3 SE=0.168  t(33)=+2.41  p=0.0217  95% CI [+0.063, +0.745]  beta=+0.53
+    Age25          b=+0.226  HC3 SE=0.235  t(33)=+0.96  p=0.3443  95% CI [-0.253, +0.705]  beta=+0.20
+    Holm family B: intensity p=0.7483 -> 0.8941   English share p=0.0379 -> 0.1136   quality gap p=0.4471 -> 0.8941   H4 p=0.0217 -> 0.0868
+
+H3 (+ computing field and AI tenure, HC3)
+    n=36  R2=0.378  adj R2=0.222  | HC3 Wald F(7,28)=2.82 p=0.0236
+    Intercept      b=-0.325  HC3 SE=0.626  t(28)=-0.52  p=0.6083  95% CI [-1.608, +0.959]
+    AI_Intensity   b=+0.002  HC3 SE=0.112  t(28)=+0.01  p=0.9890  95% CI [-0.228, +0.231]  beta=+0.00
+    EnglishShare   b=+0.266  HC3 SE=0.122  t(28)=+2.18  p=0.0375  95% CI [+0.017, +0.515]  beta=+0.46
+    QualityGap     b=-0.166  HC3 SE=0.150  t(28)=-1.11  p=0.2777  95% CI [-0.473, +0.141]  beta=-0.20
+    Age25          b=-0.554  HC3 SE=0.168  t(28)=-3.30  p=0.0026  95% CI [-0.898, -0.210]  beta=-0.37
+    EventMove      b=+0.228  HC3 SE=0.223  t(28)=+1.02  p=0.3156  95% CI [-0.229, +0.684]  beta=+0.17
+    Computing      b=-0.370  HC3 SE=0.265  t(28)=-1.40  p=0.1735  95% CI [-0.913, +0.173]  beta=-0.32
+    AI_TenureRank  b=+0.166  HC3 SE=0.134  t(28)=+1.24  p=0.2264  95% CI [-0.109, +0.441]  beta=+0.28
+    joint test of the three H3 predictors (HC3): F(3,28)=1.63 p=0.2052
+
+H4 (+ computing field and AI tenure, HC3)
+    n=36  R2=0.386  adj R2=0.284  | HC3 Wald F(5,30)=2.41 p=0.0594
+    Intercept      b=-0.038  HC3 SE=0.263  t(30)=-0.14  p=0.8873  95% CI [-0.575, +0.500]
+    Displacement   b=+0.487  HC3 SE=0.175  t(30)=+2.78  p=0.0093  95% CI [+0.129, +0.844]  beta=+0.64
+    Age25          b=+0.325  HC3 SE=0.256  t(30)=+1.27  p=0.2136  95% CI [-0.197, +0.847]  beta=+0.28
+    EventMove      b=-0.394  HC3 SE=0.173  t(30)=-2.27  p=0.0306  95% CI [-0.748, -0.039]  beta=-0.39
+    Computing      b=+0.200  HC3 SE=0.167  t(30)=+1.20  p=0.2399  95% CI [-0.141, +0.540]  beta=+0.23
+    AI_TenureRank  b=-0.034  HC3 SE=0.070  t(30)=-0.48  p=0.6332  95% CI [-0.178, +0.110]  beta=-0.07
+    Holm family B: intensity p=0.9890 -> 0.9890   English share p=0.0375 -> 0.1124   quality gap p=0.2777 -> 0.5554   H4 p=0.0093 -> 0.0372
+
+H3 (+ English proficiency, HC3)
+    n=36  R2=0.305  adj R2=0.161  | HC3 Wald F(6,29)=2.77 p=0.0299
+    Intercept      b=-0.004  HC3 SE=0.512  t(29)=-0.01  p=0.9933  95% CI [-1.051, +1.043]
+    AI_Intensity   b=+0.020  HC3 SE=0.103  t(29)=+0.19  p=0.8472  95% CI [-0.191, +0.231]  beta=+0.03
+    EnglishShare   b=+0.150  HC3 SE=0.119  t(29)=+1.26  p=0.2192  95% CI [-0.094, +0.394]  beta=+0.26
+    QualityGap     b=-0.135  HC3 SE=0.146  t(29)=-0.93  p=0.3622  95% CI [-0.433, +0.163]  beta=-0.17
+    Age25          b=-0.709  HC3 SE=0.209  t(29)=-3.39  p=0.0020  95% CI [-1.137, -0.282]  beta=-0.47
+    EventMove      b=+0.211  HC3 SE=0.247  t(29)=+0.86  p=0.3988  95% CI [-0.293, +0.716]  beta=+0.16
+    Eng_Prof       b=+0.114  HC3 SE=0.114  t(29)=+1.00  p=0.3245  95% CI [-0.119, +0.347]  beta=+0.22
+    joint test of the three H3 predictors (HC3): F(3,29)=0.63 p=0.6028
+
+H4 (+ English proficiency, HC3)
+    n=36  R2=0.358  adj R2=0.275  | HC3 Wald F(4,31)=3.31 p=0.0229
+    Intercept      b=-0.145  HC3 SE=0.194  t(31)=-0.75  p=0.4588  95% CI [-0.540, +0.250]
+    Displacement   b=+0.410  HC3 SE=0.134  t(31)=+3.07  p=0.0044  95% CI [+0.138, +0.682]  beta=+0.54
+    Age25          b=+0.293  HC3 SE=0.242  t(31)=+1.21  p=0.2367  95% CI [-0.202, +0.787]  beta=+0.26
+    EventMove      b=-0.319  HC3 SE=0.127  t(31)=-2.50  p=0.0177  95% CI [-0.578, -0.059]  beta=-0.32
+    Eng_Prof       b=+0.045  HC3 SE=0.053  t(31)=+0.85  p=0.4012  95% CI [-0.062, +0.152]  beta=+0.11
+    Holm family B: intensity p=0.8472 -> 0.8472   English share p=0.2192 -> 0.6575   quality gap p=0.3622 -> 0.7244   H4 p=0.0044 -> 0.0176
+
+================================================================================================
+SENSITIVITY: the alternative at each decision point
+================================================================================================
+
+H3 (displacement over writing, self, personal, family only - the 27 Sep plan, HC3)
+    n=37  R2=0.362  adj R2=0.259  | HC3 Wald F(5,31)=3.51 p=0.0125
+    Intercept      b=-0.093  HC3 SE=0.580  t(31)=-0.16  p=0.8737  95% CI [-1.277, +1.091]
+    AI_Intensity   b=+0.026  HC3 SE=0.112  t(31)=+0.24  p=0.8157  95% CI [-0.202, +0.254]  beta=+0.04
+    EnglishShare   b=+0.298  HC3 SE=0.102  t(31)=+2.91  p=0.0066  95% CI [+0.089, +0.507]  beta=+0.45
+    QualityGap     b=-0.166  HC3 SE=0.161  t(31)=-1.03  p=0.3101  95% CI [-0.494, +0.162]  beta=-0.18
+    Age25          b=-0.770  HC3 SE=0.210  t(31)=-3.67  p=0.0009  95% CI [-1.197, -0.342]  beta=-0.46
+    EventMove      b=+0.288  HC3 SE=0.241  t(31)=+1.20  p=0.2401  95% CI [-0.203, +0.779]  beta=+0.21
+    joint test of the three H3 predictors (HC3): F(3,31)=2.90 p=0.0505
+
+H4 (displacement over writing, self, personal, family only - the 27 Sep plan, HC3)
+    n=37  R2=0.248  adj R2=0.179  | HC3 Wald F(3,33)=2.13 p=0.1147
+    Intercept      b=+0.041  HC3 SE=0.074  t(33)=+0.56  p=0.5802  95% CI [-0.109, +0.191]
+    Displacement4  b=+0.359  HC3 SE=0.150  t(33)=+2.40  p=0.0224  95% CI [+0.054, +0.663]  beta=+0.52
+    Age25          b=+0.272  HC3 SE=0.251  t(33)=+1.08  p=0.2858  95% CI [-0.238, +0.783]  beta=+0.23
+    EventMove      b=-0.284  HC3 SE=0.139  t(33)=-2.04  p=0.0496  95% CI [-0.567, -0.000]  beta=-0.29
+    Holm family B: intensity p=0.8157 -> 0.8157   English share p=0.0066 -> 0.0265   quality gap p=0.3101 -> 0.6202   H4 p=0.0224 -> 0.0673
+    wild bootstrap (restricted, Rademacher, HC3-t, 9999 reps): intensity p=0.8012 -> Holm 0.8012   English share p=0.0033 -> Holm 0.0132   quality gap p=0.2302 -> Holm 0.4604   H4 p=0.0819 -> Holm 0.2457
+
+H3 (dialect-only displacement: self, personal, family, HC3)
+    n=37  R2=0.280  adj R2=0.164  | HC3 Wald F(5,31)=2.84 p=0.0316
+    Intercept      b=-0.374  HC3 SE=0.579  t(31)=-0.65  p=0.5229  95% CI [-1.554, +0.806]
+    AI_Intensity   b=-0.013  HC3 SE=0.115  t(31)=-0.11  p=0.9108  95% CI [-0.248, +0.222]  beta=-0.02
+    EnglishShare   b=+0.292  HC3 SE=0.105  t(31)=+2.79  p=0.0090  95% CI [+0.078, +0.506]  beta=+0.44
+    QualityGap     b=-0.109  HC3 SE=0.174  t(31)=-0.63  p=0.5359  95% CI [-0.463, +0.246]  beta=-0.12
+    Age25          b=-0.592  HC3 SE=0.227  t(31)=-2.61  p=0.0138  95% CI [-1.054, -0.129]  beta=-0.35
+    EventMove      b=+0.180  HC3 SE=0.288  t(31)=+0.63  p=0.5362  95% CI [-0.407, +0.767]  beta=+0.13
+    joint test of the three H3 predictors (HC3): F(3,31)=2.82 p=0.0553
+
+H4 (dialect-only displacement: self, personal, family, HC3)
+    n=37  R2=0.195  adj R2=0.122  | HC3 Wald F(3,33)=1.68 p=0.1904
+    Intercept      b=+0.103  HC3 SE=0.067  t(33)=+1.54  p=0.1320  95% CI [-0.033, +0.239]
+    DialectLoss    b=+0.295  HC3 SE=0.143  t(33)=+2.06  p=0.0469  95% CI [+0.004, +0.587]  beta=+0.43
+    Age25          b=+0.188  HC3 SE=0.241  t(33)=+0.78  p=0.4419  95% CI [-0.303, +0.678]  beta=+0.16
+    EventMove      b=-0.227  HC3 SE=0.129  t(33)=-1.75  p=0.0886  95% CI [-0.490, +0.036]  beta=-0.23
+    Holm family B: intensity p=0.9108 -> 1.0000   English share p=0.0090 -> 0.0360   quality gap p=0.5359 -> 1.0000   H4 p=0.0469 -> 0.1408
+
+H3 (AI intensity including frequency, HC3)
+    n=36  R2=0.273  adj R2=0.152  | HC3 Wald F(5,30)=3.76 p=0.0092
+    Intercept      b=+0.063  HC3 SE=0.468  t(30)=+0.14  p=0.8930  95% CI [-0.892, +1.019]
+    AI_Intensity3  b=+0.019  HC3 SE=0.103  t(30)=+0.19  p=0.8514  95% CI [-0.191, +0.230]  beta=+0.03
+    EnglishShare   b=+0.224  HC3 SE=0.111  t(30)=+2.02  p=0.0528  95% CI [-0.003, +0.450]  beta=+0.38
+    QualityGap     b=-0.127  HC3 SE=0.143  t(30)=-0.88  p=0.3833  95% CI [-0.420, +0.166]  beta=-0.16
+    Age25          b=-0.656  HC3 SE=0.180  t(30)=-3.64  p=0.0010  95% CI [-1.025, -0.288]  beta=-0.44
+    EventMove      b=+0.165  HC3 SE=0.209  t(30)=+0.79  p=0.4366  95% CI [-0.262, +0.591]  beta=+0.13
+    joint test of the three H3 predictors (HC3): F(3,30)=1.44 p=0.2503
+
+H4 (AI intensity including frequency, HC3)
+    n=36  R2=0.347  adj R2=0.286  | HC3 Wald F(3,32)=3.71 p=0.0214
+    Intercept      b=-0.004  HC3 SE=0.067  t(32)=-0.07  p=0.9473  95% CI [-0.141, +0.132]
+    Displacement   b=+0.444  HC3 SE=0.151  t(32)=+2.94  p=0.0060  95% CI [+0.136, +0.751]  beta=+0.58
+    Age25          b=+0.327  HC3 SE=0.246  t(32)=+1.33  p=0.1921  95% CI [-0.173, +0.827]  beta=+0.29
+    EventMove      b=-0.335  HC3 SE=0.134  t(32)=-2.49  p=0.0182  95% CI [-0.608, -0.061]  beta=-0.33
+    Holm family B: intensity p=0.8514 -> 0.8514   English share p=0.0528 -> 0.1583   quality gap p=0.3833 -> 0.7665   H4 p=0.0060 -> 0.0242
+
+H3 (quality gap without the AI-voice item - the 27 Sep plan, HC3)
+    n=36  R2=0.264  adj R2=0.142  | HC3 Wald F(5,30)=3.81 p=0.0086
+    Intercept      b=-0.124  HC3 SE=0.390  t(30)=-0.32  p=0.7523  95% CI [-0.922, +0.673]
+    AI_Intensity   b=-0.021  HC3 SE=0.090  t(30)=-0.24  p=0.8145  95% CI [-0.205, +0.163]  beta=-0.03
+    EnglishShare   b=+0.207  HC3 SE=0.103  t(30)=+2.00  p=0.0549  95% CI [-0.005, +0.418]  beta=+0.35
+    QualityGap3    b=-0.058  HC3 SE=0.088  t(30)=-0.66  p=0.5124  95% CI [-0.239, +0.122]  beta=-0.09
+    Age25          b=-0.625  HC3 SE=0.169  t(30)=-3.69  p=0.0009  95% CI [-0.971, -0.279]  beta=-0.42
+    EventMove      b=+0.171  HC3 SE=0.204  t(30)=+0.84  p=0.4100  95% CI [-0.246, +0.588]  beta=+0.13
+    joint test of the three H3 predictors (HC3): F(3,30)=1.38 p=0.2675
+
+H4 (quality gap without the AI-voice item - the 27 Sep plan, HC3)
+    n=36  R2=0.347  adj R2=0.286  | HC3 Wald F(3,32)=3.71 p=0.0214
+    Intercept      b=-0.004  HC3 SE=0.067  t(32)=-0.07  p=0.9473  95% CI [-0.141, +0.132]
+    Displacement   b=+0.444  HC3 SE=0.151  t(32)=+2.94  p=0.0060  95% CI [+0.136, +0.751]  beta=+0.58
+    Age25          b=+0.327  HC3 SE=0.246  t(32)=+1.33  p=0.1921  95% CI [-0.173, +0.827]  beta=+0.29
+    EventMove      b=-0.335  HC3 SE=0.134  t(32)=-2.49  p=0.0182  95% CI [-0.608, -0.061]  beta=-0.33
+    Holm family B: intensity p=0.8145 -> 1.0000   English share p=0.0549 -> 0.1648   quality gap p=0.5124 -> 1.0000   H4 p=0.0060 -> 0.0242
+
+H3 (ability decline including the Fusha-register item, HC3)
+    n=36  R2=0.272  adj R2=0.151  | HC3 Wald F(5,30)=3.79 p=0.0088
+    Intercept      b=+0.044  HC3 SE=0.507  t(30)=+0.09  p=0.9311  95% CI [-0.991, +1.079]
+    AI_Intensity   b=-0.006  HC3 SE=0.099  t(30)=-0.07  p=0.9482  95% CI [-0.208, +0.195]  beta=-0.01
+    EnglishShare   b=+0.218  HC3 SE=0.104  t(30)=+2.09  p=0.0454  95% CI [+0.005, +0.430]  beta=+0.37
+    QualityGap     b=-0.116  HC3 SE=0.139  t(30)=-0.83  p=0.4115  95% CI [-0.400, +0.168]  beta=-0.14
+    Age25          b=-0.653  HC3 SE=0.181  t(30)=-3.60  p=0.0011  95% CI [-1.023, -0.282]  beta=-0.44
+    EventMove      b=+0.183  HC3 SE=0.207  t(30)=+0.88  p=0.3835  95% CI [-0.240, +0.606]  beta=+0.14
+    joint test of the three H3 predictors (HC3): F(3,30)=1.46 p=0.2444
+
+H4 (ability decline including the Fusha-register item, HC3)
+    n=36  R2=0.404  adj R2=0.348  | HC3 Wald F(3,32)=5.20 p=0.0049
+    Intercept      b=-0.030  HC3 SE=0.064  t(32)=-0.47  p=0.6395  95% CI [-0.161, +0.101]
+    Displacement   b=+0.562  HC3 SE=0.151  t(32)=+3.71  p=0.0008  95% CI [+0.253, +0.870]  beta=+0.66
+    Age25          b=+0.339  HC3 SE=0.244  t(32)=+1.39  p=0.1755  95% CI [-0.159, +0.837]  beta=+0.27
+    EventMove      b=-0.306  HC3 SE=0.156  t(32)=-1.96  p=0.0586  95% CI [-0.624, +0.012]  beta=-0.28
+    Holm family B: intensity p=0.9482 -> 0.9482   English share p=0.0454 -> 0.1363   quality gap p=0.4115 -> 0.8231   H4 p=0.0008 -> 0.0031
+
+    H4 as a rank correlation: Spearman Displacement-AbilityDecline rho=0.43 p=0.0096
+
+(g) The not-applicable filter removes 7 answers that were not "no change". Variant removing only "no change":
+    H1a Fusha: Wilcoxon z=-3.47 p=0.0005 n=36
+
+H3 (not-applicable filter on "no change" answers only, HC3)
+    n=37  R2=0.314  adj R2=0.204  | HC3 Wald F(5,31)=3.28 p=0.0172
+    Intercept      b=-0.078  HC3 SE=0.546  t(31)=-0.14  p=0.8870  95% CI [-1.192, +1.035]
+    AI_Intensity   b=+0.021  HC3 SE=0.111  t(31)=+0.19  p=0.8510  95% CI [-0.205, +0.247]  beta=+0.03
+    EnglishShare   b=+0.253  HC3 SE=0.109  t(31)=+2.32  p=0.0272  95% CI [+0.030, +0.475]  beta=+0.39
+    QualityGap     b=-0.114  HC3 SE=0.155  t(31)=-0.73  p=0.4684  95% CI [-0.429, +0.202]  beta=-0.13
+    Age25          b=-0.726  HC3 SE=0.208  t(31)=-3.49  p=0.0015  95% CI [-1.150, -0.302]  beta=-0.43
+    EventMove      b=+0.284  HC3 SE=0.250  t(31)=+1.14  p=0.2643  95% CI [-0.225, +0.793]  beta=+0.20
+    joint test of the three H3 predictors (HC3): F(3,31)=1.84 p=0.1603
+
+H4 (not-applicable filter on "no change" answers only, HC3)
+    n=37  R2=0.383  adj R2=0.327  | HC3 Wald F(3,33)=4.89 p=0.0064
+    Intercept      b=-0.021  HC3 SE=0.061  t(33)=-0.34  p=0.7371  95% CI [-0.145, +0.104]
+    Displacement   b=+0.459  HC3 SE=0.121  t(33)=+3.81  p=0.0006  95% CI [+0.214, +0.705]  beta=+0.66
+    Age25          b=+0.336  HC3 SE=0.244  t(33)=+1.37  p=0.1785  95% CI [-0.161, +0.833]  beta=+0.29
+    EventMove      b=-0.317  HC3 SE=0.131  t(33)=-2.42  p=0.0212  95% CI [-0.584, -0.050]  beta=-0.33
+    Holm family B: intensity p=0.8510 -> 0.9367   English share p=0.0272 -> 0.0817   quality gap p=0.4684 -> 0.9367   H4 p=0.0006 -> 0.0023
+
+================================================================================================
+EXPLORATORY (planned before the data; no correction)
+================================================================================================
+
+E1  parallel mediators: Displacement and change in switching (Switch_Mode, positive = more switching)
+    n=36  covariates: Age25, EventMove
+    via Displacement         -0.0197  95% CI [-0.0952, +0.0362]
+    via Switch_Mode          +0.0247  95% CI [-0.0427, +0.1187]
+    contrast (1 - 2)         -0.0444  95% CI [-0.1530, +0.0451]
+
+E3  Fusha-register ability, among those who wrote Fusha before AI (n=28)
+    Abil_Register_f distribution (-2 much harder .. +2 much easier): {-2.0: 5, -1.0: 6, 0.0: 14, 1.0: 3}
+    Spearman (register decline, Displacement) rho=0.57 p=0.0020
+
+================================================================================================
+RELIABILITY (core sample): omega with bootstrap CI, alpha, mean inter-item r
+================================================================================================
+    Displacement (8 domains)   (core sample)      n=30  omega=0.88 [0.75, 0.93]  alpha=0.88  mean inter-item r=0.48  (7 of 2000 resamples skipped)
+    Displacement (8 domains)   (all respondents)  n=33  omega=0.90 [0.81, 0.94]  alpha=0.90  mean inter-item r=0.52  (4 of 2000 resamples skipped)
+    AbilityDecline (3 items)   (core sample)      n=37  omega=0.83 [0.62, 0.93]  alpha=0.78  mean inter-item r=0.56  (6 of 2000 resamples skipped)
+    AbilityDecline (3 items)   (all respondents)  n=40  omega=0.84 [0.67, 0.93]  alpha=0.80  mean inter-item r=0.60  (6 of 2000 resamples skipped)
+    QualityGap (4 items)       (core sample)      n=37  omega=0.69 [0.45, 0.86]  alpha=0.68  mean inter-item r=0.35
+    QualityGap (4 items)       (all respondents)  n=40  omega=0.69 [0.47, 0.86]  alpha=0.68  mean inter-item r=0.35
+    QualityGap3 (3 items)      (core sample)      n=37  omega=0.69 [0.36, 0.89]  alpha=0.68  mean inter-item r=0.42
+    QualityGap3 (3 items)      (all respondents)  n=40  omega=0.69 [0.40, 0.88]  alpha=0.69  mean inter-item r=0.42
+    Displacement uses complete cases (the not-applicable filter leaves some domains missing).

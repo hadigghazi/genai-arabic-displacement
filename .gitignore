@@ -1,0 +1,32 @@
+# Public repository: everything is ignored except the paths allowed below.
+/*
+!/.gitignore
+!/README.md
+!/instrument_data.py
+!/instrument_v3.py
+!/instrument-v3.md
+!/instrument-v3.json
+!/build-form-v3-ar.gs
+!/paper/
+!/analysis/
+
+# Never published: individual responses, internal notes, local outputs
+/analysis/data/
+/analysis/ANALYSIS-DECISIONS-internal.md
+/analysis/spss/OUTPUT.doc
+/analysis/spss/*.spv
+/paper/archive/
+
+# Build files
+__pycache__/
+*.pyc
+/paper/*.aux
+/paper/*.bbl
+/paper/*.blg
+/paper/*.fdb_latexmk
+/paper/*.fls
+/paper/*.log
+/paper/*.out
+/paper/*.xdv
+/paper/*.synctex.gz
+/paper/pg-*.png
