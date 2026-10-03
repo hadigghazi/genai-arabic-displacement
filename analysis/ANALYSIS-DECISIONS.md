@@ -15,6 +15,30 @@ dependent on the definition.** Family A (H1a, H1b, H2a) holds under every altern
 and a study proposal with the codebook (30 Sep 2026); neither is included here. Neither was registered, so
 the 27 Sep document is "the analysis plan written before data collection", not a pre-registration.
 
+## Extended sample (decided 3 Oct 2026, before any analysis of the new responses)
+
+Collection was reopened after the first analysis of 40 responses. The export of 3 Oct 2026 (17:59) holds 65
+responses; collection closes at 65. Before this decision only structural checks were run on the 25 new
+responses (`analysis/data/responses-raw-2026-10-03.xlsx`): the form is unchanged (identical headers, every
+answer maps to the instrument), the first 40 responses are identical cell for cell to the first export, there
+are no duplicates, all 65 consented and passed the screening question, and the sample composition is: main
+sample under the plan's rule 56; aged 25 or over 12 (5 + 7 new); outside computing 26 (11 + 15 new). No outcome
+item and no relation between variables was looked at.
+
+- **Primary sample: all 65 respondents.** The study's population is Lebanese Arabic–English bilinguals, and
+  the migration criterion (no move since 2022) is dropped. Nationality was not asked, so the paper describes the
+  sample by where respondents grew up and live.
+- **The plan's core rule becomes the sensitivity sample** (grew up and live in the Arab region, no move since
+  2022; n = 56). It addresses the obvious objection: respondents living abroad may attribute to AI change that
+  comes from migration.
+- **Disclosure.** This change was made after the first analysis of 40, which had shown that the core-vs-all
+  choice changes H4 (all 40: not supported, driven by one respondent). The paper states this.
+- **Everything else is fixed before running on 65**: hypotheses, scoring, covariates, test families and Holm
+  correction, ML targets (including the minimum-class rule), feature blocks, models, validation, and the four
+  usable-model criteria of the ML extension, which now apply in advance to every ML target. No design change
+  will be made after seeing results on 65 except bug fixes, which will be logged here.
+- Collection was extended after a first analysis; the paper states this.
+
 ## Results at a glance (primary sample, n = 37)
 
 | | Result | Holds under the alternatives? |
