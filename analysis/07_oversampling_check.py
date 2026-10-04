@@ -31,7 +31,7 @@ from imblearn import FunctionSampler
 OUT = os.path.join(HERE, 'results', 'oversampling_check.txt')
 ALL['Substitution'] = (ALL.SwitchEng >= 3).astype(float).where(ALL.SwitchEng.notna())
 ALL['AnyDifficulty'] = (ALL.AbilityDecline > 0).astype(float).where(ALL.AbilityDecline.notna())
-core = ALL[ALL.core == 1].copy()
+prim = ALL.copy()                      # primary sample: all respondents (decision of 3 Oct 2026)
 COLS = M0 + AI
 CAT = [i for i, c in enumerate(COLS) if c in BINARY]
 TARGETS = [('AnyFormalLoss', 'any formal-domain loss'), ('Loss_Writing', 'loss: writing'),
@@ -76,7 +76,7 @@ LEAKY = ['random duplication', 'SMOTENC to balance', 'SMOTENC amplified x5', 'no
 
 
 def run(tgt, name, leaky):
-    X, y = data(core, tgt, COLS)
+    X, y = data(prim, tgt, COLS)
     if leaky:
         Xr, yr = sampler(name).fit_resample(StandardScaler().fit_transform(X), y)
         return run_cv('clf', pipe('none'), Xr, yr.astype(int), splits('clf', yr.astype(int), R)), yr.astype(int)
@@ -88,12 +88,12 @@ log('running %d evaluations' % len(jobs))
 res = dict(zip(jobs, Parallel(n_jobs=JOBS)(delayed(run)(*j) for j in jobs)))
 
 say('=' * 100)
-say('CAN OVERSAMPLING PRODUCE A USABLE MODEL?  Core sample (n=37), background + AI use, linear model, %d x 5-fold CV.' % R)
+say('CAN OVERSAMPLING PRODUCE A USABLE MODEL?  All respondents (n=%d), background + AI use, linear model, %d x 5-fold CV.' % (len(prim), R))
 say('Inside = resampling on training folds only (valid). Leaky = resample everything, then cross-validate (invalid).')
 say('=' * 100)
 comp = []
 for tgt, lab in TARGETS:
-    _, y = data(core, tgt, COLS)
+    _, y = data(prim, tgt, COLS)
     base = res[(tgt, 'none', False)][0]['main']
     say('')
     say('%s  (n=%d: %d yes / %d no)' % (lab.upper(), len(y), int(y.sum()), int(len(y) - y.sum())))
@@ -130,9 +130,11 @@ print('\n'.join(lines))
 
 
 # ------------------------------------------------------------------ the best valid result, against the usability criteria
-bt, bs = 'AnyFormalLoss', 'noise augmentation x5'
+# the best valid (inside-the-folds) result of the run above
+bt, bs = max(((t, st) for t, _ in TARGETS for st in STRATS if st != 'none'),
+             key=lambda k: res[(k[0], k[1], False)][0]['main'].mean())
 say('BEST VALID RESULT (%s, %s) against the usability criteria:' % (bs, bt))
-X, y = data(core, bt, COLS)
+X, y = data(prim, bt, COLS)
 idx = [i for i, c in enumerate(COLS) if c != 'Age25']
 CAT_SAVE = CAT
 def seed_auc(seed, cols_idx):

@@ -31,7 +31,7 @@ from sklearn.decomposition import FactorAnalysis
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ALL = pd.read_csv(os.path.join(HERE, 'data', 'scored.csv'))
-PRIMARY = 'core'     # 'core' = the 37 who grew up and live in the Arab region and did not move (primary); 'all' = all 40
+PRIMARY = 'all'      # 'all' = every respondent (primary, decision of 3 Oct 2026); 'core' = the plan's core sample (sensitivity)
 ALL['SocialLoss'] = -ALL.SocialMedia             # same direction as the loss scores
 ALL['stable_grad'] = ((ALL.Events_1 == 0) & (ALL.Events_3 == 0) & (ALL.Role != 4)).astype(int)   # graduating counts as same setting
 d = ALL[ALL.core == 1].copy() if PRIMARY == 'core' else ALL
@@ -276,6 +276,11 @@ def influence(data, label):
         m = smf.ols(f, h[~h.id.isin(drop)]).fit(cov_type='HC3', use_t=True)
         say('      without id(s) %-14s b=%+.3f p=%s n=%d' % (','.join(str(int(i)) for i in drop), m.params['Displacement'],
                                                             fmtp(m.pvalues['Displacement']), int(m.nobs)))
+    loo = pd.Series({i: smf.ols(f, h[h.id != i]).fit(cov_type='HC3', use_t=True).pvalues['Displacement'] for i in h.id})
+    say('      leave-one-out over all %d: p from %s to %s; single removals giving p > .0125 (the smallest Holm threshold'
+        ' of four tests): %d %s; giving p > .05: %d'
+        % (len(loo), fmtp(loo.min()), fmtp(loo.max()), int((loo > .0125).sum()),
+           sorted(int(i) for i in loo[loo > .0125].index)[:10], int((loo > .05).sum())))
 
 
 def omega(X, boot=2000):
@@ -306,18 +311,30 @@ say('=' * 96)
 
 say('\nPARTICIPANTS')
 say('    submitted %d -> consented %d -> eligible %d -> analysed %d' % (len(ALL), int(ALL.Consent.sum()), int(ALL.Eligible.sum()), len(d)))
-say('    outside the primary sample: ids %s (21 grew up and lives outside the Arab world; 25 moved country since 2022;'
-    ' 38 moved and now lives outside)' % ALL.loc[ALL.core == 0, 'id'].tolist())
-say('    analysed sample: grew up in Lebanon %d, the Gulf %d; live in Lebanon %d; under 25: %d; computing/IT: %d;'
-    ' wrote Fusha before AI (yes or sometimes): %d'
-    % ((d.Country_GrewUp == 1).sum(), (d.Country_GrewUp == 3).sum(), (d.Country_Now == 1).sum(),
+def _why(r):
+    w = []
+    if r.Country_GrewUp == 6: w.append('grew up outside the Arab world')
+    if r.Country_Now == 6: w.append('lives outside the Arab world')
+    if r.Moved_Since2022 == 1: w.append('moved since 2022')
+    if r.Events_5 == 1 and r.Moved_Since2022 != 1: w.append('ticked "moved" among life events')
+    return '%d: %s' % (r.id, ', '.join(w))
+say('    outside the core sample (%d): %s' % ((ALL.core == 0).sum(), '; '.join(_why(r) for r in ALL[ALL.core == 0].itertuples())))
+say('    analysed sample: grew up (1 Lebanon, 3 Gulf, 6 outside the Arab world) %s; live now %s; under 25: %d;'
+    ' computing/IT: %d; wrote Fusha before AI (yes or sometimes): %d'
+    % (d.Country_GrewUp.value_counts().sort_index().to_dict(), d.Country_Now.value_counts().sort_index().to_dict(),
        (d.Age25 == 0).sum(), d.Computing.sum(), (d.FushaPreAI != 3).sum()))
-say('    EventMove in the analysed sample = started studying or working in English: n=%d (nobody ticked "moved")' % d.EventMove.sum())
+say('    age %s (1 under 25, 2 25-34, 3 35-44, 4 45+); women %d; education %s (1 secondary, 2 bachelor, 3 master+);'
+    ' field %s; AI several times a day %d; always write to AI in English %d'
+    % (d.Age.value_counts().sort_index().to_dict(), (d.Gender == 1).sum(), d.Education.value_counts().sort_index().to_dict(),
+       d.Field.value_counts().sort_index().to_dict(), (d.AI_Freq == 4).sum(), (d.AI_Lang == 5).sum()))
+say('    EventMove in the analysed sample: n=%d (started studying or working in English %d; moved country %d)'
+    % (d.EventMove.sum(), d.Events_4.sum(), d.Events_5.sum()))
 say('    same work/study setting throughout the AI period: strict n=%d; counting graduation as the same setting n=%d'
     % (d.stable.sum(), d.stable_grad.sum()))
-say('    straight-liners (every change row "much less"): ids %s. Id 29 has only 5 applicable domains (work/study,'
-    ' formal texts and religion marked not applicable), so it has no displacement score and no work/study or'
-    ' Fusha change: it enters no confirmatory test.' % d.loc[d.straightline == 1, 'id'].tolist())
+say('    straight-liners (every change row "much less" or every row "much more"): %s'
+    % ('; '.join('id %d (%d applicable domains, displacement %s)' % (r.id, r.DomainsValid,
+                 'missing' if pd.isna(r.Displacement) else '%.2f' % r.Displacement)
+                 for r in d[d.straightline == 1].itertuples()) or 'none'))
 say('    power: with n=%d, the smallest correlation detectable at 80%% power (alpha .05, two-sided) is r = %.2f'
     % (len(d), np.tanh((1.959964 + 0.841621) / np.sqrt(len(d) - 3))))
 
@@ -419,12 +436,13 @@ z2, p2 = mann_whitney(u.loc[u.stable == 1, 'd_WorkStudy'], u.loc[u.stable == 0, 
 say('    stable vs changed, Mann-Whitney: all Z=%+.2f p=%s | under 25 only (means %+.2f, n=%d vs %+.2f, n=%d) Z=%+.2f p=%s'
     % (z1, fmtp(p1), u.loc[u.stable == 1, 'd_WorkStudy'].mean(), int((u.stable == 1).sum()),
        u.loc[u.stable == 0, 'd_WorkStudy'].mean(), int((u.stable == 0).sum()), z2, fmtp(p2)))
-say('    (%d of the %d strictly stable respondents are aged 25+, and those report no change in any domain)'
-    % (int(((d.stable == 1) & (d.Age25 == 1)).sum()), int(d.stable.sum())))
+_o = d[(d.stable == 1) & (d.Age25 == 1)]
+say('    (%d of the %d strictly stable respondents are aged 25+; of those, %d report no change in any domain)'
+    % (len(_o), int(d.stable.sum()), int((_o.DomainsLost == 0).sum())))
 ols('d_WorkStudy ~ stable + Age25', d, '    work/study change on stable setting, adjusted for age')
 page(d[d.stable == 1], ['Disp_Family', 'Disp_Personal', 'Disp_WorkStudy'], '(strictly stable only)')
 
-say('\n(e) Without the straight-liners (in practice id 13: id 29 is already outside every confirmatory test)')
+say('\n(e) Without the straight-liners (ids %s)' % d.loc[d.straightline == 1, 'id'].tolist())
 ns = d[d.straightline == 0]
 w = wilcoxon_signed(ns.d_Fusha)
 say('    H1a Fusha: Wilcoxon z=%+.2f p=%s n=%d' % (w['z'], fmtp(w['p']), w['n']))

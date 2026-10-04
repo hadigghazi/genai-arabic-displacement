@@ -58,6 +58,13 @@ DATA = os.path.join(HERE, 'data', 'scored.csv')
 OUT = os.path.join(HERE, 'results', 'ml_results.txt')
 TABLE = os.path.join(HERE, 'results', 'ml_table.csv')
 QUICK = os.environ.get('ML_QUICK') == '1'
+# Resumable runs: each finished piece (one cross-validation job, one permutation test) is cached on disk, keyed by
+# the data file and the run mode, so an interrupted run continues where it stopped. Results are unchanged, because
+# every piece uses its own fixed seed. Delete analysis/.mlcache to start afresh.
+from joblib import Memory
+with open(os.path.join(HERE, 'data', 'scored.csv'), 'rb') as _f:
+    _DATA_MD5 = hashlib.md5(_f.read()).hexdigest()
+MEM = Memory(os.path.join(HERE, '.mlcache', '%s-%s' % (_DATA_MD5[:12], 'quick' if QUICK else 'full')), verbose=0)
 SEED = 20261002
 K = 5
 R = 3 if QUICK else 10                 # repeats of 5-fold CV
@@ -70,7 +77,7 @@ MIN_CLASS = 8
 MARGIN_AUC, MARGIN_R2 = .08, .05       # the plan's decision rule for "a flexible model adds something"
 
 ALL = pd.read_csv(DATA)
-ALL['SchoolEnglish'] = (ALL.Sch_SciLang == 2).astype(int)      # 2 = English, 3 = French (nobody: Arabic)
+ALL['SchoolEnglish'] = (ALL.Sch_SciLang == 2).astype(int)      # 2 = English vs 3 = French or 1 = Arabic (one respondent)
 ALL['SocialLoss'] = -ALL.SocialMedia
 ALL['NetLoss4'] = (ALL.Displacement4 > 0).astype(float).where(ALL.Displacement4.notna())   # the plan's NetLoss
 DOM = ['WorkStudy', 'Writing', 'Self', 'Personal', 'Family', 'Fusha', 'Religion', 'Consume']
@@ -82,7 +89,8 @@ D2 = pd.DataFrame({dom: ALL['ArUse_' + dom].where(~((ALL['CurUse_' + cu] == 5) &
 ALL['DomainsLost_na'] = (D2 <= -1).sum(axis=1)
 _fmin = D2[['WorkStudy', 'Fusha']].min(axis=1)
 ALL['AnyFormalLoss_na'] = (_fmin <= -1).astype(float).where(_fmin.notna())
-core = ALL[ALL.core == 1].copy()
+prim = ALL.copy()                      # primary sample: all respondents (decision of 3 Oct 2026)
+core_df = ALL[ALL.core == 1].copy()       # the plan's core sample (sensitivity)
 REG_TARGETS = {'DomainsLost', 'Displacement', 'Displacement4', 'DomainsLost_na'}
 
 M0 = ['Age25', 'Computing', 'Education', 'Eng_Prof', 'EventMove']       # the plan's M0; Medium is constant (dropped)
@@ -208,6 +216,9 @@ def perm_test(kind, pipe, X, y, B):
     return obs, (1 + np.sum(null >= obs)) / (1 + B), null.mean()
 
 
+perm_test = MEM.cache(perm_test)
+
+
 def _group_drop(kind, res, X, y, folds, idx, seed, n_perm):
     rng = np.random.default_rng(seed)
     drops = []
@@ -255,7 +266,7 @@ def data(df, target, cols):
 
 
 # ------------------------------------------------------------------ main evaluation
-TG, skipped = targets(core)
+TG, skipped = targets(prim)
 NAMES = ['linear', 'forest', 'boosting']
 ALLSETS = dict(SETS, **EXTRA)
 jobs = []
@@ -267,21 +278,22 @@ for tgt, kind, _, _ in TG:
         jobs.append((tgt, kind, sname, 'linear'))
 # every block of a target must use the same rows, or the per-fold differences would not pair
 for tgt, kind, _, _ in TG:
-    assert len({len(data(core, tgt, c)[1]) for c in ALLSETS.values()}) == 1, tgt
+    assert len({len(data(prim, tgt, c)[1]) for c in ALLSETS.values()}) == 1, tgt
 
 
 def evaluate(tgt, kind, sname, mname, keep=False):
     cols = ALLSETS[sname]
-    X, y = data(core, tgt, cols)
+    X, y = data(prim, tgt, cols)
     return run_cv(kind, model(kind, mname, cols), X, y, splits(kind, y, R), keep=keep)
 
 
 log('main evaluation: %d jobs' % len(jobs))
-results = dict(zip(jobs, Parallel(n_jobs=JOBS)(delayed(evaluate)(*j) for j in jobs)))
+evaluate_cached = MEM.cache(evaluate)
+results = dict(zip(jobs, Parallel(n_jobs=JOBS)(delayed(evaluate_cached)(*j) for j in jobs)))
 log('main evaluation done')
 
 say('=' * 100)
-say('RQ4 MACHINE LEARNING. Primary sample: core (n=37). %d x 5-fold CV%s; fixed models; SMOTENC inside training folds.' % (R, ' [QUICK MODE: NOT FOR REPORTING]' if QUICK else ''))
+say('RQ4 MACHINE LEARNING. Primary sample: all respondents (n=%d). %d x 5-fold CV%s; fixed models; SMOTENC inside training folds.' % (len(prim), R, ' [QUICK MODE: NOT FOR REPORTING]' if QUICK else ''))
 say('Decisions and their alternatives: analysis/ANALYSIS-DECISIONS.md, section "Machine learning".')
 with open(DATA, 'rb') as f:
     md5 = hashlib.md5(f.read()).hexdigest()
@@ -292,12 +304,12 @@ say('')
 say('FEATURES')
 for sname, cols in ALLSETS.items():
     say('    %-22s %s' % (sname, ', '.join(cols)))
-say('    M0 is the 27 Sep plan\'s background list without "Medium" (constant: all 40 studied school science in English or French).')
+say('    M0 is the 27 Sep plan\'s background list without "Medium" (constant in this sample: everyone studied school science or university in English or French).')
 say('    "M0 + school language" is post hoc: the English-vs-French contrast is in neither pre-data document.')
 say('    never features: the change grid, current-use grid, ability, expectations, substitution, switching, social-media attribution')
-say('TARGETS (core sample)')
+say('TARGETS (primary sample: all respondents)')
 for tgt, kind, lab, fam in TG:
-    X, y = data(core, tgt, M0)
+    X, y = data(prim, tgt, M0)
     if kind == 'clf':
         say('    %-16s n=%d  loss %d / no loss %d  (%s)' % (tgt, len(y), int(y.sum()), int(len(y) - y.sum()), fam))
     else:
@@ -315,7 +327,7 @@ say('permutation tests; comparisons between models use paired, corrected interva
 
 table = []
 for tgt, kind, lab, fam in TG:
-    _, y = data(core, tgt, M0)
+    _, y = data(prim, tgt, M0)
     say('')
     say('-' * 100)
     say('%s  (%s)' % (lab.upper(), tgt))
@@ -411,7 +423,7 @@ for tgt, kind, lab, fam in TG:
             plan.append((tgt, kind, fam, sname, 'linear', B_LIN))
 for tgt, kind, fam, sname, mname, B in plan:
     cols = ALLSETS[sname]
-    X, y = data(core, tgt, cols)
+    X, y = data(prim, tgt, cols)
     obs, p, nullmean = perm_test(kind, model(kind, mname, cols), X, y, B)
     log('permutation %s %s %s: p=%.3f' % (tgt, sname, mname, p))
     perm.append(dict(target=tgt, family=fam, kind=kind, features=sname, model=mname, obs=obs, null=nullmean, p=p, B=B))
@@ -445,7 +457,7 @@ if passed.empty:
 for _, r in passed.iterrows():
     kind = r.kind
     cols = ALLSETS[r.features]
-    X, y = data(core, r.target, cols)
+    X, y = data(prim, r.target, cols)
     folds = splits(kind, y, R)
     res = run_cv(kind, model(kind, r.model, cols), X, y, folds, keep=True)
     say('    %s, %s, %s: grouped permutation importance (drop in per-fold %s when the block is shuffled)' % (
@@ -491,29 +503,26 @@ def sens_perm(df, tgt, kind, cols):
 
 for tgt, kind in [('DomainsLost', 'reg'), ('AnyFormalLoss', 'clf')]:
     say('  %s' % tgt)
-    for lab, df, t in [('decision 12 alternative (n/a dropped only with "no change")', core, tgt + '_na'),
-                       ('without the straight-liners (ids 13, 29)', core[core.straightline == 0], tgt)]:
+    for lab, df, t in [('decision 12 alternative (n/a dropped only with "no change")', prim, tgt + '_na'),
+                       ('without the straight-liners (ids %s)' % prim.loc[prim.straightline == 1, 'id'].tolist(), prim[prim.straightline == 0], tgt),
+                       ('core sample (the plan\'s rule)', core_df, tgt)]:
         r0, y = quick(df, t, kind, SETS['M0 background'])
         r1, _ = quick(df, t, kind, SETS['M1 + AI use'])
         line(lab + ', M0', r0, kind, y, extra='  | permutation p %s' % fmtp(sens_perm(df, t, kind, SETS['M0 background'])))
         line(lab + ', M1', r1, kind, y, r0)
         log('sensitivity %s %s' % (tgt, lab))
-    r0, y = quick(core, tgt, kind, SETS['M0 background'])
-    rc, _ = quick(core, tgt, kind, M0 + ['AI_Intensity', 'EnglishShare'])
+    r0, y = quick(prim, tgt, kind, SETS['M0 background'])
+    rc, _ = quick(prim, tgt, kind, M0 + ['AI_Intensity', 'EnglishShare'])
     line('compact AI block (the H3 predictors: intensity, English share)', rc, kind, y, r0)
-    r0, y = quick(ALL, tgt, kind, SETS['M0 background'])
-    r1, _ = quick(ALL, tgt, kind, SETS['M1 + AI use'])
-    line('all 40, M0', r0, kind, y)
-    line('all 40, M1', r1, kind, y, r0)
-    r0, y = quick(core, tgt, kind, SETS['M0 background'])
-    r1, _ = quick(core, tgt, kind, M0 + AI[:5])
+    r0, y = quick(prim, tgt, kind, SETS['M0 background'])
+    r1, _ = quick(prim, tgt, kind, M0 + AI[:5])
     line('M1 as in the 27 Sep plan (without the two AI-content items)', r1, kind, y, r0)
-    rs, _ = quick(core, tgt, kind, M0 + ['SocialLoss'])
+    rs, _ = quick(prim, tgt, kind, M0 + ['SocialLoss'])
     line('exploratory: M0 + social-media attribution (not AI use)', rs, kind, y, r0)
     if kind == 'clf':
         for bal, lab in [('weight', 'class weights instead of SMOTENC (the 27 Sep plan)'), ('none', 'no imbalance handling')]:
-            a, y = quick(core, tgt, kind, SETS['M0 background'], bal)
-            b, _ = quick(core, tgt, kind, SETS['M1 + AI use'], bal)
+            a, y = quick(prim, tgt, kind, SETS['M0 background'], bal)
+            b, _ = quick(prim, tgt, kind, SETS['M1 + AI use'], bal)
             line(lab + ', M0', a, kind, y)
             line(lab + ', M1', b, kind, y, a)
 
@@ -521,12 +530,12 @@ say('  the 27 Sep plan\'s own targets (4-domain displacement; NetLoss = 4-domain
 for tgt, kind in [('Displacement4', 'reg'), ('NetLoss4', 'clf'), ('Displacement', 'reg'), ('NetLoss', 'clf')]:
     if tgt == 'Displacement':
         say('  the 8-domain versions (decision 2)')
-    _, y = data(core, tgt, M0)
+    _, y = data(prim, tgt, M0)
     if kind == 'clf' and min(y.sum(), len(y) - y.sum()) < MIN_CLASS:
         say('    %s: smaller class %d, below %d - not modelled' % (tgt, min(y.sum(), len(y) - y.sum()), MIN_CLASS))
         continue
-    r0, y = quick(core, tgt, kind, SETS['M0 background'])
-    r1, _ = quick(core, tgt, kind, SETS['M1 + AI use'])
+    r0, y = quick(prim, tgt, kind, SETS['M0 background'])
+    r1, _ = quick(prim, tgt, kind, SETS['M1 + AI use'])
     line('%s, M0' % tgt, r0, kind, y)
     line('%s, M1' % tgt, r1, kind, y, r0)
 
@@ -534,7 +543,7 @@ for tgt, kind in [('Displacement4', 'reg'), ('NetLoss4', 'clf'), ('Displacement'
 def _seed_run(tgt, kind, seed):
     out = []
     for cols in (SETS['M0 background'], SETS['M1 + AI use']):
-        X, y = data(core, tgt, cols)
+        X, y = data(prim, tgt, cols)
         out.append(run_cv(kind, model(kind, 'linear', cols), X, y, splits(kind, y, R, seed))['main'])
     return out[0].mean(), out[1].mean(), (out[1] - out[0]).mean()
 
@@ -554,7 +563,7 @@ say('')
 say('WHY OVERSAMPLING STAYS INSIDE THE TRAINING FOLDS (AnyFormalLoss, M1). Oversampling first and then splitting')
 say('puts synthetic copies of training cases into the test folds, so the score measures memory, not prediction.')
 log('leakage demonstration')
-X, y = data(core, 'AnyFormalLoss', SETS['M1 + AI use'])
+X, y = data(prim, 'AnyFormalLoss', SETS['M1 + AI use'])
 cat = [i for i, c in enumerate(SETS['M1 + AI use']) if c in BINARY]
 Xr, yr = SMOTENC(categorical_features=cat, k_neighbors=5, random_state=SEED).fit_resample(X, y)
 for mname in ['linear', 'forest']:

@@ -1,56 +1,56 @@
 ====================================================================================================
-CAN OVERSAMPLING PRODUCE A USABLE MODEL?  Core sample (n=37), background + AI use, linear model, 10 x 5-fold CV.
+CAN OVERSAMPLING PRODUCE A USABLE MODEL?  All respondents (n=105), background + AI use, linear model, 10 x 5-fold CV.
 Inside = resampling on training folds only (valid). Leaky = resample everything, then cross-validate (invalid).
 ====================================================================================================
 
-ANY FORMAL-DOMAIN LOSS  (n=36: 27 yes / 9 no)
+ANY FORMAL-DOMAIN LOSS  (n=104: 55 yes / 49 no)
     strategy                 AUC      bal acc  vs no oversampling (inside)          leaky AUC (n after resampling)
-    none                     0.69     0.64     -                                    
-    class weights            0.69     0.61     -0.002 [-0.055, +0.051] p 0.950      
-    random duplication       0.70     0.64     +0.016 [-0.072, +0.103] p 0.721      0.92 (n=54)
-    SMOTENC to balance       0.70     0.59     +0.012 [-0.144, +0.168] p 0.877      0.91 (n=54)
-    SMOTENC amplified x5     0.52     0.50     -0.166 [-0.373, +0.042] p 0.115      0.96 (n=270)
-    SMOTENC + Tomek          0.67     0.57     -0.015 [-0.167, +0.137] p 0.844      
-    noise augmentation x5    0.73     0.63     +0.043 [-0.076, +0.161] p 0.473      0.96 (n=216)
+    none                     0.75     0.71     -                                    
+    class weights            0.75     0.71     -0.001 [-0.007, +0.004] p 0.580      
+    random duplication       0.75     0.69     -0.006 [-0.027, +0.015] p 0.592      0.77 (n=110)
+    SMOTENC to balance       0.75     0.70     -0.005 [-0.022, +0.011] p 0.533      0.78 (n=110)
+    SMOTENC amplified x5     0.73     0.66     -0.025 [-0.087, +0.036] p 0.409      0.89 (n=550)
+    SMOTENC + Tomek          0.76     0.71     +0.002 [-0.041, +0.044] p 0.932      
+    noise augmentation x5    0.75     0.71     -0.003 [-0.023, +0.017] p 0.793      0.83 (n=624)
 
-LOSS: WRITING  (n=37: 21 yes / 16 no)
+LOSS: WRITING  (n=105: 42 yes / 63 no)
     strategy                 AUC      bal acc  vs no oversampling (inside)          leaky AUC (n after resampling)
-    none                     0.60     0.57     -                                    
-    class weights            0.60     0.57     -0.000 [-0.024, +0.023] p 0.972      
-    random duplication       0.59     0.57     -0.010 [-0.071, +0.051] p 0.743      0.62 (n=42)
-    SMOTENC to balance       0.58     0.55     -0.018 [-0.114, +0.078] p 0.705      0.59 (n=42)
-    SMOTENC amplified x5     0.47     0.46     -0.133 [-0.310, +0.043] p 0.135      0.80 (n=210)
-    SMOTENC + Tomek          0.56     0.53     -0.036 [-0.143, +0.070] p 0.495      
-    noise augmentation x5    0.64     0.59     +0.042 [-0.045, +0.130] p 0.335      0.86 (n=222)
+    none                     0.70     0.62     -                                    
+    class weights            0.69     0.64     -0.002 [-0.014, +0.010] p 0.746      
+    random duplication       0.68     0.64     -0.011 [-0.046, +0.024] p 0.537      0.73 (n=126)
+    SMOTENC to balance       0.70     0.66     +0.001 [-0.025, +0.027] p 0.922      0.73 (n=126)
+    SMOTENC amplified x5     0.67     0.60     -0.027 [-0.093, +0.038] p 0.407      0.82 (n=630)
+    SMOTENC + Tomek          0.69     0.65     -0.001 [-0.039, +0.037] p 0.963      
+    noise augmentation x5    0.70     0.63     +0.000 [-0.023, +0.023] p 0.980      0.77 (n=630)
 
-SUBSTITUTION  (n=37: 25 yes / 12 no)
+SUBSTITUTION  (n=105: 59 yes / 46 no)
     strategy                 AUC      bal acc  vs no oversampling (inside)          leaky AUC (n after resampling)
-    none                     0.42     0.50     -                                    
-    class weights            0.41     0.47     -0.014 [-0.085, +0.057] p 0.694      
-    random duplication       0.40     0.46     -0.019 [-0.102, +0.064] p 0.642      0.64 (n=50)
-    SMOTENC to balance       0.32     0.41     -0.096 [-0.248, +0.056] p 0.209      0.58 (n=50)
-    SMOTENC amplified x5     0.31     0.38     -0.108 [-0.296, +0.080] p 0.255      0.84 (n=250)
-    SMOTENC + Tomek          0.32     0.43     -0.102 [-0.263, +0.059] p 0.209      
-    noise augmentation x5    0.43     0.50     +0.009 [-0.087, +0.105] p 0.857      0.74 (n=222)
+    none                     0.62     0.61     -                                    
+    class weights            0.62     0.60     +0.000 [-0.012, +0.012] p 1.000      
+    random duplication       0.62     0.59     -0.004 [-0.036, +0.029] p 0.825      0.67 (n=118)
+    SMOTENC to balance       0.61     0.59     -0.009 [-0.042, +0.024] p 0.597      0.67 (n=118)
+    SMOTENC amplified x5     0.62     0.58     -0.005 [-0.064, +0.054] p 0.855      0.84 (n=590)
+    SMOTENC + Tomek          0.61     0.59     -0.013 [-0.063, +0.037] p 0.600      
+    noise augmentation x5    0.62     0.60     +0.001 [-0.018, +0.020] p 0.937      0.73 (n=630)
 
-HARDER WITHOUT AI  (n=37: 12 yes / 25 no)
+HARDER WITHOUT AI  (n=105: 34 yes / 71 no)
     strategy                 AUC      bal acc  vs no oversampling (inside)          leaky AUC (n after resampling)
-    none                     0.51     0.47     -                                    
-    class weights            0.51     0.49     +0.005 [-0.069, +0.079] p 0.900      
-    random duplication       0.52     0.49     +0.011 [-0.081, +0.104] p 0.806      0.75 (n=50)
-    SMOTENC to balance       0.54     0.49     +0.031 [-0.071, +0.133] p 0.548      0.66 (n=50)
-    SMOTENC amplified x5     0.51     0.51     +0.005 [-0.155, +0.166] p 0.947      0.89 (n=250)
-    SMOTENC + Tomek          0.53     0.49     +0.025 [-0.116, +0.166] p 0.719      
-    noise augmentation x5    0.54     0.49     +0.029 [-0.067, +0.125] p 0.552      0.84 (n=222)
+    none                     0.59     0.54     -                                    
+    class weights            0.58     0.58     -0.008 [-0.034, +0.017] p 0.526      
+    random duplication       0.58     0.55     -0.016 [-0.062, +0.031] p 0.506      0.60 (n=142)
+    SMOTENC to balance       0.60     0.58     +0.011 [-0.051, +0.073] p 0.726      0.75 (n=142)
+    SMOTENC amplified x5     0.56     0.56     -0.029 [-0.106, +0.048] p 0.457      0.83 (n=710)
+    SMOTENC + Tomek          0.61     0.59     +0.019 [-0.053, +0.090] p 0.600      
+    noise augmentation x5    0.60     0.54     +0.012 [-0.019, +0.042] p 0.446      0.72 (n=630)
 
-Inside the folds, best gain over no oversampling: +0.043 (noise augmentation x5, AnyFormalLoss); smallest Holm-adjusted p across 24 comparisons: 1.000
-Highest valid AUC of any strategy on any target: 0.73 (the usability criteria need >= .70 across splits, plus the other three).
+Inside the folds, best gain over no oversampling: +0.019 (SMOTENC + Tomek, AnyDifficulty); smallest Holm-adjusted p across 24 comparisons: 1.000
+Highest valid AUC of any strategy on any target: 0.76 (the usability criteria need >= .70 across splits, plus the other three).
 Leaky AUCs rise with the amount of synthetic data - they measure how well the model recognises copies of people it
 has already seen, not how well it predicts new people.
 
-runtime 15 s
-BEST VALID RESULT (noise augmentation x5, AnyFormalLoss) against the usability criteria:
-    over 10 other splits: AUC 0.74 (0.71 to 0.76)   [criterion 2 needs mean >= .70 and min >= .65]
-    without the age dummy: AUC 0.57   [criterion 3 needs it to stay above chance]
-    without the age dummy, permutation test (200 shuffles, full CV): AUC 0.57, null mean 0.50, p 0.303  [criterion 3 needs p < .05]
-    -> fails criterion 3: the signal is the 5 respondents aged 25+, as in every earlier model
+runtime 32 s
+BEST VALID RESULT (SMOTENC + Tomek, AnyFormalLoss) against the usability criteria:
+    over 10 other splits: AUC 0.77 (0.76 to 0.77)   [criterion 2 needs mean >= .70 and min >= .65]
+    without the age dummy: AUC 0.68   [criterion 3 needs it to stay above chance]
+    without the age dummy, permutation test (200 shuffles, full CV): AUC 0.68, null mean 0.50, p 0.015  [criterion 3 needs p < .05]
+    -> passes criterion 3

@@ -31,8 +31,9 @@ EXECUTE.
 FREQUENCIES Consent Eligible excl_region moved core straightline.
 
 * ============================================================ primary sample from here on.
-* core = grew up and lives in the Arab region, no move since 2022 (n = 37).
-FILTER BY core.
+* The primary sample is all respondents (decision of 3 Oct 2026).
+* The plan's core sample is analysed as a sensitivity check at the end.
+FILTER OFF.
 
 * ------------------------------------------------------------ Table 1: the sample.
 FREQUENCIES Consent Eligible L1_Home_1 TO L1_Home_4 Role Education Field Age Gender
@@ -146,12 +147,13 @@ REGRESSION /STATISTICS COEFF OUTS CI(95) R ANOVA /DEPENDENT Displacement4
 REGRESSION /STATISTICS COEFF OUTS CI(95) R ANOVA /DEPENDENT AbilityDecline
   /METHOD=ENTER Displacement4 Age25 EventMove.
 
-* ============================================================ all 40 respondents.
-* The whole sample, same models as the primary analysis.
-FILTER OFF.
+* ============================================================ core sample (sensitivity).
+* Grew up and lives in the Arab region, no move since 2022; same models as the primary analysis.
+FILTER BY core.
 NPAR TESTS /WILCOXON=zero WITH d_Fusha (PAIRED) /SIGN=zero WITH d_Fusha (PAIRED) /MISSING ANALYSIS.
 NPAR TESTS /WILCOXON=zero WITH d_WorkStudy (PAIRED) /SIGN=zero WITH d_WorkStudy (PAIRED) /MISSING ANALYSIS.
 REGRESSION /STATISTICS COEFF OUTS CI(95) R ANOVA /DEPENDENT Displacement
   /METHOD=ENTER AI_Intensity EnglishShare QualityGap Age25 EventMove.
 REGRESSION /STATISTICS COEFF OUTS CI(95) R ANOVA /DEPENDENT AbilityDecline
   /METHOD=ENTER Displacement Age25 EventMove.
+FILTER OFF.

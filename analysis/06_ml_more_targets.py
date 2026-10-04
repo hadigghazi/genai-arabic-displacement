@@ -40,7 +40,7 @@ for df in (ALL,):
     fut = df[[c for c in df.columns if c.startswith('Future_')]]
     df['ExpectedLoss'] = (fut <= -1).sum(axis=1).where(fut.notna().sum(axis=1) >= 6)
     df['AnyDifficulty'] = (df.AbilityDecline > 0).astype(float).where(df.AbilityDecline.notna())
-core = ALL[ALL.core == 1].copy()
+prim = ALL.copy()                      # primary sample: all respondents (decision of 3 Oct 2026)
 REG_TARGETS = REG_TARGETS | {'ExpectedLoss'}
 TG = [('Substitution', 'clf', 'substitution (English instead of Arabic because of AI)'),
       ('ExpectedLoss', 'reg', 'expected loss in two years (count of domains)'),
@@ -57,9 +57,9 @@ def blocks_for(tgt):
 
 
 for tgt, kind, _ in TG:
-    assert len({len(data(core, tgt, c)[1]) for c in ALLSETS6.values()}) == 1, tgt
+    assert len({len(data(prim, tgt, c)[1]) for c in ALLSETS6.values()}) == 1, tgt
     if kind == 'clf':
-        _, y = data(core, tgt, M0)
+        _, y = data(prim, tgt, M0)
         assert min(y.sum(), len(y) - y.sum()) >= MIN_CLASS, tgt
 
 # ------------------------------------------------------------------ main evaluation
@@ -74,16 +74,17 @@ for tgt, kind, _ in TG:
 
 def evaluate6(tgt, kind, sname, mname):
     cols = ALLSETS6[sname]
-    X, y = data(core, tgt, cols)
+    X, y = data(prim, tgt, cols)
     return run_cv(kind, model(kind, mname, cols), X, y, splits(kind, y, R))
 
 
 log('main evaluation: %d jobs' % len(jobs))
-results = dict(zip(jobs, Parallel(n_jobs=JOBS)(delayed(evaluate6)(*j) for j in jobs)))
+evaluate6_cached = MEM.cache(evaluate6)
+results = dict(zip(jobs, Parallel(n_jobs=JOBS)(delayed(evaluate6_cached)(*j) for j in jobs)))
 log('main evaluation done')
 
 say('=' * 100)
-say('RQ4 EXTENSION: the other targets listed before the data. Core sample (n=37). %d x 5-fold CV%s; fixed models;' % (R, ' [QUICK MODE: NOT FOR REPORTING]' if QUICK else ''))
+say('RQ4 EXTENSION: the other targets listed before the data. All respondents (n=%d). %d x 5-fold CV%s; fixed models;' % (len(prim), R, ' [QUICK MODE: NOT FOR REPORTING]' if QUICK else ''))
 say('SMOTENC inside training folds. Machinery executed from 05_ml.py. Criteria fixed before running: ANALYSIS-DECISIONS.md, "ML extension".')
 with open(DATA, 'rb') as f:
     md5 = hashlib.md5(f.read()).hexdigest()
@@ -91,9 +92,9 @@ say('Python %s | numpy %s | scipy %s | scikit-learn %s | imbalanced-learn %s | s
     sys.version.split()[0], np.__version__, scipy.__version__, sklearn.__version__, imblearn.__version__, md5))
 say('=' * 100)
 say('')
-say('TARGETS (core sample)')
+say('TARGETS (primary sample: all respondents)')
 for tgt, kind, lab in TG:
-    _, y = data(core, tgt, M0)
+    _, y = data(prim, tgt, M0)
     if kind == 'clf':
         say('    %-14s n=%d  yes %d / no %d   %s' % (tgt, len(y), int(y.sum()), int(len(y) - y.sum()), lab))
     else:
@@ -108,7 +109,7 @@ say('BSS from pooled out-of-fold predictions; Q2 = 1 - MSE / Var(y) per fold. No
 
 table = []
 for tgt, kind, lab in TG:
-    _, y = data(core, tgt, M0)
+    _, y = data(prim, tgt, M0)
     say('')
     say('-' * 100)
     say('%s  (%s)' % (lab.upper(), tgt))
@@ -186,7 +187,7 @@ for tgt, kind, lab in TG:
 perm = []
 for tgt, kind, sname, mname, B in plan:
     cols = ALLSETS6[sname]
-    X, y = data(core, tgt, cols)
+    X, y = data(prim, tgt, cols)
     obs, p, nullmean = perm_test(kind, model(kind, mname, cols), X, y, B)
     log('permutation %s %s %s: p=%.3f' % (tgt, sname, mname, p))
     perm.append(dict(target=tgt, kind=kind, features=sname, model=mname, obs=obs, null=nullmean, p=p, B=B))
@@ -217,7 +218,7 @@ def _seed6(tgt, kind, seed):
     out = {}
     for sname in ['M0 background', 'M1 + AI use']:
         cols = ALLSETS6[sname]
-        X, y = data(core, tgt, cols)
+        X, y = data(prim, tgt, cols)
         res = run_cv(kind, model(kind, 'linear', cols), X, y, splits(kind, y, R, seed))
         s = summary(kind, res, y)
         out[sname] = (s['main'], s.get('bacc', np.nan))
@@ -276,7 +277,7 @@ for tgt, kind, lab in TG:
     if not verdicts[tgt]:
         continue
     cols = ALLSETS6[PRIMARY]
-    X, y = data(core, tgt, cols)
+    X, y = data(prim, tgt, cols)
     folds = splits(kind, y, R)
     res = run_cv(kind, model(kind, 'linear', cols), X, y, folds, keep=True)
     say('')
@@ -291,9 +292,9 @@ for tgt, kind, lab in TG:
         for bal, blab in [('weight', 'class weights, no oversampling'), ('none', 'no imbalance handling')]:
             s = summary(kind, run_cv(kind, model(kind, 'linear', cols, bal), X, y, folds), y)
             say('        %-34s AUC %.2f  balanced accuracy %.2f  BSS %+.2f' % (blab, s['main'], s['bacc'], s['bss']))
-    X40, y40 = data(ALL, tgt, cols)
+    X40, y40 = data(ALL[ALL.core == 1], tgt, cols)
     s40 = summary(kind, run_cv(kind, model(kind, 'linear', cols), X40, y40, splits(kind, y40, R)), y40)
-    say('        all 40: %s %.2f%s' % ('AUC' if kind == 'clf' else 'Q2', s40['main'], ('  balanced accuracy %.2f' % s40['bacc']) if kind == 'clf' else ''))
+    say('        prim sample: %s %.2f%s' % ('AUC' if kind == 'clf' else 'Q2', s40['main'], ('  balanced accuracy %.2f' % s40['bacc']) if kind == 'clf' else ''))
 
 say('')
 say('runtime %.0f s' % (time.time() - T0))

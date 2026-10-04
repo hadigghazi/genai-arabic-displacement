@@ -12,6 +12,7 @@
 
 # Never published: individual responses, internal notes, local outputs
 /analysis/data/
+/analysis/.mlcache/
 /analysis/ANALYSIS-DECISIONS-internal.md
 /analysis/spss/OUTPUT.doc
 /analysis/spss/*.spv

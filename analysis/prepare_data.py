@@ -3,7 +3,8 @@
 Raw Google Forms export -> numeric CSV + SPSS syntax.
 
 Run:   python analysis/prepare_data.py
-Reads:  analysis/data/responses-raw-2026-10-01.xlsx  (frozen copy of the export)
+Reads:  analysis/data/responses-raw-2026-10-04.xlsx  (frozen copy of the final export, 105 responses;
+        earlier exports of 40 and 65 responses are identical to its first rows)
 Writes: analysis/data/coded.csv            numeric codes only, one row per respondent
         analysis/data/open_answers.md      the optional free-text answers, for quoting
         analysis/data/scored.csv           coded.csv + every computed score (for the Python/ML side)
@@ -24,7 +25,7 @@ sys.path.insert(0, ROOT)
 from instrument_data import S, SECTIONS          # noqa: E402
 from instrument_v3 import opts, resolve          # noqa: E402
 
-RAW = os.path.join(HERE, 'data', 'responses-raw-2026-10-01.xlsx')
+RAW = os.path.join(HERE, 'data', 'responses-raw-2026-10-04.xlsx')
 OUT_CSV = os.path.join(HERE, 'data', 'coded.csv')
 OUT_SCORED = os.path.join(HERE, 'data', 'scored.csv')
 OUT_OPEN = os.path.join(HERE, 'data', 'open_answers.md')
@@ -213,7 +214,7 @@ def score(d):
     # flags
     d['excl_region'] = ((d['Country_GrewUp'] == 6) | (d['Country_Now'] == 6)).astype(int)
     d['moved'] = ((d['Moved_Since2022'] == 1) | (d['Events_5'] == 1)).astype(int)
-    d['core'] = ((d['excl_region'] == 0) & (d['moved'] == 0)).astype(int)      # primary analysis sample
+    d['core'] = ((d['excl_region'] == 0) & (d['moved'] == 0)).astype(int)      # the plan's core sample (sensitivity analysis)
     d['stable'] = ((d['Events_1'] == 0) & (d['Events_2'] == 0) & (d['Events_3'] == 0) & (d['Role'] != 4)).astype(int)
     G9 = d[['ArUse_' + x for x in DOMAINS] + ['Switch_Mode']]
     d['straightline'] = (G9.eq(-2).all(axis=1) | G9.eq(2).all(axis=1)).astype(int)   # plan 7.0.5
@@ -269,7 +270,8 @@ def write_sps(meta, names):
     w('* ---------------------------------------------------------------- flags (plan 6.2 and 7.0).')
     w('COMPUTE excl_region = (Country_GrewUp = 6 OR Country_Now = 6).')
     w('COMPUTE moved = (Moved_Since2022 = 1 OR Events_5 = 1).')
-    w('* core: the primary analysis sample - grew up and lives in the Arab region, no move since 2022.')
+    w('* core: the plan\'s core sample (sensitivity) - grew up and lives in the Arab region, no move since 2022.')
+    w('* The primary analysis uses all respondents (decision of 3 Oct 2026, ANALYSIS-DECISIONS.md).')
     w('COMPUTE core = (excl_region = 0 AND moved = 0).')
     w('* stable: same workplace or university throughout the AI period (no new university, graduation or job; role not "other").')
     w('COMPUTE stable = (Events_1 = 0 AND Events_2 = 0 AND Events_3 = 0 AND Role <> 4).')
@@ -322,7 +324,7 @@ def write_sps(meta, names):
     w('COMPUTE EventMove = (Events_4 = 1 OR Events_5 = 1).')
     w('COMPUTE Medium = (ANY(Sch_SciLang, 2, 3) OR ANY(Uni_Lang, 2, 3, 4)).')
     w('DESCRIPTIVES AI_Freq AI_TaskShare AI_BreadthCount /SAVE.')
-    w('* AI intensity = mean of z(task share) and z(breadth). Frequency is left out: 33 of 40 are in its top category.')
+    w('* AI intensity = mean of z(task share) and z(breadth). Frequency is descriptive only, as planned.')
     w('COMPUTE AI_Intensity = MEAN(ZAI_TaskShare, ZAI_BreadthCount).')
     w('COMPUTE AI_Intensity3 = MEAN(ZAI_Freq, ZAI_TaskShare, ZAI_BreadthCount).')
     w('EXECUTE.')
@@ -331,7 +333,7 @@ def write_sps(meta, names):
     for k, (n, lab) in enumerate([
         ('excl_region', 'Grew up or lives outside the Arab world'),
         ('moved', 'Moved country since 2022 or since starting AI'),
-        ('core', 'Primary analysis sample: grew up and lives in the Arab region, no move since 2022'),
+        ('core', 'Core sample (sensitivity): grew up and lives in the Arab region, no move since 2022'),
         ('stable', 'Same workplace or university throughout the AI period'),
         ('straightline', 'Every change row much less, or every row much more'),
         ('DomainsValid', 'Number of domains that apply'),

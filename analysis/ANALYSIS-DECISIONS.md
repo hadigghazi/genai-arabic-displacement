@@ -7,9 +7,10 @@ statistics agree; `crosscheck_spss.py`). Respondent ids are row numbers in the (
 **How choices were made.** At each decision point the options were compared on construct validity,
 statistical power at this sample size, and how well the choice holds up with a reviewer — not on which
 gives the smaller p-value. Every alternative is reported as a labelled sensitivity analysis in
-`results/python_stats.txt`. **Several alternatives change the Holm-adjusted Family B conclusions
-(H3 English share, H4); those rows are marked "Differs", and the paper presents H3 and H4 as
-dependent on the definition.** Family A (H1a, H1b, H2a) holds under every alternative.
+`results/python_stats.txt`. **On the final sample (n = 105), Family A (H1a, H1b, H2a) and the H3 English
+share hold under every alternative; H4 depends on the definition and on one respondent, and the paper presents
+it that way.** (At n = 37 the English share also depended on the definition; that analysis is kept below as the
+first analysis.)
 
 **Documents written before the data** (first response 30 Sep 2026, 17:57): an analysis plan (27 Sep 2026)
 and a study proposal with the codebook (30 Sep 2026); neither is included here. Neither was registered, so
@@ -51,7 +52,57 @@ to the instrument), the first 65 responses identical cell for cell to the 3 Oct 
 21:17). All decisions of 3 Oct stand unchanged: primary sample = all respondents; the plan's core rule is the
 sensitivity sample; the design is otherwise fixed.
 
-## Results at a glance (primary sample, n = 37)
+## Results on the final sample (all respondents, n = 105; core sample n = 89 as sensitivity)
+
+Collected 30 Sep 17:57 to 4 Oct 21:17, 2026 (36, 4, 11, 27 and 27 responses per day). All 105 consented and passed
+screening. Grew up in Lebanon 101 (Gulf 2, outside the Arab world 2); live in Lebanon 96 (elsewhere in the region
+2, outside it 7); all but one grew up or live in Lebanon; moved since 2022: 10. Under 25: 82, 25-34: 20, 35-44: 3.
+Women 60, men 44. Master's or higher 55, bachelor 44, secondary 6. Computing 45, engineering 22, sciences/health 15.
+AI several times a day 79; always write to AI in English 37; began regular AI use in 2025: 9, in 2026: 2 (the
+six-month rule cannot be checked for these 2). Straight-liners: ids 13 and 29. The smallest correlation detectable
+with 80% power is r = .27.
+
+| | Result (all 105) | Core sample (n = 89) | Holds under the alternatives? |
+|---|---|---|---|
+| H1a Fusha | 29 less vs 11 more (n = 100); Wilcoxon z = -3.06, r = -.31, Holm .004 | Holm .003 | Yes |
+| H1b work/study | 52 less vs 3 more (n = 104); z = -6.00, r = -.59, Holm < .001 | Holm < .001 | Yes. Strict stable-setting proxy (decision 7), n = 25: 8 less vs 1 more, sign p = .039, Wilcoxon exact p = .12 |
+| H2a Fishman order | Page one-sided exact p < .001; Friedman chi2(2) = 57.06, W = .28, n = 102; means .64, .14, .10 | Holm < .001 | Yes; stable proxy Page p = .011 (n = 24) |
+| H2b Fusha > dialect | Not supported: z = 1.21, p = .22 | p = .21 | - |
+| H3 joint | Supported: F(3,98) = 7.86, p < .001 | F(3,82) = 9.21, p < .001 | Yes, every alternative |
+| H3a intensity | b = -.003 [-.13, .12], p = .96 | p = .54 | Never significant |
+| H3b English share | b = .17 [.09, .25], p = .0001, Holm .0004; wild bootstrap Holm .0012; Firth p = .004 | Holm .0002 | **Yes, every specification**: Holm <= .042 (the largest with English proficiency controlled; .021 with social-media attribution) |
+| H3c quality gap | b = .06 [-.07, .19], p = .37 | p = .88 | Never significant |
+| H4 | Not supported: b = .37 [-.01, .74], p = .053, Holm .16; wild bootstrap Holm .23; Spearman rho = .47 | b = .53, Holm .0007; every leave-one-out p <= .002 | **Differs**: Holm-significant with the 4-domain (.028) or dialect-only score (.004), in the core sample, and without id 21 (Cook's d .80; b = .52, Holm .0001); not with no covariates (.11), age only (.15), English proficiency (.38), social-media attribution (.14) or without the straight-liners (.30). Leave-one-out: only removing id 21 brings p below .0125 |
+| H5 | Borderline: a = .111 (p = .035), b = .384 (p = .055), c' = -.074, c = -.031; indirect .043, 95% CI [.0001, .110] | indirect .069 [.008, .144] | Fragile: with switching as a second mediator (E1) the indirect effect via displacement is [-.0009, .103] |
+| RQ4 (ML) | Three usable models (any formal loss, work/study, self-talk); the AI-use increment over background is not significant | see "Machine learning" | see "Machine learning" |
+
+- **Reliability.** Displacement alpha .87, omega .87 [.80, .91] (n = 97 complete cases); ability decline alpha .79,
+  omega .81 [.67, .90]; quality gap alpha .69, omega .70 [.60, .79]. 63 of 105 score exactly 0 on ability decline.
+- **Age.** 23 respondents are 25 or over; 15 of them report no change in any domain (displacement mean .04 vs .33
+  under 25); in H3, b = -.30, p = .0015.
+- **AI or technology in general.** AI- and social-media-attributed loss correlate (rho = .55). Social media +.48 vs
+  AI +.27 over all domains (p < .0001); formal domains .48 vs .45 (p = .35). Non-blamers (n = 56) +.04 (p = .34);
+  blamers (n = 48) +.54. With social-media attribution as a covariate, English share p = .0053 (Holm .021).
+- **Change of setting.** 66 of the 82 under 25 started university, graduated, began a new job or started studying or
+  working in English. Started university: work/study -1.03 (n = 35) vs -.42 (n = 69), Mann-Whitney p = .0004
+  (exploratory). Stable vs changed: -.28 vs -.73, p = .022, but 11 of the 25 stable are 25+; under 25 only p = .12;
+  adjusted for age b = .35, p = .080.
+- **Exploratory, planned before the data.** E1: neither indirect effect excludes zero. E3 (n = 82): rho = .46,
+  p < .0001. English share and English proficiency correlate rho = .57.
+- **What changed relative to the decision table below** (written at n = 37). Decision 1: the primary sample is all
+  respondents (decided 3 Oct), the plan's core rule is the sensitivity sample (16 outside it). Decision 7: strict
+  proxy n = 25 (graduation counted, n = 43). Decision 9: EventMove n = 25 (started English-medium study or work 24,
+  moved 4); education medium is still unusable (one respondent studied school science in Arabic). Decision 14:
+  Firth logit, 8.8 events per predictor (indicative). Decision 16: N = 105 is above the plan's threshold of 100,
+  so its small-sample rule no longer applies and H5 is not labelled underpowered. ML2: every single domain now has
+  at least 8 in the smaller class, so family and religion are modelled. ML10: all 105, core as a sensitivity row.
+  The numbers inside the table below refer to n = 37.
+
+## First analysis (n = 37, the plan's core sample of the first 40 responses; superseded)
+
+Kept as the record of what was known when collection was reopened.
+
+### Results at a glance (primary sample, n = 37)
 
 | | Result | Holds under the alternatives? |
 |---|---|---|
@@ -87,6 +138,8 @@ sensitivity sample; the design is otherwise fixed.
 | 16 | The 27 Sep plan's small-sample rule (section 7.6) | The rule: below N = 100, H5 becomes the single confirmatory test and H3/H4 keep only Medium and age; below ≈78, H5 is reported as underpowered and the paper leads with the domain profile | **Set aside on 2 Oct (after the data), except that H5 is reported as underpowered**; its machine-learning clause (logistic regression against the baseline only) is set aside too — see ML5 | Two families are kept because Family A is within-person and well powered (H1a, H1b and H2a all p < .005), and H3/H4 are what the paper's argument needs; H5 needs ≈78 even for medium paths and has 36. The paper still leads with the domain profile (Figure 1) | The rule's covariate set (age only) is run in robustness (f). **Differs for H4** (Holm .087) |
 
 ## Further notes
+
+(Written at n = 37. For the final sample, see "Results on the final sample" above.)
 
 - **Sample size and collection.** 40 responses (37 analysed), collected 30 Sep 17:57 – 1 Oct 22:15, 2026 (36 on 30 Sep, 4 on 1 Oct). The plan aimed at about 150 collected and 120 analysed; collection was closed at 40, before any analysis. The smallest correlation detectable with 80% power is r = .45, so the H3–H5 results are weak evidence either way.
 - **Launch before the scheduled checks.** The proposal scheduled back-translation for 1–2 Oct, the pretest for 2–3 Oct and the launch for 5 Oct. The form went live on 30 Sep, so the scheduled back-translation and pretest did not precede it, and the stated "about 7 minutes" was not pilot-timed. Only the author reviewed the wording before launch.
@@ -145,7 +198,38 @@ class-weighted fits; an M1 model's AI-feature importances are not interpreted un
 Note on oversampling: it is used, inside the training folds; it corrects class imbalance for the classifier
 but cannot create information, so it does not fix the small sample.
 
-**Results (core sample, linear model unless stated; `results/ml_results.txt`).**
+**Results on the final sample (all respondents, n = 105; `results/ml_results.txt`, `ml_more_targets.txt`,
+`ml_usability.txt`, `oversampling_check.txt`).**
+
+- **Usable models** (the four criteria below, applied in advance to every target; linear background + AI use):
+  any formal loss (55 vs 49): AUC .75, permutation Holm .004; .76 (.75-.77) over 10 other splits; without the age
+  dummy p = .018; balanced accuracy .71. Work/study (52 vs 52): .74, Holm .016; .74 (.72-.75); p = .006; .70.
+  Self-talk (28 vs 77): .73, Holm .016; .75 (.73-.77); p = .002; .65. Not usable: domains lost (Q2 .06,
+  permutation p .004, but gain over the mean +.09, p = .46), writing (.69 across splits), personal, family, Fusha,
+  religion, content, and the three further targets. Holm across all 13 targets: formal, work/study and self .026.
+- **RQ4 not supported.** M1 - M0: +.007 [-.16, +.18] Q2 (domains lost), +.018 [-.066, +.102] AUC (any formal
+  loss), Holm 1.00; single domains -.10 to +.16 (family +.156 [.012, .300], p = .034, Holm .27). Positive at 10 of
+  10 seeds for any formal loss (+.033). Minimum detectable gain: Q2 .24, AUC .12.
+- **The blocks overlap.** AI use alone: formal .71 (Holm .004), work/study .70, self .75. Background alone: .73,
+  .73, .68 (self Holm .072). English proficiency (background) correlates rho = .57 with English share (AI use).
+  Background without age: formal .63 (p = .032, Holm .064), domains lost Q2 -.01 (p = .052).
+- **What the background models use**: age 25+ first, then education and English proficiency.
+- **Flexible models** never pass the decision rule.
+- **Sensitivity rows**: core sample M1 formal .79 (vs M0 +.071, p = .19); social-media attribution added to
+  background +.061 (p = .083); class weights or no imbalance handling give the same verdicts.
+- **Leakage demonstration**: oversampling before the split raises any formal loss from .75 to .78 (n = 110).
+- **Further targets** (`06`): substitution .61 (background .56; +.055 [-.068, .177]); expected loss Q2 -.01;
+  any difficulty .60 (background .66). None usable.
+- **Oversampling check** (`07`): inside the folds, best gain +.019 (SMOTENC + Tomek, any difficulty), Holm 1.00
+  across 24 comparisons. Before the split, the apparent AUC rises with the amount of synthetic data: up to .89 (any
+  formal loss, amplified x5) and .84 for substitution (valid .61-.62).
+
+In short: within this sample, three screening-level models meet the criteria fixed in advance; AI-use information
+predicts about as well as background but adds no significant gain to it.
+
+**First analysis (core sample, n = 37; superseded).**
+
+(core sample, linear model unless stated)
 
 - **No evidence that AI-use information improves prediction (RQ4 not supported).** Adding the AI-use block changes out-of-sample performance by ΔQ² −.27 [−.62, +.08] for domains lost and ΔAUC −.01 [−.34, +.32] for any formal loss (Holm p = .26 and .94). On 10 other random splits the change is negative at 10 of 10 and 9 of 10. AI use on its own predicts neither target better than chance (Q² −.36, p = .43; AUC .52, p = .40). Across every sensitivity row (all 40, decisions 12 and 13, the plan's AI block and targets, class weights or no imbalance handling) the AI-use increment is never above +.02. Adding the quality gap does not help either (ΔQ² −.09, ΔAUC −.06, both p > .3).
 - **How large a gain could have been missed.** The corrected test has 80% power only for gains of about .50 Q² or .47 AUC, so on its own it cannot exclude even a large gain. A compact AI block — the two H3 predictors, intensity and English share — bounds the gain more tightly: ΔQ² −.03 [−.14, +.09], ΔAUC +.01 [−.20, +.23]. In words: no detectable improvement; gains above about .1 Q² are unlikely, and the AUC bound is wide — not "AI use has no effect".
@@ -233,6 +317,6 @@ it manufactures a model from nothing.
 
 ## Cannot be checked from the data
 
-- Whether the respondent who started using AI in 2026 met the 6-month rule (start month not asked).
+- Whether the 2 respondents who started using AI in 2026 met the 6-month rule (start month not asked).
 - Completion times (Google Forms does not record them).
 - Whether "not applicable today" together with "much less because of AI" means stopping because of AI, or a misreading.

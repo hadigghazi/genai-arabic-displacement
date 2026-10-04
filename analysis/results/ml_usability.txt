@@ -1,0 +1,66 @@
+====================================================================================================
+USABLE-MODEL CRITERIA for the targets of 05_ml.py (linear background + AI use, all respondents, n=105)
+====================================================================================================
+    domains lost (count)
+        1 better than chance      PASS   permutation Holm p 0.004
+        2 not split luck          fail   Q2 over splits 0.09 (min 0.08), gain over the mean +0.09 p 0.457: need min > 0 and p < .05
+        3 not carried by age 25+  PASS   without the age dummy: permutation p 0.022
+        4 classification          n/a    not applicable (count)
+        -> not usable
+    any formal-domain loss
+        1 better than chance      PASS   permutation Holm p 0.004
+        2 not split luck          PASS   AUC over splits 0.76 (0.75 to 0.77): need mean >= .70 and min >= .65
+        3 not carried by age 25+  PASS   without the age dummy: permutation p 0.018
+        4 classification          PASS   balanced accuracy over splits 0.71: need >= .65
+        -> USABLE (within this sample)
+    loss: WorkStudy
+        1 better than chance      PASS   permutation Holm p 0.016
+        2 not split luck          PASS   AUC over splits 0.74 (0.72 to 0.75): need mean >= .70 and min >= .65
+        3 not carried by age 25+  PASS   without the age dummy: permutation p 0.006
+        4 classification          PASS   balanced accuracy over splits 0.70: need >= .65
+        -> USABLE (within this sample)
+    loss: Writing
+        1 better than chance      PASS   permutation Holm p 0.024
+        2 not split luck          fail   AUC over splits 0.69 (0.68 to 0.70): need mean >= .70 and min >= .65
+        3 not carried by age 25+  PASS   without the age dummy: permutation p 0.034
+        4 classification          PASS   balanced accuracy over splits 0.66: need >= .65
+        -> not usable
+    loss: Self
+        1 better than chance      PASS   permutation Holm p 0.016
+        2 not split luck          PASS   AUC over splits 0.75 (0.73 to 0.77): need mean >= .70 and min >= .65
+        3 not carried by age 25+  PASS   without the age dummy: permutation p 0.002
+        4 classification          PASS   balanced accuracy over splits 0.65: need >= .65
+        -> USABLE (within this sample)
+    loss: Personal
+        1 better than chance      fail   permutation Holm p 0.060
+        2 not split luck          fail   AUC over splits 0.69 (0.67 to 0.71): need mean >= .70 and min >= .65
+        3 not carried by age 25+  PASS   without the age dummy: permutation p 0.024
+        4 classification          fail   balanced accuracy over splits 0.61: need >= .65
+        -> not usable
+    loss: Family
+        1 better than chance      fail   permutation Holm p 0.090
+        2 not split luck          fail   AUC over splits 0.69 (0.68 to 0.70): need mean >= .70 and min >= .65
+        3 not carried by age 25+  PASS   without the age dummy: permutation p 0.048
+        4 classification          fail   balanced accuracy over splits 0.58: need >= .65
+        -> not usable
+    loss: Fusha
+        1 better than chance      fail   permutation Holm p 0.060
+        2 not split luck          fail   AUC over splits 0.68 (0.67 to 0.69): need mean >= .70 and min >= .65
+        3 not carried by age 25+  PASS   without the age dummy: permutation p 0.040
+        4 classification          fail   balanced accuracy over splits 0.63: need >= .65
+        -> not usable
+    loss: Religion
+        1 better than chance      fail   permutation Holm p 0.497
+        2 not split luck          fail   AUC over splits 0.51 (0.48 to 0.53): need mean >= .70 and min >= .65
+        3 not carried by age 25+  fail   without the age dummy: permutation p 0.377
+        4 classification          fail   balanced accuracy over splits 0.53: need >= .65
+        -> not usable
+    loss: Consume
+        1 better than chance      fail   permutation Holm p 0.399
+        2 not split luck          fail   AUC over splits 0.55 (0.53 to 0.56): need mean >= .70 and min >= .65
+        3 not carried by age 25+  fail   without the age dummy: permutation p 0.471
+        4 classification          fail   balanced accuracy over splits 0.52: need >= .65
+        -> not usable
+
+usable: AnyFormalLoss, Loss_WorkStudy, Loss_Self
+runtime 1253 s

@@ -20,7 +20,7 @@ import matplotlib.pyplot as plt
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, 'results')
 d = pd.read_csv(os.path.join(HERE, 'data', 'scored.csv'))
-d = d[d.core == 1]
+# primary sample: all respondents (decision of 3 Oct 2026)
 
 NAMES = {'WorkStudy': 'Work or study', 'Writing': 'Messages and posts', 'Self': 'Self-talk and private notes',
          'Personal': 'Personal matters', 'Family': 'Family and friends', 'Fusha': 'Fusha (formal texts)',

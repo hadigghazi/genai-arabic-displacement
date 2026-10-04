@@ -252,7 +252,8 @@ MISSING VALUES CurUse_Consume (4,5).
 * ---------------------------------------------------------------- flags (plan 6.2 and 7.0).
 COMPUTE excl_region = (Country_GrewUp = 6 OR Country_Now = 6).
 COMPUTE moved = (Moved_Since2022 = 1 OR Events_5 = 1).
-* core: the primary analysis sample - grew up and lives in the Arab region, no move since 2022.
+* core: the plan's core sample (sensitivity) - grew up and lives in the Arab region, no move since 2022.
+* The primary analysis uses all respondents (decision of 3 Oct 2026, ANALYSIS-DECISIONS.md).
 COMPUTE core = (excl_region = 0 AND moved = 0).
 * stable: same workplace or university throughout the AI period (no new university, graduation or job; role not "other").
 COMPUTE stable = (Events_1 = 0 AND Events_2 = 0 AND Events_3 = 0 AND Role <> 4).
@@ -303,7 +304,7 @@ COMPUTE Computing = (Field = 1).
 COMPUTE EventMove = (Events_4 = 1 OR Events_5 = 1).
 COMPUTE Medium = (ANY(Sch_SciLang, 2, 3) OR ANY(Uni_Lang, 2, 3, 4)).
 DESCRIPTIVES AI_Freq AI_TaskShare AI_BreadthCount /SAVE.
-* AI intensity = mean of z(task share) and z(breadth). Frequency is left out: 33 of 40 are in its top category.
+* AI intensity = mean of z(task share) and z(breadth). Frequency is descriptive only, as planned.
 COMPUTE AI_Intensity = MEAN(ZAI_TaskShare, ZAI_BreadthCount).
 COMPUTE AI_Intensity3 = MEAN(ZAI_Freq, ZAI_TaskShare, ZAI_BreadthCount).
 EXECUTE.
@@ -311,7 +312,7 @@ EXECUTE.
 VARIABLE LABELS
   excl_region "Grew up or lives outside the Arab world"
   /moved "Moved country since 2022 or since starting AI"
-  /core "Primary analysis sample: grew up and lives in the Arab region, no move since 2022"
+  /core "Core sample (sensitivity): grew up and lives in the Arab region, no move since 2022"
   /stable "Same workplace or university throughout the AI period"
   /straightline "Every change row much less, or every row much more"
   /DomainsValid "Number of domains that apply"

@@ -1,13 +1,13 @@
 ====================================================================================================
-RQ4 EXTENSION: the other targets listed before the data. Core sample (n=37). 10 x 5-fold CV; fixed models;
+RQ4 EXTENSION: the other targets listed before the data. All respondents (n=105). 10 x 5-fold CV; fixed models;
 SMOTENC inside training folds. Machinery executed from 05_ml.py. Criteria fixed before running: ANALYSIS-DECISIONS.md, "ML extension".
-Python 3.13.5 | numpy 2.2.4 | scipy 1.15.3 | scikit-learn 1.6.1 | imbalanced-learn 0.13.0 | scored.csv md5 5069168d3063b52cebce048c768439e3
+Python 3.13.5 | numpy 2.2.4 | scipy 1.15.3 | scikit-learn 1.6.1 | imbalanced-learn 0.13.0 | scored.csv md5 624c77c952323b93935fb612080b1e54
 ====================================================================================================
 
-TARGETS (core sample)
-    Substitution   n=37  yes 25 / no 12   substitution (English instead of Arabic because of AI)
-    ExpectedLoss   n=37  mean 3.70  SD 2.52  range 0-8   expected loss in two years (count of domains)
-    AnyDifficulty  n=37  yes 12 / no 25   harder to use Arabic without AI (any)
+TARGETS (primary sample: all respondents)
+    Substitution   n=105  yes 59 / no 46   substitution (English instead of Arabic because of AI)
+    ExpectedLoss   n=105  mean 2.90  SD 2.51  range 0-8   expected loss in two years (count of domains)
+    AnyDifficulty  n=105  yes 34 / no 71   harder to use Arabic without AI (any)
 FEATURES
     M0 background      Age25, Computing, Education, Eng_Prof, EventMove
     M1 + AI use        Age25, Computing, Education, Eng_Prof, EventMove, AI_TaskShare, AI_BreadthCount, AI_Freq, AI_TenureRank, EnglishShare, AI_Content, AI_ContentLang
@@ -22,145 +22,145 @@ BSS from pooled out-of-fold predictions; Q2 = 1 - MSE / Var(y) per fold. No inte
 ----------------------------------------------------------------------------------------------------
 SUBSTITUTION (ENGLISH INSTEAD OF ARABIC BECAUSE OF AI)  (Substitution)
     features           model     AUC    PR-AUC  rec yes   rec no    bal acc  BSS   
-    M0 background      linear    0.29   0.57    0.49      0.27      0.38     -0.46
-    M0 background      forest    0.26   0.57    0.49      0.19      0.34     -0.25
-    M0 background      boosting  0.36   0.61    0.54      0.17      0.35     -0.32
-    M0 background      baseline  0.50   0.66    1.00      0.00      0.50     +0.00
-    M1 + AI use        linear    0.32   0.59    0.56      0.27      0.41     -0.70
-    M1 + AI use        forest    0.35   0.60    0.71      0.21      0.46     -0.21
-    M1 + AI use        boosting  0.34   0.59    0.64      0.23      0.44     -0.52
-    M1 without age     linear    0.35   0.59    0.59      0.28      0.43     -0.64
-    AI use only        linear    0.39   0.61    0.61      0.30      0.46     -0.50
-    PR-AUC chance level = 0.68
+    M0 background      linear    0.56   0.59    0.58      0.50      0.54     -0.06
+    M0 background      forest    0.58   0.61    0.60      0.51      0.55     -0.02
+    M0 background      boosting  0.58   0.63    0.61      0.52      0.57     -0.04
+    M0 background      baseline  0.50   0.55    1.00      0.00      0.50     +0.00
+    M1 + AI use        linear    0.61   0.64    0.66      0.52      0.59     -0.05
+    M1 + AI use        forest    0.59   0.60    0.70      0.46      0.58     +0.00
+    M1 + AI use        boosting  0.53   0.57    0.64      0.44      0.54     -0.12
+    M1 without age     linear    0.62   0.64    0.67      0.53      0.60     -0.03
+    AI use only        linear    0.62   0.62    0.72      0.48      0.60     +0.00
+    PR-AUC chance level = 0.56
 
 ----------------------------------------------------------------------------------------------------
 EXPECTED LOSS IN TWO YEARS (COUNT OF DOMAINS)  (ExpectedLoss)
     features           model     Q2     MAE    RMSE  
-    M0 background      linear    +0.02  1.97   2.46  
-    M0 background      forest    -0.15  2.18   2.67  
-    M0 background      boosting  -0.14  2.17   2.66  
-    M0 background      baseline  -0.04  2.08   2.53  
-    M1 + AI use        linear    -0.61  2.49   3.14  
-    M1 + AI use        forest    -0.14  2.18   2.65  
-    M1 + AI use        boosting  -0.19  2.24   2.71  
-    M2 + quality gap   linear    -0.72  2.58   3.25  
-    M2 + quality gap   forest    -0.15  2.19   2.67  
-    M2 + quality gap   boosting  -0.18  2.21   2.70  
-    M1 without age     linear    -0.81  2.68   3.34  
-    AI use only        linear    -0.49  2.44   3.04  
+    M0 background      linear    +0.02  2.00   2.48  
+    M0 background      forest    -0.02  2.03   2.53  
+    M0 background      boosting  -0.00  2.00   2.50  
+    M0 background      baseline  -0.02  2.07   2.53  
+    M1 + AI use        linear    -0.01  2.08   2.51  
+    M1 + AI use        forest    +0.09  2.00   2.39  
+    M1 + AI use        boosting  +0.10  2.00   2.38  
+    M2 + quality gap   linear    -0.02  2.08   2.53  
+    M2 + quality gap   forest    +0.09  2.00   2.39  
+    M2 + quality gap   boosting  +0.07  2.03   2.41  
+    M1 without age     linear    -0.09  2.16   2.61  
+    AI use only        linear    -0.01  2.08   2.51  
 
 ----------------------------------------------------------------------------------------------------
 HARDER TO USE ARABIC WITHOUT AI (ANY)  (AnyDifficulty)
     features           model     AUC    PR-AUC  rec yes   rec no    bal acc  BSS   
-    M0 background      linear    0.57   0.37    0.48      0.54      0.51     -0.22
-    M0 background      forest    0.44   0.31    0.24      0.60      0.42     -0.21
-    M0 background      boosting  0.44   0.33    0.24      0.64      0.44     -0.30
-    M0 background      baseline  0.50   0.31    0.00      1.00      0.50     +0.00
-    M1 + AI use        linear    0.54   0.36    0.37      0.62      0.49     -0.41
-    M1 + AI use        forest    0.42   0.32    0.24      0.61      0.42     -0.20
-    M1 + AI use        boosting  0.40   0.31    0.26      0.57      0.41     -0.50
-    M2 + quality gap   linear    0.55   0.37    0.37      0.61      0.49     -0.39
-    M2 + quality gap   forest    0.41   0.31    0.27      0.62      0.45     -0.21
-    M2 + quality gap   boosting  0.41   0.31    0.27      0.58      0.43     -0.48
-    M1 without age     linear    0.57   0.42    0.40      0.62      0.51     -0.37
-    AI use only        linear    0.52   0.40    0.47      0.57      0.52     -0.38
+    M0 background      linear    0.66   0.49    0.62      0.64      0.63     -0.09
+    M0 background      forest    0.65   0.48    0.57      0.67      0.62     -0.04
+    M0 background      boosting  0.64   0.48    0.56      0.65      0.61     -0.09
+    M0 background      baseline  0.50   0.32    0.00      1.00      0.50     +0.00
+    M1 + AI use        linear    0.60   0.44    0.52      0.64      0.58     -0.17
+    M1 + AI use        forest    0.61   0.43    0.35      0.73      0.54     -0.02
+    M1 + AI use        boosting  0.59   0.44    0.41      0.71      0.56     -0.12
+    M2 + quality gap   linear    0.65   0.47    0.52      0.68      0.60     -0.11
+    M2 + quality gap   forest    0.62   0.43    0.34      0.73      0.53     -0.02
+    M2 + quality gap   boosting  0.60   0.42    0.39      0.71      0.55     -0.12
+    M1 without age     linear    0.60   0.41    0.53      0.64      0.58     -0.19
+    AI use only        linear    0.53   0.35    0.47      0.54      0.50     -0.22
     PR-AUC chance level = 0.32
 
 ====================================================================================================
 BLOCK COMPARISONS (paired per-fold differences, Nadeau-Bengio corrected 95% CI)
 ====================================================================================================
     substitution (English instead of Arabic because of AI)
-        linear    M1 - M0 (AI use)           +0.034 [-0.264, +0.331]  p 0.821
-        forest    M1 - M0 (AI use)           +0.081 [-0.166, +0.328]  p 0.513
-        boosting  M1 - M0 (AI use)           -0.017 [-0.350, +0.316]  p 0.920
-        linear    AI use only - M0           +0.096 [-0.246, +0.437]  p 0.576
-        linear    M1 without age - M1        +0.026 [-0.042, +0.094]  p 0.445
+        linear    M1 - M0 (AI use)           +0.055 [-0.068, +0.177]  p 0.374
+        forest    M1 - M0 (AI use)           +0.018 [-0.111, +0.147]  p 0.780
+        boosting  M1 - M0 (AI use)           -0.048 [-0.194, +0.097]  p 0.509
+        linear    AI use only - M0           +0.056 [-0.102, +0.213]  p 0.479
+        linear    M1 without age - M1        +0.008 [-0.031, +0.048]  p 0.673
     expected loss in two years (count of domains)
-        linear    M1 - M0 (AI use)           -0.621 [-1.179, -0.063]  p 0.030
-        linear    M2 - M1 (quality gap)      -0.110 [-0.345, +0.126]  p 0.355
-        forest    M1 - M0 (AI use)           +0.016 [-0.183, +0.215]  p 0.873
-        forest    M2 - M1 (quality gap)      -0.014 [-0.113, +0.084]  p 0.773
-        boosting  M1 - M0 (AI use)           -0.046 [-0.269, +0.176]  p 0.678
-        boosting  M2 - M1 (quality gap)      +0.004 [-0.099, +0.106]  p 0.941
-        linear    AI use only - M0           -0.510 [-1.198, +0.177]  p 0.142
-        linear    M1 without age - M1        -0.203 [-0.651, +0.245]  p 0.367
-        linear    M0 vs predicting the mean  +0.052 [-0.319, +0.422]  p 0.780
-        linear    M1 vs predicting the mean  -0.569 [-1.208, +0.070]  p 0.080
+        linear    M1 - M0 (AI use)           -0.026 [-0.188, +0.136]  p 0.749
+        linear    M2 - M1 (quality gap)      -0.016 [-0.068, +0.036]  p 0.545
+        forest    M1 - M0 (AI use)           +0.109 [-0.038, +0.255]  p 0.142
+        forest    M2 - M1 (quality gap)      -0.001 [-0.040, +0.037]  p 0.940
+        boosting  M1 - M0 (AI use)           +0.098 [-0.058, +0.253]  p 0.213
+        boosting  M2 - M1 (quality gap)      -0.026 [-0.088, +0.036]  p 0.402
+        linear    AI use only - M0           -0.027 [-0.260, +0.206]  p 0.816
+        linear    M1 without age - M1        -0.080 [-0.211, +0.050]  p 0.223
+        linear    M0 vs predicting the mean  +0.042 [-0.103, +0.187]  p 0.562
+        linear    M1 vs predicting the mean  +0.016 [-0.171, +0.203]  p 0.863
     harder to use Arabic without AI (any)
-        linear    M1 - M0 (AI use)           -0.030 [-0.265, +0.205]  p 0.799
-        linear    M2 - M1 (quality gap)      +0.013 [-0.107, +0.134]  p 0.825
-        forest    M1 - M0 (AI use)           -0.023 [-0.278, +0.231]  p 0.854
-        forest    M2 - M1 (quality gap)      -0.007 [-0.104, +0.089]  p 0.879
-        boosting  M1 - M0 (AI use)           -0.039 [-0.290, +0.212]  p 0.756
-        boosting  M2 - M1 (quality gap)      +0.012 [-0.124, +0.147]  p 0.863
-        linear    AI use only - M0           -0.053 [-0.386, +0.279]  p 0.749
-        linear    M1 without age - M1        +0.029 [-0.072, +0.130]  p 0.562
+        linear    M1 - M0 (AI use)           -0.057 [-0.156, +0.042]  p 0.252
+        linear    M2 - M1 (quality gap)      +0.043 [-0.031, +0.117]  p 0.252
+        forest    M1 - M0 (AI use)           -0.034 [-0.151, +0.082]  p 0.555
+        forest    M2 - M1 (quality gap)      +0.005 [-0.065, +0.075]  p 0.878
+        boosting  M1 - M0 (AI use)           -0.051 [-0.190, +0.087]  p 0.460
+        boosting  M2 - M1 (quality gap)      +0.008 [-0.067, +0.084]  p 0.822
+        linear    AI use only - M0           -0.132 [-0.327, +0.062]  p 0.178
+        linear    M1 without age - M1        -0.007 [-0.064, +0.051]  p 0.812
 
 FLEXIBLE VS LINEAR (the plan's decision rule: >= 0.08 AUC / 0.05 Q2 and corrected p < .05)
-    substitution (English instead of Arabic because of AI) M0 background      forest    -0.026 [-0.204, +0.152] p 0.770  -> no
-    substitution (English instead of Arabic because of AI) M0 background      boosting  +0.071 [-0.216, +0.359] p 0.621  -> no
-    substitution (English instead of Arabic because of AI) M1 + AI use        forest    +0.021 [-0.212, +0.255] p 0.855  -> no
-    substitution (English instead of Arabic because of AI) M1 + AI use        boosting  +0.021 [-0.239, +0.281] p 0.871  -> no
-    expected loss in two years (count of domains) M0 background      forest    -0.168 [-0.529, +0.193] p 0.354  -> no
-    expected loss in two years (count of domains) M0 background      boosting  -0.155 [-0.542, +0.232] p 0.426  -> no
-    expected loss in two years (count of domains) M1 + AI use        forest    +0.469 [-0.137, +1.074] p 0.126  -> no
-    expected loss in two years (count of domains) M1 + AI use        boosting  +0.420 [-0.219, +1.059] p 0.193  -> no
-    expected loss in two years (count of domains) M2 + quality gap   forest    +0.564 [-0.079, +1.207] p 0.084  -> no
-    expected loss in two years (count of domains) M2 + quality gap   boosting  +0.533 [-0.135, +1.201] p 0.115  -> no
-    harder to use Arabic without AI (any)        M0 background      forest    -0.124 [-0.377, +0.129] p 0.330  -> no
-    harder to use Arabic without AI (any)        M0 background      boosting  -0.132 [-0.430, +0.166] p 0.377  -> no
-    harder to use Arabic without AI (any)        M1 + AI use        forest    -0.117 [-0.353, +0.119] p 0.323  -> no
-    harder to use Arabic without AI (any)        M1 + AI use        boosting  -0.141 [-0.408, +0.126] p 0.293  -> no
-    harder to use Arabic without AI (any)        M2 + quality gap   forest    -0.138 [-0.367, +0.091] p 0.232  -> no
-    harder to use Arabic without AI (any)        M2 + quality gap   boosting  -0.143 [-0.405, +0.120] p 0.280  -> no
+    substitution (English instead of Arabic because of AI) M0 background      forest    +0.016 [-0.069, +0.100] p 0.710  -> no
+    substitution (English instead of Arabic because of AI) M0 background      boosting  +0.023 [-0.077, +0.124] p 0.644  -> no
+    substitution (English instead of Arabic because of AI) M1 + AI use        forest    -0.021 [-0.106, +0.064] p 0.621  -> no
+    substitution (English instead of Arabic because of AI) M1 + AI use        boosting  -0.080 [-0.194, +0.035] p 0.169  -> no
+    expected loss in two years (count of domains) M0 background      forest    -0.038 [-0.095, +0.019] p 0.185  -> no
+    expected loss in two years (count of domains) M0 background      boosting  -0.021 [-0.078, +0.037] p 0.470  -> no
+    expected loss in two years (count of domains) M1 + AI use        forest    +0.097 [-0.016, +0.209] p 0.090  -> no
+    expected loss in two years (count of domains) M1 + AI use        boosting  +0.103 [-0.013, +0.219] p 0.082  -> no
+    expected loss in two years (count of domains) M2 + quality gap   forest    +0.111 [-0.004, +0.226] p 0.058  -> no
+    expected loss in two years (count of domains) M2 + quality gap   boosting  +0.093 [-0.035, +0.220] p 0.150  -> no
+    harder to use Arabic without AI (any)        M0 background      forest    -0.014 [-0.081, +0.053] p 0.672  -> no
+    harder to use Arabic without AI (any)        M0 background      boosting  -0.016 [-0.091, +0.059] p 0.668  -> no
+    harder to use Arabic without AI (any)        M1 + AI use        forest    +0.008 [-0.073, +0.090] p 0.835  -> no
+    harder to use Arabic without AI (any)        M1 + AI use        boosting  -0.010 [-0.111, +0.090] p 0.836  -> no
+    harder to use Arabic without AI (any)        M2 + quality gap   forest    -0.029 [-0.107, +0.049] p 0.460  -> no
+    harder to use Arabic without AI (any)        M2 + quality gap   boosting  -0.045 [-0.142, +0.052] p 0.360  -> no
 
 ====================================================================================================
 BETTER THAN CHANCE? Permutation tests (outcome shuffled, whole pipeline refit, splits redrawn; statistic = the
 headline score over all 10 repeats; 500 permutations). Holm across the three targets for each block.
 ====================================================================================================
     substitution (English instead of Arabic because of AI)
-        M1 + AI use        linear    AUC = +0.324 (null mean +0.497)  p 0.926  p_Holm 1.000  (B=500)
-        M0 background      linear    AUC = +0.290 (null mean +0.505)  p 0.960  p_Holm 0.960  (B=500)
-        AI use only        linear    AUC = +0.386 (null mean +0.488)  p 0.794  p_Holm 1.000  (B=500)
-        M1 without age     linear    AUC = +0.350 (null mean +0.493)  p 0.886  p_Holm 1.000  (B=500)
+        M1 + AI use        linear    AUC = +0.614 (null mean +0.499)  p 0.054  p_Holm 0.108  (B=500)
+        M0 background      linear    AUC = +0.560 (null mean +0.495)  p 0.176  p_Holm 0.176  (B=500)
+        AI use only        linear    AUC = +0.616 (null mean +0.501)  p 0.054  p_Holm 0.108  (B=500)
+        M1 without age     linear    AUC = +0.623 (null mean +0.499)  p 0.040  p_Holm 0.120  (B=500)
     expected loss in two years (count of domains)
-        M1 + AI use        linear    Q2 = -0.605 (null mean -0.689)  p 0.395  p_Holm 1.000  (B=500)
-        M0 background      linear    Q2 = +0.015 (null mean -0.261)  p 0.050  p_Holm 0.150  (B=500)
-        AI use only        linear    Q2 = -0.495 (null mean -0.375)  p 0.745  p_Holm 1.000  (B=500)
-        M1 without age     linear    Q2 = -0.808 (null mean -0.598)  p 0.754  p_Holm 1.000  (B=500)
+        M1 + AI use        linear    Q2 = -0.008 (null mean -0.189)  p 0.010  p_Holm 0.030  (B=500)
+        M0 background      linear    Q2 = +0.018 (null mean -0.084)  p 0.006  p_Holm 0.018  (B=500)
+        AI use only        linear    Q2 = -0.009 (null mean -0.116)  p 0.016  p_Holm 0.048  (B=500)
+        M1 without age     linear    Q2 = -0.088 (null mean -0.175)  p 0.076  p_Holm 0.152  (B=500)
     harder to use Arabic without AI (any)
-        M1 + AI use        linear    AUC = +0.539 (null mean +0.502)  p 0.373  p_Holm 1.000  (B=500)
-        M0 background      linear    AUC = +0.569 (null mean +0.508)  p 0.313  p_Holm 0.627  (B=500)
-        AI use only        linear    AUC = +0.515 (null mean +0.501)  p 0.461  p_Holm 1.000  (B=500)
-        M1 without age     linear    AUC = +0.568 (null mean +0.502)  p 0.311  p_Holm 0.934  (B=500)
-    Strictest check - Holm across all 11 targets modelled (05_ml.py and this file), linear M1:
-        DomainsLost 0.417  AnyFormalLoss 0.611  Loss_WorkStudy 0.611  Loss_Writing 1.000  Loss_Self 0.611  Loss_Personal 0.579  Loss_Fusha 1.000  Loss_Consume 1.000  Substitution 1.000  ExpectedLoss 1.000  AnyDifficulty 1.000
+        M1 + AI use        linear    AUC = +0.604 (null mean +0.502)  p 0.064  p_Holm 0.108  (B=500)
+        M0 background      linear    AUC = +0.661 (null mean +0.499)  p 0.008  p_Holm 0.018  (B=500)
+        AI use only        linear    AUC = +0.528 (null mean +0.505)  p 0.387  p_Holm 0.387  (B=500)
+        M1 without age     linear    AUC = +0.597 (null mean +0.503)  p 0.094  p_Holm 0.152  (B=500)
+    Strictest check - Holm across all 13 targets modelled (05_ml.py and this file), linear M1:
+        DomainsLost 0.040  AnyFormalLoss 0.026  Loss_WorkStudy 0.026  Loss_Writing 0.040  Loss_Self 0.026  Loss_Personal 0.084  Loss_Family 0.149  Loss_Fusha 0.084  Loss_Religion 0.497  Loss_Consume 0.399  Substitution 0.216  ExpectedLoss 0.080  AnyDifficulty 0.216
 
 SPLIT-SEED STABILITY (linear): the same 10 x 5-fold CV on 10 other random splits - mean (min to max)
-    substitution (English instead of Arabic because of AI) M0 +0.30 (+0.26 to +0.35)   M1 +0.32 (+0.31 to +0.36)   M1 balanced accuracy 0.40 (0.38 to 0.43)
-    expected loss in two years (count of domains)      M0 +0.03 (-0.03 to +0.09)   M1 -0.66 (-0.80 to -0.52)
-    harder to use Arabic without AI (any)              M0 +0.57 (+0.53 to +0.60)   M1 +0.55 (+0.53 to +0.58)   M1 balanced accuracy 0.49 (0.46 to 0.51)
+    substitution (English instead of Arabic because of AI) M0 +0.55 (+0.54 to +0.57)   M1 +0.62 (+0.60 to +0.63)   M1 balanced accuracy 0.59 (0.58 to 0.60)
+    expected loss in two years (count of domains)      M0 +0.01 (-0.00 to +0.02)   M1 -0.01 (-0.04 to +0.01)
+    harder to use Arabic without AI (any)              M0 +0.65 (+0.64 to +0.66)   M1 +0.60 (+0.58 to +0.61)   M1 balanced accuracy 0.58 (0.56 to 0.60)
 
 ====================================================================================================
 IS THERE A USABLE PREDICTIVE MODEL? (linear M1; criteria fixed before running)
 ====================================================================================================
     substitution (English instead of Arabic because of AI)
-        1 better than chance      fail   permutation p 0.926, Holm 1.000
-        2 not split luck          fail   mean AUC over splits 0.32 (min 0.31): need >= .70 and min >= .65
-        3 not carried by age 25+  fail   without the age dummy: permutation p 0.886
-        4 classification          fail   balanced accuracy over splits 0.40: need >= .65
+        1 better than chance      fail   permutation p 0.054, Holm 0.108
+        2 not split luck          fail   mean AUC over splits 0.62 (min 0.60): need >= .70 and min >= .65
+        3 not carried by age 25+  PASS   without the age dummy: permutation p 0.040
+        4 classification          fail   balanced accuracy over splits 0.59: need >= .65
         -> not usable
     expected loss in two years (count of domains)
-        1 better than chance      fail   permutation p 0.395, Holm 1.000
-        2 not split luck          fail   Q2 over splits -0.66 (min -0.80), gain over the mean -0.57 p 0.080: need min > 0 and p < .05
-        3 not carried by age 25+  fail   without the age dummy: permutation p 0.754
+        1 better than chance      PASS   permutation p 0.010, Holm 0.030
+        2 not split luck          fail   Q2 over splits -0.01 (min -0.04), gain over the mean +0.02 p 0.863: need min > 0 and p < .05
+        3 not carried by age 25+  fail   without the age dummy: permutation p 0.076
         4 classification          n/a    not applicable (count)
         -> not usable
     harder to use Arabic without AI (any)
-        1 better than chance      fail   permutation p 0.373, Holm 1.000
-        2 not split luck          fail   mean AUC over splits 0.55 (min 0.53): need >= .70 and min >= .65
-        3 not carried by age 25+  fail   without the age dummy: permutation p 0.311
-        4 classification          fail   balanced accuracy over splits 0.49: need >= .65
+        1 better than chance      fail   permutation p 0.064, Holm 0.108
+        2 not split luck          fail   mean AUC over splits 0.60 (min 0.58): need >= .70 and min >= .65
+        3 not carried by age 25+  fail   without the age dummy: permutation p 0.094
+        4 classification          fail   balanced accuracy over splits 0.58: need >= .65
         -> not usable
 
-runtime 770 s
+runtime 1175 s
