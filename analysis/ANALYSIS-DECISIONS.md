@@ -22,14 +22,15 @@ responses; collection closes at 65. Before this decision only structural checks 
 responses (`analysis/data/responses-raw-2026-10-03.xlsx`): the form is unchanged (identical headers, every
 answer maps to the instrument), the first 40 responses are identical cell for cell to the first export, there
 are no duplicates, all 65 consented and passed the screening question, and the sample composition is: main
-sample under the plan's rule 56; aged 25 or over 12 (5 + 7 new); outside computing 26 (11 + 15 new). No outcome
+sample under the plan's rule 55 (the quick check first said 56: one respondent answered "no" to moving since 2022
+but ticked "moved to another country" among the life events, which the plan's rule counts as moving); aged 25 or over 12 (5 + 7 new); outside computing 26 (11 + 15 new). No outcome
 item and no relation between variables was looked at.
 
 - **Primary sample: all 65 respondents.** The study's population is Lebanese Arabic–English bilinguals, and
   the migration criterion (no move since 2022) is dropped. Nationality was not asked, so the paper describes the
   sample by where respondents grew up and live.
 - **The plan's core rule becomes the sensitivity sample** (grew up and live in the Arab region, no move since
-  2022; n = 56). It addresses the obvious objection: respondents living abroad may attribute to AI change that
+  2022; n = 55). It addresses the obvious objection: respondents living abroad may attribute to AI change that
   comes from migration.
 - **Disclosure.** This change was made after the first analysis of 40, which had shown that the core-vs-all
   choice changes H4 (all 40: not supported, driven by one respondent). The paper states this.
@@ -38,6 +39,17 @@ item and no relation between variables was looked at.
   usable-model criteria of the ML extension, which now apply in advance to every ML target. No design change
   will be made after seeing results on 65 except bug fixes, which will be logged here.
 - Collection was extended after a first analysis; the paper states this.
+
+**Final sample: 105 responses (decided 4 Oct 2026, before any result on the extended sample was reported).**
+Responses kept arriving after the commitment to stop at 65 (3 Oct, 18:07). By then the statistics and the SPSS
+run on 65 had been computed, because the SPSS–Python cross-check needs them, but no result was reported to the
+author or used for any decision. On 4 Oct the author closed the form and exported 105 responses
+(`analysis/data/responses-raw-2026-10-04.xlsx`; first response 30 Sep 17:57, last 4 Oct 21:17). This is the
+final sample. Only structural checks were run before this entry: same form (identical headers, every answer maps
+to the instrument), the first 65 responses identical cell for cell to the 3 Oct export (and the first 40 to the
+1 Oct export), no duplicates, all 105 consented and passed screening; 40 new responses (3 Oct 18:17 to 4 Oct
+21:17). All decisions of 3 Oct stand unchanged: primary sample = all respondents; the plan's core rule is the
+sensitivity sample; the design is otherwise fixed.
 
 ## Results at a glance (primary sample, n = 37)
 
