@@ -1,0 +1,245 @@
+{
+ "n": 105,
+ "agree": 34,
+ "total": 34,
+ "checks": [
+  {
+   "statistic": "alpha, Displacement (primary)",
+   "spss": 0.87006553724093,
+   "python": 0.8700655372409322,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "alpha, Ability decline (primary)",
+   "spss": 0.79120596554384,
+   "python": 0.791205965543842,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "alpha, Quality gap (primary)",
+   "spss": 0.68849870415186,
+   "python": 0.6884987041518633,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "alpha, Quality gap, 3 items (primary)",
+   "spss": 0.70080401644414,
+   "python": 0.7008040164441378,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "Wilcoxon Z, H1a Fusha (primary)",
+   "spss": -3.0571428571429,
+   "python": -3.057142857142857,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "Wilcoxon p, H1a Fusha (primary)",
+   "spss": 0.0022345775083032,
+   "python": 0.002234577508303178,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "Wilcoxon Z, H1b work/study (primary)",
+   "spss": -5.9962543901423,
+   "python": -5.996254390142256,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "Wilcoxon p, H1b work/study (primary)",
+   "spss": 2.0192062612499e-09,
+   "python": 2.0192062612499307e-09,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "Wilcoxon Z, H2a work/study vs family (primary, complete cases)",
+   "spss": -5.585307612399,
+   "python": -5.585307612399002,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "Wilcoxon p, H2a work/study vs family (primary, complete cases)",
+   "spss": 2.3328691426588e-08,
+   "python": 2.3328691426587498e-08,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "Wilcoxon Z, H2b Fusha vs dialect (primary)",
+   "spss": -1.2149401393805,
+   "python": -1.2149401393804558,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "Wilcoxon p, H2b Fusha vs dialect (primary)",
+   "spss": 0.22438892311482,
+   "python": 0.22438892311482317,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "sign test p, H1a Fusha (primary)",
+   "spss": 0.0071895172501651,
+   "python": 0.007189517250165056,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "sign test p, H1b work/study (primary)",
+   "spss": 9.6510301879661e-11,
+   "python": 9.651030187966072e-11,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "Friedman chi-square, H2a (primary)",
+   "spss": 57.062857142857,
+   "python": 57.06285714285719,
+   "tolerance": 0.002,
+   "agree": true
+  },
+  {
+   "statistic": "Mann-Whitney p, stable vs changed (primary)",
+   "spss": 0.022277305296155,
+   "python": 0.022277305296154643,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "Mann-Whitney p, stable vs changed (primary, under 25)",
+   "spss": 0.1209170218558,
+   "python": 0.12091702185579947,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "B EnglishShare in \"Displacement ~ ... EventMove\"",
+   "spss": 0.16919785297618,
+   "python": 0.16919785297618417,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "B AI_Intensity in \"Displacement ~ ... EventMove\"",
+   "spss": -0.0034017130322269,
+   "python": -0.003401713032225983,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "B Displacement in \"AbilityDecline ~ ... EventMove\"",
+   "spss": 0.36502471428799,
+   "python": 0.36502471428799244,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "B EnglishShare in \"Displacement ~ ... SocialLoss\"",
+   "spss": 0.1178845945006,
+   "python": 0.11788459450059774,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "B stable in \"d_WorkStudy ~ ... Age25\"",
+   "spss": 0.35030682452117,
+   "python": 0.35030682452116774,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "B EnglishShare in \"Displacement ~ ... QualityGap\"",
+   "spss": 0.16171461104994,
+   "python": 0.16171461104994062,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "B Displacement in \"AbilityDecline ~ ...AbilityDecline ~ Displa",
+   "spss": 0.37606718625131,
+   "python": 0.37606718625131547,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "B EnglishShare in \"Displacement4 ~ ... EventMove\"",
+   "spss": 0.17846858710117,
+   "python": 0.17846858710116498,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "B Displacement4 in \"AbilityDecline ~ ... EventMove\"",
+   "spss": 0.34392541060058,
+   "python": 0.3439254106005786,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "B EnglishShare in \"Displacement ~ ... EventMove\" (core sample)",
+   "spss": 0.16506619090446,
+   "python": 0.16506619090445535,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "B Displacement in \"AbilityDecline ~ ... EventMove\" (core sampl",
+   "spss": 0.53215915431489,
+   "python": 0.5321591543148876,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "B EnglishShare, H3 without straight-liners",
+   "spss": 0.15148998738697,
+   "python": 0.15148998738697,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "B Displacement, H4 without straight-liners",
+   "spss": 0.34890626234212,
+   "python": 0.3489062623421194,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "mean d_WorkStudy (primary)",
+   "spss": -0.625,
+   "python": -0.625,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "mean d_Fusha (primary)",
+   "spss": -0.25,
+   "python": -0.25,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "mean d_Religion (primary)",
+   "spss": 0.05050505050505,
+   "python": 0.050505050505050504,
+   "tolerance": 0.0006,
+   "agree": true
+  },
+  {
+   "statistic": "mean d_Family (primary)",
+   "spss": -0.125,
+   "python": -0.125,
+   "tolerance": 0.0006,
+   "agree": true
+  }
+ ]
+}

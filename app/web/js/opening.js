@@ -1,5 +1,5 @@
 // Home, Chapter 1 (the question) and Chapter 2 (how we asked).
-import { h, f, pct, fp, kpis, card, grid, table } from "./ui.js";
+import { h, f, pct, fp, kpis, card, grid, table, flag } from "./ui.js";
 import { chart, hbar } from "./charts.js";
 import { CHAPTERS, chapterHead, sec, prose, takeaway, howWeKnow, cite, sources, storyNav, evidence, timeline } from "./story.js";
 
@@ -149,8 +149,9 @@ export function study(main, S) {
           h("li", null, h("b", null, "Mediation (H5): "), "PROCESS model 4 logic with a 5,000-resample percentile bootstrap."),
           h("li", null, h("b", null, "Multiple testing: "), "Holm’s correction within each family of hypotheses."),
           h("li", null, h("b", null, "Machine learning: "), "repeated 10×5-fold cross-validation, permutation tests, and four usability criteria fixed in advance (Chapter 6)."),
-          h("li", null, h("b", null, "Software: "), "SPSS 23 and Python; 34 statistics computed in both agree.")),
+          h("li", null, h("b", null, "Software: "), "SPSS 23 and Python, below.")),
         h("p", null, "Responses were collected in two waves; every analysis choice was fixed before the second was analysed.")))),
+    spssSection(S),
     storyNav("study"));
   main4.forEach((c) => c.draw());
 }
@@ -177,4 +178,48 @@ function questionnaireCard(Q) {
   return card({ title: "Every question, in Arabic and English", span2: true,
     sub: "As fielded: the Arabic wording is the instrument, the English is the source wording. Open a section to read it." },
     h("div", { class: "qsecs" }, sections));
+}
+
+// ------------------------------------------------------------------ SPSS and Python
+const FILES = "research/";
+function spssSection(S) {
+  const X = S.spss;
+  const groups = [...new Set(X.checks.map((c) => c.group))];
+  const fmtv = (v) => (Math.abs(v) < 0.0001 ? "< 0.0001" : f(v, 4));
+  return sec("Two programs, one answer",
+    prose(`The analysis was run twice, in two programs written independently: SPSS 23, through syntax files that anyone can rerun, and Python. `
+      + `On all ${X.n} respondents, the ${X.total} statistics computed in both agree to four decimal places.`),
+    h("div", { class: "spssband" },
+      h("div", { class: "spssbig" }, h("b", null, `${X.agree} / ${X.total}`), h("span", null, "statistics agree between SPSS and Python")),
+      h("div", { class: "spsslinks" },
+        h("a", { class: "btn", href: FILES + "spss-output-105.pdf", target: "_blank", rel: "noopener" }, "SPSS output (PDF)"),
+        h("a", { class: "btn ghost", href: FILES + "spss-output-105.spv", download: "spss-output-105.spv" }, "SPSS Viewer file"),
+        h("a", { class: "btn ghost", href: FILES + "01_import_and_score.sps", download: "01_import_and_score.sps" }, "Syntax 1"),
+        h("a", { class: "btn ghost", href: FILES + "02_hypotheses.sps", download: "02_hypotheses.sps" }, "Syntax 2"))),
+    grid(
+      card({ title: "In SPSS 23", sub: "Two syntax files: the first imports, labels and scores the data; the second runs the tests." },
+        h("ul", { class: "findings" },
+          h("li", null, "Descriptives and frequencies of every item"),
+          h("li", null, "Reliability (Cronbach’s α) of every score"),
+          h("li", null, "Wilcoxon signed-rank and sign tests (H1, H2)"),
+          h("li", null, "Friedman’s test of the order (H2a)"),
+          h("li", null, "Mann–Whitney comparisons"),
+          h("li", null, "Regressions for H3 and H4, in every specification, and in the core sample"),
+          h("li", null, "Spearman correlations of the main scores"))),
+      card({ title: "In Python", sub: "What SPSS 23 cannot compute, and the machine learning." },
+        h("ul", { class: "findings" },
+          h("li", null, "HC3 robust standard errors and Holm’s correction"),
+          h("li", null, "Page’s test of the predicted order, exact"),
+          h("li", null, "Wild bootstrap, mediation bootstrap (H5) and Firth regression"),
+          h("li", null, "McDonald’s ω with bootstrap intervals"),
+          h("li", null, "Exact p-values for small groups"),
+          h("li", null, "Cross-validated machine learning (Chapter 6)")))),
+    howWeKnow(`All ${X.total} statistics, side by side`,
+      table([
+        { label: "Statistic", get: (c) => c.label, class: "strong" },
+        { label: "SPSS 23", num: true, get: (c) => fmtv(c.spss) },
+        { label: "Python", num: true, get: (c) => fmtv(c.python) },
+        { label: "", get: () => flag("agree", "good") },
+      ], groups.flatMap((g) => [{ group: g }, ...X.checks.filter((c) => c.group === g)])),
+      ));
 }

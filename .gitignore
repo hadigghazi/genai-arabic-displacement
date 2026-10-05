@@ -19,6 +19,8 @@
 /analysis/ANALYSIS-DECISIONS-internal.md
 /analysis/spss/OUTPUT.doc
 /analysis/spss/*.spv
+# the Word export of the SPSS output is large; the PDF and the Viewer file are committed
+/analysis/spss/output/*.doc
 /paper/archive/
 # written by paper/publish.py when the site is built
 /app/web/research/

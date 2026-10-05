@@ -61,11 +61,13 @@ def get(cells, *keys):
 
 
 results = []
+DETAILS = []
 
 
 def check(label, spss_val, py_val, tol):
     ok = abs(spss_val - py_val) <= tol
     results.append(ok)
+    DETAILS.append({'statistic': label, 'spss': float(spss_val), 'python': float(py_val), 'tolerance': tol, 'agree': bool(ok)})
     print('%-4s %-62s SPSS %10.4f   Python %10.4f' % ('OK' if ok else 'DIFF', label, spss_val, py_val))
 
 
@@ -163,4 +165,7 @@ for dom in ['WorkStudy', 'Fusha', 'Religion', 'Family']:
     check('mean d_%s (primary)' % dom, get(desc, 'd_' + dom, 'Mean'), prim['d_' + dom].mean(), .0006)
 
 print('\n%d of %d numbers agree' % (sum(results), len(results)))
+import json  # noqa: E402
+with open(os.path.join(HERE, 'results', 'spss_crosscheck.json'), 'w', encoding='utf-8') as f:
+    json.dump({'n': int(len(d)), 'agree': int(sum(results)), 'total': len(results), 'checks': DETAILS}, f, indent=1)
 sys.exit(0 if all(results) else 1)

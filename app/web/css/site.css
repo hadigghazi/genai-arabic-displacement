@@ -437,3 +437,10 @@ a.cite:hover { background: var(--accent); color: #fff !important; }
 .kpis { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
 table.data a { text-decoration: none; color: var(--accent-ink); }
 table.data a:hover { text-decoration: underline; text-underline-offset: 2px; }
+
+/* SPSS and Python: the agreement band */
+.spssband { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin: 14px 0 18px; padding: 18px 20px; border-radius: 12px; background: var(--tint); border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--rule)); }
+.spssbig { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.spssbig b { font-family: "Bricolage Grotesque", sans-serif; font-size: 34px; color: var(--accent-ink); }
+.spssbig span { color: var(--ink-2); font-size: 14px; }
+.spsslinks { display: flex; flex-wrap: wrap; gap: 8px; }

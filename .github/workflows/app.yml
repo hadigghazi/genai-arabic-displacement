@@ -4,9 +4,9 @@ name: Model app
 on:
   push:
     branches: [main]
-    paths: ["app/**", "paper/main.pdf", "paper/main.tex", "paper/publish.py", "docker-compose.prod.yml", ".github/workflows/app.yml"]
+    paths: ["app/**", "paper/main.pdf", "paper/main.tex", "paper/publish.py", "analysis/spss/**", "docker-compose.prod.yml", ".github/workflows/app.yml"]
   pull_request:
-    paths: ["app/**", "paper/main.pdf", "paper/main.tex", "paper/publish.py", "docker-compose.prod.yml", ".github/workflows/app.yml"]
+    paths: ["app/**", "paper/main.pdf", "paper/main.tex", "paper/publish.py", "analysis/spss/**", "docker-compose.prod.yml", ".github/workflows/app.yml"]
   workflow_dispatch:
 
 env:

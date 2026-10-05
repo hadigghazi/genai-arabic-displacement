@@ -84,3 +84,14 @@ def test_paper_is_published():
     pdf = client.get('/research/' + p['pdf'])
     assert pdf.status_code == 200 and pdf.headers['content-type'] == 'application/pdf' and pdf.content[:4] == b'%PDF'
     assert client.get('/research/' + p['bib']).text.startswith('@misc{')
+
+
+def test_spss_materials_are_published():
+    """The SPSS output and syntax are published with the paper, and the site data say SPSS and Python agree."""
+    p = client.get('/research/paper.json').json()
+    files = {m['file'] for m in p['materials']}
+    assert {'spss-output-105.pdf', '01_import_and_score.sps', '02_hypotheses.sps'} <= files
+    assert client.get('/research/spss-output-105.pdf').content[:4] == b'%PDF'
+    assert 'NPAR TESTS' in client.get('/research/02_hypotheses.sps').text
+    x = client.get('/data/study.json').json()['spss']
+    assert x['n'] == 105 and x['agree'] == x['total'] >= 30

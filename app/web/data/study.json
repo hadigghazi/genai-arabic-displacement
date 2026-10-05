@@ -4409,6 +4409,217 @@
    "url": "https://doi.org/10.3390/socsci7090155"
   }
  },
+ "spss": {
+  "n": 105,
+  "agree": 34,
+  "total": 34,
+  "checks": [
+   {
+    "group": "Reliability",
+    "label": "Cronbach’s α, decrease score (8 areas)",
+    "spss": 0.87006553724093,
+    "python": 0.8700655372409322
+   },
+   {
+    "group": "Reliability",
+    "label": "Cronbach’s α, difficulty without AI",
+    "spss": 0.79120596554384,
+    "python": 0.791205965543842
+   },
+   {
+    "group": "Reliability",
+    "label": "Cronbach’s α, perceived quality gap (4 items)",
+    "spss": 0.68849870415186,
+    "python": 0.6884987041518633
+   },
+   {
+    "group": "Reliability",
+    "label": "Cronbach’s α, perceived quality gap (3 items)",
+    "spss": 0.70080401644414,
+    "python": 0.7008040164441378
+   },
+   {
+    "group": "Direction and order",
+    "label": "Wilcoxon z, H1a Fusha",
+    "spss": -3.0571428571429,
+    "python": -3.057142857142857
+   },
+   {
+    "group": "Direction and order",
+    "label": "Wilcoxon p, H1a Fusha",
+    "spss": 0.0022345775083032,
+    "python": 0.002234577508303178
+   },
+   {
+    "group": "Direction and order",
+    "label": "Wilcoxon z, H1b work or study",
+    "spss": -5.9962543901423,
+    "python": -5.996254390142256
+   },
+   {
+    "group": "Direction and order",
+    "label": "Wilcoxon p, H1b work or study",
+    "spss": 2.0192062612499e-09,
+    "python": 2.0192062612499307e-09
+   },
+   {
+    "group": "Direction and order",
+    "label": "Wilcoxon z, H2a work or study vs family",
+    "spss": -5.585307612399,
+    "python": -5.585307612399002
+   },
+   {
+    "group": "Direction and order",
+    "label": "Wilcoxon p, H2a work or study vs family",
+    "spss": 2.3328691426588e-08,
+    "python": 2.3328691426587498e-08
+   },
+   {
+    "group": "Direction and order",
+    "label": "Wilcoxon z, H2b Fusha vs dialect",
+    "spss": -1.2149401393805,
+    "python": -1.2149401393804558
+   },
+   {
+    "group": "Direction and order",
+    "label": "Wilcoxon p, H2b Fusha vs dialect",
+    "spss": 0.22438892311482,
+    "python": 0.22438892311482317
+   },
+   {
+    "group": "Direction and order",
+    "label": "Sign test p, H1a Fusha",
+    "spss": 0.0071895172501651,
+    "python": 0.007189517250165056
+   },
+   {
+    "group": "Direction and order",
+    "label": "Sign test p, H1b work or study",
+    "spss": 9.6510301879661e-11,
+    "python": 9.651030187966072e-11
+   },
+   {
+    "group": "Direction and order",
+    "label": "Friedman χ², H2a order",
+    "spss": 57.062857142857,
+    "python": 57.06285714285719
+   },
+   {
+    "group": "Group comparisons",
+    "label": "Mann–Whitney p, unchanged vs changed setting",
+    "spss": 0.022277305296155,
+    "python": 0.022277305296154643
+   },
+   {
+    "group": "Group comparisons",
+    "label": "Mann–Whitney p, same, under 25 only",
+    "spss": 0.1209170218558,
+    "python": 0.12091702185579947
+   },
+   {
+    "group": "Regression",
+    "label": "English share → decrease (H3)",
+    "spss": 0.16919785297618,
+    "python": 0.16919785297618417
+   },
+   {
+    "group": "Regression",
+    "label": "AI-use intensity → decrease (H3)",
+    "spss": -0.0034017130322269,
+    "python": -0.003401713032225983
+   },
+   {
+    "group": "Regression",
+    "label": "Decrease → difficulty (H4)",
+    "spss": 0.36502471428799,
+    "python": 0.36502471428799244
+   },
+   {
+    "group": "Regression",
+    "label": "English share, social media controlled",
+    "spss": 0.1178845945006,
+    "python": 0.11788459450059774
+   },
+   {
+    "group": "Regression",
+    "label": "Unchanged setting → work/study change, age controlled",
+    "spss": 0.35030682452117,
+    "python": 0.35030682452116774
+   },
+   {
+    "group": "Regression",
+    "label": "English share, no covariates",
+    "spss": 0.16171461104994,
+    "python": 0.16171461104994062
+   },
+   {
+    "group": "Regression",
+    "label": "Decrease → difficulty, no covariates",
+    "spss": 0.37606718625131,
+    "python": 0.37606718625131547
+   },
+   {
+    "group": "Regression",
+    "label": "English share, the plan’s 4-area score",
+    "spss": 0.17846858710117,
+    "python": 0.17846858710116498
+   },
+   {
+    "group": "Regression",
+    "label": "Decrease → difficulty, the plan’s 4-area score",
+    "spss": 0.34392541060058,
+    "python": 0.3439254106005786
+   },
+   {
+    "group": "Regression",
+    "label": "English share, core sample",
+    "spss": 0.16506619090446,
+    "python": 0.16506619090445535
+   },
+   {
+    "group": "Regression",
+    "label": "Decrease → difficulty, core sample",
+    "spss": 0.53215915431489,
+    "python": 0.5321591543148876
+   },
+   {
+    "group": "Regression",
+    "label": "English share, without straight-line responders",
+    "spss": 0.15148998738697,
+    "python": 0.15148998738697
+   },
+   {
+    "group": "Regression",
+    "label": "Decrease → difficulty, without straight-line responders",
+    "spss": 0.34890626234212,
+    "python": 0.3489062623421194
+   },
+   {
+    "group": "Means",
+    "label": "Mean change, work or study",
+    "spss": -0.625,
+    "python": -0.625
+   },
+   {
+    "group": "Means",
+    "label": "Mean change, Fusha",
+    "spss": -0.25,
+    "python": -0.25
+   },
+   {
+    "group": "Means",
+    "label": "Mean change, religious texts",
+    "spss": 0.05050505050505,
+    "python": 0.050505050505050504
+   },
+   {
+    "group": "Means",
+    "label": "Mean change, family and friends",
+    "spss": -0.125,
+    "python": -0.125
+   }
+  ]
+ },
  "instrument": {
   "question": {
    "en": "Because of AI, do you now do each of these less or more?",

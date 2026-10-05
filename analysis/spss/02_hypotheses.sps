@@ -27,10 +27,12 @@ VARIABLE LEVEL d_WorkStudy d_Writing d_Self d_Personal d_Family d_Fusha d_Religi
 EXECUTE.
 
 * ============================================================ participants.
+TITLE 'Participants'.
 * Submitted, consented, eligible, outside the primary sample, straight-liners.
 FREQUENCIES Consent Eligible excl_region moved core straightline.
 
 * ============================================================ primary sample from here on.
+TITLE 'All respondents: descriptives and the eight areas'.
 * The primary sample is all respondents (decision of 3 Oct 2026).
 * The plan's core sample is analysed as a sensitivity check at the end.
 FILTER OFF.
@@ -57,6 +59,7 @@ DESCRIPTIVES d_WorkStudy d_Writing d_Self d_Personal d_Family d_Fusha d_Religion
   /STATISTICS=MEAN STDDEV MIN MAX.
 
 * ============================================================ FAMILY A (Holm in Python).
+TITLE 'Family A: direction and order of the change (H1, H2)'.
 * H1a: Fusha. Wilcoxon signed-rank against 0, with the exact sign test alongside.
 NPAR TESTS /WILCOXON=zero WITH d_Fusha (PAIRED) /SIGN=zero WITH d_Fusha (PAIRED) /MISSING ANALYSIS.
 
@@ -72,6 +75,7 @@ NPAR TESTS /FRIEDMAN=Disp_WorkStudy Disp_Personal Disp_Family
 NPAR TESTS /WILCOXON=Disp_Fusha WITH DialectLoss (PAIRED) /MISSING ANALYSIS.
 
 * ============================================================ FAMILY B (HC3 and Holm in Python).
+TITLE 'Family B: what predicts the decrease (H3, H4)'.
 * Covariates: age (25 or over) and EventMove (in this sample: started English-medium study or work).
 * H3. Block 1 enters the covariates, block 2 the three H3 predictors: the R-square change F in block 2.
 * is the (classical) joint test of the three predictors.
@@ -92,6 +96,7 @@ REGRESSION
 * H5 (mediation) and E1 are in Python: SPSS 23 cannot run PROCESS.
 
 * ============================================================ robustness.
+TITLE 'Robustness: the alternative at each decision point'.
 * Spearman matrix of the main scores.
 NONPAR CORR /VARIABLES=Displacement Displacement4 FormalLoss Disp_Fusha Disp_WorkStudy AbilityDecline
   QualityGap AI_Intensity EnglishShare SocialLoss /PRINT=SPEARMAN TWOTAIL.
@@ -148,6 +153,7 @@ REGRESSION /STATISTICS COEFF OUTS CI(95) R ANOVA /DEPENDENT AbilityDecline
   /METHOD=ENTER Displacement4 Age25 EventMove.
 
 * ============================================================ core sample (sensitivity).
+TITLE 'Core sample (sensitivity check)'.
 * Grew up and lives in the Arab region, no move since 2022; same models as the primary analysis.
 FILTER BY core.
 NPAR TESTS /WILCOXON=zero WITH d_Fusha (PAIRED) /SIGN=zero WITH d_Fusha (PAIRED) /MISSING ANALYSIS.

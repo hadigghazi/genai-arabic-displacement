@@ -93,6 +93,7 @@ export async function paper(main, S) {
         pp ? h("li", null, h("a", { href: BASE + pp.pdf, download: pp.pdf }, "The paper"), ` (PDF, ${pp.pages || "?"} pages)`) : null,
         pp ? h("li", null, h("a", { href: BASE + pp.bib, download: pp.bib }, "BibTeX entry")) : null,
         h("li", null, h("a", { href: "data/study.json", download: "genai-arabic-study-results.json" }, "Every number on this site"), " (JSON, group-level results only)"),
+        ...(pp && pp.materials ? pp.materials.map((m) => h("li", null, h("a", { href: BASE + m.file, download: m.file }, m.label), ` (${size(m.bytes)})`)) : []),
         h("li", null, h("a", { href: "#study" }, "The questionnaire"), ", in Arabic and English (Chapter 2)")),
         h("p", { class: "muted" }, "Individual responses are not shared: participants were told that answers would be reported only as group results.")),
       card({ title: "Cite this study" },

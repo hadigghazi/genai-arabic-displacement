@@ -1,4 +1,5 @@
-"""Publishes the paper on the study website: copies the PDF and writes paper.json and a BibTeX entry.
+"""Publishes the paper on the study website: copies the PDF and writes paper.json and a BibTeX entry, and copies
+the SPSS output and syntax beside it.
 
     python paper/publish.py paper app/web/research
 
@@ -84,6 +85,17 @@ paper = {
     'updated': git('log', '-1', '--format=%cI', '--', os.path.join(SRC, 'main.pdf')),
     'commit': git('log', '-1', '--format=%h', '--', os.path.join(SRC, 'main.pdf')),
 }
+# the SPSS materials: the output of the final run, and the syntax that produced it
+SPSS = os.path.join(os.path.dirname(os.path.abspath(SRC)), 'analysis', 'spss')
+paper['materials'] = []
+for name, path, label in [
+        ('spss-output-105.pdf', os.path.join(SPSS, 'output', 'spss-output-105.pdf'), 'SPSS 23 output, all 105 respondents (PDF)'),
+        ('spss-output-105.spv', os.path.join(SPSS, 'output', 'spss-output-105.spv'), 'SPSS 23 output, all 105 respondents (SPSS Viewer file)'),
+        ('01_import_and_score.sps', os.path.join(SPSS, '01_import_and_score.sps'), 'SPSS syntax 1: import, labels and scoring'),
+        ('02_hypotheses.sps', os.path.join(SPSS, '02_hypotheses.sps'), 'SPSS syntax 2: the hypothesis tests')]:
+    if os.path.exists(path):
+        shutil.copyfile(path, os.path.join(OUT, name))
+        paper['materials'].append({'file': name, 'label': label, 'bytes': os.path.getsize(path)})
 with open(os.path.join(OUT, 'paper.json'), 'w', encoding='utf-8') as f:
     json.dump(paper, f, ensure_ascii=False, indent=1)
 print('published %s (%s pages, %d bytes, %s) to %s' % (PDF_NAME, paper['pages'], paper['bytes'], paper['commit'], OUT))

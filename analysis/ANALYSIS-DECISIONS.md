@@ -76,6 +76,9 @@ with 80% power is r = .27.
 | H5 | Borderline: a = .111 (p = .035), b = .384 (p = .055), c' = -.074, c = -.031; indirect .043, 95% CI [.0001, .110] | indirect .069 [.008, .144] | Fragile: with switching as a second mediator (E1) the indirect effect via displacement is [-.0009, .103] |
 | RQ4 (ML) | Three usable models (any formal loss, work/study, self-talk); the AI-use increment over background is not significant | see "Machine learning" | see "Machine learning" |
 
+- **SPSS on the final sample.** The two syntax files were run in SPSS 23 on all 105 (5 Oct 2026); the output is in
+  `spss/output/spss-output-105.pdf` and `.spv` (Notes tables omitted). `crosscheck_spss.py`: 34 of 34 statistics agree with
+  Python (`results/spss_crosscheck.json`). The output holds group-level tables only: no open answers, crosstabs or case listings.
 - **Reliability.** Displacement alpha .87, omega .87 [.80, .91] (n = 97 complete cases); ability decline alpha .79,
   omega .81 [.67, .90]; quality gap alpha .69, omega .70 [.60, .79]. 63 of 105 score exactly 0 on ability decline.
 - **Age.** 23 respondents are 25 or over; 15 of them report no change in any domain (displacement mean .04 vs .33

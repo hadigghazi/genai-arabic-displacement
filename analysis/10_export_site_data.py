@@ -406,6 +406,51 @@ for key, (kind, f) in read_bib(os.path.join(ROOT, 'paper', 'refs.bib')).items():
 assert len(REFS) >= 35 and REFS['kubrak2025']['short'] == 'Kubrak et al.', REFS.get('kubrak2025')
 assert '\\' not in json.dumps(REFS, ensure_ascii=False), 'a LaTeX command survived in the references'
 
+# ------------------------------------------------------------------ SPSS against Python (crosscheck_spss.py)
+SPSS_LABEL = {
+    'alpha, Displacement (primary)': ('Reliability', 'Cronbach’s α, decrease score (8 areas)'),
+    'alpha, Ability decline (primary)': ('Reliability', 'Cronbach’s α, difficulty without AI'),
+    'alpha, Quality gap (primary)': ('Reliability', 'Cronbach’s α, perceived quality gap (4 items)'),
+    'alpha, Quality gap, 3 items (primary)': ('Reliability', 'Cronbach’s α, perceived quality gap (3 items)'),
+    'Wilcoxon Z, H1a Fusha (primary)': ('Direction and order', 'Wilcoxon z, H1a Fusha'),
+    'Wilcoxon p, H1a Fusha (primary)': ('Direction and order', 'Wilcoxon p, H1a Fusha'),
+    'Wilcoxon Z, H1b work/study (primary)': ('Direction and order', 'Wilcoxon z, H1b work or study'),
+    'Wilcoxon p, H1b work/study (primary)': ('Direction and order', 'Wilcoxon p, H1b work or study'),
+    'Wilcoxon Z, H2a work/study vs family (primary, complete cases)': ('Direction and order', 'Wilcoxon z, H2a work or study vs family'),
+    'Wilcoxon p, H2a work/study vs family (primary, complete cases)': ('Direction and order', 'Wilcoxon p, H2a work or study vs family'),
+    'Wilcoxon Z, H2b Fusha vs dialect (primary)': ('Direction and order', 'Wilcoxon z, H2b Fusha vs dialect'),
+    'Wilcoxon p, H2b Fusha vs dialect (primary)': ('Direction and order', 'Wilcoxon p, H2b Fusha vs dialect'),
+    'sign test p, H1a Fusha (primary)': ('Direction and order', 'Sign test p, H1a Fusha'),
+    'sign test p, H1b work/study (primary)': ('Direction and order', 'Sign test p, H1b work or study'),
+    'Friedman chi-square, H2a (primary)': ('Direction and order', 'Friedman χ², H2a order'),
+    'Mann-Whitney p, stable vs changed (primary)': ('Group comparisons', 'Mann–Whitney p, unchanged vs changed setting'),
+    'Mann-Whitney p, stable vs changed (primary, under 25)': ('Group comparisons', 'Mann–Whitney p, same, under 25 only'),
+    'B EnglishShare in "Displacement ~ ... EventMove"': ('Regression', 'English share → decrease (H3)'),
+    'B AI_Intensity in "Displacement ~ ... EventMove"': ('Regression', 'AI-use intensity → decrease (H3)'),
+    'B Displacement in "AbilityDecline ~ ... EventMove"': ('Regression', 'Decrease → difficulty (H4)'),
+    'B EnglishShare in "Displacement ~ ... SocialLoss"': ('Regression', 'English share, social media controlled'),
+    'B stable in "d_WorkStudy ~ ... Age25"': ('Regression', 'Unchanged setting → work/study change, age controlled'),
+    'B EnglishShare in "Displacement ~ ... QualityGap"': ('Regression', 'English share, no covariates'),
+    'B Displacement in "AbilityDecline ~ ...AbilityDecline ~ Displa': ('Regression', 'Decrease → difficulty, no covariates'),
+    'B EnglishShare in "Displacement4 ~ ... EventMove"': ('Regression', 'English share, the plan’s 4-area score'),
+    'B Displacement4 in "AbilityDecline ~ ... EventMove"': ('Regression', 'Decrease → difficulty, the plan’s 4-area score'),
+    'B EnglishShare in "Displacement ~ ... EventMove" (core sample)': ('Regression', 'English share, core sample'),
+    'B Displacement in "AbilityDecline ~ ... EventMove" (core sampl': ('Regression', 'Decrease → difficulty, core sample'),
+    'B EnglishShare, H3 without straight-liners': ('Regression', 'English share, without straight-line responders'),
+    'B Displacement, H4 without straight-liners': ('Regression', 'Decrease → difficulty, without straight-line responders'),
+    'mean d_WorkStudy (primary)': ('Means', 'Mean change, work or study'),
+    'mean d_Fusha (primary)': ('Means', 'Mean change, Fusha'),
+    'mean d_Religion (primary)': ('Means', 'Mean change, religious texts'),
+    'mean d_Family (primary)': ('Means', 'Mean change, family and friends'),
+}
+with open(os.path.join(RES, 'spss_crosscheck.json'), encoding='utf-8') as _f:
+    _cc = json.load(_f)
+assert _cc['n'] == len(d) and _cc['agree'] == _cc['total'], 'SPSS and Python disagree, or the cross-check is stale'
+assert {c['statistic'] for c in _cc['checks']} <= set(SPSS_LABEL), 'a cross-checked statistic has no label'
+SPSS = {'n': _cc['n'], 'agree': _cc['agree'], 'total': _cc['total'],
+        'checks': [{'group': SPSS_LABEL[c['statistic']][0], 'label': SPSS_LABEL[c['statistic']][1],
+                    'spss': c['spss'], 'python': c['python']} for c in _cc['checks']]}
+
 # ------------------------------------------------------------------ the questionnaire, as fielded (questions and options only)
 from instrument_data import S as SCALES, T as TEXTS  # noqa: E402
 
@@ -458,6 +503,7 @@ out = {
     'sample': sample, 'rq1': rq1, 'hypotheses': hyp, 'context': context, 'ml': ml, 'oversampling': over,
     'questionnaire': QUESTIONNAIRE,
     'references': REFS,
+    'spss': SPSS,
     'instrument': {'question': grid['q'],
                    'rows': [{'code': r[0].replace('ArUse_', ''), 'en': r[1], 'ar': r[2]} for r in grid['rows'] if r[0].startswith('ArUse_')],
                    'social_media_q': ITEM['SocialMedia']['q'], 'substitution_q': ITEM['SwitchEng']['q']},
