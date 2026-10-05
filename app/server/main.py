@@ -18,6 +18,7 @@ from .scoring import Models
 
 # ES modules need a JavaScript MIME type; some hosts' registries map .js to text/plain
 mimetypes.add_type('text/javascript', '.js')
+mimetypes.add_type('application/octet-stream', '.spv')   # SPSS Viewer files download rather than display
 WEB_DIR = Path(__file__).resolve().parent.parent / 'web'
 MODELS = Models()
 
