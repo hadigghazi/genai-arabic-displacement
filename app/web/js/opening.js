@@ -1,7 +1,7 @@
 // Home, Chapter 1 (the question) and Chapter 2 (how we asked).
 import { h, f, pct, fp, kpis, card, grid, table } from "./ui.js";
 import { chart, hbar } from "./charts.js";
-import { CHAPTERS, chapterHead, sec, prose, takeaway, howWeKnow, cite, sources, storyNav } from "./story.js";
+import { CHAPTERS, chapterHead, sec, prose, takeaway, howWeKnow, cite, sources, storyNav, evidence, timeline } from "./story.js";
 
 // ------------------------------------------------------------------ home
 export function home(main, S) {
@@ -45,19 +45,23 @@ export function question(main, S) {
     chapterHead("question", "AI tools speak better English than Arabic. People who live in both languages may be quietly moving their AI-assisted work into English. "
       + "This chapter sets out why that matters and what we expected to find."),
     sec("AI works better in English",
-      prose(["Generative AI tools perform less well in Arabic than in English. Tool-calling accuracy drops when the same tasks are prompted in Arabic ",
-        c("kubrak2025"), ", and chatbots answered the same infectious-disease questions less well in Arabic than in English ", c("sallam2024"),
-        ". Bilinguals who use these tools daily may therefore do more of their AI-assisted tasks in English."])),
+      evidence(S, [
+        { label: "Using tools", title: "Less accurate in Arabic", text: "When the same tasks are prompted in Arabic, AI models call the right tools less accurately than in English.", cites: ["kubrak2025"] },
+        { label: "Answering questions", title: "Weaker answers in Arabic", text: "Four chatbots answered the same infectious-disease questions less well in Arabic than in English.", cites: ["sallam2024"] },
+        { label: "What may follow", title: "A pull toward English", text: "Bilinguals who use these tools every day may do more of their AI-assisted work in English.", accent: true },
+      ])),
     sec("A shift already under way",
-      prose(["English was moving into Arabic speakers’ formal lives well before generative AI. It dominates higher education in the UAE ", c("albataineh2021"),
-        ", where students at English-medium universities report weaker academic Arabic ", c("masri2019"),
-        "; Qatar University students rate English more useful than Arabic for scientific and professional communication ", c("mustafawi2022"),
-        "; and in Lebanon, English runs across education and professional life ", c("mehio2026"), "."],
-        ["Social networking sites then moved young Arabs’ informal writing toward English and Latin script, giving rise to Arabizi ", c("alghamdi2018"),
-          ". Generative AI may be the next step of the same shift."]),
-      takeaway("Research on AI and language has looked at people learning a second language ", c("saarela2026"),
-        ". The closest work on Arabic records which language people choose with ChatGPT ", c("bouzayenne2026"),
-        ", but no study had asked Arabic speakers whether AI has changed their own Arabic.")),
+      prose("English was moving into Arabic speakers’ lives well before generative AI. Each step reached a different part of life."),
+      timeline(S, [
+        { when: "University", title: "English leads higher education", text: "English dominates higher education in the UAE, and students at English-medium universities report weaker academic Arabic.", cites: ["albataineh2021", "masri2019"] },
+        { when: "Study and work", title: "English seen as more useful", text: "Qatar University students rate English more useful than Arabic for scientific and professional communication; in Lebanon, English runs across education and professional life.", cites: ["mustafawi2022", "mehio2026"] },
+        { when: "Online", title: "Arabizi on social media", text: "Social networking sites moved young Arabs’ informal writing toward English and Latin script.", cites: ["alghamdi2018"] },
+        { when: "Now", title: "Generative AI", text: "Tools that work better in English arrive in daily study and work. This study asks whether they are the next step.", now: true },
+      ]),
+      h("div", { class: "gap" }, h("div", { class: "evlabel" }, "The gap"),
+        h("p", null, "Research on AI and language has looked at people learning a second language ", c("saarela2026"),
+          ", and the closest work on Arabic records which language people choose with ChatGPT ", c("bouzayenne2026"),
+          ". No study had asked Arabic speakers whether AI has changed their own Arabic."))),
     sec("Two ideas from linguistics",
       grid(
         card({ title: "Domains" }, prose(["Language use is organised by domains: family, friendship, religion, education, work. "
@@ -73,12 +77,13 @@ export function question(main, S) {
       h("div", { class: "hyplist" }, links.map(([k, t, ch]) => h("a", { href: "#" + ch, class: "hyp" }, h("span", { class: "hk" }, k), h("span", null, t),
         h("span", { class: "hto" }, "Chapter " + (CHAPTERS.findIndex((x) => x.id === ch) + 1) + " →"))))),
     sec("What a survey like this can tell us",
-      prose(["We asked people about the change they attribute to AI, comparing now with before they started using it regularly. "
-        + "That is a perception, not a measurement of how their Arabic changed. People can rate how a major life event changed their language use ",
-        c("wirtz2025"), ", and such ratings track real change only partly ", c("schwaba2023"), ". So the findings describe what bilinguals experience, "
-        + "which is where any longer study of AI and Arabic would start."])),
-    sec("Sources for this chapter", sources(S, ["kubrak2025", "sallam2024", "albataineh2021", "masri2019", "mustafawi2022", "mehio2026", "alghamdi2018",
-      "saarela2026", "bouzayenne2026", "fishman1965", "fishman1972", "ferguson1959", "wirtz2025", "schwaba2023"])),
+      h("div", { class: "note" }, h("div", { class: "evlabel" }, "Good to know"),
+        h("p", null, "We asked people about the change they attribute to AI, comparing now with before they started using it regularly. "
+          + "That is a perception, not a measurement of how their Arabic changed. People can rate how a major life event changed their language use ",
+          c("wirtz2025"), ", and such ratings track real change only partly ", c("schwaba2023"), ". So the findings describe what bilinguals experience, "
+          + "which is where any longer study of AI and Arabic would start."))),
+    sec("Sources for this chapter", card({ title: "Cited in this chapter", span2: true }, sources(S, ["kubrak2025", "sallam2024", "albataineh2021", "masri2019",
+      "mustafawi2022", "mehio2026", "alghamdi2018", "saarela2026", "bouzayenne2026", "fishman1965", "fishman1972", "ferguson1959", "wirtz2025", "schwaba2023"]))),
     storyNav("question"));
 }
 
@@ -103,10 +108,12 @@ export function study(main, S) {
   main.append(
     chapterHead("study", "An anonymous survey in Arabic, built around one question asked about eight areas of daily life."),
     sec("The survey",
-      prose(`The survey was an anonymous Google Form in Arabic, open from ${S.study.collected}. It was shared through university WhatsApp groups, `
-        + "friends and their contacts, Instagram stories and LinkedIn posts. Before launch, a speech-language pathologist reviewed the form.",
-        "To take part, people had to have Arabic as their first language, use English for study or work, and have used AI tools at least weekly for six months. "
-        + `All ${s.n} who answered met these conditions.`)),
+      evidence(S, [
+        { label: "When", title: S.study.collected, text: "An anonymous Google Form in Arabic: no names or contact details were collected." },
+        { label: "How it spread", title: "Shared person to person", text: "University WhatsApp groups, friends and their contacts, Instagram stories and LinkedIn posts." },
+        { label: "Who could answer", title: "Arabic–English bilinguals who use AI", text: `Arabic as first language, English for study or work, AI at least weekly for six months. All ${s.n} who answered qualified.` },
+        { label: "Checked first", title: "Reviewed before launch", text: "A speech-language pathologist reviewed the form before it went live.", accent: true },
+      ])),
     sec("The core question",
       card({ title: `“${q.question.en}”`, sub: "Compared with before regular AI use. Each area was answered on five steps; an area that did not apply could be marked as such and is left out." },
         table([

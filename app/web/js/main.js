@@ -2,7 +2,7 @@
 // The site tells one story: Home, eight chapters (story.js), then the paper and materials.
 import { h } from "./ui.js";
 import { disposeCharts, rerenderCharts } from "./charts.js";
-import { CHAPTERS } from "./story.js";
+import { CHAPTERS, rail } from "./story.js";
 import { home, question, study } from "./opening.js";
 import { where, language, wider } from "./findings.js";
 import { prediction } from "./prediction.js";
@@ -21,6 +21,17 @@ const nav = document.getElementById("nav");
 const sidebar = document.getElementById("sidebar");
 const menubtn = document.getElementById("menubtn");
 let data = null;
+let railObs = null;
+
+// a thin bar along the top that fills as the reader scrolls through the page
+const readbar = h("div", { class: "readbar", "aria-hidden": "true" });
+document.body.append(readbar);
+function updateReadbar() {
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  readbar.style.transform = `scaleX(${max > 0 ? Math.min(1, window.scrollY / max) : 0})`;
+}
+window.addEventListener("scroll", updateReadbar, { passive: true });
+window.addEventListener("resize", updateReadbar);
 
 function loadData() {
   data = data || fetch("data/study.json").then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
@@ -56,11 +67,25 @@ async function show() {
   disposeCharts();
   mainEl.replaceChildren(h("div", { class: "skel", style: { height: "120px", marginBottom: "18px" } }), h("div", { class: "skel", style: { height: "320px" } }));
   document.title = (page.id === "home" ? "" : page.label + " · ") + "Is Generative AI Displacing Arabic?";
+  if (railObs) { railObs(); railObs = null; }
   try {
     const S = page.noData ? null : await loadData();
     if (current() !== page) return;                       // the reader moved on while this loaded
-    mainEl.replaceChildren();
-    await page.render(mainEl, S);
+    if (page.id === "home") {
+      mainEl.replaceChildren();
+      await page.render(mainEl, S);
+    } else {
+      // a chapter: the text on the left, a sticky panel on the right (where we are, sections, next)
+      const article = h("article", { class: "article" });
+      const layout = h("div", { class: "chapterlayout" }, article);
+      mainEl.replaceChildren(layout);
+      await page.render(article, S);
+      if (current() !== page) return;
+      const side = rail(page.id, article);
+      layout.append(side);
+      railObs = side.firstChild.disconnect || null;
+    }
+    updateReadbar();
   } catch (e) {
     mainEl.replaceChildren(h("div", { class: "cardmsg error", role: "alert" }, "This page could not be loaded. Please refresh."));
     console.error(e);
