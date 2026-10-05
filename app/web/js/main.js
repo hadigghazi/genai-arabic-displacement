@@ -5,6 +5,7 @@ import { overview, profile, hypotheses, predictors, context, sample } from "./fi
 import { results, oversampling } from "./mlpages.js";
 import { model } from "./model.js";
 import { method } from "./about.js";
+import { research } from "./research.js";
 
 const PAGES = [
   { id: "overview", no: "–", label: "Overview", render: overview },
@@ -16,6 +17,7 @@ const PAGES = [
   { id: "ml", no: "M1", label: "Prediction models", group: "Machine learning", render: results },
   { id: "oversampling", no: "M2", label: "Oversampling check", group: "Machine learning", render: oversampling },
   { id: "model", no: "★", label: "Try the model", group: "Machine learning", render: model, cta: true, noData: true },
+  { id: "research", no: "R1", label: "The paper", group: "Research", render: research },
   { id: "method", no: "A", label: "How the study was done", group: "About", render: method },
 ];
 

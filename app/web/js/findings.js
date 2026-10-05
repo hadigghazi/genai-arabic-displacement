@@ -48,6 +48,7 @@ export function overview(main, S) {
        ["sample", "Who took part", "The 105 respondents"],
        ["ml", "Prediction models", "Cross-validated machine learning"],
        ["model", "Try the model", "Answer 12 questions"],
+       ["research", "The paper", "Read, download or cite it"],
        ["method", "How the study was done", "Design, instrument, analysis"]]
         .map(([id, t, s]) => h("a", { class: "linkcard", href: "#" + id }, h("b", null, t), h("span", null, s)))));
   main.append(findings, grid(profile, explore));

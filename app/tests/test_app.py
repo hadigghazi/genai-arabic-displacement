@@ -73,3 +73,12 @@ def test_study_data_is_aggregate_only():
             for v in x:
                 walk(v)
     walk(s)
+
+
+def test_paper_is_published():
+    """paper/publish.py runs before every build; the research page reads these files."""
+    p = client.get('/research/paper.json').json()
+    assert p['title'].startswith('Is Generative AI Displacing Arabic?') and p['pages'] and p['abstract']
+    pdf = client.get('/research/' + p['pdf'])
+    assert pdf.status_code == 200 and pdf.headers['content-type'] == 'application/pdf' and pdf.content[:4] == b'%PDF'
+    assert client.get('/research/' + p['bib']).text.startswith('@misc{')

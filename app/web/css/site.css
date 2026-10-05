@@ -234,3 +234,35 @@ table.data tr.group td { color: var(--muted); font-style: italic; padding-top: 1
 .moves .down .arrow { color: var(--muted); }
 .moves .dir { margin-inline-start: auto; color: var(--muted); font-size: 11.5px; }
 .result .fine { font-size: 11.5px; color: var(--muted); line-height: 1.45; margin: 0; }
+
+/* ---- Research page (as on the dblp Explorer) ---- */
+.papertitle { font-family: "Bricolage Grotesque", sans-serif; font-size: 18px; font-weight: 700; line-height: 1.3; margin: 6px 0 4px; }
+.paperby { font-size: 12.5px; color: var(--muted); margin: 0; }
+.abstract { font-size: 13.5px; line-height: 1.7; color: var(--ink-2); margin: 12px 0 10px; max-width: 100ch; }
+.keywords { font-size: 12.5px; color: var(--muted); margin: 0 0 16px; }
+.keywords b { color: var(--ink-2); font-weight: 600; }
+.paperactions { display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; }
+a.btn { text-decoration: none; display: inline-block; }
+.srclist { list-style: none; padding: 0; margin: 6px 0 10px; display: grid; gap: 8px; font-size: 13px; line-height: 1.5; color: var(--ink-2); }
+.srclist a { color: var(--accent-ink); }
+.qsecs { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.qsec { border: 1px solid var(--rule); border-radius: 9px; background: var(--surface-2); }
+.qsec summary { display: flex; justify-content: space-between; gap: 12px; padding: 10px 14px; cursor: pointer; font-weight: 600; color: var(--ink); list-style: none; }
+.qsec summary::-webkit-details-marker { display: none; }
+.qsec summary::before { content: "▸"; color: var(--muted); margin-right: 8px; }
+.qsec[open] summary::before { content: "▾"; }
+.qsec summary > span:first-child { flex: 1; }
+.qsec summary .ar { font-weight: 600; }
+.qitem { padding: 10px 14px 12px; border-top: 1px solid var(--rule-2); font-size: 13px; color: var(--ink-2); }
+.qitem.note { font-size: 12.5px; color: var(--muted); }
+.qitem.note p { margin: 0 0 4px; white-space: pre-line; }
+.qitem .no { font-family: "IBM Plex Mono", monospace; font-size: 11px; color: var(--muted); margin-right: 8px; }
+.qitem b { color: var(--ink); font-weight: 600; }
+.qpair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; align-items: baseline; }
+.qrows { list-style: none; margin: 6px 0 0; padding: 0; }
+.qrows li { padding: 3px 0; border-bottom: 1px dashed var(--rule-2); }
+.qopts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; align-items: center; }
+.chip.static { cursor: default; font-size: 12px; }
+.chip.static:hover { border-color: var(--rule); }
+.ar-inline { font-family: "Noto Naskh Arabic", "Segoe UI", Tahoma, serif; color: var(--muted); }
+@media (max-width: 640px) { .qpair { grid-template-columns: minmax(0, 1fr); gap: 2px; } }

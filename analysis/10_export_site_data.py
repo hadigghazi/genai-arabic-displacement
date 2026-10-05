@@ -344,12 +344,57 @@ assert len(over) == 4
 assert sum('leaky_auc' in r for o in over for r in o['rows']) == 16, 'every resampling strategy has a leaky AUC'
 assert sum('gain' in r for o in over for r in o['rows']) == 24, 'every strategy has a comparison with none'
 
+# ------------------------------------------------------------------ the questionnaire, as fielded (questions and options only)
+from instrument_data import S as SCALES, T as TEXTS  # noqa: E402
+
+
+def clean(t):
+    return re.sub(r'\s*\((reverse-coded|R)\)', '', t)
+
+
+def questionnaire():
+    out = []
+    for sec in SECTIONS:
+        if sec['id'] == 'consent':                 # the information page, not a question
+            continue
+        items = []
+        for it in sec['items']:
+            help_ = it.get('help')
+            note = TEXTS[help_] if isinstance(help_, str) else help_
+            if it['type'] == 'text':
+                items.append({'type': 'text', 'text': note})
+                continue
+            q = {'type': it['type'], 'q': it['q'], 'note': note}
+            if it['type'] == 'gate':
+                q['options'] = [{'en': it['yes']['en'], 'ar': it['yes']['ar']}, {'en': it['no']['en'], 'ar': it['no']['ar']}]
+            elif it['type'] == 'grid':
+                q['rows'] = [{'en': clean(r[1]), 'ar': r[2]} for r in it['rows']]
+                sc = SCALES[it['scale']]
+                q['options'] = [{'en': e, 'ar': a} for e, a in zip(sc['en'], sc['ar'])]
+            elif it['type'] in ('mc', 'check'):
+                o = it.get('o')
+                if o is None:
+                    o = SCALES[it['scale']]
+                elif isinstance(o, str):
+                    o = ITEM[o.split(':')[1]]['o']
+                q['options'] = [{'en': e, 'ar': a} for e, a in zip(o['en'], o['ar'])]
+            items.append(q)
+        out.append({'title': sec['title'], 'items': items})
+    return out
+
+
+QUESTIONNAIRE = questionnaire()
+assert 'research project' not in json.dumps(QUESTIONNAIRE).lower()    # the information page stays out
+assert '"role"' not in json.dumps(QUESTIONNAIRE)                        # no internal design tags
+assert 'reverse-coded' not in json.dumps(QUESTIONNAIRE)
+
 # ------------------------------------------------------------------ instrument (the core grid, as fielded)
 grid = next(it for sec in SECTIONS if sec['id'] == 'change' for it in sec['items'] if it.get('type') == 'grid')
 out = {
     'study': {'title': 'Is Generative AI Displacing Arabic? Perceived Change in Arabic Use Among Lebanese Arabic-English Bilinguals',
               'author': 'Hadi Ghazi', 'affiliation': 'Lebanese University', 'collected': '30 September to 4 October 2026'},
     'sample': sample, 'rq1': rq1, 'hypotheses': hyp, 'context': context, 'ml': ml, 'oversampling': over,
+    'questionnaire': QUESTIONNAIRE,
     'instrument': {'question': grid['q'],
                    'rows': [{'code': r[0].replace('ArUse_', ''), 'en': r[1], 'ar': r[2]} for r in grid['rows'] if r[0].startswith('ArUse_')],
                    'social_media_q': ITEM['SocialMedia']['q'], 'substitution_q': ITEM['SwitchEng']['q']},

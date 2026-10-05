@@ -20,6 +20,8 @@
 /analysis/spss/OUTPUT.doc
 /analysis/spss/*.spv
 /paper/archive/
+# written by paper/publish.py when the site is built
+/app/web/research/
 
 # Build files
 __pycache__/
