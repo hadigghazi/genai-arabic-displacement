@@ -1,0 +1,1160 @@
+{
+ "study": {
+  "title": "Is Generative AI Displacing Arabic? Perceived Change in Arabic Use Among Lebanese Arabic-English Bilinguals",
+  "author": "Hadi Ghazi, Lebanese University",
+  "n": 105,
+  "collected": "30 September to 4 October 2026"
+ },
+ "method": "L2 logistic regression (C = 1) on standardised features, SMOTENC oversampling inside training; evaluated by repeated 10x5-fold cross-validation and permutation tests; fitted on all respondents.",
+ "threshold": 0.5,
+ "feature_order": [
+  "Age25",
+  "Computing",
+  "Education",
+  "Eng_Prof",
+  "EventMove",
+  "AI_TaskShare",
+  "AI_BreadthCount",
+  "AI_Freq",
+  "AI_TenureRank",
+  "EnglishShare",
+  "AI_Content",
+  "AI_ContentLang"
+ ],
+ "feature_text": {
+  "Age25": {
+   "en": "Age 25 or over",
+   "ar": "العمر 25 عاماً أو أكثر"
+  },
+  "Computing": {
+   "en": "Field: computing / IT",
+   "ar": "المجال: الحوسبة / تقنية المعلومات"
+  },
+  "Education": {
+   "en": "Education level",
+   "ar": "المستوى التعليمي"
+  },
+  "Eng_Prof": {
+   "en": "English level",
+   "ar": "مستوى الإنجليزية"
+  },
+  "EventMove": {
+   "en": "Started studying or working in English, or moved country",
+   "ar": "بدء الدراسة أو العمل بالإنجليزية، أو الانتقال إلى بلد آخر"
+  },
+  "AI_TaskShare": {
+   "en": "Share of work or study done with AI",
+   "ar": "نسبة العمل أو الدراسة بمساعدة الذكاء الاصطناعي"
+  },
+  "AI_BreadthCount": {
+   "en": "Number of things you use AI for",
+   "ar": "عدد استخدامات الذكاء الاصطناعي"
+  },
+  "AI_Freq": {
+   "en": "How often you use AI",
+   "ar": "عدد مرات استخدام الذكاء الاصطناعي"
+  },
+  "AI_TenureRank": {
+   "en": "How long you have used AI regularly",
+   "ar": "مدة الاستخدام المنتظم للذكاء الاصطناعي"
+  },
+  "EnglishShare": {
+   "en": "Writing to AI in English",
+   "ar": "الكتابة للذكاء الاصطناعي بالإنجليزية"
+  },
+  "AI_Content": {
+   "en": "Seeing AI-generated content",
+   "ar": "مصادفة محتوى مولّد بالذكاء الاصطناعي"
+  },
+  "AI_ContentLang": {
+   "en": "Choosing the English original over AI Arabic voice",
+   "ar": "اختيار الأصل الإنجليزي بدل الصوت العربي المولّد"
+  }
+ },
+ "questions": [
+  {
+   "code": "Age",
+   "type": "single",
+   "q": {
+    "en": "Age",
+    "ar": "العمر"
+   },
+   "options": [
+    {
+     "code": 1,
+     "en": "Under 25",
+     "ar": "أقل من 25"
+    },
+    {
+     "code": 2,
+     "en": "25 to 34",
+     "ar": "من 25 إلى 34"
+    },
+    {
+     "code": 3,
+     "en": "35 to 44",
+     "ar": "من 35 إلى 44"
+    },
+    {
+     "code": 4,
+     "en": "45 or over",
+     "ar": "45 فأكثر"
+    }
+   ]
+  },
+  {
+   "code": "Education",
+   "type": "single",
+   "q": {
+    "en": "Education level (completed or in progress)",
+    "ar": "المستوى التعليمي (مكتمل أو قيد الدراسة)"
+   },
+   "options": [
+    {
+     "code": 1,
+     "en": "Secondary",
+     "ar": "ثانوي"
+    },
+    {
+     "code": 2,
+     "en": "Bachelor's",
+     "ar": "بكالوريوس"
+    },
+    {
+     "code": 3,
+     "en": "Master's or higher",
+     "ar": "ماجستير أو أعلى"
+    }
+   ]
+  },
+  {
+   "code": "Field",
+   "type": "single",
+   "q": {
+    "en": "Field of study or work",
+    "ar": "مجال الدراسة أو العمل"
+   },
+   "options": [
+    {
+     "code": 1,
+     "en": "Computing / IT",
+     "ar": "الحوسبة / تقنية المعلومات"
+    },
+    {
+     "code": 2,
+     "en": "Engineering",
+     "ar": "الهندسة"
+    },
+    {
+     "code": 3,
+     "en": "Sciences or health",
+     "ar": "العلوم أو الصحة"
+    },
+    {
+     "code": 4,
+     "en": "Business",
+     "ar": "إدارة الأعمال"
+    },
+    {
+     "code": 5,
+     "en": "Humanities, education or law",
+     "ar": "العلوم الإنسانية أو التربية أو القانون"
+    },
+    {
+     "code": 6,
+     "en": "Other",
+     "ar": "غير ذلك"
+    }
+   ]
+  },
+  {
+   "code": "Eng_Prof",
+   "type": "single",
+   "q": {
+    "en": "Your English level",
+    "ar": "مستواك في الإنجليزية"
+   },
+   "options": [
+    {
+     "code": 1,
+     "en": "Weak",
+     "ar": "ضعيف"
+    },
+    {
+     "code": 2,
+     "en": "Average",
+     "ar": "متوسط"
+    },
+    {
+     "code": 3,
+     "en": "Good",
+     "ar": "جيد"
+    },
+    {
+     "code": 4,
+     "en": "Very good",
+     "ar": "جيد جداً"
+    },
+    {
+     "code": 5,
+     "en": "Excellent",
+     "ar": "ممتاز"
+    }
+   ]
+  },
+  {
+   "code": "Events",
+   "type": "check",
+   "q": {
+    "en": "Since you started using AI regularly, did any of these also happen? (tick all that apply)",
+    "ar": "منذ أن بدأت باستخدام الذكاء الاصطناعي بانتظام، هل حدث لك أيضاً أيٌّ مما يلي؟ (اختر كل ما ينطبق)"
+   },
+   "options": [
+    {
+     "code": 1,
+     "en": "Started university",
+     "ar": "بدأت الجامعة"
+    },
+    {
+     "code": 2,
+     "en": "Graduated",
+     "ar": "تخرّجت"
+    },
+    {
+     "code": 3,
+     "en": "New job",
+     "ar": "بدأت عملاً جديداً"
+    },
+    {
+     "code": 4,
+     "en": "Started studying or working in English",
+     "ar": "بدأت الدراسة أو العمل بالإنجليزية"
+    },
+    {
+     "code": 5,
+     "en": "Moved to another country",
+     "ar": "انتقلت إلى بلد آخر"
+    },
+    {
+     "code": 6,
+     "en": "None of these",
+     "ar": "لا شيء مما سبق"
+    }
+   ]
+  },
+  {
+   "code": "AI_Start",
+   "type": "single",
+   "q": {
+    "en": "When did you start using AI tools regularly (at least weekly)?",
+    "ar": "متى بدأت باستخدام أدوات الذكاء الاصطناعي بانتظام (مرة أسبوعياً على الأقل)؟"
+   },
+   "options": [
+    {
+     "code": 1,
+     "en": "2022 or earlier",
+     "ar": "2022 أو قبل ذلك"
+    },
+    {
+     "code": 2,
+     "en": "2023",
+     "ar": "2023"
+    },
+    {
+     "code": 3,
+     "en": "2024",
+     "ar": "2024"
+    },
+    {
+     "code": 4,
+     "en": "2025",
+     "ar": "2025"
+    },
+    {
+     "code": 5,
+     "en": "2026",
+     "ar": "2026"
+    }
+   ]
+  },
+  {
+   "code": "AI_Freq",
+   "type": "single",
+   "q": {
+    "en": "How often do you use AI tools?",
+    "ar": "كم مرة تستخدم أدوات الذكاء الاصطناعي؟"
+   },
+   "options": [
+    {
+     "code": 1,
+     "en": "Once a week",
+     "ar": "مرة في الأسبوع"
+    },
+    {
+     "code": 2,
+     "en": "A few days a week",
+     "ar": "بضعة أيام في الأسبوع"
+    },
+    {
+     "code": 3,
+     "en": "Once a day",
+     "ar": "مرة في اليوم"
+    },
+    {
+     "code": 4,
+     "en": "Several times a day",
+     "ar": "عدة مرات في اليوم"
+    }
+   ]
+  },
+  {
+   "code": "AI_TaskShare",
+   "type": "single",
+   "q": {
+    "en": "How much of your work or study do you do with the help of AI?",
+    "ar": "كم من عملك أو دراستك تنجزه بمساعدة الذكاء الاصطناعي؟"
+   },
+   "options": [
+    {
+     "code": 1,
+     "en": "Very little",
+     "ar": "القليل جداً"
+    },
+    {
+     "code": 2,
+     "en": "Some",
+     "ar": "بعضه"
+    },
+    {
+     "code": 3,
+     "en": "About half",
+     "ar": "نحو النصف"
+    },
+    {
+     "code": 4,
+     "en": "Most",
+     "ar": "معظمه"
+    },
+    {
+     "code": 5,
+     "en": "Almost all",
+     "ar": "كله تقريباً"
+    }
+   ]
+  },
+  {
+   "code": "AI_Breadth",
+   "type": "check",
+   "q": {
+    "en": "What do you use AI for? (tick all that apply)",
+    "ar": "فيمَ تستخدم الذكاء الاصطناعي؟ (اختر كل ما ينطبق)"
+   },
+   "options": [
+    {
+     "code": 1,
+     "en": "Writing or editing",
+     "ar": "الكتابة أو التحرير"
+    },
+    {
+     "code": 2,
+     "en": "Coding",
+     "ar": "البرمجة"
+    },
+    {
+     "code": 3,
+     "en": "Searching for information",
+     "ar": "البحث عن معلومات"
+    },
+    {
+     "code": 4,
+     "en": "Translation",
+     "ar": "الترجمة"
+    },
+    {
+     "code": 5,
+     "en": "Studying",
+     "ar": "الدراسة"
+    },
+    {
+     "code": 6,
+     "en": "Emails and messages",
+     "ar": "البريد والرسائل"
+    },
+    {
+     "code": 7,
+     "en": "Ideas",
+     "ar": "توليد الأفكار"
+    },
+    {
+     "code": 8,
+     "en": "Personal advice",
+     "ar": "نصائح شخصية"
+    }
+   ]
+  },
+  {
+   "code": "AI_Lang",
+   "type": "single",
+   "q": {
+    "en": "In which language do you usually write to AI?",
+    "ar": "بأي لغة تكتب للذكاء الاصطناعي عادةً؟"
+   },
+   "options": [
+    {
+     "code": 1,
+     "en": "Always Arabic",
+     "ar": "العربية دائماً"
+    },
+    {
+     "code": 2,
+     "en": "Mostly Arabic",
+     "ar": "العربية غالباً"
+    },
+    {
+     "code": 3,
+     "en": "Both equally",
+     "ar": "الاثنتان بالتساوي"
+    },
+    {
+     "code": 4,
+     "en": "Mostly English",
+     "ar": "الإنجليزية غالباً"
+    },
+    {
+     "code": 5,
+     "en": "Always English",
+     "ar": "الإنجليزية دائماً"
+    }
+   ]
+  },
+  {
+   "code": "AI_Content",
+   "type": "single",
+   "q": {
+    "en": "How often do you come across AI-generated content (videos, voice-overs, summaries in search results)?",
+    "ar": "كم تصادف محتوى مولّداً بالذكاء الاصطناعي (فيديوهات، تعليق صوتي، ملخّصات في نتائج البحث)؟"
+   },
+   "options": [
+    {
+     "code": 1,
+     "en": "Never",
+     "ar": "لا أصادفه"
+    },
+    {
+     "code": 2,
+     "en": "Rarely",
+     "ar": "نادراً"
+    },
+    {
+     "code": 3,
+     "en": "Sometimes",
+     "ar": "أحياناً"
+    },
+    {
+     "code": 4,
+     "en": "Often",
+     "ar": "كثيراً"
+    },
+    {
+     "code": 5,
+     "en": "Every day",
+     "ar": "يومياً"
+    }
+   ]
+  },
+  {
+   "code": "AI_ContentLang",
+   "type": "single",
+   "q": {
+    "en": "When the same content is available in AI-generated Arabic voice and in the original English, which do you usually choose?",
+    "ar": "عندما يتوفّر المحتوى نفسه بصوت عربي مولّد بالذكاء الاصطناعي وبالإنجليزية الأصلية، ماذا تختار عادةً؟"
+   },
+   "options": [
+    {
+     "code": 1,
+     "en": "Always Arabic",
+     "ar": "العربية دائماً"
+    },
+    {
+     "code": 2,
+     "en": "Mostly Arabic",
+     "ar": "العربية غالباً"
+    },
+    {
+     "code": 3,
+     "en": "Depends on the topic",
+     "ar": "بحسب الموضوع"
+    },
+    {
+     "code": 4,
+     "en": "Mostly English",
+     "ar": "الإنجليزية غالباً"
+    },
+    {
+     "code": 5,
+     "en": "Always English",
+     "ar": "الإنجليزية دائماً"
+    }
+   ]
+  }
+ ],
+ "models": [
+  {
+   "id": "AnyFormalLoss",
+   "label": {
+    "en": "Less Arabic in formal areas (work or study, or Fusha)",
+    "ar": "استخدام أقل للعربية في المجالات الرسمية (العمل أو الدراسة، أو الفصحى)"
+   },
+   "n_yes": 55,
+   "n_no": 49,
+   "cv": {
+    "auc": 0.7495,
+    "balanced_accuracy_headline": 0.7017,
+    "perm_p_holm": 0.004,
+    "auc_splits": {
+     "mean": 0.76,
+     "min": 0.75,
+     "max": 0.77
+    },
+    "without_age_perm_p": 0.018,
+    "balanced_accuracy": 0.71
+   },
+   "intercept": 0.12074407757697651,
+   "features": [
+    {
+     "name": "Age25",
+     "mean": 0.22115384615384615,
+     "sd": 0.4150238818251392,
+     "coef": -0.9328171865084645
+    },
+    {
+     "name": "Computing",
+     "mean": 0.4326923076923077,
+     "sd": 0.49544896261493276,
+     "coef": -0.17554195389729127
+    },
+    {
+     "name": "Education",
+     "mean": 2.4615384615384617,
+     "sd": 0.6032456592830048,
+     "coef": 0.5450015553930958
+    },
+    {
+     "name": "Eng_Prof",
+     "mean": 3.4711538461538463,
+     "sd": 1.037348049755414,
+     "coef": -0.19378870655327352
+    },
+    {
+     "name": "EventMove",
+     "mean": 0.23076923076923078,
+     "sd": 0.42132504423474315,
+     "coef": 0.26633219320639384
+    },
+    {
+     "name": "AI_TaskShare",
+     "mean": 3.2403846153846154,
+     "sd": 1.0515116619172271,
+     "coef": 0.22631749193618678
+    },
+    {
+     "name": "AI_BreadthCount",
+     "mean": 4.586538461538462,
+     "sd": 1.6848338021384786,
+     "coef": 0.0019948013633770173
+    },
+    {
+     "name": "AI_Freq",
+     "mean": 3.5865384615384617,
+     "sd": 0.7546086214705164,
+     "coef": 0.5832843795398586
+    },
+    {
+     "name": "AI_TenureRank",
+     "mean": 3.605769230769231,
+     "sd": 0.9549292083182964,
+     "coef": 0.0680703390719096
+    },
+    {
+     "name": "EnglishShare",
+     "mean": 3.7115384615384617,
+     "sd": 1.2455542242085598,
+     "coef": 0.9313429000036331
+    },
+    {
+     "name": "AI_Content",
+     "mean": 3.7788461538461537,
+     "sd": 0.9603357863191432,
+     "coef": 0.22190575016319086
+    },
+    {
+     "name": "AI_ContentLang",
+     "mean": 3.375,
+     "sd": 1.0847500598329978,
+     "coef": -0.1884799351143882
+    }
+   ],
+   "tests": [
+    {
+     "answers": {
+      "Age": 1,
+      "Education": 3,
+      "Field": 1,
+      "Eng_Prof": 5,
+      "Events": [
+       1,
+       4
+      ],
+      "AI_Start": 1,
+      "AI_Freq": 4,
+      "AI_TaskShare": 5,
+      "AI_Breadth": [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6,
+       7,
+       8
+      ],
+      "AI_Lang": 5,
+      "AI_Content": 5,
+      "AI_ContentLang": 5
+     },
+     "score": 0.946288539585398
+    },
+    {
+     "answers": {
+      "Age": 3,
+      "Education": 1,
+      "Field": 5,
+      "Eng_Prof": 2,
+      "Events": [
+       6
+      ],
+      "AI_Start": 5,
+      "AI_Freq": 1,
+      "AI_TaskShare": 1,
+      "AI_Breadth": [
+       3
+      ],
+      "AI_Lang": 1,
+      "AI_Content": 1,
+      "AI_ContentLang": 1
+     },
+     "score": 0.0005019948924598305
+    },
+    {
+     "answers": {
+      "Age": 1,
+      "Education": 2,
+      "Field": 2,
+      "Eng_Prof": 4,
+      "Events": [],
+      "AI_Start": 3,
+      "AI_Freq": 3,
+      "AI_TaskShare": 3,
+      "AI_Breadth": [
+       1,
+       3,
+       5,
+       7
+      ],
+      "AI_Lang": 3,
+      "AI_Content": 3,
+      "AI_ContentLang": 3
+     },
+     "score": 0.25230353961543267
+    },
+    {
+     "answers": {
+      "Age": 2,
+      "Education": 3,
+      "Field": 3,
+      "Eng_Prof": 3,
+      "Events": [
+       3,
+       5
+      ],
+      "AI_Start": 2,
+      "AI_Freq": 2,
+      "AI_TaskShare": 4,
+      "AI_Breadth": [
+       2,
+       4
+      ],
+      "AI_Lang": 4,
+      "AI_Content": 4,
+      "AI_ContentLang": 2
+     },
+     "score": 0.27931645827499085
+    },
+    {
+     "answers": {
+      "Age": 4,
+      "Education": 2,
+      "Field": 6,
+      "Eng_Prof": 1,
+      "Events": [
+       2
+      ],
+      "AI_Start": 4,
+      "AI_Freq": 4,
+      "AI_TaskShare": 2,
+      "AI_Breadth": [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6
+      ],
+      "AI_Lang": 2,
+      "AI_Content": 2,
+      "AI_ContentLang": 4
+     },
+     "score": 0.031150042972842767
+    }
+   ]
+  },
+  {
+   "id": "Loss_WorkStudy",
+   "label": {
+    "en": "Less Arabic in work or study",
+    "ar": "استخدام أقل للعربية في العمل أو الدراسة"
+   },
+   "n_yes": 52,
+   "n_no": 52,
+   "cv": {
+    "auc": 0.7356,
+    "balanced_accuracy_headline": 0.7077,
+    "perm_p_holm": 0.016,
+    "auc_splits": {
+     "mean": 0.74,
+     "min": 0.72,
+     "max": 0.75
+    },
+    "without_age_perm_p": 0.006,
+    "balanced_accuracy": 0.7
+   },
+   "intercept": -0.003917840506938947,
+   "features": [
+    {
+     "name": "Age25",
+     "mean": 0.22115384615384615,
+     "sd": 0.4150238818251392,
+     "coef": -0.7811609748935504
+    },
+    {
+     "name": "Computing",
+     "mean": 0.4326923076923077,
+     "sd": 0.49544896261493276,
+     "coef": -0.06181458070018099
+    },
+    {
+     "name": "Education",
+     "mean": 2.4615384615384617,
+     "sd": 0.6032456592830048,
+     "coef": 0.476801274445863
+    },
+    {
+     "name": "Eng_Prof",
+     "mean": 3.4711538461538463,
+     "sd": 1.037348049755414,
+     "coef": -0.05453754065023113
+    },
+    {
+     "name": "EventMove",
+     "mean": 0.23076923076923078,
+     "sd": 0.42132504423474315,
+     "coef": 0.3096265160494836
+    },
+    {
+     "name": "AI_TaskShare",
+     "mean": 3.2403846153846154,
+     "sd": 1.0515116619172271,
+     "coef": 0.14652373504425256
+    },
+    {
+     "name": "AI_BreadthCount",
+     "mean": 4.586538461538462,
+     "sd": 1.6848338021384786,
+     "coef": 0.06631905634760332
+    },
+    {
+     "name": "AI_Freq",
+     "mean": 3.5865384615384617,
+     "sd": 0.7546086214705164,
+     "coef": 0.454267785869925
+    },
+    {
+     "name": "AI_TenureRank",
+     "mean": 3.605769230769231,
+     "sd": 0.9549292083182964,
+     "coef": 0.060394062496881985
+    },
+    {
+     "name": "EnglishShare",
+     "mean": 3.7115384615384617,
+     "sd": 1.2455542242085598,
+     "coef": 0.6328466142390834
+    },
+    {
+     "name": "AI_Content",
+     "mean": 3.7788461538461537,
+     "sd": 0.9603357863191432,
+     "coef": 0.34059399163968157
+    },
+    {
+     "name": "AI_ContentLang",
+     "mean": 3.375,
+     "sd": 1.0847500598329978,
+     "coef": -0.04366045937892472
+    }
+   ],
+   "tests": [
+    {
+     "answers": {
+      "Age": 1,
+      "Education": 3,
+      "Field": 1,
+      "Eng_Prof": 5,
+      "Events": [
+       1,
+       4
+      ],
+      "AI_Start": 1,
+      "AI_Freq": 4,
+      "AI_TaskShare": 5,
+      "AI_Breadth": [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6,
+       7,
+       8
+      ],
+      "AI_Lang": 5,
+      "AI_Content": 5,
+      "AI_ContentLang": 5
+     },
+     "score": 0.9521681150109782
+    },
+    {
+     "answers": {
+      "Age": 3,
+      "Education": 1,
+      "Field": 5,
+      "Eng_Prof": 2,
+      "Events": [
+       6
+      ],
+      "AI_Start": 5,
+      "AI_Freq": 1,
+      "AI_TaskShare": 1,
+      "AI_Breadth": [
+       3
+      ],
+      "AI_Lang": 1,
+      "AI_Content": 1,
+      "AI_ContentLang": 1
+     },
+     "score": 0.0008193311412770154
+    },
+    {
+     "answers": {
+      "Age": 1,
+      "Education": 2,
+      "Field": 2,
+      "Eng_Prof": 4,
+      "Events": [],
+      "AI_Start": 3,
+      "AI_Freq": 3,
+      "AI_TaskShare": 3,
+      "AI_Breadth": [
+       1,
+       3,
+       5,
+       7
+      ],
+      "AI_Lang": 3,
+      "AI_Content": 3,
+      "AI_ContentLang": 3
+     },
+     "score": 0.23748694057754696
+    },
+    {
+     "answers": {
+      "Age": 2,
+      "Education": 3,
+      "Field": 3,
+      "Eng_Prof": 3,
+      "Events": [
+       3,
+       5
+      ],
+      "AI_Start": 2,
+      "AI_Freq": 2,
+      "AI_TaskShare": 4,
+      "AI_Breadth": [
+       2,
+       4
+      ],
+      "AI_Lang": 4,
+      "AI_Content": 4,
+      "AI_ContentLang": 2
+     },
+     "score": 0.25999584221381794
+    },
+    {
+     "answers": {
+      "Age": 4,
+      "Education": 2,
+      "Field": 6,
+      "Eng_Prof": 1,
+      "Events": [
+       2
+      ],
+      "AI_Start": 4,
+      "AI_Freq": 4,
+      "AI_TaskShare": 2,
+      "AI_Breadth": [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6
+      ],
+      "AI_Lang": 2,
+      "AI_Content": 2,
+      "AI_ContentLang": 4
+     },
+     "score": 0.035031031395533645
+    }
+   ]
+  },
+  {
+   "id": "Loss_Self",
+   "label": {
+    "en": "Less Arabic when talking to yourself or writing your own notes",
+    "ar": "استخدام أقل للعربية عند التحدث مع نفسك أو كتابة ملاحظاتك الخاصة"
+   },
+   "n_yes": 28,
+   "n_no": 77,
+   "cv": {
+    "auc": 0.7347,
+    "balanced_accuracy_headline": 0.658,
+    "perm_p_holm": 0.016,
+    "auc_splits": {
+     "mean": 0.75,
+     "min": 0.73,
+     "max": 0.77
+    },
+    "without_age_perm_p": 0.002,
+    "balanced_accuracy": 0.65
+   },
+   "intercept": -0.8587631421000129,
+   "features": [
+    {
+     "name": "Age25",
+     "mean": 0.21904761904761905,
+     "sd": 0.41360096667825647,
+     "coef": -1.1687364687032584
+    },
+    {
+     "name": "Computing",
+     "mean": 0.42857142857142855,
+     "sd": 0.49487165930539345,
+     "coef": -0.17686519431979497
+    },
+    {
+     "name": "Education",
+     "mean": 2.466666666666667,
+     "sd": 0.6026396959831001,
+     "coef": -0.34606033269608955
+    },
+    {
+     "name": "Eng_Prof",
+     "mean": 3.4857142857142858,
+     "sd": 1.043020209038437,
+     "coef": 0.35640383371668893
+    },
+    {
+     "name": "EventMove",
+     "mean": 0.23809523809523808,
+     "sd": 0.4259177099999599,
+     "coef": -0.43761434285877104
+    },
+    {
+     "name": "AI_TaskShare",
+     "mean": 3.257142857142857,
+     "sd": 1.0603554788355642,
+     "coef": -0.011828526450215097
+    },
+    {
+     "name": "AI_BreadthCount",
+     "mean": 4.59047619047619,
+     "sd": 1.677272378114386,
+     "coef": -0.5815234862281848
+    },
+    {
+     "name": "AI_Freq",
+     "mean": 3.5904761904761906,
+     "sd": 0.7520795056152242,
+     "coef": 0.9120027838375064
+    },
+    {
+     "name": "AI_TenureRank",
+     "mean": 3.619047619047619,
+     "sd": 0.9599697652079355,
+     "coef": 0.04777958613232989
+    },
+    {
+     "name": "EnglishShare",
+     "mean": 3.723809523809524,
+     "sd": 1.245909406591469,
+     "coef": 1.130011442391526
+    },
+    {
+     "name": "AI_Content",
+     "mean": 3.780952380952381,
+     "sd": 0.9559931498155889,
+     "coef": 0.5652663596255071
+    },
+    {
+     "name": "AI_ContentLang",
+     "mean": 3.3904761904761904,
+     "sd": 1.0910478850757857,
+     "coef": 0.48402987489677596
+    }
+   ],
+   "tests": [
+    {
+     "answers": {
+      "Age": 1,
+      "Education": 3,
+      "Field": 1,
+      "Eng_Prof": 5,
+      "Events": [
+       1,
+       4
+      ],
+      "AI_Start": 1,
+      "AI_Freq": 4,
+      "AI_TaskShare": 5,
+      "AI_Breadth": [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6,
+       7,
+       8
+      ],
+      "AI_Lang": 5,
+      "AI_Content": 5,
+      "AI_ContentLang": 5
+     },
+     "score": 0.7191902897886499
+    },
+    {
+     "answers": {
+      "Age": 3,
+      "Education": 1,
+      "Field": 5,
+      "Eng_Prof": 2,
+      "Events": [
+       6
+      ],
+      "AI_Start": 5,
+      "AI_Freq": 1,
+      "AI_TaskShare": 1,
+      "AI_Breadth": [
+       3
+      ],
+      "AI_Lang": 1,
+      "AI_Content": 1,
+      "AI_ContentLang": 1
+     },
+     "score": 7.409231391753362e-05
+    },
+    {
+     "answers": {
+      "Age": 1,
+      "Education": 2,
+      "Field": 2,
+      "Eng_Prof": 4,
+      "Events": [],
+      "AI_Start": 3,
+      "AI_Freq": 3,
+      "AI_TaskShare": 3,
+      "AI_Breadth": [
+       1,
+       3,
+       5,
+       7
+      ],
+      "AI_Lang": 3,
+      "AI_Content": 3,
+      "AI_ContentLang": 3
+     },
+     "score": 0.2263559594263482
+    },
+    {
+     "answers": {
+      "Age": 2,
+      "Education": 3,
+      "Field": 3,
+      "Eng_Prof": 3,
+      "Events": [
+       3,
+       5
+      ],
+      "AI_Start": 2,
+      "AI_Freq": 2,
+      "AI_TaskShare": 4,
+      "AI_Breadth": [
+       2,
+       4
+      ],
+      "AI_Lang": 4,
+      "AI_Content": 4,
+      "AI_ContentLang": 2
+     },
+     "score": 0.004389456546673725
+    },
+    {
+     "answers": {
+      "Age": 4,
+      "Education": 2,
+      "Field": 6,
+      "Eng_Prof": 1,
+      "Events": [
+       2
+      ],
+      "AI_Start": 4,
+      "AI_Freq": 4,
+      "AI_TaskShare": 2,
+      "AI_Breadth": [
+       1,
+       2,
+       3,
+       4,
+       5,
+       6
+      ],
+      "AI_Lang": 2,
+      "AI_Content": 2,
+      "AI_ContentLang": 4
+     },
+     "score": 0.0034916252340617513
+    }
+   ]
+  }
+ ]
+}

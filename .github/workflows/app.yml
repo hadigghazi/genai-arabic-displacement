@@ -1,0 +1,123 @@
+name: Model app
+
+# Only the app and its deployment trigger this; paper and analysis commits do not.
+on:
+  push:
+    branches: [main]
+    paths: ["app/**", "docker-compose.prod.yml", ".github/workflows/app.yml"]
+  pull_request:
+    paths: ["app/**", "docker-compose.prod.yml", ".github/workflows/app.yml"]
+  workflow_dispatch:
+
+env:
+  IMAGE: ghcr.io/${{ github.repository }}-app
+
+jobs:
+  # The app must score exactly like the fitted scikit-learn models (expected scores are in model.json).
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - name: Build test image
+        uses: docker/build-push-action@v6
+        with:
+          context: app
+          target: test
+          load: true
+          tags: arabic-ai:test
+          cache-from: type=gha,scope=app-test
+          cache-to: type=gha,scope=app-test,mode=max
+      - name: Run tests
+        run: docker run --rm arabic-ai:test
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - name: Log in to GitHub Container Registry
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build runtime image (push on main)
+        uses: docker/build-push-action@v6
+        with:
+          context: app
+          target: runtime
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: |
+            ${{ env.IMAGE }}:latest
+            ${{ env.IMAGE }}:${{ github.sha }}
+          cache-from: type=gha,scope=app
+          cache-to: type=gha,scope=app,mode=max
+
+  # Main only: ssh into the VM, pull the new image, restart, smoke test.
+  # Skips cleanly (no failure) until the VM_HOST secret exists.
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    concurrency: deploy-vm-arabic-ai
+    permissions:
+      contents: read
+      packages: read
+    env:
+      HAS_HOST: ${{ secrets.VM_HOST != '' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Not configured yet
+        if: env.HAS_HOST != 'true'
+        run: echo "VM_HOST secret is not set - skipping deploy. The image is on GHCR."
+
+      - name: Prepare SSH
+        if: env.HAS_HOST == 'true'
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.VM_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "${{ secrets.VM_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Copy compose file to the VM
+        if: env.HAS_HOST == 'true'
+        run: |
+          ssh -i ~/.ssh/deploy_key "${{ secrets.VM_USER }}@${{ secrets.VM_HOST }}" 'mkdir -p ~/arabic-ai'
+          scp -i ~/.ssh/deploy_key docker-compose.prod.yml "${{ secrets.VM_USER }}@${{ secrets.VM_HOST }}:~/arabic-ai/docker-compose.prod.yml"
+
+      - name: Pull and restart on the VM
+        if: env.HAS_HOST == 'true'
+        run: |
+          ssh -i ~/.ssh/deploy_key "${{ secrets.VM_USER }}@${{ secrets.VM_HOST }}" bash -s <<'EOF'
+            set -e
+            cd ~/arabic-ai
+            [ -f .env ] || echo "APP_PORT=8082" > .env
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+            docker compose -f docker-compose.prod.yml pull
+            docker compose -f docker-compose.prod.yml up -d --remove-orphans
+            docker logout ghcr.io
+            docker image prune -f >/dev/null
+            docker compose -f docker-compose.prod.yml ps
+          EOF
+
+      - name: Smoke test
+        if: env.HAS_HOST == 'true'
+        run: |
+          ssh -i ~/.ssh/deploy_key "${{ secrets.VM_USER }}@${{ secrets.VM_HOST }}" bash -s <<'EOF'
+            set -e
+            PORT=$(grep '^APP_PORT=' ~/arabic-ai/.env | cut -d= -f2)
+            for i in $(seq 1 30); do
+              if curl -fsS http://127.0.0.1:$PORT/api/health && curl -fsS -o /dev/null http://127.0.0.1:$PORT/; then
+                echo; echo "model app is up on 127.0.0.1:$PORT"; exit 0
+              fi
+              sleep 2
+            done
+            echo "model app did not come up"; docker logs --tail 50 arabic-ai; exit 1
+          EOF

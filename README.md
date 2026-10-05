@@ -27,6 +27,9 @@ improves cross-validated prediction of who reports a decrease (RQ4).
 | `analysis/ANALYSIS-DECISIONS.md` | Decision log: every analysis choice, its alternatives, and where each alternative is reported. |
 | `analysis/results/` | All outputs: `python_stats.txt`, `ml_results.txt`, `ml_more_targets.txt`, `oversampling_check.txt`, `ml_usability.txt`, tables and figures. |
 | `analysis/requirements.txt` | Package versions used. |
+| `analysis/09_export_model.py` | Fits the usable models on all respondents and exports their coefficients (no individual data) to `app/model/model.json`. |
+| `app/` | The live model: FastAPI service + bilingual page (`web/`), tests that replay scikit-learn's scores, Dockerfile. |
+| `docker-compose.prod.yml`, `.github/workflows/app.yml` | Deployment: GitHub Actions tests, builds the image to GHCR and restarts it on the VM behind Caddy. |
 
 ## Data
 
@@ -45,4 +48,11 @@ python analysis/05_ml.py                  # results/ml_results.txt (over an hour
 python analysis/06_ml_more_targets.py     # results/ml_more_targets.txt
 python analysis/07_oversampling_check.py  # results/oversampling_check.txt
 python analysis/08_usability_main_targets.py  # results/ml_usability.txt
+python analysis/09_export_model.py        # app/model/model.json (commit it; CI tests and deploys the app)
 ```
+
+## Live model
+
+`app/` serves the three usable models (any formal-domain decrease, work or study, self-talk) as a bilingual
+form at https://arabic-ai.hadighazi.com. Answers are scored in memory and never stored. Run it locally with
+`docker build --target runtime -t arabic-ai app && docker run --rm -p 8082:8000 arabic-ai`.

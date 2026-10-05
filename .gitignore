@@ -9,6 +9,9 @@
 !/build-form-v3-ar.gs
 !/paper/
 !/analysis/
+!/app/
+!/.github/
+!/docker-compose.prod.yml
 
 # Never published: individual responses, internal notes, local outputs
 /analysis/data/

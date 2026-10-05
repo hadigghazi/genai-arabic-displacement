@@ -1,0 +1,13 @@
+# Used on the VM (~/arabic-ai). Pulls the image GitHub Actions built; nothing is built on the server.
+#   docker compose -f docker-compose.prod.yml up -d
+# .env (written by the deploy job on first run):
+#   APP_PORT=8082     the localhost port Caddy forwards arabic-ai.hadighazi.com to
+services:
+  app:
+    image: ghcr.io/hadigghazi/genai-arabic-displacement-app:latest
+    container_name: arabic-ai
+    ports:
+      - "127.0.0.1:${APP_PORT:-8082}:8000"   # Caddy on the VM owns :80/:443
+    read_only: true
+    tmpfs: [/tmp]
+    restart: unless-stopped
