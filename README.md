@@ -55,9 +55,11 @@ python analysis/10_export_site_data.py    # app/web/data/study.json, the website
 
 ## Study website
 
-`app/` is the study's website at https://arabic-ai.hadighazi.com, styled like the dblp Explorer: findings pages
-(the domain profile, the hypotheses, what predicts the decrease, social media and life changes, the sample),
-the machine-learning results and oversampling check, the method, and a live form scored by the three usable
-models. The pages read `app/web/data/study.json` (group-level results only, written by
-`analysis/10_export_site_data.py`); the form posts to `/api/predict`, which scores answers in memory and never
-stores them. Run it locally with `docker build --target runtime -t arabic-ai app && docker run --rm -p 8082:8000 arabic-ai`.
+`app/` is the study's website at https://arabic-ai.hadighazi.com, told as one story in eight chapters: the
+question, how we asked, where Arabic is used less, the language of AI use, the shift that began before AI,
+whether it can be predicted, a live model to try, and what it means, followed by the paper (read, download,
+cite) and the references. Each chapter keeps its statistics in collapsible "How we know" boxes. The pages read
+`app/web/data/study.json` (group-level results only, written by `analysis/10_export_site_data.py`); the paper
+is copied in by `paper/publish.py` on every deploy; the form posts to `/api/predict`, which scores answers in
+memory and never stores them. Run it locally with
+`python paper/publish.py paper app/web/research && docker build --target runtime -t arabic-ai app && docker run --rm -p 8082:8000 arabic-ai`.

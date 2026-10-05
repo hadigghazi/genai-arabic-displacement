@@ -1,25 +1,20 @@
 // The site shell: sidebar navigation, hash routing, theme switch, and the study data every page reads.
+// The site tells one story: Home, eight chapters (story.js), then the paper and materials.
 import { h } from "./ui.js";
 import { disposeCharts, rerenderCharts } from "./charts.js";
-import { overview, profile, hypotheses, predictors, context, sample } from "./findings.js";
-import { results, oversampling } from "./mlpages.js";
+import { CHAPTERS } from "./story.js";
+import { home, question, study } from "./opening.js";
+import { where, language, wider } from "./findings.js";
+import { prediction } from "./prediction.js";
 import { model } from "./model.js";
-import { method } from "./about.js";
-import { research } from "./research.js";
+import { meaning, paper } from "./closing.js";
 
+const RENDER = { home, question, study, where, language, wider, prediction, model, meaning, paper };
 const PAGES = [
-  { id: "overview", no: "–", label: "Overview", render: overview },
-  { id: "profile", no: "01", label: "Where Arabic is used less", group: "Findings", render: profile },
-  { id: "hypotheses", no: "02", label: "Hypotheses", group: "Findings", render: hypotheses },
-  { id: "predictors", no: "03", label: "What goes with it", group: "Findings", render: predictors },
-  { id: "context", no: "04", label: "Social media & life changes", group: "Findings", render: context },
-  { id: "sample", no: "05", label: "Who took part", group: "Findings", render: sample },
-  { id: "ml", no: "M1", label: "Prediction models", group: "Machine learning", render: results },
-  { id: "oversampling", no: "M2", label: "Oversampling check", group: "Machine learning", render: oversampling },
-  { id: "model", no: "★", label: "Try the model", group: "Machine learning", render: model, cta: true, noData: true },
-  { id: "research", no: "R1", label: "The paper", group: "Research", render: research },
-  { id: "method", no: "A", label: "How the study was done", group: "About", render: method },
-];
+  { id: "home", no: "⌂", label: "Home" },
+  ...CHAPTERS.map((c, i) => ({ id: c.id, no: String(i + 1), label: c.title, group: "The story", cta: c.id === "model" })),
+  { id: "paper", no: "¶", label: "Paper & materials", group: "Read more" },
+].map((p) => ({ ...p, render: RENDER[p.id], noData: p.id === "model" }));
 
 const mainEl = document.getElementById("main");
 const nav = document.getElementById("nav");
@@ -60,7 +55,7 @@ async function show() {
   menubtn.setAttribute("aria-expanded", "false");
   disposeCharts();
   mainEl.replaceChildren(h("div", { class: "skel", style: { height: "120px", marginBottom: "18px" } }), h("div", { class: "skel", style: { height: "320px" } }));
-  document.title = (page.id === "overview" ? "" : page.label + " · ") + "Generative AI and Arabic";
+  document.title = (page.id === "home" ? "" : page.label + " · ") + "Is Generative AI Displacing Arabic?";
   try {
     const S = page.noData ? null : await loadData();
     if (current() !== page) return;                       // the reader moved on while this loaded
@@ -91,7 +86,16 @@ menubtn.addEventListener("click", () => {
   sidebar.classList.toggle("open", open);
   menubtn.setAttribute("aria-expanded", String(open));
 });
-window.addEventListener("hashchange", () => { window.scrollTo(0, 0); show(); });
+// old addresses from before the site was a story
+const MOVED = { overview: "home", profile: "where", hypotheses: "meaning", predictors: "language", context: "wider", sample: "study",
+  ml: "prediction", oversampling: "prediction", research: "paper", method: "study" };
+window.addEventListener("hashchange", () => {
+  const id = location.hash.replace(/^#/, "");
+  if (MOVED[id]) { history.replaceState(null, "", "#" + MOVED[id]); }
+  window.scrollTo(0, 0);
+  show();
+});
+{ const id = location.hash.replace(/^#/, ""); if (MOVED[id]) history.replaceState(null, "", "#" + MOVED[id]); }
 
 buildNav();
 show();

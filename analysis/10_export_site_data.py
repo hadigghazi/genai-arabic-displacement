@@ -344,6 +344,68 @@ assert len(over) == 4
 assert sum('leaky_auc' in r for o in over for r in o['rows']) == 16, 'every resampling strategy has a leaky AUC'
 assert sum('gain' in r for o in over for r in o['rows']) == 24, 'every strategy has a comparison with none'
 
+# ------------------------------------------------------------------ references (the paper's bibliography)
+def read_bib(path):
+    """A small BibTeX reader for refs.bib: entries of the form field = {value} with balanced braces."""
+    text = io.open(path, encoding='utf-8').read()
+    out = {}
+    for m in re.finditer(r'@(\w+)\{([^,\s]+),', text):
+        kind, key = m.group(1).lower(), m.group(2)
+        if kind == 'ieeetranbstctl':
+            continue
+        i, depth, fields = m.end(), 1, {}
+        while depth and i < len(text):
+            f = re.match(r'\s*(\w+)\s*=\s*\{', text[i:])
+            if not f:
+                if text[i] == '}':
+                    depth -= 1
+                i += 1
+                continue
+            name, j, d = f.group(1).lower(), i + f.end(), 1
+            k = j
+            while d:
+                d += {'{': 1, '}': -1}.get(text[k], 0)
+                k += 1
+            fields[name] = text[j:k - 1]
+            i = k
+        out[key] = (kind, fields)
+    return out
+
+
+ACCENT = {"'": '\u0301', '`': '\u0300', '^': '\u0302', '"': '\u0308', '~': '\u0303', '=': '\u0304', '.': '\u0307',
+          'c': '\u0327', 'u': '\u0306', 'v': '\u030c', 'H': '\u030b'}
+
+
+def bib_plain(v):
+    """LaTeX accents ({\\'i}, {\\c{c}}, {\\u{g}}, ...) -> letters; braces and dashes -> plain text."""
+    import unicodedata
+    v = re.sub(r'\\([\'`^"~=.cuvH])\{?\\?([A-Za-z])\}?', lambda m: unicodedata.normalize('NFC', m.group(2) + ACCENT[m.group(1)]), v)
+    return re.sub(r'\s+', ' ', v.replace('{', '').replace('}', '').replace('--', '–').replace('\\&', '&')).strip()
+
+
+def bib_authors(v):
+    names = []
+    for a in bib_plain(v).split(' and '):
+        if ',' in a:
+            last, first = [x.strip() for x in a.split(',', 1)]
+            names.append((last, ' '.join(w[0] + '.' for w in first.replace('-', ' ').split() if w)))
+        else:
+            names.append((a, ''))
+    short = names[0][0] + (' et al.' if len(names) > 2 else (' and ' + names[1][0] if len(names) == 2 else ''))
+    full = ', '.join((f + ' ' + l).strip() for l, f in names[:6]) + (' et al.' if len(names) > 6 else '')
+    return short, full
+
+
+import io  # noqa: E402
+REFS = {}
+for key, (kind, f) in read_bib(os.path.join(ROOT, 'paper', 'refs.bib')).items():
+    short, full = bib_authors(f.get('author', f.get('organization', '')) or 'IBM Corp.')
+    venue = f.get('journal') or f.get('booktitle') or f.get('publisher') or f.get('organization') or ''
+    REFS[key] = {'short': short, 'authors': full, 'year': f.get('year', ''), 'title': bib_plain(f.get('title', '')),
+                 'venue': bib_plain(venue), 'url': ('https://doi.org/' + f['doi']) if f.get('doi') else f.get('url', '')}
+assert len(REFS) >= 35 and REFS['kubrak2025']['short'] == 'Kubrak et al.', REFS.get('kubrak2025')
+assert '\\' not in json.dumps(REFS, ensure_ascii=False), 'a LaTeX command survived in the references'
+
 # ------------------------------------------------------------------ the questionnaire, as fielded (questions and options only)
 from instrument_data import S as SCALES, T as TEXTS  # noqa: E402
 
@@ -395,6 +457,7 @@ out = {
               'author': 'Hadi Ghazi', 'affiliation': 'Lebanese University', 'collected': '30 September to 4 October 2026'},
     'sample': sample, 'rq1': rq1, 'hypotheses': hyp, 'context': context, 'ml': ml, 'oversampling': over,
     'questionnaire': QUESTIONNAIRE,
+    'references': REFS,
     'instrument': {'question': grid['q'],
                    'rows': [{'code': r[0].replace('ArUse_', ''), 'en': r[1], 'ar': r[2]} for r in grid['rows'] if r[0].startswith('ArUse_')],
                    'social_media_q': ITEM['SocialMedia']['q'], 'substitution_q': ITEM['SwitchEng']['q']},

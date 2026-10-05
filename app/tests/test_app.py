@@ -55,6 +55,8 @@ def test_rejects_missing_answers():
 def test_site_is_served():
     r = client.get('/')
     assert r.status_code == 200 and 'js/main.js' in r.text
+    for mod in ['story', 'opening', 'findings', 'prediction', 'model', 'closing', 'charts', 'ui']:
+        assert client.get(f'/js/{mod}.js').status_code == 200, mod
     js = client.get('/js/main.js')
     assert js.status_code == 200 and 'javascript' in js.headers['content-type']
 

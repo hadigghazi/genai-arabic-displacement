@@ -1,6 +1,7 @@
 // The live model: the survey's 12 questions in English or Arabic, scored by POST api/predict.
 // State lives at module level, so answers survive switching pages or language.
-import { h, f, pct, pageHead, card, grid, table, callout } from "./ui.js";
+import { h, f, pct, card, grid, table } from "./ui.js";
+import { chapterHead, storyNav } from "./story.js";
 
 const T = {
   en: {
@@ -33,11 +34,10 @@ state.lang = initialLang();
 
 export async function model(main) {
   main.append(
-    pageHead("Machine learning · live", "Try the model",
-      "Answer the survey’s 12 questions about yourself and your AI use, and see whether people with answers like yours reported using less Arabic because of AI. "
-      + "Three models score you: the three that met all four usability criteria. Your answers are scored on the spot and never stored."));
+    chapterHead("model", "Answer the survey’s 12 questions about yourself and your AI use, and see whether people with answers like yours reported using less Arabic because of AI. "
+      + "The three usable models from Chapter 6 score you. Your answers are scored on the spot and never stored."));
   const holder = h("div");
-  main.append(holder);
+  main.append(holder, storyNav("model"));
   if (!state.card) {
     holder.append(h("div", { class: "skel", style: { height: "420px" } }));
     try {
