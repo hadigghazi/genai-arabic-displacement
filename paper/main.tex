@@ -19,6 +19,11 @@
 
 \usepackage[hidelinks]{hyperref}
 
+% No em dashes: a colon after "Abstract" and "Index Terms" instead of IEEEtran's dash.
+\usepackage{etoolbox}
+\patchcmd{\abstract}{---}{:\ }{}{\errmessage{abstract dash patch failed}}
+\patchcmd{\IEEEkeywords}{---}{:\ }{}{\errmessage{keywords dash patch failed}}
+
 \newcommand{\todo}[1]{\textcolor{red}{[#1]}}
 \newcommand{\ar}[1]{{\arabicfont\beginR #1\endR}}
 
@@ -36,7 +41,7 @@ hadigghazi@gmail.com}}
 \pagestyle{plain}
 
 \begin{abstract}
-Generative AI works better in English than in Arabic, so bilinguals who rely on it may route more of their work through English. In an anonymous Arabic online survey of 105 Lebanese Arabic--English bilinguals who use AI regularly, respondents rated whether, because of AI, they now use Arabic less or more in eight domains. About two thirds (68) reported an AI-attributed decrease in at least one domain, most often in work or study (50\%, against 3\% reporting more) and in writing messages (40\%), and rarely with family or in religion. Decreases outnumbered increases for formal Arabic and followed the order predicted by domain theory, from work and study to personal matters to family. Of three AI-use measures, only the share of AI use conducted in English predicted the reported decrease, and it did so in every specification. In cross-validated machine learning, linear models met four usability criteria fixed in advance for predicting a decrease in any formal domain, in work or study and in self-talk (AUC 0.73--0.75), but AI-use information added no significant gain over background characteristics; oversampling before the train--test split inflated the apparent AUC to 0.89. Respondents who reported losing Arabic to AI also reported losing it to social media, consistent with AI extending a shift that social media began, and the English share stayed predictive with social media taken into account.
+Generative AI tools work better in English than in Arabic, so Arabic speakers who also know English may turn to English when they use them. This study asks whether these speakers feel that AI has reduced their use of Arabic. In an anonymous online survey in Arabic, 105 Lebanese Arabic--English bilinguals who use AI regularly rated, for eight areas of daily life, whether they now use Arabic less or more because of AI. About two thirds reported using less Arabic in at least one area. The decrease was most common in work or study (half of respondents), in writing messages and in formal Arabic, and least common with family and in religion, following the order that theories of language shift predict. The more often respondents wrote to AI in English, the larger the decrease they reported, whereas how much they used AI did not matter. Simple machine-learning models identified, with moderate accuracy, who reports a decrease in formal areas, in work or study and in self-talk, but information about AI use did not make them significantly more accurate than models based on background characteristics such as age, education and English level. The study also shows how a common oversampling error inflates the apparent accuracy of such models. Respondents who felt that AI reduced their Arabic felt the same about social media, which suggests that AI continues a shift that social media began. The findings describe perceived change; tracking actual language use over time is the next step.
 \end{abstract}
 
 \begin{IEEEkeywords}
