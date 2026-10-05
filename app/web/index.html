@@ -1,42 +1,28 @@
 <!doctype html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Is AI Reducing Your Arabic?</title>
-<meta name="description" content="A research model from a survey of 105 Lebanese Arabic-English bilinguals: answer 12 questions and see whether people with answers like yours reported using less Arabic because of AI.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23176b5b'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='white' font-family='Arial'%3E%D8%B9%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="style.css">
+<title>Generative AI and Arabic</title>
+<meta name="description" content="Is generative AI displacing Arabic? A survey of 105 Lebanese Arabic-English bilinguals: where they report using Arabic less because of AI, what goes with it, and a live model built from their answers.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Naskh+Arabic:wght@400;600&display=swap">
+<link rel="stylesheet" href="css/site.css">
 </head>
 <body>
-<header class="top">
-  <div class="wrap top-row">
-    <span class="brand" id="brand"></span>
-    <button id="lang" class="lang" type="button"></button>
+<button class="menubtn" id="menubtn" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+<aside class="sidebar" id="sidebar">
+  <div class="brand">
+    <div class="mark"><b>GenAI</b> &amp; Arabic</div>
+    <button class="themebtn" id="themebtn" type="button" title="Switch theme">system</button>
   </div>
-</header>
-
-<main class="wrap">
-  <section class="intro">
-    <h1 id="title"></h1>
-    <p class="lead" id="lead"></p>
-    <p class="note" id="privacy"></p>
-  </section>
-
-  <form id="form" novalidate>
-    <div id="questions"><p class="loading" id="loading">Loading…</p></div>
-    <p id="formError" class="error" role="alert" hidden></p>
-    <button type="submit" id="submit" class="primary"></button>
-  </form>
-
-  <section id="results" class="results" hidden aria-live="polite"></section>
-
-  <section id="about" class="about"></section>
-</main>
-
-<footer class="foot">
-  <div class="wrap" id="footer"></div>
-</footer>
-<script src="app.js"></script>
+  <nav class="pages" id="nav" aria-label="Sections"></nav>
+  <div class="sidefoot">A survey of 105 Lebanese Arabic–English bilinguals, 30 Sep – 4 Oct 2026. Hadi Ghazi, Lebanese University.</div>
+</aside>
+<main id="main"></main>
+<script src="vendor/echarts.min.js"></script>
+<script type="module" src="js/main.js"></script>
 </body>
 </html>

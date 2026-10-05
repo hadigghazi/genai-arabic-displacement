@@ -52,6 +52,24 @@ def test_rejects_missing_answers():
     assert client.post('/api/predict', json=bad).status_code == 422
 
 
-def test_page_is_served():
+def test_site_is_served():
     r = client.get('/')
-    assert r.status_code == 200 and 'app.js' in r.text
+    assert r.status_code == 200 and 'js/main.js' in r.text
+    js = client.get('/js/main.js')
+    assert js.status_code == 200 and 'javascript' in js.headers['content-type']
+
+
+def test_study_data_is_aggregate_only():
+    s = client.get('/data/study.json').json()
+    assert s['sample']['n'] == 105 and len(s['rq1']['domains']) == 8
+    assert sum(t['usability']['usable'] for t in s['ml']['targets']) == 3
+    # group-level numbers only: no per-respondent arrays anywhere
+    def walk(x):
+        if isinstance(x, dict):
+            for v in x.values():
+                walk(v)
+        elif isinstance(x, list):
+            assert len(x) < 105, 'a list as long as the sample'
+            for v in x:
+                walk(v)
+    walk(s)
