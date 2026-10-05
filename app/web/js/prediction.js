@@ -11,7 +11,7 @@ export function prediction(main, S) {
   const O = S.oversampling;
   const auc = card({ title: "How well each outcome is predicted", span2: true,
     sub: "AUC on people the model was not trained on: the chance that it ranks someone who reported the decrease above someone who did not. Dashed lines: chance (0.50) and the usability threshold (0.70)." });
-  const rules = card({ title: "Four rules, fixed before the models were run", span2: true,
+  const rules = card({ title: "Four rules, fixed in advance", span2: true,
     sub: "1 better than chance after correcting for the many outcomes; 2 mean AUC of at least 0.70 over ten other random splits, none below 0.65; 3 still better than chance without the age question; 4 balanced accuracy of at least 0.65." },
     table([
       { label: "Outcome", get: (r) => r.t.label, class: "strong" },
@@ -36,7 +36,7 @@ export function prediction(main, S) {
   const bestGain = Math.max(...O.flatMap((o) => o.rows.filter((r) => r.gain !== undefined).map((r) => r.gain)));
   main.append(
     chapterHead("prediction", "If the language of AI use goes with the decrease, can answers about AI use predict who will report it? "
-      + "Thirteen outcomes were modelled and judged by four rules written down before the models were run."),
+      + "Thirteen outcomes were modelled and judged by four rules fixed in advance."),
     kpis([
       { n: usable.length, l: "usable models: any formal-domain decrease, work or study, self-talk" },
       { n: f(formal.blocks.with_ai.score), l: "AUC for any formal-domain decrease (0.50 = chance)" },
@@ -45,7 +45,7 @@ export function prediction(main, S) {
     sec("Three outcomes can be predicted", auc,
       takeaway("Answers about background and AI use identify who reports a decrease in formal areas, in work or study and in self-talk, with moderate accuracy.")),
     sec("Judged by rules fixed in advance", rules,
-      prose("A model counts as usable only if it passes all four rules. The rules were written before the models were run on the full sample, "
+      prose("A model counts as usable only if it passes all four rules. The rules were fixed in advance, "
         + "so no threshold was chosen after seeing which model would clear it.")),
     sec("Background and AI use overlap", grid(gain, relies),
       prose("Answers about AI use alone predict about as well as background alone, and adding one to the other changes little. "

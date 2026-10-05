@@ -48,7 +48,7 @@ export function where(main, S) {
         { h: "H2a  Work/study > personal > family", n: A.H2a.n, res: `means ${f(A.H2a.means.WorkStudy)}, ${f(A.H2a.means.Personal)}, ${f(A.H2a.means.Family)}`, test: `Page; χ²(2) = ${f(A.H2a.chi2)}, W = ${f(A.H2a.W)}`, p: A.H2a.p_holm, pc: C.H2a.p_holm },
         { h: "H2b  Fusha > dialect", n: A.H2b.n, res: `difference ${sg(A.H2b.mean_diff)}`, test: `Wilcoxon z = ${f(A.H2b.z)}`, p: A.H2b.p_holm, pc: C.H2b.p_holm },
       ]),
-      h("p", { class: "muted" }, `Wilcoxon signed-rank tests against zero (exact sign tests agree); Page’s one-sided test of the predicted order; Holm’s correction across the four. The core sample is the analysis plan’s narrower sample (n = ${S.sample.core_n}).`),
+      h("p", { class: "muted" }, `Wilcoxon signed-rank tests against zero (exact sign tests agree); Page’s one-sided test of the predicted order; Holm’s correction across the four. The core sample is a narrower sample: grew up and live in the Arab region, no move since 2022 (n = ${S.sample.core_n}).`),
       table([
         { label: "Area", get: (d) => d.label, class: "strong" }, { label: "n", num: true, get: (d) => d.n },
         { label: "Less [95% CI]", num: true, get: (d) => `${pct(d.less)} [${pct(d.less_ci[0])}, ${pct(d.less_ci[1])}]` },
@@ -95,7 +95,7 @@ export function language(main, S) {
         + `(${H.age25.no_change} reported none), which is why age carries a large estimate of its own.`)),
     sec("It holds every way we looked", rob,
       prose("Each row reruns the analysis with one choice made differently: another way of scoring the decrease, other covariates, without unusual respondents, "
-        + `or in the analysis plan’s narrower sample. Writing to AI in English stays significant every time, even with English level held constant `
+        + `or in a narrower core sample. Writing to AI in English stays significant every time, even with English level held constant `
         + `(the two go together, ρ = ${f(H.english_share_vs_proficiency_rho)}) and with the blame people give social media held constant (Chapter 5).`)),
     sec("Is Arabic harder without AI?", grid(h4c, card({ title: "What respondents said", sub: "“Because of AI, has each of these become harder or easier for you, when you use Arabic on your own without AI?”" },
       prose("Finding the everyday word, speaking one’s dialect fluently, and saying what one means fully in Arabic. "

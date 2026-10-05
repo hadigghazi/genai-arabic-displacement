@@ -138,9 +138,8 @@ export function study(main, S) {
       h("p", { class: "muted" }, "Only totals for single questions are shown, never combinations, so no respondent can be singled out.")),
     sec("The full questionnaire", questionnaireCard(S.questionnaire)),
     sec("How we analysed it",
-      prose("Every test follows an analysis plan written before data collection. Two families of hypotheses were tested with corrections for multiple testing, "
-        + `every analysis choice was rerun the other way to check it, and the results describe all ${s.n} respondents, with the plan’s narrower core sample `
-        + `(n = ${s.core_n}) as a check.`),
+      prose("Two families of hypotheses were tested with corrections for multiple testing, every analysis choice was rerun the other way to check it, "
+        + `and the results describe all ${s.n} respondents, with a narrower core sample (n = ${s.core_n}) as a check.`),
       howWeKnow("The tests, in brief", h("div", { class: "prose" },
         h("ul", null,
           h("li", null, h("b", null, "Direction (H1): "), "Wilcoxon signed-rank tests against zero, with exact sign tests alongside."),
@@ -149,8 +148,7 @@ export function study(main, S) {
           h("li", null, h("b", null, "Mediation (H5): "), "PROCESS model 4 logic with a 5,000-resample percentile bootstrap."),
           h("li", null, h("b", null, "Multiple testing: "), "Holm’s correction within each family of hypotheses."),
           h("li", null, h("b", null, "Machine learning: "), "repeated 10×5-fold cross-validation, permutation tests, and four usability criteria fixed in advance (Chapter 6)."),
-          h("li", null, h("b", null, "Software: "), "SPSS 23 and Python, below.")),
-        h("p", null, "Responses were collected in two waves; every analysis choice was fixed before the second was analysed.")))),
+          h("li", null, h("b", null, "Software: "), "SPSS 23 and Python, below."))))),
     spssSection(S),
     storyNav("study"));
   main4.forEach((c) => c.draw());

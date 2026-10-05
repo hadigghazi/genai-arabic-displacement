@@ -177,7 +177,7 @@ def fam_b(df, disp='Displacement', cov=('Age25', 'EventMove')):
 
 
 d['SocialLoss'] = -d.SocialMedia
-SPECS = [('Primary specification', d, {}), ("Plan's 4-domain score", d, {'disp': 'Displacement4'}),
+SPECS = [('Primary specification', d, {}), ("Four-domain score", d, {'disp': 'Displacement4'}),
          ('Dialect domains only', d, {'disp': 'DialectLoss'}), ('Age as the only covariate', d, {'cov': ('Age25',)}),
          ('No covariates', d, {'cov': ()}), ('Adding English proficiency', d, {'cov': ('Age25', 'EventMove', 'Eng_Prof')}),
          ('Adding social-media attribution', d, {'cov': ('Age25', 'EventMove', 'SocialLoss')}),
@@ -432,8 +432,8 @@ SPSS_LABEL = {
     'B stable in "d_WorkStudy ~ ... Age25"': ('Regression', 'Unchanged setting → work/study change, age controlled'),
     'B EnglishShare in "Displacement ~ ... QualityGap"': ('Regression', 'English share, no covariates'),
     'B Displacement in "AbilityDecline ~ ...AbilityDecline ~ Displa': ('Regression', 'Decrease → difficulty, no covariates'),
-    'B EnglishShare in "Displacement4 ~ ... EventMove"': ('Regression', 'English share, the plan’s 4-area score'),
-    'B Displacement4 in "AbilityDecline ~ ... EventMove"': ('Regression', 'Decrease → difficulty, the plan’s 4-area score'),
+    'B EnglishShare in "Displacement4 ~ ... EventMove"': ('Regression', 'English share, four-area score'),
+    'B Displacement4 in "AbilityDecline ~ ... EventMove"': ('Regression', 'Decrease → difficulty, four-area score'),
     'B EnglishShare in "Displacement ~ ... EventMove" (core sample)': ('Regression', 'English share, core sample'),
     'B Displacement in "AbilityDecline ~ ... EventMove" (core sampl': ('Regression', 'Decrease → difficulty, core sample'),
     'B EnglishShare, H3 without straight-liners': ('Regression', 'English share, without straight-line responders'),

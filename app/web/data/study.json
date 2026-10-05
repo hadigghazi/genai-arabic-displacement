@@ -912,7 +912,7 @@
     }
    },
    {
-    "label": "Plan's 4-domain score",
+    "label": "Four-domain score",
     "n": 105,
     "joint": {
      "F": 9.16066179831453,
@@ -4560,13 +4560,13 @@
    },
    {
     "group": "Regression",
-    "label": "English share, the plan’s 4-area score",
+    "label": "English share, four-area score",
     "spss": 0.17846858710117,
     "python": 0.17846858710116498
    },
    {
     "group": "Regression",
-    "label": "Decrease → difficulty, the plan’s 4-area score",
+    "label": "Decrease → difficulty, four-area score",
     "spss": 0.34392541060058,
     "python": 0.3439254106005786
    },
