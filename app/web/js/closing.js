@@ -83,7 +83,8 @@ export async function paper(main, S) {
       h("div", { class: "paperactions" },
         h("a", { class: "btn", href: BASE + pp.pdf, target: "_blank", rel: "noopener" }, `Read the paper (PDF, ${size(pp.bytes)})`),
         h("a", { class: "btn ghost", href: BASE + pp.pdf, download: pp.pdf }, "Download"),
-        h("a", { class: "btn ghost", href: BASE + pp.bib, download: pp.bib }, "Cite (BibTeX)")))));
+        h("a", { class: "btn ghost", href: BASE + pp.bib, download: pp.bib }, "Cite (BibTeX)"),
+        h("a", { class: "btn ghost", href: "https://github.com/hadigghazi/genai-arabic-displacement", target: "_blank", rel: "noopener" }, "Code and instrument (GitHub)")))));
   } else {
     main.append(card({ title: "The paper" }, h("div", { class: "cardmsg" }, "The paper hasn’t been published on this server yet.")));
   }
