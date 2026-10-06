@@ -67,3 +67,7 @@ cite) and the references. Each chapter keeps its statistics in collapsible "How 
 is copied in by `paper/publish.py` on every deploy; the form posts to `/api/predict`, which scores answers in
 memory and never stores them. Run it locally with
 `python paper/publish.py paper app/web/research && docker build --target runtime -t arabic-ai app && docker run --rm -p 8082:8000 arabic-ai`.
+
+## License
+
+Code and instrument: MIT License (see `LICENSE`). Individual survey responses are not part of the repository.

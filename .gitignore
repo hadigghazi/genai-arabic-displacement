@@ -2,6 +2,7 @@
 /*
 !/.gitignore
 !/README.md
+!/LICENSE
 !/instrument_data.py
 !/instrument_v3.py
 !/instrument-v3.md
