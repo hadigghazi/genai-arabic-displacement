@@ -6,7 +6,20 @@
   "collected": "30 September to 4 October 2026"
  },
  "method": "L2 logistic regression (C = 1) on standardised features, SMOTENC oversampling inside training; evaluated by repeated 10x5-fold cross-validation and permutation tests; fitted on all respondents.",
- "threshold": 0.5,
+ "reference_profile": {
+  "Age25": 0.2,
+  "Computing": 0.4,
+  "Education": 2.5,
+  "Eng_Prof": 3.5,
+  "EventMove": 0.2,
+  "AI_TaskShare": 3.3,
+  "AI_BreadthCount": 4.6,
+  "AI_Freq": 3.6,
+  "AI_TenureRank": 3.6,
+  "EnglishShare": 3.7,
+  "AI_Content": 3.8,
+  "AI_ContentLang": 3.4
+ },
  "feature_order": [
   "Age25",
   "Computing",
@@ -98,7 +111,8 @@
     {
      "code": 4,
      "en": "45 or over",
-     "ar": "45 فأكثر"
+     "ar": "45 فأكثر",
+     "unseen": true
     }
    ]
   },
@@ -288,7 +302,8 @@
     {
      "code": 1,
      "en": "Once a week",
-     "ar": "مرة في الأسبوع"
+     "ar": "مرة في الأسبوع",
+     "unseen": true
     },
     {
      "code": 2,
@@ -519,79 +534,56 @@
     "without_age_perm_p": 0.018,
     "balanced_accuracy": 0.71
    },
-   "intercept": 0.12074407757697651,
+   "threshold": 0.5,
+   "logit_at_reference": 0.2045,
    "features": [
     {
      "name": "Age25",
-     "mean": 0.22115384615384615,
-     "sd": 0.4150238818251392,
-     "coef": -0.9328171865084645
+     "per_unit": -2.2476
     },
     {
      "name": "Computing",
-     "mean": 0.4326923076923077,
-     "sd": 0.49544896261493276,
-     "coef": -0.17554195389729127
+     "per_unit": -0.3543
     },
     {
      "name": "Education",
-     "mean": 2.4615384615384617,
-     "sd": 0.6032456592830048,
-     "coef": 0.5450015553930958
+     "per_unit": 0.9034
     },
     {
      "name": "Eng_Prof",
-     "mean": 3.4711538461538463,
-     "sd": 1.037348049755414,
-     "coef": -0.19378870655327352
+     "per_unit": -0.1868
     },
     {
      "name": "EventMove",
-     "mean": 0.23076923076923078,
-     "sd": 0.42132504423474315,
-     "coef": 0.26633219320639384
+     "per_unit": 0.6321
     },
     {
      "name": "AI_TaskShare",
-     "mean": 3.2403846153846154,
-     "sd": 1.0515116619172271,
-     "coef": 0.22631749193618678
+     "per_unit": 0.2152
     },
     {
      "name": "AI_BreadthCount",
-     "mean": 4.586538461538462,
-     "sd": 1.6848338021384786,
-     "coef": 0.0019948013633770173
+     "per_unit": 0.0012
     },
     {
      "name": "AI_Freq",
-     "mean": 3.5865384615384617,
-     "sd": 0.7546086214705164,
-     "coef": 0.5832843795398586
+     "per_unit": 0.773
     },
     {
      "name": "AI_TenureRank",
-     "mean": 3.605769230769231,
-     "sd": 0.9549292083182964,
-     "coef": 0.0680703390719096
+     "per_unit": 0.0713
     },
     {
      "name": "EnglishShare",
-     "mean": 3.7115384615384617,
-     "sd": 1.2455542242085598,
-     "coef": 0.9313429000036331
+     "per_unit": 0.7477
     },
     {
      "name": "AI_Content",
-     "mean": 3.7788461538461537,
-     "sd": 0.9603357863191432,
-     "coef": 0.22190575016319086
+     "per_unit": 0.2311
     },
     {
      "name": "AI_ContentLang",
-     "mean": 3.375,
-     "sd": 1.0847500598329978,
-     "coef": -0.1884799351143882
+     "per_unit": -0.1738
     }
    ],
    "tests": [
@@ -622,7 +614,8 @@
       "AI_Content": 5,
       "AI_ContentLang": 5
      },
-     "score": 0.946288539585398
+     "score": 0.9462828905253783,
+     "sklearn_score": 0.946288539585398
     },
     {
      "answers": {
@@ -643,7 +636,8 @@
       "AI_Content": 1,
       "AI_ContentLang": 1
      },
-     "score": 0.0005019948924598305
+     "score": 0.0005020091882079259,
+     "sklearn_score": 0.0005019948924598305
     },
     {
      "answers": {
@@ -651,7 +645,9 @@
       "Education": 2,
       "Field": 2,
       "Eng_Prof": 4,
-      "Events": [],
+      "Events": [
+       6
+      ],
       "AI_Start": 3,
       "AI_Freq": 3,
       "AI_TaskShare": 3,
@@ -665,7 +661,8 @@
       "AI_Content": 3,
       "AI_ContentLang": 3
      },
-     "score": 0.25230353961543267
+     "score": 0.2522986742749825,
+     "sklearn_score": 0.25230353961543267
     },
     {
      "answers": {
@@ -688,7 +685,8 @@
       "AI_Content": 4,
       "AI_ContentLang": 2
      },
-     "score": 0.27931645827499085
+     "score": 0.2792892288130435,
+     "sklearn_score": 0.27931645827499085
     },
     {
      "answers": {
@@ -714,7 +712,8 @@
       "AI_Content": 2,
       "AI_ContentLang": 4
      },
-     "score": 0.031150042972842767
+     "score": 0.031150167676103225,
+     "sklearn_score": 0.031150042972842767
     }
    ]
   },
@@ -738,79 +737,56 @@
     "without_age_perm_p": 0.006,
     "balanced_accuracy": 0.7
    },
-   "intercept": -0.003917840506938947,
+   "threshold": 0.5,
+   "logit_at_reference": 0.0635,
    "features": [
     {
      "name": "Age25",
-     "mean": 0.22115384615384615,
-     "sd": 0.4150238818251392,
-     "coef": -0.7811609748935504
+     "per_unit": -1.8822
     },
     {
      "name": "Computing",
-     "mean": 0.4326923076923077,
-     "sd": 0.49544896261493276,
-     "coef": -0.06181458070018099
+     "per_unit": -0.1248
     },
     {
      "name": "Education",
-     "mean": 2.4615384615384617,
-     "sd": 0.6032456592830048,
-     "coef": 0.476801274445863
+     "per_unit": 0.7904
     },
     {
      "name": "Eng_Prof",
-     "mean": 3.4711538461538463,
-     "sd": 1.037348049755414,
-     "coef": -0.05453754065023113
+     "per_unit": -0.0526
     },
     {
      "name": "EventMove",
-     "mean": 0.23076923076923078,
-     "sd": 0.42132504423474315,
-     "coef": 0.3096265160494836
+     "per_unit": 0.7349
     },
     {
      "name": "AI_TaskShare",
-     "mean": 3.2403846153846154,
-     "sd": 1.0515116619172271,
-     "coef": 0.14652373504425256
+     "per_unit": 0.1393
     },
     {
      "name": "AI_BreadthCount",
-     "mean": 4.586538461538462,
-     "sd": 1.6848338021384786,
-     "coef": 0.06631905634760332
+     "per_unit": 0.0394
     },
     {
      "name": "AI_Freq",
-     "mean": 3.5865384615384617,
-     "sd": 0.7546086214705164,
-     "coef": 0.454267785869925
+     "per_unit": 0.602
     },
     {
      "name": "AI_TenureRank",
-     "mean": 3.605769230769231,
-     "sd": 0.9549292083182964,
-     "coef": 0.060394062496881985
+     "per_unit": 0.0632
     },
     {
      "name": "EnglishShare",
-     "mean": 3.7115384615384617,
-     "sd": 1.2455542242085598,
-     "coef": 0.6328466142390834
+     "per_unit": 0.5081
     },
     {
      "name": "AI_Content",
-     "mean": 3.7788461538461537,
-     "sd": 0.9603357863191432,
-     "coef": 0.34059399163968157
+     "per_unit": 0.3547
     },
     {
      "name": "AI_ContentLang",
-     "mean": 3.375,
-     "sd": 1.0847500598329978,
-     "coef": -0.04366045937892472
+     "per_unit": -0.0402
     }
    ],
    "tests": [
@@ -841,7 +817,8 @@
       "AI_Content": 5,
       "AI_ContentLang": 5
      },
-     "score": 0.9521681150109782
+     "score": 0.9521740743861937,
+     "sklearn_score": 0.9521681150109782
     },
     {
      "answers": {
@@ -862,7 +839,8 @@
       "AI_Content": 1,
       "AI_ContentLang": 1
      },
-     "score": 0.0008193311412770154
+     "score": 0.0008192350075520251,
+     "sklearn_score": 0.0008193311412770154
     },
     {
      "answers": {
@@ -870,7 +848,9 @@
       "Education": 2,
       "Field": 2,
       "Eng_Prof": 4,
-      "Events": [],
+      "Events": [
+       6
+      ],
       "AI_Start": 3,
       "AI_Freq": 3,
       "AI_TaskShare": 3,
@@ -884,7 +864,8 @@
       "AI_Content": 3,
       "AI_ContentLang": 3
      },
-     "score": 0.23748694057754696
+     "score": 0.2374845865511002,
+     "sklearn_score": 0.23748694057754696
     },
     {
      "answers": {
@@ -907,7 +888,8 @@
       "AI_Content": 4,
       "AI_ContentLang": 2
      },
-     "score": 0.25999584221381794
+     "score": 0.25997086307623735,
+     "sklearn_score": 0.25999584221381794
     },
     {
      "answers": {
@@ -933,7 +915,8 @@
       "AI_Content": 2,
       "AI_ContentLang": 4
      },
-     "score": 0.035031031395533645
+     "score": 0.03503920148753197,
+     "sklearn_score": 0.035031031395533645
     }
    ]
   },
@@ -957,79 +940,56 @@
     "without_age_perm_p": 0.002,
     "balanced_accuracy": 0.65
    },
-   "intercept": -0.8587631421000129,
+   "threshold": 0.6,
+   "logit_at_reference": -0.7691,
    "features": [
     {
      "name": "Age25",
-     "mean": 0.21904761904761905,
-     "sd": 0.41360096667825647,
-     "coef": -1.1687364687032584
+     "per_unit": -2.8258
     },
     {
      "name": "Computing",
-     "mean": 0.42857142857142855,
-     "sd": 0.49487165930539345,
-     "coef": -0.17686519431979497
+     "per_unit": -0.3574
     },
     {
      "name": "Education",
-     "mean": 2.466666666666667,
-     "sd": 0.6026396959831001,
-     "coef": -0.34606033269608955
+     "per_unit": -0.5742
     },
     {
      "name": "Eng_Prof",
-     "mean": 3.4857142857142858,
-     "sd": 1.043020209038437,
-     "coef": 0.35640383371668893
+     "per_unit": 0.3417
     },
     {
      "name": "EventMove",
-     "mean": 0.23809523809523808,
-     "sd": 0.4259177099999599,
-     "coef": -0.43761434285877104
+     "per_unit": -1.0275
     },
     {
      "name": "AI_TaskShare",
-     "mean": 3.257142857142857,
-     "sd": 1.0603554788355642,
-     "coef": -0.011828526450215097
+     "per_unit": -0.0112
     },
     {
      "name": "AI_BreadthCount",
-     "mean": 4.59047619047619,
-     "sd": 1.677272378114386,
-     "coef": -0.5815234862281848
+     "per_unit": -0.3467
     },
     {
      "name": "AI_Freq",
-     "mean": 3.5904761904761906,
-     "sd": 0.7520795056152242,
-     "coef": 0.9120027838375064
+     "per_unit": 1.2126
     },
     {
      "name": "AI_TenureRank",
-     "mean": 3.619047619047619,
-     "sd": 0.9599697652079355,
-     "coef": 0.04777958613232989
+     "per_unit": 0.0498
     },
     {
      "name": "EnglishShare",
-     "mean": 3.723809523809524,
-     "sd": 1.245909406591469,
-     "coef": 1.130011442391526
+     "per_unit": 0.907
     },
     {
      "name": "AI_Content",
-     "mean": 3.780952380952381,
-     "sd": 0.9559931498155889,
-     "coef": 0.5652663596255071
+     "per_unit": 0.5913
     },
     {
      "name": "AI_ContentLang",
-     "mean": 3.3904761904761904,
-     "sd": 1.0910478850757857,
-     "coef": 0.48402987489677596
+     "per_unit": 0.4436
     }
    ],
    "tests": [
@@ -1060,7 +1020,8 @@
       "AI_Content": 5,
       "AI_ContentLang": 5
      },
-     "score": 0.7191902897886499
+     "score": 0.7191865072289286,
+     "sklearn_score": 0.7191902897886499
     },
     {
      "answers": {
@@ -1081,7 +1042,8 @@
       "AI_Content": 1,
       "AI_ContentLang": 1
      },
-     "score": 7.409231391753362e-05
+     "score": 7.409636374681564e-05,
+     "sklearn_score": 7.409231391753362e-05
     },
     {
      "answers": {
@@ -1089,7 +1051,9 @@
       "Education": 2,
       "Field": 2,
       "Eng_Prof": 4,
-      "Events": [],
+      "Events": [
+       6
+      ],
       "AI_Start": 3,
       "AI_Freq": 3,
       "AI_TaskShare": 3,
@@ -1103,7 +1067,8 @@
       "AI_Content": 3,
       "AI_ContentLang": 3
      },
-     "score": 0.2263559594263482
+     "score": 0.22636175066224568,
+     "sklearn_score": 0.2263559594263482
     },
     {
      "answers": {
@@ -1126,7 +1091,8 @@
       "AI_Content": 4,
       "AI_ContentLang": 2
      },
-     "score": 0.004389456546673725
+     "score": 0.004389809385969725,
+     "sklearn_score": 0.004389456546673725
     },
     {
      "answers": {
@@ -1152,7 +1118,8 @@
       "AI_Content": 2,
       "AI_ContentLang": 4
      },
-     "score": 0.0034916252340617513
+     "score": 0.003491347700600294,
+     "sklearn_score": 0.0034916252340617513
     }
    ]
   }

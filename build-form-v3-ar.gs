@@ -90,9 +90,9 @@ var DATA = [
     "help_ar": "",
     "opts_en": [
      "A student",
-     "Employed",
+     "An employee",
      "Both",
-     "Neither"
+     "Other"
     ],
     "opts_ar": [
      "طالب",
@@ -618,7 +618,7 @@ var DATA = [
      },
      {
       "code": "ArUse_Personal",
-      "en": "Using Arabic for personal matters",
+      "en": "Using Arabic when talking about my personal matters",
       "ar": "استخدام العربية في الحديث عن أموري الشخصية"
      },
      {
@@ -721,7 +721,7 @@ var DATA = [
     "rows": [
      {
       "code": "Abil_Lexical",
-      "en": "Finding the everyday Arabic word I need",
+      "en": "Recalling the everyday Arabic word I need",
       "ar": "تذكّر الكلمة العربية اليومية التي أحتاجها"
      },
      {

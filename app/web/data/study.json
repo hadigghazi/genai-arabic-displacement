@@ -11,7 +11,6 @@
   "moved_since_2022": 10,
   "grew_up_lebanon": 101,
   "live_lebanon": 96,
-  "lebanon_either": 104,
   "items": [
    {
     "code": "Age",
@@ -84,7 +83,7 @@
       "n": 44
      },
      {
-      "label": "Employed",
+      "label": "An employee",
       "n": 25
      },
      {
@@ -92,7 +91,7 @@
       "n": 20
      },
      {
-      "label": "Neither",
+      "label": "Other",
       "n": 16
      }
     ]
@@ -1225,6 +1224,88 @@
     }
    },
    {
+    "label": "Adding field and AI tenure",
+    "n": 104,
+    "joint": {
+     "F": 6.4652941708695195,
+     "df": [
+      3,
+      96
+     ],
+     "p": 0.0004938281717953464
+    },
+    "H3a": {
+     "b": 0.00639442667711706,
+     "ci": [
+      -0.1303941930656589,
+      0.14318304641989302
+     ],
+     "p": 0.9262624868264623,
+     "p_holm": 0.9262624868264623
+    },
+    "H3b": {
+     "b": 0.1765848029204634,
+     "ci": [
+      0.08478873174661017,
+      0.26838087409431666
+     ],
+     "p": 0.00023801732347050706,
+     "p_holm": 0.0009520692938820282
+    },
+    "H3c": {
+     "b": 0.05884737736296964,
+     "ci": [
+      -0.06995007030237294,
+      0.1876448250283122
+     ],
+     "p": 0.3667111956124537,
+     "p_holm": 0.7334223912249074
+    },
+    "H4": {
+     "b": 0.37219472339579734,
+     "ci": [
+      0.00929683002218551,
+      0.7350926167694092
+     ],
+     "p": 0.044519869310670014,
+     "p_holm": 0.13355960793201005
+    },
+    "covariates": {
+     "Age25": {
+      "b": -0.30765510501597226,
+      "ci": [
+       -0.49901962922654414,
+       -0.11629058080540039
+      ],
+      "p": 0.0019148809603175816
+     },
+     "EventMove": {
+      "b": 0.050607384664523775,
+      "ci": [
+       -0.1824729486925557,
+       0.28368771802160325
+      ],
+      "p": 0.6674431745544565
+     },
+     "Computing": {
+      "b": -0.05528402788203672,
+      "ci": [
+       -0.27562158936399334,
+       0.16505353359991987
+      ],
+      "p": 0.6195916654988949
+     },
+     "AI_TenureRank": {
+      "b": -0.004910213128832871,
+      "ci": [
+       -0.0935907913409395,
+       0.08377036508327376
+      ],
+      "p": 0.9127118487767796
+     }
+    }
+   },
+   {
     "label": "Adding social-media attribution",
     "n": 104,
     "joint": {
@@ -1501,12 +1582,12 @@
    "H3b": 0.0012,
    "H4": 0.2298
   },
-  "firth_english_p": 0.0039,
+  "firth_english_p": 0.0247,
   "h4_spearman": 0.47,
   "h4_influence": {
    "cooks_d": 0.8,
    "loo_max_p": 0.0997,
-   "loo_above_holm": 103
+   "loo_below_holm": 1
   },
   "h5": {
    "primary": {
@@ -1518,8 +1599,8 @@
     "c_total": -0.031,
     "indirect": 0.0426,
     "ci": [
-     0.0001,
-     0.1097
+     -0.0001,
+     0.1081
     ]
    },
    "core": {
@@ -1531,8 +1612,8 @@
     "c_total": -0.039,
     "indirect": 0.0691,
     "ci": [
-     0.0078,
-     0.1435
+     0.0079,
+     0.1423
     ]
    }
   },
@@ -1581,7 +1662,7 @@
   "english_share_vs_proficiency_rho": 0.5654112040681138,
   "age25": {
    "n": 23,
-   "no_change": 15,
+   "no_decrease": 15,
    "disp_mean": 0.043478260869565216,
    "disp_mean_under25": 0.3341416813639036
   },
@@ -1774,6 +1855,10 @@
      }
     },
     "n_yes": 55,
+    "auc_ci": [
+     0.6564083821999869,
+     0.8425916178000132
+    ],
     "delta_ai": {
      "d": 0.018,
      "ci": [
@@ -1851,6 +1936,10 @@
      }
     },
     "n_yes": 52,
+    "auc_ci": [
+     0.6397049804374001,
+     0.8314950195626
+    ],
     "delta_ai": {
      "d": 0.002,
      "ci": [
@@ -1928,6 +2017,10 @@
      }
     },
     "n_yes": 42,
+    "auc_ci": [
+     0.5917179019064368,
+     0.8018820980935631
+    ],
     "delta_ai": {
      "d": -0.012,
      "ci": [
@@ -2005,6 +2098,10 @@
      }
     },
     "n_yes": 28,
+    "auc_ci": [
+     0.6185421713219139,
+     0.8508578286780861
+    ],
     "delta_ai": {
      "d": 0.057,
      "ci": [
@@ -2082,6 +2179,10 @@
      }
     },
     "n_yes": 19,
+    "auc_ci": [
+     0.5515240356501722,
+     0.8346759643498279
+    ],
     "delta_ai": {
      "d": 0.022,
      "ci": [
@@ -2159,6 +2260,10 @@
      }
     },
     "n_yes": 14,
+    "auc_ci": [
+     0.52502529609437,
+     0.85017470390563
+    ],
     "delta_ai": {
      "d": 0.156,
      "ci": [
@@ -2236,6 +2341,10 @@
      }
     },
     "n_yes": 29,
+    "auc_ci": [
+     0.5559733742243271,
+     0.7986266257756729
+    ],
     "delta_ai": {
      "d": 0.035,
      "ci": [
@@ -2313,6 +2422,10 @@
      }
     },
     "n_yes": 9,
+    "auc_ci": [
+     0.303163300325878,
+     0.7012366996741219
+    ],
     "delta_ai": {
      "d": -0.096,
      "ci": [
@@ -2390,6 +2503,10 @@
      }
     },
     "n_yes": 37,
+    "auc_ci": [
+     0.44042583612971,
+     0.6739741638702901
+    ],
     "delta_ai": {
      "d": 0.004,
      "ci": [
@@ -2465,6 +2582,10 @@
      }
     },
     "n_yes": 59,
+    "auc_ci": [
+     0.5073104359360037,
+     0.7216895640639964
+    ],
     "delta_ai": {
      "d": 0.055,
      "ci": [
@@ -2577,7 +2698,7 @@
    },
    {
     "id": "AnyDifficulty",
-    "label": "Any difficulty without AI",
+    "label": "Net difficulty without AI",
     "kind": "clf",
     "metric": "AUC",
     "n": 105,
@@ -2615,6 +2736,10 @@
      }
     },
     "n_yes": 34,
+    "auc_ci": [
+     0.48567252231954183,
+     0.7221274776804582
+    ],
     "delta_ai": {
      "d": -0.057,
      "ci": [
@@ -2985,7 +3110,7 @@
    ]
   },
   {
-   "target": "Any difficulty without AI",
+   "target": "Net difficulty without AI",
    "n": 105,
    "yes": 34,
    "rows": [
@@ -3074,6 +3199,32 @@
  "questionnaire": [
   {
    "title": {
+    "en": "About this survey",
+    "ar": "عن هذا الاستبيان"
+   },
+   "items": [
+    {
+     "type": "gate",
+     "q": {
+      "en": "I am 18 or older and I agree to take part.",
+      "ar": "عمري 18 عاماً أو أكثر، وأوافق على المشاركة."
+     },
+     "note": null,
+     "options": [
+      {
+       "en": "I agree",
+       "ar": "أوافق"
+      },
+      {
+       "en": "I do not agree",
+       "ar": "لا أوافق"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "title": {
     "en": "Who can take part",
     "ar": "من يمكنه المشاركة"
    },
@@ -3117,7 +3268,7 @@
        "ar": "طالب"
       },
       {
-       "en": "Employed",
+       "en": "An employee",
        "ar": "موظف"
       },
       {
@@ -3125,7 +3276,7 @@
        "ar": "طالب وموظف"
       },
       {
-       "en": "Neither",
+       "en": "Other",
        "ar": "غير ذلك"
       }
      ]
@@ -3720,7 +3871,7 @@
        "ar": "استخدام العربية عندما أحدّث نفسي أو أكتب ملاحظاتي الخاصة"
       },
       {
-       "en": "Using Arabic for personal matters",
+       "en": "Using Arabic when talking about my personal matters",
        "ar": "استخدام العربية في الحديث عن أموري الشخصية"
       },
       {
@@ -3839,7 +3990,7 @@
      },
      "rows": [
       {
-       "en": "Finding the everyday Arabic word I need",
+       "en": "Recalling the everyday Arabic word I need",
        "ar": "تذكّر الكلمة العربية اليومية التي أحتاجها"
       },
       {
@@ -4407,12 +4558,52 @@
    "title": "Arabizi in Saudi Arabia: A deviant form of language or simply a form of expression?",
    "venue": "Social Sciences",
    "url": "https://doi.org/10.3390/socsci7090155"
+  },
+  "esseili2017": {
+   "short": "Esseili",
+   "authors": "F. Esseili",
+   "year": "2017",
+   "title": "A sociolinguistic profile of English in Lebanon",
+   "venue": "World Englishes",
+   "url": "https://doi.org/10.1111/weng.12262"
+  },
+  "podsakoff2003": {
+   "short": "Podsakoff et al.",
+   "authors": "P. M. Podsakoff, S. B. MacKenzie, J. Y. Lee, N. P. Podsakoff",
+   "year": "2003",
+   "title": "Common method biases in behavioral research: A critical review of the literature and recommended remedies",
+   "venue": "Journal of Applied Psychology",
+   "url": "https://doi.org/10.1037/0021-9010.88.5.879"
+  },
+  "bianchi2012": {
+   "short": "Bianchi",
+   "authors": "R. M. Bianchi",
+   "year": "2012",
+   "title": "3arabizi – When local Arabic meets global English",
+   "venue": "Acta Linguistica Asiatica",
+   "url": "https://doi.org/10.4312/ala.2.1.89-100"
+  },
+  "ahuja2023": {
+   "short": "Ahuja et al.",
+   "authors": "K. Ahuja, H. Diddee, R. Hada, M. Ochieng, K. Ramesh, P. Jain et al.",
+   "year": "2023",
+   "title": "MEGA: Multilingual evaluation of generative AI",
+   "venue": "Proc. 2023 Conf. Empirical Methods Natural Lang. Process. (EMNLP)",
+   "url": "https://doi.org/10.18653/v1/2023.emnlp-main.258"
+  },
+  "hanley1982": {
+   "short": "Hanley and McNeil",
+   "authors": "J. A. Hanley, B. J. McNeil",
+   "year": "1982",
+   "title": "The meaning and use of the area under a receiver operating characteristic (ROC) curve",
+   "venue": "Radiology",
+   "url": "https://doi.org/10.1148/radiology.143.1.7063747"
   }
  },
  "spss": {
   "n": 105,
-  "agree": 34,
-  "total": 34,
+  "agree": 104,
+  "total": 104,
   "checks": [
    {
     "group": "Reliability",
@@ -4440,9 +4631,9 @@
    },
    {
     "group": "Direction and order",
-    "label": "Wilcoxon z, H1a Fusha",
-    "spss": -3.0571428571429,
-    "python": -3.057142857142857
+    "label": "Wilcoxon |z|, H1a Fusha",
+    "spss": 3.0571428571429,
+    "python": 3.057142857142857
    },
    {
     "group": "Direction and order",
@@ -4452,9 +4643,21 @@
    },
    {
     "group": "Direction and order",
-    "label": "Wilcoxon z, H1b work or study",
-    "spss": -5.9962543901423,
-    "python": -5.996254390142256
+    "label": "decreases (negative ranks), H1a Fusha",
+    "spss": 29.0,
+    "python": 29.0
+   },
+   {
+    "group": "Direction and order",
+    "label": "increases (positive ranks), H1a Fusha",
+    "spss": 11.0,
+    "python": 11.0
+   },
+   {
+    "group": "Direction and order",
+    "label": "Wilcoxon |z|, H1b work or study",
+    "spss": 5.9962543901423,
+    "python": 5.996254390142256
    },
    {
     "group": "Direction and order",
@@ -4464,9 +4667,21 @@
    },
    {
     "group": "Direction and order",
-    "label": "Wilcoxon z, H2a work or study vs family",
-    "spss": -5.585307612399,
-    "python": -5.585307612399002
+    "label": "decreases (negative ranks), H1b work or study",
+    "spss": 52.0,
+    "python": 52.0
+   },
+   {
+    "group": "Direction and order",
+    "label": "increases (positive ranks), H1b work or study",
+    "spss": 3.0,
+    "python": 3.0
+   },
+   {
+    "group": "Direction and order",
+    "label": "Wilcoxon |z|, H2a work or study vs family",
+    "spss": 5.585307612399,
+    "python": 5.585307612399002
    },
    {
     "group": "Direction and order",
@@ -4476,9 +4691,69 @@
    },
    {
     "group": "Direction and order",
-    "label": "Wilcoxon z, H2b Fusha vs dialect",
-    "spss": -1.2149401393805,
-    "python": -1.2149401393804558
+    "label": "decreases (negative ranks), H2a work or study vs family",
+    "spss": 47.0,
+    "python": 47.0
+   },
+   {
+    "group": "Direction and order",
+    "label": "increases (positive ranks), H2a work or study vs family",
+    "spss": 3.0,
+    "python": 3.0
+   },
+   {
+    "group": "Direction and order",
+    "label": "Wilcoxon |z|, H2a work or study vs personal matters",
+    "spss": 5.2122645619111,
+    "python": 5.212264561911074
+   },
+   {
+    "group": "Direction and order",
+    "label": "Wilcoxon p, H2a work or study vs personal matters",
+    "spss": 1.865492467819e-07,
+    "python": 1.8654924678190427e-07
+   },
+   {
+    "group": "Direction and order",
+    "label": "decreases (negative ranks), H2a work or study vs personal matters",
+    "spss": 44.0,
+    "python": 44.0
+   },
+   {
+    "group": "Direction and order",
+    "label": "increases (positive ranks), H2a work or study vs personal matters",
+    "spss": 7.0,
+    "python": 7.0
+   },
+   {
+    "group": "Direction and order",
+    "label": "Wilcoxon |z|, H2a personal matters vs family",
+    "spss": 0.8247423082867,
+    "python": 0.8247423082867014
+   },
+   {
+    "group": "Direction and order",
+    "label": "Wilcoxon p, H2a personal matters vs family",
+    "spss": 0.40951790636243,
+    "python": 0.40951790636242513
+   },
+   {
+    "group": "Direction and order",
+    "label": "decreases (negative ranks), H2a personal matters vs family",
+    "spss": 11.0,
+    "python": 11.0
+   },
+   {
+    "group": "Direction and order",
+    "label": "increases (positive ranks), H2a personal matters vs family",
+    "spss": 6.0,
+    "python": 6.0
+   },
+   {
+    "group": "Direction and order",
+    "label": "Wilcoxon |z|, H2b Fusha vs dialect",
+    "spss": 1.2149401393805,
+    "python": 1.2149401393804558
    },
    {
     "group": "Direction and order",
@@ -4488,15 +4763,165 @@
    },
    {
     "group": "Direction and order",
-    "label": "Sign test p, H1a Fusha",
+    "label": "decreases (negative ranks), H2b Fusha vs dialect",
+    "spss": 23.0,
+    "python": 23.0
+   },
+   {
+    "group": "Direction and order",
+    "label": "increases (positive ranks), H2b Fusha vs dialect",
+    "spss": 20.0,
+    "python": 20.0
+   },
+   {
+    "group": "Social media",
+    "label": "Wilcoxon |z|, social media vs AI, all areas",
+    "spss": 3.8974829438286,
+    "python": 3.897482943828589
+   },
+   {
+    "group": "Social media",
+    "label": "Wilcoxon p, social media vs AI, all areas",
+    "spss": 9.7197665557345e-05,
+    "python": 9.719766555734517e-05
+   },
+   {
+    "group": "Social media",
+    "label": "decreases (negative ranks), social media vs AI, all areas",
+    "spss": 53.0,
+    "python": 53.0
+   },
+   {
+    "group": "Social media",
+    "label": "increases (positive ranks), social media vs AI, all areas",
+    "spss": 25.0,
+    "python": 25.0
+   },
+   {
+    "group": "Social media",
+    "label": "Wilcoxon |z|, social media vs AI, formal areas",
+    "spss": 0.943288773508,
+    "python": 0.943288773507997
+   },
+   {
+    "group": "Social media",
+    "label": "Wilcoxon p, social media vs AI, formal areas",
+    "spss": 0.34553321659034,
+    "python": 0.345533216590343
+   },
+   {
+    "group": "Social media",
+    "label": "decreases (negative ranks), social media vs AI, formal areas",
+    "spss": 34.0,
+    "python": 34.0
+   },
+   {
+    "group": "Social media",
+    "label": "increases (positive ranks), social media vs AI, formal areas",
+    "spss": 26.0,
+    "python": 26.0
+   },
+   {
+    "group": "Group comparisons",
+    "label": "Wilcoxon |z|, work or study, unchanged setting",
+    "spss": 1.7482935149525,
+    "python": 1.7482935149524956
+   },
+   {
+    "group": "Group comparisons",
+    "label": "Wilcoxon p, work or study, unchanged setting",
+    "spss": 0.080413215614428,
+    "python": 0.08041321561442799
+   },
+   {
+    "group": "Group comparisons",
+    "label": "decreases (negative ranks), work or study, unchanged setting",
+    "spss": 8.0,
+    "python": 8.0
+   },
+   {
+    "group": "Group comparisons",
+    "label": "increases (positive ranks), work or study, unchanged setting",
+    "spss": 1.0,
+    "python": 1.0
+   },
+   {
+    "group": "Core sample",
+    "label": "Wilcoxon |z|, H2a work or study vs family",
+    "spss": 5.5695939526346,
+    "python": 5.569593952634572
+   },
+   {
+    "group": "Core sample",
+    "label": "Wilcoxon p, H2a work or study vs family",
+    "spss": 2.5533367756331e-08,
+    "python": 2.5533367756330508e-08
+   },
+   {
+    "group": "Core sample",
+    "label": "decreases (negative ranks), H2a work or study vs family",
+    "spss": 39.0,
+    "python": 39.0
+   },
+   {
+    "group": "Core sample",
+    "label": "increases (positive ranks), H2a work or study vs family",
+    "spss": 1.0,
+    "python": 1.0
+   },
+   {
+    "group": "Core sample",
+    "label": "Wilcoxon |z|, H2b Fusha vs dialect",
+    "spss": 1.2613256096841,
+    "python": 1.2613256096841117
+   },
+   {
+    "group": "Core sample",
+    "label": "Wilcoxon p, H2b Fusha vs dialect",
+    "spss": 0.20719155800287,
+    "python": 0.20719155800287437
+   },
+   {
+    "group": "Core sample",
+    "label": "decreases (negative ranks), H2b Fusha vs dialect",
+    "spss": 20.0,
+    "python": 20.0
+   },
+   {
+    "group": "Core sample",
+    "label": "increases (positive ranks), H2b Fusha vs dialect",
+    "spss": 17.0,
+    "python": 17.0
+   },
+   {
+    "group": "Direction and order",
+    "label": "sign test p, switching, more vs less",
+    "spss": 0.012602024939936,
+    "python": 0.012602024939936302
+   },
+   {
+    "group": "Direction and order",
+    "label": "sign test p, H1a Fusha",
     "spss": 0.0071895172501651,
     "python": 0.007189517250165056
    },
    {
     "group": "Direction and order",
-    "label": "Sign test p, H1b work or study",
+    "label": "sign test p, H1b work or study",
     "spss": 9.6510301879661e-11,
     "python": 9.651030187966072e-11
+   },
+   {
+    "group": "Group comparisons",
+    "label": "sign test p, work or study, unchanged setting",
+    "spss": 0.0390625,
+    "python": 0.0390625
+   },
+   {
+    "group": "Group comparisons",
+    "label": "sign test p, work or study, unchanged setting and no English-medium start",
+    "spss": 0.0703125,
+    "python": 0.0703125
    },
    {
     "group": "Direction and order",
@@ -4505,8 +4930,38 @@
     "python": 57.06285714285719
    },
    {
+    "group": "Direction and order",
+    "label": "Kendall’s W, H2a order",
+    "spss": 0.27971988795518,
+    "python": 0.2797198879551823
+   },
+   {
+    "group": "Core sample",
+    "label": "Friedman χ², H2a order",
+    "spss": 49.971631205674,
+    "python": 49.97163120567364
+   },
+   {
+    "group": "Core sample",
+    "label": "Kendall’s W, H2a order",
+    "spss": 0.29053273956787,
+    "python": 0.29053273956787
+   },
+   {
+    "group": "Social media",
+    "label": "Mann–Whitney p, AI decrease, with vs without a social-media decrease",
+    "spss": 4.9313334048335e-08,
+    "python": 4.931333404833465e-08
+   },
+   {
     "group": "Group comparisons",
-    "label": "Mann–Whitney p, unchanged vs changed setting",
+    "label": "Mann–Whitney p, work or study, started university vs not",
+    "spss": 0.00036515852237388,
+    "python": 0.0003651585223738815
+   },
+   {
+    "group": "Group comparisons",
+    "label": "Mann–Whitney p, work or study, unchanged vs changed setting",
     "spss": 0.022277305296155,
     "python": 0.022277305296154643
    },
@@ -4518,103 +4973,259 @@
    },
    {
     "group": "Regression",
-    "label": "English share → decrease (H3)",
-    "spss": 0.16919785297618,
-    "python": 0.16919785297618417
-   },
-   {
-    "group": "Regression",
-    "label": "AI-use intensity → decrease (H3)",
+    "label": "b, intensity → decrease (H3)",
     "spss": -0.0034017130322269,
-    "python": -0.003401713032225983
+    "python": -0.003401713032226014
    },
    {
     "group": "Regression",
-    "label": "Decrease → difficulty (H4)",
+    "label": "classical SE, intensity (H3)",
+    "spss": 0.064762723026484,
+    "python": 0.06476272302648349
+   },
+   {
+    "group": "Regression",
+    "label": "b, English share → decrease (H3)",
+    "spss": 0.16919785297618,
+    "python": 0.16919785297618412
+   },
+   {
+    "group": "Regression",
+    "label": "classical SE, English share (H3)",
+    "spss": 0.039450757012618,
+    "python": 0.03945075701261836
+   },
+   {
+    "group": "Regression",
+    "label": "b, quality gap → decrease (H3)",
+    "spss": 0.05764602748992,
+    "python": 0.05764602748992161
+   },
+   {
+    "group": "Regression",
+    "label": "classical SE, quality gap (H3)",
+    "spss": 0.073234822565801,
+    "python": 0.0732348225658005
+   },
+   {
+    "group": "Regression",
+    "label": "b, decrease → difficulty (H4)",
     "spss": 0.36502471428799,
     "python": 0.36502471428799244
    },
    {
     "group": "Regression",
-    "label": "English share, social media controlled",
+    "label": "classical SE, decrease (H4)",
+    "spss": 0.090681016893145,
+    "python": 0.09068101689314549
+   },
+   {
+    "group": "Regression",
+    "label": "b, intensity → decrease (intensity alone)",
+    "spss": 0.11090326311171,
+    "python": 0.11090326311170662
+   },
+   {
+    "group": "Regression",
+    "label": "b, quality gap → decrease (quality gap alone)",
+    "spss": 0.15645724315171,
+    "python": 0.15645724315170623
+   },
+   {
+    "group": "Regression",
+    "label": "b, English share → decrease (social media controlled)",
     "spss": 0.1178845945006,
     "python": 0.11788459450059774
    },
    {
     "group": "Regression",
-    "label": "Unchanged setting → work/study change, age controlled",
+    "label": "b, decrease → difficulty (social media controlled)",
+    "spss": 0.33703610686953,
+    "python": 0.3370361068695339
+   },
+   {
+    "group": "Regression",
+    "label": "b, unchanged setting → d_WorkStudy (age controlled)",
     "spss": 0.35030682452117,
     "python": 0.35030682452116774
    },
    {
     "group": "Regression",
-    "label": "English share, no covariates",
-    "spss": 0.16171461104994,
-    "python": 0.16171461104994062
+    "label": "b, English share → decrease (life transitions controlled)",
+    "spss": 0.16265630665541,
+    "python": 0.16265630665540579
    },
    {
     "group": "Regression",
-    "label": "Decrease → difficulty, no covariates",
-    "spss": 0.37606718625131,
-    "python": 0.37606718625131547
+    "label": "b, decrease → difficulty (life transitions controlled)",
+    "spss": 0.37988181148953,
+    "python": 0.3798818114895306
    },
    {
     "group": "Regression",
-    "label": "English share, four-area score",
-    "spss": 0.17846858710117,
-    "python": 0.17846858710116498
-   },
-   {
-    "group": "Regression",
-    "label": "Decrease → difficulty, four-area score",
-    "spss": 0.34392541060058,
-    "python": 0.3439254106005786
-   },
-   {
-    "group": "Regression",
-    "label": "English share, core sample",
-    "spss": 0.16506619090446,
-    "python": 0.16506619090445535
-   },
-   {
-    "group": "Regression",
-    "label": "Decrease → difficulty, core sample",
-    "spss": 0.53215915431489,
-    "python": 0.5321591543148876
-   },
-   {
-    "group": "Regression",
-    "label": "English share, without straight-line responders",
+    "label": "b, English share → decrease (without straight-liners)",
     "spss": 0.15148998738697,
     "python": 0.15148998738697
    },
    {
     "group": "Regression",
-    "label": "Decrease → difficulty, without straight-line responders",
+    "label": "b, decrease → difficulty (without straight-liners)",
     "spss": 0.34890626234212,
     "python": 0.3489062623421194
    },
    {
-    "group": "Means",
-    "label": "Mean change, work or study",
+    "group": "Regression",
+    "label": "b, English share → decrease (without the most influential case)",
+    "spss": 0.15128850425046,
+    "python": 0.1512885042504583
+   },
+   {
+    "group": "Regression",
+    "label": "b, decrease → difficulty (without the most influential case)",
+    "spss": 0.51778960173838,
+    "python": 0.5177896017383816
+   },
+   {
+    "group": "Regression",
+    "label": "b, English share → decrease (no covariates)",
+    "spss": 0.16171461104994,
+    "python": 0.16171461104994062
+   },
+   {
+    "group": "Regression",
+    "label": "b, decrease → difficulty (no covariates)",
+    "spss": 0.37606718625131,
+    "python": 0.37606718625131547
+   },
+   {
+    "group": "Regression",
+    "label": "b, English share → decrease (age only)",
+    "spss": 0.16964269844287,
+    "python": 0.16964269844287178
+   },
+   {
+    "group": "Regression",
+    "label": "b, decrease → difficulty (age only)",
+    "spss": 0.36986522015614,
+    "python": 0.36986522015613943
+   },
+   {
+    "group": "Regression",
+    "label": "b, English share → decrease (English proficiency added)",
+    "spss": 0.15164307803479,
+    "python": 0.15164307803478883
+   },
+   {
+    "group": "Regression",
+    "label": "b, decrease → difficulty (English proficiency added)",
+    "spss": 0.31579394374056,
+    "python": 0.3157939437405609
+   },
+   {
+    "group": "Regression",
+    "label": "b, English share → decrease (field and AI tenure added)",
+    "spss": 0.17658480292046,
+    "python": 0.1765848029204634
+   },
+   {
+    "group": "Regression",
+    "label": "b, decrease → difficulty (field and AI tenure added)",
+    "spss": 0.3721947233958,
+    "python": 0.37219472339579734
+   },
+   {
+    "group": "Regression",
+    "label": "b, English share → decrease (four areas) (four-area score)",
+    "spss": 0.17846858710117,
+    "python": 0.17846858710116498
+   },
+   {
+    "group": "Regression",
+    "label": "b, decrease (four areas) → difficulty (four-area score)",
+    "spss": 0.34392541060058,
+    "python": 0.3439254106005786
+   },
+   {
+    "group": "Regression",
+    "label": "b, English share → decrease (dialect areas) (dialect areas only)",
+    "spss": 0.16850746733353,
+    "python": 0.16850746733352864
+   },
+   {
+    "group": "Regression",
+    "label": "b, decrease (dialect areas) → difficulty (dialect areas only)",
+    "spss": 0.40658866619841,
+    "python": 0.4065886661984076
+   },
+   {
+    "group": "Regression",
+    "label": "b, English share → decrease (core sample)",
+    "spss": 0.16506619090446,
+    "python": 0.16506619090445535
+   },
+   {
+    "group": "Regression",
+    "label": "b, decrease → difficulty (core sample)",
+    "spss": 0.53215915431489,
+    "python": 0.5321591543148876
+   },
+   {
+    "group": "Correlations",
+    "label": "Spearman ρ, decrease and difficulty (H4)",
+    "spss": 0.47359782119277,
+    "python": 0.4735978211927661
+   },
+   {
+    "group": "Correlations",
+    "label": "Spearman ρ, English share and English proficiency",
+    "spss": 0.56541120406811,
+    "python": 0.5654112040681138
+   },
+   {
+    "group": "Social media",
+    "label": "Spearman ρ, AI decrease and social-media decrease",
+    "spss": 0.54571617252351,
+    "python": 0.54571617252351
+   },
+   {
+    "group": "Correlations",
+    "label": "Spearman ρ, decrease and change in switching",
+    "spss": -0.2226073548923,
+    "python": -0.2226073548923049
+   },
+   {
+    "group": "Correlations",
+    "label": "Spearman ρ, harder Fusha writing and decrease (E3)",
+    "spss": 0.46372904227784,
+    "python": 0.46372904227783807
+   },
+   {
+    "group": "Regression",
+    "label": "largest Cook’s distance in H4",
+    "spss": 0.79543970801632,
+    "python": 0.7954397080163242
+   },
+   {
+    "group": "Descriptives",
+    "label": "mean change, work or study",
     "spss": -0.625,
     "python": -0.625
    },
    {
-    "group": "Means",
-    "label": "Mean change, Fusha",
+    "group": "Descriptives",
+    "label": "mean change, Fusha",
     "spss": -0.25,
     "python": -0.25
    },
    {
-    "group": "Means",
-    "label": "Mean change, religious texts",
+    "group": "Descriptives",
+    "label": "mean change, religious texts",
     "spss": 0.05050505050505,
     "python": 0.050505050505050504
    },
    {
-    "group": "Means",
-    "label": "Mean change, family and friends",
+    "group": "Descriptives",
+    "label": "mean change, family and friends",
     "spss": -0.125,
     "python": -0.125
    }
@@ -4643,7 +5254,7 @@
    },
    {
     "code": "Personal",
-    "en": "Using Arabic for personal matters",
+    "en": "Using Arabic when talking about my personal matters",
     "ar": "استخدام العربية في الحديث عن أموري الشخصية"
    },
    {

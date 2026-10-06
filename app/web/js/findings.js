@@ -16,8 +16,8 @@ export function where(main, S) {
   const h1 = card({ title: "Decreases against increases", sub: "Among respondents who reported a change." });
   const dist = card({ title: "Areas with a decrease, per person", sub: `${r.domains_lost[0]} respondents reported none.` });
   main.append(
-    chapterHead("where", `About two thirds of respondents (${r.any_decrease} of ${S.sample.n}) said AI has reduced their Arabic in at least one area. `
-      + "The decrease sits where theory expects it."),
+    chapterHead("where", `About two thirds of respondents (${r.any_decrease} of ${S.sample.n}) said AI has reduced their use of Arabic in at least one area. `
+      + "Work or study comes first, as theory expects."),
     kpis([
       { n: `${pct(ws.less)} vs ${pct(ws.more)}`, l: "less vs more Arabic in work or study" },
       { n: pct(dom("Writing").less), l: "write messages and posts in Arabic less often" },
@@ -28,10 +28,10 @@ export function where(main, S) {
       takeaway("Work and study, writing and following content shift first; family and religion barely move.")),
     sec("Formal first",
       prose(`Respondents reported less Fusha than more (${A.H1a.less} against ${A.H1a.more}) and far more often less than more Arabic in work or study (${A.H1b.less} against ${A.H1b.more}). `
-        + "The size of the decrease falls from work or study to personal matters to family, the order domain theory predicts."),
+        + "The decrease is largest in work or study, as domain theory predicts; personal matters and family barely differ (Wilcoxon p 0.41)."),
       grid(order, h1),
-      prose(`One prediction did not hold: the decrease is no larger for Fusha than for the dialect (difference ${sg(A.H2b.mean_diff)}, p ${pe(A.H2b.p_holm)}). `
-        + "The change follows tasks, the things people now do with AI, more than it follows the two varieties of Arabic.")),
+      prose(`One prediction did not hold: the decrease is not significantly larger for Fusha than for the dialect (difference ${sg(A.H2b.mean_diff)}, p ${pe(A.H2b.p_holm)}). `
+        + "Religious texts, also in Fusha, show no net decrease, while writing messages, usually in the dialect, shows the second largest: the change does not follow the two varieties of Arabic.")),
     sec("How widespread",
       grid(dist, card({ title: "Doing it in English instead", sub: "“Has it happened that you did something in English, although you could have done it in Arabic, because AI helps you better in English?”" },
         h("div", { class: "bignum" }, pct(sub.k / sub.n)),
@@ -85,23 +85,23 @@ export function language(main, S) {
     chapterHead("language", "Three measures of AI use were tested against the decrease. One of them matters: the language people write to AI in."),
     kpis([
       { n: `b = ${f(B.H3b.b)}`, l: `writing to AI in English, 95% CI ${ci(B.H3b.ci[0], B.H3b.ci[1])}, Holm p ${fp(B.H3b.p_holm)}` },
-      { n: `b = ${f(B.H3a.b, 3)}`, l: `how much AI is used: no relation (p ${pe(B.H3a.p)})` },
-      { n: `b = ${f(B.H3c.b)}`, l: `the quality gap people perceive: no relation (p ${pe(B.H3c.p)})` },
-      { n: "10 of 10", l: "ways of checking in which the English effect holds" },
+      { n: `b = ${f(B.H3a.b, 3)}`, l: `how much AI is used: nothing beyond the English share (p ${pe(B.H3a.p)})` },
+      { n: `b = ${f(B.H3c.b)}`, l: `the quality gap people perceive: nothing beyond the English share (p ${pe(B.H3c.p)})` },
+      { n: `${H.specs.filter((x) => x.H3b.p_holm < .05).length} of ${H.specs.length}`, l: "ways of checking in which the English effect holds" },
     ]),
-    sec("Not how much, but in which language", reg,
-      takeaway("The more often people write to AI in English, the more decrease they report. How much they use AI does not matter."),
-      prose(`The model holds age and a move to English-medium study or work constant. The ${H.age25.n} respondents aged 25 or over reported little change `
-        + `(${H.age25.no_change} reported none), which is why age carries a large estimate of its own.`)),
+    sec("Language more than amount", reg,
+      takeaway("The more often people write to AI in English, the more decrease they report. How much they use AI adds nothing once the language is taken into account."),
+      prose(`The model holds age and a move to English-medium study or work, or abroad, constant. The ${H.age25.n} respondents aged 25 or over reported little change `
+        + `(${H.age25.no_decrease} reported no decrease), which is why age carries a large estimate of its own.`)),
     sec("It holds every way we looked", rob,
       prose("Each row reruns the analysis with one choice made differently: another way of scoring the decrease, other covariates, without unusual respondents, "
         + `or in a narrower core sample. Writing to AI in English stays significant every time, even with English level held constant `
         + `(the two go together, ρ = ${f(H.english_share_vs_proficiency_rho)}) and with the blame people give social media held constant (Chapter 5).`)),
     sec("Is Arabic harder without AI?", grid(h4c, card({ title: "What respondents said", sub: "“Because of AI, has each of these become harder or easier for you, when you use Arabic on your own without AI?”" },
-      prose("Finding the everyday word, speaking one’s dialect fluently, and saying what one means fully in Arabic. "
+      prose("Recalling the everyday word, speaking one’s dialect fluently, and saying what one means fully in Arabic without English words. "
         + `Most respondents reported no change in difficulty; those who reported more decrease also tended to find Arabic harder (ρ = ${f(H.h4_spearman)}).`,
         `In the main analysis this falls just short of significance (p ${pe(B.H4.p)}). It is positive in every version and strong in the narrower sample; `
-        + "one respondent whose answers run against the trend holds it down. Whether the decrease is the route from AI use to difficulty (H5) is borderline.")))),
+        + "one respondent whose answers run against the trend weakens it, and an ordinal model shows a clear association. That the decrease is the route from AI use to difficulty (H5) is not supported: its interval reaches zero.")))),
     howWeKnow("Regression, robustness, mediation and reliability", h("div", null,
       h("div", { class: "prose" }, h("p", null, `Ordinary least squares with HC3 robust standard errors and t-based inference; the three AI-use measures were also tested jointly `
         + `(F(${B.joint.df.join(", ")}) = ${f(B.joint.F)}, p ${fp(B.joint.p)}). A wild bootstrap (9,999 resamples) confirmed the p-values `
@@ -138,12 +138,12 @@ export function wider(main, S) {
       { n: `${C.under25_transition} of ${C.under25_n}`, l: "respondents under 25 who started university, graduated, began a job or started studying or working in English" },
     ]),
     sec("Social media came first", grid(a, b),
-      takeaway("The same people feel both: social media moved everyday communication toward English, and AI carries the shift into work, study and writing."),
+      takeaway("The same people feel both: social media moved everyday communication away from Arabic, and AI carries the shift into work, study and writing."),
       prose(`Respondents who did not report a decrease from social media reported almost none from AI (${sg(C.non_blamers.mean)}), while those who did reported `
-        + `${sg(C.blamers.mean)}. Writing to AI in English still predicts the decrease with social media held constant, so AI adds something of its own.`)),
+        + `${sg(C.blamers.mean)}. Writing to AI in English still predicts the decrease with social media held constant, so the AI attribution has a pattern of its own.`)),
     sec("A time of change", grid(c, d),
       prose(`Those who started university reported larger work/study decreases than the rest (${f(u.mean)} against ${f(u.rest_mean)}, p ${pe(u.p)}). `
-        + `Yet among the ${st.n} whose study or work setting did not change, decreases still outnumbered increases (${st.less} against ${st.more}, p ${pe(st.sign_p)}): `
+        + `Yet among the ${st.n} who reported no new university, graduation or job, decreases still outnumbered increases (${st.less} against ${st.more}, p ${pe(st.sign_p)}; 7 against 1 without the three who started studying or working in English): `
         + "a new setting adds to the change, but the decrease appears without one too.")),
     howWeKnow("How these comparisons were made", prose(
       `AI against social media: paired Wilcoxon test (p ${pe(sm.p)}; for the formal areas p ${pe(sm.formal_p)}); Spearman correlation ρ = ${f(sm.rho)}. `

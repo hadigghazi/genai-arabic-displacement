@@ -1,8 +1,8 @@
 # Analysis decisions
 
 Decision log for the paper: every analysis choice, the alternatives considered, and where each alternative
-is reported. Checked by independent audits and a number-by-number SPSS–Python cross-check (34 of 34
-statistics agree; `crosscheck_spss.py`). Respondent ids are row numbers in the (unshared) data.
+is reported. Checked by independent audits and a number-by-number SPSS–Python cross-check (104 of 104
+statistics agree; `crosscheck_spss.py`).
 
 **How choices were made.** At each decision point the options were compared on construct validity,
 statistical power at this sample size, and how well the choice holds up with a reviewer — not on which
@@ -34,12 +34,12 @@ item and no relation between variables was looked at.
   2022; n = 55). It addresses the obvious objection: respondents living abroad may attribute to AI change that
   comes from migration.
 - **Disclosure.** This change was made after the first analysis of 40, which had shown that the core-vs-all
-  choice changes H4 (all 40: not supported, driven by one respondent). The paper states this.
+  choice changes H4 (all 40: not supported, driven by one respondent). This is recorded here; the paper does not describe the collection history.
 - **Everything else is fixed before running on 65**: hypotheses, scoring, covariates, test families and Holm
   correction, ML targets (including the minimum-class rule), feature blocks, models, validation, and the four
   usable-model criteria of the ML extension, which now apply in advance to every ML target. No design change
   will be made after seeing results on 65 except bug fixes, which will be logged here.
-- Collection was extended after a first analysis; the paper states this.
+- Collection was extended after a first analysis (recorded here; not described in the paper).
 
 **Final sample: 105 responses (decided 4 Oct 2026, before any result on the extended sample was reported).**
 Responses kept arriving after the commitment to stop at 65 (3 Oct, 18:07). By then the statistics and the SPSS
@@ -59,7 +59,7 @@ screening. Grew up in Lebanon 101 (Gulf 2, outside the Arab world 2); live in Le
 2, outside it 7); all but one grew up or live in Lebanon; moved since 2022: 10. Under 25: 82, 25-34: 20, 35-44: 3.
 Women 60, men 44. Master's or higher 55, bachelor 44, secondary 6. Computing 45, engineering 22, sciences/health 15.
 AI several times a day 79; always write to AI in English 37; began regular AI use in 2025: 9, in 2026: 2 (the
-six-month rule cannot be checked for these 2). Straight-liners: ids 13 and 29. The smallest correlation detectable
+six-month rule cannot be checked for these 2). Straight-liners: two. The smallest correlation detectable
 with 80% power is r = .27.
 
 | | Result (all 105) | Core sample (n = 89) | Holds under the alternatives? |
@@ -72,7 +72,7 @@ with 80% power is r = .27.
 | H3a intensity | b = -.003 [-.13, .12], p = .96 | p = .54 | Never significant |
 | H3b English share | b = .17 [.09, .25], p = .0001, Holm .0004; wild bootstrap Holm .0012; Firth p = .004 | Holm .0002 | **Yes, every specification**: Holm <= .042 (the largest with English proficiency controlled; .021 with social-media attribution) |
 | H3c quality gap | b = .06 [-.07, .19], p = .37 | p = .88 | Never significant |
-| H4 | Not supported: b = .37 [-.01, .74], p = .053, Holm .16; wild bootstrap Holm .23; Spearman rho = .47 | b = .53, Holm .0007; every leave-one-out p <= .002 | **Differs**: Holm-significant with the 4-domain (.028) or dialect-only score (.004), in the core sample, and without id 21 (Cook's d .80; b = .52, Holm .0001); not with no covariates (.11), age only (.15), English proficiency (.38), social-media attribution (.14) or without the straight-liners (.30). Leave-one-out: only removing id 21 brings p below .0125 |
+| H4 | Not supported: b = .37 [-.01, .74], p = .053, Holm .16; wild bootstrap Holm .23; Spearman rho = .47 | b = .53, Holm .0007; every leave-one-out p <= .002 | **Differs**: Holm-significant with the 4-domain (.028) or dialect-only score (.004), in the core sample, and without the most influential respondent (Cook's d .80; b = .52, Holm .0001); not with no covariates (.11), age only (.15), English proficiency (.38), social-media attribution (.14) or without the straight-liners (.30). Leave-one-out: only removing the most influential respondent brings p below the Holm threshold .0167 |
 | H5 | Borderline: a = .111 (p = .035), b = .384 (p = .055), c' = -.074, c = -.031; indirect .043, 95% CI [.0001, .110] | indirect .069 [.008, .144] | Fragile: with switching as a second mediator (E1) the indirect effect via displacement is [-.0009, .103] |
 | RQ4 (ML) | Three usable models (any formal loss, work/study, self-talk); the AI-use increment over background is not significant | see "Machine learning" | see "Machine learning" |
 
@@ -81,7 +81,7 @@ with 80% power is r = .27.
   Python (`results/spss_crosscheck.json`). The output holds group-level tables only: no open answers, crosstabs or case listings.
 - **Reliability.** Displacement alpha .87, omega .87 [.80, .91] (n = 97 complete cases); ability decline alpha .79,
   omega .81 [.67, .90]; quality gap alpha .69, omega .70 [.60, .79]. 63 of 105 score exactly 0 on ability decline.
-- **Age.** 23 respondents are 25 or over; 15 of them report no change in any domain (displacement mean .04 vs .33
+- **Age.** 23 respondents are 25 or over; 15 of them report no decrease in any domain (13 no change at all) (displacement mean .04 vs .33
   under 25); in H3, b = -.30, p = .0015.
 - **AI or technology in general.** AI- and social-media-attributed loss correlate (rho = .55). Social media +.48 vs
   AI +.27 over all domains (p < .0001); formal domains .48 vs .45 (p = .35). Non-blamers (n = 56) +.04 (p = .34);
@@ -101,6 +101,59 @@ with 80% power is r = .27.
   at least 8 in the smaller class, so family and religion are modelled. ML10: all 105, core as a sensitivity row.
   The numbers inside the table below refer to n = 37.
 
+## Audit of 6 October 2026 (final sample)
+
+A full audit of data, instrument, statistics, SPSS, machine learning, paper and site. What changed:
+
+- **Firth regression.** The penalised-likelihood test refitted each restricted model with its own penalty, which
+  made the p-value depend on the predictor's units. It now uses profile penalised-likelihood tests with the full
+  design's penalty (as R's logistf): English share p = .025 (was .004). The verdict does not change.
+- **H5.** At 5,000 resamples the lower limit of the indirect effect moved across zero from seed to seed. With
+  100,000 resamples the CI is [-.0001, .108] (2.6% of resamples at or below zero): **not supported** (was
+  "borderline").
+- **H2a.** Page's test is carried by work or study; personal matters and family do not differ (Wilcoxon p = .41).
+  The paper says so.
+- **Same-setting check (decision 7).** "Stable" means studying or working with no new university, graduation or
+  job; three of the 25 started studying or working in English. Without them: 7 less vs 1 more, sign p = .070
+  (with them 8 vs 1, p = .039; Wilcoxon exact p = .12 either way). Work or study still has the largest decrease
+  (Page p = .011), but personal matters (.04) fall below family (.08), so "the order held" was dropped.
+- **H4.** Holm threshold in the leave-one-out check is .0167 (H4 ranks second of four), not .0125. An ordinal
+  (proportional-odds) model of difficulty in four bands gives a clear association (p < .0001): the OLS result is
+  held down by one respondent with an extreme score. Verdict stays "not supported" for the planned test.
+- **H3 checks added.** Intensity alone b = .11, p = .035; quality gap alone b = .16, p = .037 (each with the
+  covariates); both correlate with the English share (rho .35, .37), so "did not matter" became "added nothing
+  once the English share was controlled". With starting university, graduating and a new job as covariates the
+  English share holds (b = .16, Holm .0007). Field plus AI tenure added to Table II (b = .18, Holm .001; H4 Holm
+  .13). H4 is Holm-significant in four of the eleven specifications.
+- **Age.** 15 of the 23 aged 25 or over report no decrease in any domain (13 no change at all); p = .0015.
+- **EventMove** codes starting English-medium study or work OR moving country (one respondent is in it only
+  because they moved); the paper and site now say so.
+- **Home language.** One respondent did not list Arabic among childhood home languages but confirmed Arabic as
+  first language in the screening question; kept (the primary sample is all respondents).
+- **Inconsistent answers, coded as given.** "None of these" ticked with another life event (1: the event counts);
+  "no" to moving since 2022 with "moved country" ticked among life events (2: counted as moved, so 12 movers);
+  Education used as reported although 4 of the 6 "secondary" respondents give a university course language and
+  one bachelor's respondent says they did not attend university.
+- **Open question.** 15 of 105 answered. Not quoted or analysed, because the consent page said answers are
+  reported as group results.
+- **Not-applicable rule.** It removed 7 decreases and no increases; the paper states this.
+- **SPSS.** 02_hypotheses.sps now also runs Kendall's W, the H2a pairwise tests, the item frequencies, the
+  dialect-only, field-and-tenure, life-transition, social-media and influential-case regressions, the
+  stable-without-English-starters tests and the core-sample H2a/H2b. The cross-check compares 104 statistics
+  (relative tolerance 1e-6, regression tables verified by their predictors); all agree.
+- **Live model.** model.json no longer stores per-model scaler means (the 104- and 105-respondent means differed
+  by one person's answers). Each model is exported as a weight per answer unit and its logit at a shared,
+  rounded reference profile. "Likely" thresholds come from out-of-fold calibration: .5 for the two formal-domain
+  models (75% and 72% of those above had reported it), .6 for self-talk (56%; at .5 only 46%).
+- **Machine learning.** Hanley-McNeil 95% CIs for the usable AUCs: .66-.84, .64-.83, .62-.85. "Any difficulty"
+  is net difficulty (mean of the three items on the harder side: 34 vs 71).
+- **Instrument glosses** (English only; the fielded Arabic is unchanged): Role option 4 "Other" (was
+  "Neither"), "An employee", "Using Arabic when talking about my personal matters", "Recalling the everyday
+  Arabic word I need".
+- **References** added after Crossref checks: Ahuja et al. 2023 (MEGA), Esseili 2017, Podsakoff et al. 2003,
+  Bianchi 2012, Hanley and McNeil 1982. Alghamdi and Petraki 2018 documents Arabizi (Latin script) in Saudi
+  Arabia, not a move to English; the paper now cites it for script and Bianchi for the English mixing.
+
 ## First analysis (n = 37, the plan's core sample of the first 40 responses; superseded)
 
 Kept as the record of what was known when collection was reopened.
@@ -115,7 +168,7 @@ Kept as the record of what was known when collection was reopened.
 | H2b Fusha > dialect | Not supported (z = 1.14, p = .26) | — |
 | H3 overall | Not supported: the three predictors jointly F(3,30) = 1.46, p = .24 (HC3) | Joint p between .16 and .60 under every alternative, except the 4-domain (.051) and dialect-only (.055) displacement |
 | H3 English share | b = .22, p = .045, Holm .136 | **Differs**: positive in every specification; Holm-significant only with the plan's 4-domain displacement (.027) or dialect-only displacement (.036) |
-| H4 | b = .44, p = .006, Holm .024; wild bootstrap Holm .0496 | **Differs**: not Holm-significant with no covariates (.18), the plan's age-only covariates (.087), the 4-domain displacement (.067), the dialect-only displacement (.14) or without id 13 (.29); with all 40, b = .12, unadjusted p = .73 |
+| H4 | b = .44, p = .006, Holm .024; wild bootstrap Holm .0496 | **Differs**: not Holm-significant with no covariates (.18), the plan's age-only covariates (.087), the 4-domain displacement (.067), the dialect-only displacement (.14) or without the straight-liner (.29); with all 40, b = .12, unadjusted p = .73 |
 | H5 | Not supported: a = −.06 (p = .55); indirect −.024, 95% CI [−.138, .041] | Underpowered at this n (see decision 16) |
 | RQ4 (ML) | No evidence that AI-use information improves prediction (ΔQ² −.27, ΔAUC −.01; Holm p = .26, .94; AI use alone at chance). Background predicts the count above chance only through age (5 people) | **Yes for AI use**: the increment is never above +.02 in any sensitivity row and is negative at 10 of 10 and 9 of 10 random splits. **Differs for background**: without age neither overall target is predicted (p = .31, .44); any formal loss is borderline (p = .052) |
 
@@ -123,7 +176,7 @@ Kept as the record of what was known when collection was reopened.
 
 | # | Decision | Options | Chosen | Why | Where the alternative is reported |
 |---|---|---|---|---|---|
-| 1 | Primary sample | The 37 who grew up in and live in an Arabic-speaking country and have not moved country since 2022; or all 40 | **37 (core)** | Pre-specified: the 27 Sep plan (section 6.2) defines this CORE sample to hold migration constant, and the 30 Sep codebook tags the three country questions as the "CORE sample rule" (the proposal states the regional part). The first pass on 2 Oct used all 40; the analysis then returned to the plan's sample, knowing that this changes H4. Excluded: id 21 (grew up and lives outside the Arab world), id 25 (moved since 2022), id 38 (moved; lives outside) | Robustness (c), same models on all 40. **Differs for H4** (b = .12, p = .73), entirely because of id 21 (Cook's distance 1.78; without id 21, b = .43, p = .008) |
+| 1 | Primary sample | The 37 who grew up in and live in an Arabic-speaking country and have not moved country since 2022; or all 40 | **37 (core)** | Pre-specified: the 27 Sep plan (section 6.2) defines this CORE sample to hold migration constant, and the 30 Sep codebook tags the three country questions as the "CORE sample rule" (the proposal states the regional part). The first pass on 2 Oct used all 40; the analysis then returned to the plan's sample, knowing that this changes H4. Excluded: the respondents outside the plan's core rule. | Robustness (c), same models on all 40. **Differs for H4** (b = .12, p = .73), entirely because of one respondent outside the core sample (Cook's distance 1.78; without that respondent, b = .43, p = .008) |
 | 2 | Displacement score | Mean over all 8 domains (at least 6 applying); or the 27 Sep plan's 4 domains (writing, self, personal, family) | **8 domains** | The plan's 4-domain score was designed when work/study was asked only of people whose setting had not changed, Fusha and work/study were the separate H1 items, and religion and content were not yet measured. In the fielded form all 8 domains are asked of everyone, and the 30 Sep proposal frames displacement over all the RQ1 domains. **This departs from the plan.** The plan also treated displacement as a formative index (no alpha); in the data the domains covary strongly (mean inter-item r .48, alpha .88, omega .88 [.75, .93], n = 30 complete cases), so the score is read as one "AI-attributed domain loss" and alpha/omega are reported descriptively | Sensitivity rows "4-domain" and "dialect-only". **Differs**: with the 4-domain score, English share is Holm-significant (.027) and H4 is not (.067) |
 | 3 | AI intensity | Share of work + breadth (the 27 Sep plan's definition); or also frequency (added in the first pass) | **Share of work + breadth, as planned** | The plan lists frequency as descriptive only. The plan's rule (drop a component with over 60% in one category) keeps both components: share of work, largest category 53% (49% in core); breadth 23%. Frequency has 33 of 40 (30 of 37) in its top category and barely varies | Sensitivity "intensity including frequency" (no change) |
 | 4 | Ability decline (H4, H5) | 3 items asked of everyone (the plan); or 4 including the Fusha-register item, which applies only to the 28 of 37 (31 of 40) who wrote Fusha before AI | **3 items, as planned** | Every respondent's score uses the same items. Omega .83 [.62, .93] | Sensitivity "including the Fusha-register item" (H4 stronger: Holm .003); E3 analyses the register item on its own |
@@ -135,7 +188,7 @@ Kept as the record of what was known when collection was reopened.
 | 10 | Regression inference | Classical OLS; HC3 | **HC3 with t(df) tests** | Small n and unequal spread. SPSS 23's REGRESSION has no HC3 option (GENLIN offers only HC0-type errors with Wald χ²), so the paper reports HC3 from Python and SPSS shows classical errors. The H3 omnibus is the joint test of the three H3 predictors, not the model F (the model's HC3 F is significant only because of the age dummy). A wild bootstrap (restricted, Rademacher, 9,999 reps) checks every Family B p | — |
 | 11 | Mediation (H5) | PROCESS in SPSS; the same model in Python | **Python**: OLS paths, HC3 path tests, 5,000-resample percentile bootstrap, fixed seed, same covariates | SPSS 23 cannot run PROCESS (v5 needs SPSS 26+) | — |
 | 12 | "Not applicable today" | Set that domain's change to missing; or only when the change answer is "no change" | **Set to missing** (written before the data; conservative) | It removes 7 "less" answers, all in the primary sample | Sensitivity (g): Fusha stronger (z = −3.47); H4 stronger (Holm .002) |
-| 13 | Straight-liners (ids 13, 29: every change row "much less") | Keep; exclude | **Keep** | Answering at an extreme is not proof of carelessness. In practice this concerns id 13 only: id 29 marked work/study, formal texts and religion as not applicable, so it has 5 applicable domains, no displacement score and no work/study or Fusha change, and enters no confirmatory test | Robustness (e), i.e. without id 13. **Differs for H4**: b = .41, p = .078 (Holm .29) |
+| 13 | Straight-liners (two: every change row "much less") | Keep; exclude | **Keep** | Answering at an extreme is not proof of carelessness. In practice this concerns one of them only: the other marked work/study, formal texts and religion as not applicable, so it has 5 applicable domains, no displacement score and no work/study or Fusha change, and enters no confirmatory test | Robustness (e), i.e. without the straight-liner. **Differs for H4**: b = .41, p = .078 (Holm .29) |
 | 14 | Binary robustness (net loss) | Ordinary logit; Firth logit with covariates | **Firth logit** with the H3 predictors and covariates | Ordinary logit does not converge (the covariates separate the outcome; only 8 of 36 have no net loss). Even so, events per predictor are 1.6: indicative only. It does not support H3 (all p ≥ .26) | Robustness (b) |
 | 15 | Standardisation of AI intensity | z on all 40; z on the 37 | **All 40** | Keeps SPSS (DESCRIPTIVES /SAVE on the open file) and Python identical; negligible difference | — |
 | 16 | The 27 Sep plan's small-sample rule (section 7.6) | The rule: below N = 100, H5 becomes the single confirmatory test and H3/H4 keep only Medium and age; below ≈78, H5 is reported as underpowered and the paper leads with the domain profile | **Set aside on 2 Oct (after the data), except that H5 is reported as underpowered**; its machine-learning clause (logistic regression against the baseline only) is set aside too — see ML5 | Two families are kept because Family A is within-person and well powered (H1a, H1b and H2a all p < .005), and H3/H4 are what the paper's argument needs; H5 needs ≈78 even for medium paths and has 36. The paper still leads with the domain profile (Figure 1) | The rule's covariate set (age only) is run in robustness (f). **Differs for H4** (Holm .087) |
@@ -149,13 +202,15 @@ Kept as the record of what was known when collection was reopened.
 - **Recruitment.** University WhatsApp groups, friends who passed the link on to their own contacts, Instagram stories and LinkedIn posts.
 - **Items removed before launch.** The practice items, attention check and placebo (tea/coffee) row in the 27 Sep plan were dropped before 30 Sep. The 30 Sep prune removed the overall-influence question, the dialect-attachment grid, the pre-AI ability grid, the question on which form of Arabic people use with AI, and the question on whether they were already at their current workplace or university when they started using AI. The checks built on these could not be run. **The fielded change grids also lack the plan's reminder** ("'No change' means AI has not changed this for you, even if ... it changed for other reasons such as a new job, university or moving country"; 27 Sep plan, instrument section), so respondents were never told to exclude change with other causes — the only cue was "compare now with before you started using AI regularly".
 - **Sample composition (analysed sample, n = 37).** Grew up in Lebanon 35, the Gulf 2; all 37 live in Lebanon; 32 are under 25; 26 work or study in computing; 28 wrote Fusha before AI. (All 40: grew up in Lebanon 37, live in Lebanon 38, under 25 35, computing 28, wrote Fusha 31.) Results describe young, mostly computing-trained Lebanese bilinguals.
-- **Age.** 5 respondents are aged 25 or over (all in the primary sample). Four report no AI-attributed change in any domain; the fifth (id 34) reports less Arabic only in work or study (displacement 0.125, against a mean of 0.57 under 25). The age coefficient in H3 rests on these 5 people.
+- **Age.** 5 respondents are aged 25 or over (all in the primary sample). Four report no AI-attributed change in any domain; the fifth reports less Arabic only in work or study (displacement 0.125, against a mean of 0.57 under 25). The age coefficient in H3 rests on these 5 people.
 - **AI or technology in general.** People who report AI-attributed loss also report social-media-attributed loss (ρ = .56). Averaged over all 8 domains, social media is blamed for more loss than AI (+0.72 vs +0.49, p = .014); for the formal domains the two are equal (+0.72 vs +0.72, p = .65). Among the 15 who do not blame social media, AI-attributed displacement is small and not significant (+0.14, p = .25); among the 21 who do, +0.74 (Mann-Whitney p = .0002). With social-media attribution as a covariate, English share is no longer significant (p = .098). The data cannot separate an AI-specific effect from a general "technology is eroding my Arabic" belief — this is a limitation and an interesting result in its own right.
 - **Exploratory, planned before the data.** E1 (switching as a second mediator): neither indirect effect differs from zero. E3: among the 28 who wrote Fusha before AI, a harder time writing formal Fusha goes with more displacement (Spearman ρ = .57, p = .002).
-- **Influence.** H4's direction does not rest on one person, but **its Holm-level significance does**: dropping any one of three respondents pushes it past the Holm threshold of .0125 (without id 3, p = .018; without id 22, p = .013; without id 13, p = .078). H4 is therefore reported as positive in every core specification and Holm-significant in about half.
+- **Influence.** H4's direction does not rest on one person, but **its Holm-level significance does**: dropping any one of three respondents pushes it past the Holm threshold of .0125 (without each of them, p = .013 to .078). H4 is therefore reported as positive in every core specification and Holm-significant in about half.
 - **Tools.** SPSS 23 for descriptives, reliability, Wilcoxon, sign, Friedman and Mann-Whitney tests and classical regressions; Python (statsmodels, scipy) for HC3, Holm, Page's test, the bootstraps, the Firth logit, omega and exact p-values for groups with 15 or fewer non-zero answers (SPSS prints only the normal approximation there); scikit-learn and imbalanced-learn for the machine learning. Package versions are pinned in `requirements.txt`, and `ml_results.txt` records them with a checksum of the data.
 
 ## Machine learning (RQ4)
+
+*Written at n = 37 and kept as the design record; the final-sample results are in the sections above.*
 
 Script `05_ml.py`, output `results/ml_results.txt` and `results/ml_table.csv`. The two documents written
 before the data differ: the 27 Sep plan (continuous target; fixed, untuned models; repeated CV with
@@ -167,7 +222,7 @@ permutation importance).
 
 **When the design was fixed.** The plan required the ML script to be written and run on simulated data
 before launch, changing only the input path afterwards. That was not done: `05_ml.py` was written on
-2 Oct, after the data, so the whole ML design is post hoc relative to the plan and is reported as such.
+2 Oct, after the data, so the whole ML design is post hoc relative to the plan and is recorded as such here.
 Before the first version was fixed, the class counts and one table of feature–target correlations were
 seen. The first full run was then reviewed independently (four reviewers — leakage, statistics, code,
 consistency with this record — a skeptic re-checking each reviewer's findings by rerunning code, and a
@@ -185,7 +240,7 @@ critic's own reruns. The design below is the revised one; the changes are listed
 | ML7 | Validation and metrics | — | **10 × 5-fold CV** (stratified for classification), the same splits for every model and block. AUC = mean over the 50 test folds; for the count, Q² = 1 − MSE / Var(y) per fold. From each repeat's pooled out-of-fold predictions: PR-AUC (chance ≈ the share with loss), recall per class and balanced accuracy at 0.5, the Brier skill score against the training prevalence, MAE and RMSE. **No interval on a single model's score.** The same CV on 10 other split seeds shows how much the headline depends on the split | Per-fold scores pair across models, which the corrected test needs. With 7–8 people (1–2 in the minority class) per test fold, a per-fold interval for one model covers only about 86–90% in simulation, so chance is judged by permutation. The Brier skill score and RMSE are the plan's metrics; the skill score also shows that SMOTENC's probabilities are shifted (AUC, a ranking measure, is not affected) |
 | ML8 | Inference | — | **Nadeau–Bengio corrected t on paired per-fold differences**: the RQ4 test is the linear M1 − M0 (Holm within the overall pair and within the domains), with its minimum detectable gain; also M2 − M1, flexible − linear, AI use only − M0, and, for the count, model − predicting the mean. **Permutation tests**: outcome shuffled, the whole pipeline refit, splits redrawn; the statistic is the headline score itself (all 10 repeats); 500 permutations; linear M0 and M1 for every target, the extra blocks for the overall targets; forest and boosting only where they pass the decision rule | A permutation test rejects "no association"; for the count it does not show that the model beats predicting the mean, which is tested separately. The paired corrected test is conservative here. Any AUC above .90 is treated as leakage |
 | ML9 | Interpretation | — | Only primary-block models that beat chance after Holm, and an M1 model only if it also beats M0. Grouped permutation importance on held-out folds (correlated items shuffled together: AI intensity; AI content); class-weighted standardised coefficients for direction | "How the model uses inputs, not population effects" |
-| ML10 | Sample | — | **Core 37** | Sensitivity rows: all 40; decision 12's not-applicable alternative; without the straight-liners (ids 13, 29) |
+| ML10 | Sample | — | **Core 37** | Sensitivity rows: all 40; decision 12's not-applicable alternative; without the two straight-liners |
 
 **What the review changed.** (1) School language left M0 (not pre-specified; see ML3). (2) The permutation
 statistic had used 2 of the 10 repeats; with so few, which single domain passed Holm depended on the random

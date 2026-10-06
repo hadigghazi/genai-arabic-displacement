@@ -17,7 +17,8 @@ VARIABLES VARIABLE LABELS VALUE MISSING VALUES SET TVARS NAMES COMPUTE IF DO REP
 DESCRIPTIVES SAVE STATISTICS MEAN STDDEV MIN MAX FREQUENCIES RELIABILITY SCALE ALL MODEL ALPHA SUMMARY TOTAL NVALID SUM ANY
 OUTFILE LEVEL NPAR TESTS WILCOXON SIGN FRIEDMAN KENDALL WITH PAIRED ANALYSIS LISTWISE REGRESSION COEFF OUTS CI R ANOVA
 CHANGE COLLIN TOL DEPENDENT METHOD ENTER NONPAR CORR PRINT SPEARMAN TWOTAIL TEMPORARY SELECT AND OR NOT FILTER BY OFF
-LOGISTIC TO SYSMIS UTF8 F3 CROSSTABS TABLES M W N TITLE'''.split())
+LOGISTIC TO SYSMIS UTF8 F3 CROSSTABS TABLES M W N TITLE PAIRWISE AGGREGATE MODE ADDVARIABLES OVERWRITE YES COOK
+MEANS CELLS'''.split())
 
 
 def lint(path):
@@ -45,6 +46,8 @@ def lint(path):
         m = re.match(r'\s*(COMPUTE|COUNT)\s+(\w+)', body, re.I)
         if m:
             created.add(m.group(2))
+        for nm in re.findall(r'/SAVE\s+\w+\((\w+)\)', body, re.I) + re.findall(r'/(\w+)\s*=\s*(?:MAX|MIN|MEAN|SUM)\(', body, re.I):
+            created.add(nm)                           # REGRESSION /SAVE COOK(x), AGGREGATE /x=MAX(y)
         if re.match(r'\s*DO REPEAT', body, re.I):
             for grp in re.findall(r'/?\s*\w+\s*=\s*([\w ]+)', body):
                 pass

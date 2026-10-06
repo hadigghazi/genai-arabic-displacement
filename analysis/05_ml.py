@@ -22,8 +22,8 @@ analysis/ANALYSIS-DECISIONS.md (section "Machine learning").
                (linear model on M0 and M1, and the extra blocks on the overall targets; forest and
                boosting only where they pass the plan's decision rule against the linear model, since
                otherwise they are never interpreted); Holm within the overall pair and within the domains.
-               Single-model scores carry no interval: at 7-8 people per test fold a per-fold interval
-               under-covers, so chance is judged by the permutation tests.
+               Single-model scores carry no per-fold interval (a per-fold interval under-covers); chance is
+               judged by the permutation tests. The paper adds Hanley-McNeil intervals (10_export_site_data.py).
 
 Run with Anaconda's Python:  C:\\Users\\User\\anaconda3\\python.exe analysis\\05_ml.py
 Set ML_QUICK=1 for a fast smoke test (few repeats and permutations; numbers not for reporting).
@@ -96,7 +96,7 @@ REG_TARGETS = {'DomainsLost', 'Displacement', 'Displacement4', 'DomainsLost_na'}
 M0 = ['Age25', 'Computing', 'Education', 'Eng_Prof', 'EventMove']       # the plan's M0; Medium is constant (dropped)
 AI = ['AI_TaskShare', 'AI_BreadthCount', 'AI_Freq', 'AI_TenureRank', 'EnglishShare', 'AI_Content', 'AI_ContentLang']
 SETS = {'M0 background': M0, 'M1 + AI use': M0 + AI, 'M2 + quality gap': M0 + AI + ['QualityGap']}
-EXTRA = {'M0 without age': [c for c in M0 if c != 'Age25'],              # sensitivity: 5 people are 25+
+EXTRA = {'M0 without age': [c for c in M0 if c != 'Age25'],              # sensitivity: age carries much of the background signal
          'M0 + school language': M0 + ['SchoolEnglish'],                 # post hoc (not in either pre-data document)
          'AI use only': AI}                                              # exploratory: AI use against background
 BINARY = {'Age25', 'Computing', 'EventMove', 'SchoolEnglish'}
@@ -322,7 +322,7 @@ say('precision for "loss" (chance = the share with loss); recall per class and b
 say('Brier skill score against predicting the training prevalence (SMOTENC rebalances the training data, so its')
 say('probabilities are not calibrated: AUC measures ranking, BSS penalises the shift). For the count: Q2 = 1 -')
 say('MSE / Var(y) per test fold (0 = no better than predicting the mean), MAE and RMSE. No interval is given for a')
-say('single model: with 7-8 people per test fold a per-fold interval under-covers. Chance is judged by the')
+say('single model here: a per-fold interval under-covers (Hanley-McNeil CIs are in study.json). Chance is judged by the')
 say('permutation tests; comparisons between models use paired, corrected intervals.')
 
 table = []
@@ -504,7 +504,7 @@ def sens_perm(df, tgt, kind, cols):
 for tgt, kind in [('DomainsLost', 'reg'), ('AnyFormalLoss', 'clf')]:
     say('  %s' % tgt)
     for lab, df, t in [('decision 12 alternative (n/a dropped only with "no change")', prim, tgt + '_na'),
-                       ('without the straight-liners (ids %s)' % prim.loc[prim.straightline == 1, 'id'].tolist(), prim[prim.straightline == 0], tgt),
+                       ('without the straight-liners (%d)' % int((prim.straightline == 1).sum()), prim[prim.straightline == 0], tgt),
                        ('core sample (the plan\'s rule)', core_df, tgt)]:
         r0, y = quick(df, t, kind, SETS['M0 background'])
         r1, _ = quick(df, t, kind, SETS['M1 + AI use'])

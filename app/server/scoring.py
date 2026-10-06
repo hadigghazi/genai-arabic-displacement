@@ -1,7 +1,8 @@
 """Scores a person's answers with the exported models (model/model.json, written by analysis/09_export_model.py).
 
-Each model is a logistic regression on standardised features, so scoring is a few lines of arithmetic and
-the server needs neither scikit-learn nor the training data.
+Each model is a logistic regression, exported as its logit at a shared reference profile (the respondents'
+average answers, rounded) plus a weight per unit of each answer, so scoring is a few lines of arithmetic and
+the server needs neither scikit-learn nor the training data. Each model has its own threshold for "likely".
 """
 import json
 import math
@@ -35,12 +36,12 @@ class Models:
         with open(path, encoding='utf-8') as f:
             self.spec = json.load(f)
         self.questions = {q['code']: q for q in self.spec['questions']}
-        self.threshold = self.spec['threshold']
+        self.reference = self.spec['reference_profile']
 
     def card(self):
         """Everything the page shows, without the test fixtures."""
         out = {k: v for k, v in self.spec.items() if k != 'models'}
-        out['models'] = [{k: v for k, v in m.items() if k not in ('tests', 'features', 'intercept')}
+        out['models'] = [{k: v for k, v in m.items() if k not in ('tests', 'features', 'logit_at_reference')}
                          for m in self.spec['models']]
         return out
 
@@ -51,8 +52,10 @@ class Models:
             allowed = {o['code'] for o in q['options']}
             v = a.get(code)
             if q['type'] == 'check':
-                if not isinstance(v, list) or any(x not in allowed for x in v) or len(set(v)) != len(v):
-                    errors.append('%s: tick options from %s' % (code, sorted(allowed)))
+                if not isinstance(v, list) or not v or any(x not in allowed for x in v) or len(set(v)) != len(v):
+                    errors.append('%s: tick at least one of %s' % (code, sorted(allowed)))
+                elif code == 'Events' and 6 in v and len(v) > 1:
+                    errors.append('Events: "None of these" cannot be ticked with another event')
             elif v not in allowed:
                 errors.append('%s: choose one of %s' % (code, sorted(allowed)))
         return errors
@@ -61,12 +64,13 @@ class Models:
         x = derive_features(a)
         results = []
         for m in self.spec['models']:
+            # contribution = how far this answer moves the logit away from the reference profile's
             contrib = [{'feature': f['name'], 'value': x[f['name']],
-                        'contribution': f['coef'] * (x[f['name']] - f['mean']) / f['sd']}
+                        'contribution': f['per_unit'] * (x[f['name']] - self.reference[f['name']])}
                        for f in m['features']]
-            logit = m['intercept'] + sum(c['contribution'] for c in contrib)
+            logit = m['logit_at_reference'] + sum(c['contribution'] for c in contrib)
             score = 1.0 / (1.0 + math.exp(-logit))
             contrib.sort(key=lambda c: abs(c['contribution']), reverse=True)
             results.append({'id': m['id'], 'label': m['label'], 'score': score, 'logit': logit,
-                            'likely': score >= self.threshold, 'contributions': contrib})
+                            'threshold': m['threshold'], 'likely': score >= m['threshold'], 'contributions': contrib})
         return {'features': x, 'results': results}

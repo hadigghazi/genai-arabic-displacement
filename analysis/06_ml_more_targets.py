@@ -5,12 +5,12 @@ same inputs with the same machinery, judged against "usable model" criteria fixe
 (ANALYSIS-DECISIONS.md, "ML extension", 2 Oct 2026 20:10).
 
   Targets   (1) Substitution: did something in English that could have been done in Arabic, because AI works
-                better in English - "sometimes" or more (25) vs "never" / "once or twice" (12)
+                better in English - "sometimes" or more (59) vs "never" / "once or twice" (46)
             (2) ExpectedLoss: number of the 8 two-year rows answered "less" or "much less" (0-8; regression)
-            (3) AnyDifficulty: any of the three ability items "harder" because of AI (12) vs none (25)
+            (3) AnyDifficulty: net difficulty - the mean of the three ability items on the "harder" side (34) vs not (71)
   Blocks    M0 background; M1 = M0 + AI use (the primary predictive model); M2 = M1 + quality gap (not for
             substitution: its wording makes the quality gap close to definitional); AI use only; M1 without
-            the age dummy (5 respondents are 25+).
+            the age dummy (23 respondents are 25+).
   Usable    all four: (1) linear M1 permutation p, Holm across the three targets, < .05; (2) over 10 other
             random splits, mean AUC >= .70 and no split < .65 (count: Q2 > 0 at every split and a significant
             paired gain over predicting the mean); (3) M1 without age still beats chance (permutation p < .05);

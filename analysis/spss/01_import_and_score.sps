@@ -130,7 +130,7 @@ VARIABLE LABELS
   /ArUse_WorkStudy "Because of AI, less or more: Using Arabic in my work or studies"
   /ArUse_Writing "Because of AI, less or more: Writing messages or posts in Arabic"
   /ArUse_Self "Because of AI, less or more: Using Arabic when I talk to myself or write my own notes"
-  /ArUse_Personal "Because of AI, less or more: Using Arabic for personal matters"
+  /ArUse_Personal "Because of AI, less or more: Using Arabic when talking about my personal matters"
   /ArUse_Family "Because of AI, less or more: Using Arabic with my family or friends"
   /ArUse_Fusha "Because of AI, less or more: Reading or writing Fusha (news, documents, articles)"
   /ArUse_Religion "Because of AI, less or more: Reading or listening to religious texts"
@@ -138,7 +138,7 @@ VARIABLE LABELS
   /Switch_Mode "Because of AI, less or more: Switching between Arabic and English while working or studying"
   /SwitchEng "Has it happened that you did something in English, although you could have done it in Arabic, because AI helps you better in English?"
   /SocialMedia "Over the same period, because of social media, do you now use Arabic less or more?"
-  /Abil_Lexical "Without AI, harder or easier: Finding the everyday Arabic word I need"
+  /Abil_Lexical "Without AI, harder or easier: Recalling the everyday Arabic word I need"
   /Abil_Fluency "Without AI, harder or easier: Speaking my dialect smoothly, without pausing for words"
   /Abil_ArabicOnly "Without AI, harder or easier: Saying what I mean fully in Arabic, without English words"
   /Abil_Register "Without AI, harder or easier: Writing a formal text in Fusha (e.g. a letter or report)"
@@ -166,7 +166,7 @@ VARIABLE LABELS
 VALUE LABELS
   Consent 1 "I agree" 0 "I do not agree"
   /Eligible 1 "Yes" 0 "No"
-  /Role 1 "A student" 2 "Employed" 3 "Both" 4 "Other"
+  /Role 1 "A student" 2 "An employee" 3 "Both" 4 "Other"
   /Education 1 "Secondary" 2 "Bachelor's" 3 "Master's or higher"
   /Field 1 "Computing / IT" 2 "Engineering" 3 "Sciences or health" 4 "Business" 5 "Humanities, education or law" 6 "Other"
   /Age 1 "Under 25" 2 "25 to 34" 3 "35 to 44" 4 "45 or over"
@@ -249,15 +249,15 @@ MISSING VALUES CurUse_Religion (4,5).
 MISSING VALUES CurUse_Formal (4,5).
 MISSING VALUES CurUse_Consume (4,5).
 
-* ---------------------------------------------------------------- flags (plan 6.2 and 7.0).
+* ---------------------------------------------------------------- flags.
 COMPUTE excl_region = (Country_GrewUp = 6 OR Country_Now = 6).
 COMPUTE moved = (Moved_Since2022 = 1 OR Events_5 = 1).
-* core: the plan's core sample (sensitivity) - grew up and lives in the Arab region, no move since 2022.
-* The primary analysis uses all respondents (decision of 3 Oct 2026, ANALYSIS-DECISIONS.md).
+* core: sensitivity sample - grew up and lives in the Arab region, no move since 2022.
+* The primary analysis uses all respondents.
 COMPUTE core = (excl_region = 0 AND moved = 0).
 * stable: same workplace or university throughout the AI period (no new university, graduation or job; role not "other").
 COMPUTE stable = (Events_1 = 0 AND Events_2 = 0 AND Events_3 = 0 AND Role <> 4).
-* straightline: every change row "much less" or every row "much more" (plan 7.0.5; sensitivity only).
+* straightline: every change row "much less" or every row "much more" (sensitivity only).
 COMPUTE straightline = (MAX(ArUse_WorkStudy, ArUse_Writing, ArUse_Self, ArUse_Personal, ArUse_Family, ArUse_Fusha, ArUse_Religion, ArUse_Consume, Switch_Mode) = -2 OR MIN(ArUse_WorkStudy, ArUse_Writing, ArUse_Self, ArUse_Personal, ArUse_Family, ArUse_Fusha, ArUse_Religion, ArUse_Consume, Switch_Mode) = 2).
 
 * ---------------------------------------------------------------- domain change, filtered.
@@ -272,7 +272,7 @@ DO REPEAT a = ArUse_WorkStudy ArUse_Writing ArUse_Self ArUse_Personal ArUse_Fami
 END REPEAT.
 
 * ---------------------------------------------------------------- scores.
-* Loss and decline scores: HIGHER = MORE LOSS (plan 7.1). d_X stay raw change (negative = less Arabic).
+* Loss and decline scores: HIGHER = MORE LOSS. d_X stay raw change (negative = less Arabic).
 * Suffix 4 or 3 = sensitivity variant; the unsuffixed score is the primary one (see ANALYSIS-DECISIONS.md).
 COMPUTE DomainsValid = NVALID(d_WorkStudy, d_Writing, d_Self, d_Personal, d_Family, d_Fusha, d_Religion, d_Consume).
 COMPUTE Displacement = -MEAN.6(d_WorkStudy, d_Writing, d_Self, d_Personal, d_Family, d_Fusha, d_Religion, d_Consume).
@@ -304,7 +304,7 @@ COMPUTE Computing = (Field = 1).
 COMPUTE EventMove = (Events_4 = 1 OR Events_5 = 1).
 COMPUTE Medium = (ANY(Sch_SciLang, 2, 3) OR ANY(Uni_Lang, 2, 3, 4)).
 DESCRIPTIVES AI_Freq AI_TaskShare AI_BreadthCount /SAVE.
-* AI intensity = mean of z(task share) and z(breadth). Frequency is descriptive only, as planned.
+* AI intensity = mean of z(task share) and z(breadth). Frequency is descriptive only.
 COMPUTE AI_Intensity = MEAN(ZAI_TaskShare, ZAI_BreadthCount).
 COMPUTE AI_Intensity3 = MEAN(ZAI_Freq, ZAI_TaskShare, ZAI_BreadthCount).
 EXECUTE.

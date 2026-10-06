@@ -23,22 +23,22 @@ export function meaning(main, S) {
   const formal = S.ml.targets.find((t) => t.id === "AnyFormalLoss");
   const rows = [
     ["H1", "Less Fusha, less Arabic at work or study", `${A.H1a.less} vs ${A.H1a.more}; ${A.H1b.less} vs ${A.H1b.more}`, flag("supported", "good"), ch("where", 3)],
-    ["H2a", "Work or study, then personal matters, then family", `Page p ${fp(A.H2a.page_p)}`, flag("supported", "good"), ch("where", 3)],
+    ["H2a", "Work or study, then personal matters, then family", `Page p ${fp(A.H2a.page_p)}, carried by work or study`, flag("supported", "good"), ch("where", 3)],
     ["H2b", "Larger for Fusha than for the dialect", `p ${pe(A.H2b.p_holm)}`, flag("not supported"), ch("where", 3)],
     ["H3", "AI use predicts the decrease", `through English only, b = ${f(B.H3b.b)}`, flag("supported", "good"), ch("language", 4)],
     ["H4", "The decrease goes with difficulty without AI", `p ${pe(B.H4.p)}`, flag("not supported"), ch("language", 4)],
-    ["H5", "The decrease is the route to that difficulty", "interval only just excludes zero", flag("borderline", "mid"), ch("language", 4)],
+    ["H5", "The decrease is the route to that difficulty", "interval reaches zero", flag("not supported"), ch("language", 4)],
     ["RQ4", "AI-use answers improve prediction", `ΔAUC ${sg(formal.delta_ai.d)}, not significant`, flag("not supported"), ch("prediction", 6)],
   ];
   main.append(
     chapterHead("meaning", "What the 105 answers add up to, how far they reach, and where the next study should go."),
     sec("The answer",
-      takeaway("Lebanese bilinguals report that generative AI has reduced their Arabic, mainly at work or study, in writing and in Fusha, "
+      takeaway("Two thirds of these Lebanese bilinguals report that generative AI has reduced their use of Arabic, mostly at work or study and in writing, "
         + "and those who use AI in English report more of it."),
       h("ol", { class: "findings" },
-        h("li", null, h("b", null, "Formal areas first. "), `${pct(ws.less)} report less Arabic in work or study and ${pct(ws.more)} more; family use and religion barely move, the order domain theory predicts. `, ch("where", 3, "Chapter 3")),
-        h("li", null, h("b", null, "Language, not amount. "), "Writing to AI in English goes with the decrease in every check; how much people use AI, and the quality gap they perceive, do not. ", ch("language", 4, "Chapter 4")),
-        h("li", null, h("b", null, "A shift that began before AI. "), "The same people report losing Arabic to social media; AI carries that shift from everyday communication into work, study and writing. ", ch("wider", 5, "Chapter 5")),
+        h("li", null, h("b", null, "Formal areas first. "), `${pct(ws.less)} report less Arabic in work or study and ${pct(ws.more)} more; family use and religion barely move. Work or study comes first, as domain theory predicts, though Fusha does not decline more than the dialect. `, ch("where", 3, "Chapter 3")),
+        h("li", null, h("b", null, "Language more than amount. "), "Writing to AI in English goes with the decrease in every check; how much people use AI, and the quality gap they perceive, add nothing beyond it. ", ch("language", 4, "Chapter 4")),
+        h("li", null, h("b", null, "A shift that began before AI. "), "The same people report using less Arabic because of social media; AI carries that shift from everyday communication into work, study and writing. ", ch("wider", 5, "Chapter 5")),
         h("li", null, h("b", null, "Predictable, moderately. "), "Three simple models identify who reports a decrease; answers about AI use add no significant gain over background. ", ch("prediction", 6, "Chapter 6")))),
     sec("The scorecard", card({ title: "Every hypothesis, and where to read about it", span2: true },
       table([
@@ -95,7 +95,7 @@ export async function paper(main, S) {
         h("li", null, h("a", { href: "data/study.json", download: "genai-arabic-study-results.json" }, "Every number on this site"), " (JSON, group-level results only)"),
         ...(pp && pp.materials ? pp.materials.map((m) => h("li", null, h("a", { href: BASE + m.file, download: m.file }, m.label), ` (${size(m.bytes)})`)) : []),
         h("li", null, h("a", { href: "#study" }, "The questionnaire"), ", in Arabic and English (Chapter 2)")),
-        h("p", { class: "muted" }, "Individual responses are not shared: participants were told that answers would be reported only as group results.")),
+        h("p", { class: "muted" }, "Individual responses are not shared: participants were told that answers would be reported as group results.")),
       card({ title: "Cite this study" },
         h("p", { class: "citebox" }, `${S.study.author}, “${(pp ? pp.title : S.study.title).replace("Arabic-English", "Arabic–English")},” ${S.study.affiliation}, 2026.`)))),
     sec("References", card({ title: `The ${Object.keys(S.references).length} works the paper cites`, sub: "Grouped by what they contribute to the study. Titles link to the source.", span2: true },

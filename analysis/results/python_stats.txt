@@ -6,12 +6,14 @@ p-values are two-sided except Page's trend test (one-sided: the order is predict
 
 PARTICIPANTS
     submitted 105 -> consented 105 -> eligible 105 -> analysed 105
-    outside the core sample (16): 21: grew up outside the Arab world, lives outside the Arab world; 25: moved since 2022; 38: lives outside the Arab world, moved since 2022; 42: lives outside the Arab world; 43: ticked "moved" among life events; 45: lives outside the Arab world, ticked "moved" among life events; 47: lives outside the Arab world, moved since 2022; 49: grew up outside the Arab world; 56: lives outside the Arab world, moved since 2022; 60: moved since 2022; 67: lives outside the Arab world; 76: moved since 2022; 82: moved since 2022; 85: moved since 2022; 89: moved since 2022; 99: moved since 2022
+    outside the core sample (16; reasons overlap): grew up outside the Arab world 2, live outside it 7, moved since 2022 10, ticked "moved" among life events only 2
+    duplicate submissions (identical answers to every item): 0
     analysed sample: grew up (1 Lebanon, 3 Gulf, 6 outside the Arab world) {1: 101, 3: 2, 6: 2}; live now {1: 96, 2: 1, 3: 1, 6: 7}; under 25: 82; computing/IT: 45; wrote Fusha before AI (yes or sometimes): 82
     age {1: 82, 2: 20, 3: 3} (1 under 25, 2 25-34, 3 35-44, 4 45+); women 60; education {1: 6, 2: 44, 3: 55} (1 secondary, 2 bachelor, 3 master+); field {1: 45, 2: 22, 3: 15, 4: 1, 5: 7, 6: 15}; AI several times a day 79; always write to AI in English 37
     EventMove in the analysed sample: n=25 (started studying or working in English 24; moved country 4)
     same work/study setting throughout the AI period: strict n=25; counting graduation as the same setting n=43
-    straight-liners (every change row "much less" or every row "much more"): id 13 (8 applicable domains, displacement 2.00); id 29 (5 applicable domains, displacement missing)
+    straight-liners (every change row "much less" or every row "much more"): 2, of whom 1 have a displacement score
+    domains with a decrease: mean 2.19 over all 105; 3.38 among the 68 with at least one
     power: with n=105, the smallest correlation detectable at 80% power (alpha .05, two-sided) is r = 0.27
 
 RQ1 DOMAIN PROFILE (all respondents), descriptive. d_X = AI-attributed change.
@@ -39,6 +41,7 @@ FAMILY A (all respondents) (Holm across H1a, H1b, H2a, H2b)
     H2a Fishman order, predicted rising loss: family < personal < work/study
     Page                          n=102  L=1289.0  one-sided exact p=<.0001   (complete-case means: Disp_Family +0.10, Disp_Personal +0.14, Disp_WorkStudy +0.64)
         Friedman chi2(2)=57.06 p=<.0001 Kendall W=0.28 n=102 | work/study vs family Wilcoxon z=+5.59 p=<.0001 (asymptotic)
+        steps: work/study vs personal Wilcoxon z=+5.21 p=<.0001 | personal vs family z=+0.82 p=0.4095 (asymptotic)
     H2b Fusha vs dialect Wilcoxon on (Fusha loss - dialect loss) z=+1.21 p=0.2244 (asymptotic) r=+0.12 n=100 (mean difference +0.08)
     Holm: H1a p=0.0022 -> 0.0045   H1b p=<.0001 -> <.0001   H2a p=<.0001 -> <.0001   H2b p=0.2244 -> 0.2244
 
@@ -61,14 +64,14 @@ H4 (all respondents, HC3)
     Holm family B: intensity p=0.9559 -> 0.9559   English share p=0.0001 -> 0.0004   quality gap p=0.3728 -> 0.7455   H4 p=0.0532 -> 0.1597
     wild bootstrap (restricted, Rademacher, HC3-t, 9999 reps): intensity p=0.9540 -> Holm 0.9540   English share p=0.0003 -> Holm 0.0012   quality gap p=0.3458 -> Holm 0.6916   H4 p=0.0766 -> Holm 0.2298
 
-H5  X = AI_Intensity, M = Displacement, Y = AbilityDecline (PROCESS model 4 logic). Underpowered at this n.
+H5  X = AI_Intensity, M = Displacement, Y = AbilityDecline (PROCESS model 4 logic; cross-sectional, so not a test of causal order).
 
     primary
     n=104  covariates: Age25, EventMove
     a  (X->M)     = +0.111  HC3 p=0.0349
     b  (M->Y | X) = +0.384  HC3 p=0.0549
     c' (direct)   = -0.074  HC3 p=0.2422   c (total) = -0.031
-    indirect a*b  = +0.0426  95% percentile CI [+0.0001, +0.1097]  (5000 resamples, seed 20261002)  -> excludes 0
+    indirect a*b  = +0.0426  95% percentile CI [-0.0001, +0.1081]  (100000 resamples, seed 20261002)  -> includes 0; share of resamples <= 0: 0.0256
     standardized indirect = +0.070
 
 ================================================================================================
@@ -92,12 +95,12 @@ ROBUSTNESS
     SocialLoss     b=+0.252  HC3 SE=0.088  t(97)=+2.88  p=0.0050  95% CI [+0.078, +0.426]  beta=+0.42
 
 (b) Binary robustness: Firth logistic regression of NetLoss (displacement above 0) on the H3 predictors and covariates
-    Intercept      b=-2.611  OR=0.07  penalised-LR p=0.0704
-    AI_Intensity   b=+0.023  OR=1.02  penalised-LR p=0.1279
-    EnglishShare   b=+0.422  OR=1.52  penalised-LR p=0.0039
-    QualityGap     b=+0.463  OR=1.59  penalised-LR p=0.0532
-    Age25          b=-1.811  OR=0.16  penalised-LR p=0.0002
-    EventMove      b=+0.690  OR=1.99  penalised-LR p=0.1010
+    Intercept      b=-2.611  OR=0.07  penalised-LR p=0.0491
+    AI_Intensity   b=+0.023  OR=1.02  penalised-LR p=0.9391
+    EnglishShare   b=+0.422  OR=1.52  penalised-LR p=0.0247
+    QualityGap     b=+0.463  OR=1.59  penalised-LR p=0.1888
+    Age25          b=-1.811  OR=0.16  penalised-LR p=0.0005
+    EventMove      b=+0.690  OR=1.99  penalised-LR p=0.2162
     n=104  NetLoss=1 for 60, 0 for 44  (events per predictor 8.8: indicative only)
 
 (c) The other sample: core sample, n=89 (same models)
@@ -108,6 +111,7 @@ FAMILY A (core sample) (Holm across H1a, H1b, H2a, H2b)
     H2a Fishman order, predicted rising loss: family < personal < work/study
     Page                          n=86  L=1088.5  one-sided exact p=<.0001   (complete-case means: Disp_Family +0.08, Disp_Personal +0.19, Disp_WorkStudy +0.66)
         Friedman chi2(2)=49.97 p=<.0001 Kendall W=0.29 n=86 | work/study vs family Wilcoxon z=+5.57 p=<.0001 (asymptotic)
+        steps: work/study vs personal Wilcoxon z=+4.63 p=<.0001 | personal vs family z=+1.83 p=0.0931 (exact)
     H2b Fusha vs dialect Wilcoxon on (Fusha loss - dialect loss) z=+1.26 p=0.2072 (asymptotic) r=+0.14 n=84 (mean difference +0.08)
     Holm: H1a p=0.0015 -> 0.0029   H1b p=<.0001 -> <.0001   H2a p=<.0001 -> <.0001   H2b p=0.2072 -> 0.2072
 
@@ -134,27 +138,29 @@ H4 (core sample, HC3)
     a  (X->M)     = +0.122  HC3 p=0.0241
     b  (M->Y | X) = +0.568  HC3 p=0.0004
     c' (direct)   = -0.108  HC3 p=0.1215   c (total) = -0.039
-    indirect a*b  = +0.0691  95% percentile CI [+0.0078, +0.1435]  (5000 resamples, seed 20261002)  -> excludes 0
+    indirect a*b  = +0.0691  95% percentile CI [+0.0079, +0.1423]  (100000 resamples, seed 20261002)  -> excludes 0; share of resamples <= 0: 0.0141
     standardized indirect = +0.113
 
-    H4 influence (all respondents): largest Cook's distances (rule of thumb 4/n = 0.04): id 21: 0.80, id 57: 0.30, id 86: 0.15
-      without id(s) 21             b=+0.518 p=<.0001 n=103
-      without id(s) 57             b=+0.307 p=0.0837 n=103
-      without id(s) 21,57,86,70,3,104,71,76,28,32,95 b=+0.375 p=<.0001 n=93
-      leave-one-out over all 104: p from <.0001 to 0.0997; single removals giving p > .0125 (the smallest Holm threshold of four tests): 103 [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; giving p > .05: 101
-    H4 influence (core sample): largest Cook's distances (rule of thumb 4/n = 0.05): id 57: 0.36, id 71: 0.22, id 86: 0.20
-      without id(s) 57             b=+0.458 p=0.0003 n=87
-      without id(s) 71             b=+0.591 p=<.0001 n=87
-      without id(s) 57,71,86,104,70,3,32,28 b=+0.457 p=<.0001 n=80
-      leave-one-out over all 88: p from <.0001 to 0.0020; single removals giving p > .0125 (the smallest Holm threshold of four tests): 0 []; giving p > .05: 0
+    H4 influence (all respondents): largest Cook's distances (rule of thumb 4/n = 0.04): 0.80, 0.30, 0.15
+      without the largest          b=+0.518 p=<.0001 n=103
+      without the second largest   b=+0.307 p=0.0837 n=103
+      without all 11 above 4/n     b=+0.375 p=<.0001 n=93
+      leave-one-out over all 104: p from <.0001 to 0.0997; single removals giving p < .0167 (H4's Holm threshold: it ranks second of the four Family B tests): 1; giving p < .05: 3
+    H4 influence (core sample): largest Cook's distances (rule of thumb 4/n = 0.05): 0.36, 0.22, 0.20
+      without the largest          b=+0.458 p=0.0003 n=87
+      without the second largest   b=+0.591 p=<.0001 n=87
+      without all 8 above 4/n      b=+0.457 p=<.0001 n=80
+      leave-one-out over all 88: p from <.0001 to 0.0020; single removals giving p < .0167 (H4's Holm threshold: it ranks second of the four Family B tests): 88; giving p < .05: 88
 
 (d) Change of setting as a rival explanation for the work/study loss
     work/study, same setting (strict, stable)              n=25 mean -0.28 | Wilcoxon z=-1.75 p=0.1211 (exact) | sign 8 less vs 1 more p=0.0391
     work/study, same setting (graduation counted as same)  n=43 mean -0.40 | Wilcoxon z=-2.85 p=0.0043 (asymptotic) | sign 16 less vs 2 more p=0.0013
     work/study, setting changed (strict)                   n=79 mean -0.73 | Wilcoxon z=-5.79 p=<.0001 (asymptotic) | sign 44 less vs 2 more p=<.0001
     work/study, did not start English study/work           n=80 mean -0.50 | Wilcoxon z=-4.85 p=<.0001 (asymptotic) | sign 35 less vs 2 more p=<.0001
-    stable vs changed, Mann-Whitney: all Z=+2.29 p=0.0223 | under 25 only (means -0.36, n=14 vs -0.81, n=68) Z=+1.55 p=0.1209
-    (11 of the 25 strictly stable respondents are aged 25+; of those, 9 report no change in any domain)
+    stable vs changed, Mann-Whitney: all Z=+2.29 p=0.0223 | under 25 only (means -0.36, n=14 vs -0.81, n=67) Z=+1.55 p=0.1209
+    (11 of the 25 strictly stable respondents are aged 25+; of those, 9 report no decrease in any domain)
+    stable, also without starting English-medium study or work: n=22 | Wilcoxon p=0.1875 (exact) | sign 7 less vs 1 more p=0.0703
+    stable group, complete-case mean decrease: work/study +0.29, personal +0.04, family +0.08 (n=24)
 
     work/study change on stable setting, adjusted for age
     n=104  R2=0.088  adj R2=0.070  | HC3 Wald F(2,101)=7.67 p=0.0008
@@ -163,7 +169,7 @@ H4 (core sample, HC3)
     Age25          b=+0.361  HC3 SE=0.173  t(101)=+2.09  p=0.0395  95% CI [+0.018, +0.703]  beta=+0.18
     Page (strictly stable only)   n=24  L=297.0  one-sided exact p=0.0107   (complete-case means: Disp_Family +0.08, Disp_Personal +0.04, Disp_WorkStudy +0.29)
 
-(e) Without the straight-liners (ids [13, 29])
+(e) Without the straight-liners (2)
     H1a Fusha: Wilcoxon z=-2.90 p=0.0038 n=99
 
 H3 (without straight-liners, HC3)
@@ -260,6 +266,40 @@ H4 (+ English proficiency, HC3)
 
 ================================================================================================
 SENSITIVITY: the alternative at each decision point
+
+(h) Checks requested in review
+    AI_Intensity  alone (with the covariates, n=104): b=+0.111 p=0.0349 | Spearman with the English share rho=0.35
+    QualityGap    alone (with the covariates, n=104): b=+0.156 p=0.0370 | Spearman with the English share rho=0.37
+    intensity components: task share vs breadth r=0.27 (n=105)
+    standardised H3 coefficients (HC3 95% CI): AI_Intensity -0.01 [-0.19, +0.18]; EnglishShare +0.41 [+0.21, +0.62]; QualityGap +0.08 [-0.09, +0.24]
+
+H3 (+ started university, graduated, new job, HC3)
+    n=104  R2=0.276  adj R2=0.215  | HC3 Wald F(8,95)=4.63 p=<.0001
+    Intercept      b=-0.562  HC3 SE=0.278  t(95)=-2.03  p=0.0456  95% CI [-1.113, -0.011]
+    AI_Intensity   b=-0.005  HC3 SE=0.064  t(95)=-0.08  p=0.9337  95% CI [-0.132, +0.121]  beta=-0.01
+    EnglishShare   b=+0.163  HC3 SE=0.042  t(95)=+3.91  p=0.0002  95% CI [+0.080, +0.245]  beta=+0.40
+    QualityGap     b=+0.061  HC3 SE=0.074  t(95)=+0.83  p=0.4105  95% CI [-0.086, +0.208]  beta=+0.08
+    Age25          b=-0.256  HC3 SE=0.105  t(95)=-2.45  p=0.0163  95% CI [-0.465, -0.048]  beta=-0.21
+    EventMove      b=+0.003  HC3 SE=0.134  t(95)=+0.02  p=0.9843  95% CI [-0.263, +0.268]  beta=+0.00
+    Events_1       b=+0.147  HC3 SE=0.115  t(95)=+1.27  p=0.2071  95% CI [-0.082, +0.375]  beta=+0.14
+    Events_2       b=+0.030  HC3 SE=0.113  t(95)=+0.27  p=0.7896  95% CI [-0.195, +0.255]  beta=+0.03
+    Events_3       b=+0.036  HC3 SE=0.141  t(95)=+0.25  p=0.8001  95% CI [-0.244, +0.315]  beta=+0.03
+    joint test of the three H3 predictors (HC3): F(3,95)=6.71 p=0.0004
+
+H4 (+ started university, graduated, new job, HC3)
+    n=104  R2=0.187  adj R2=0.137  | HC3 Wald F(6,97)=0.90 p=0.5015
+    Intercept      b=+0.081  HC3 SE=0.120  t(97)=+0.67  p=0.5034  95% CI [-0.158, +0.320]
+    Displacement   b=+0.380  HC3 SE=0.187  t(97)=+2.03  p=0.0453  95% CI [+0.008, +0.752]  beta=+0.40
+    Age25          b=+0.001  HC3 SE=0.150  t(97)=+0.01  p=0.9952  95% CI [-0.298, +0.299]  beta=+0.00
+    EventMove      b=+0.088  HC3 SE=0.134  t(97)=+0.66  p=0.5111  95% CI [-0.177, +0.354]  beta=+0.08
+    Events_1       b=-0.013  HC3 SE=0.100  t(97)=-0.13  p=0.8941  95% CI [-0.212, +0.185]  beta=-0.01
+    Events_2       b=+0.033  HC3 SE=0.102  t(97)=+0.33  p=0.7447  95% CI [-0.169, +0.236]  beta=+0.03
+    Events_3       b=-0.208  HC3 SE=0.136  t(97)=-1.52  p=0.1316  95% CI [-0.478, +0.063]  beta=-0.18
+    Holm family B: intensity p=0.9337 -> 0.9337   English share p=0.0002 -> 0.0007   quality gap p=0.4105 -> 0.8211   H4 p=0.0453 -> 0.1358
+    H4 as an ordinal (proportional-odds) model, difficulty in 4 ordered bands: easier, no change, slightly harder, harder (n=104): Displacement b=+2.244 p=<.0001
+    switching between Arabic and English (change row): 39 more vs 19 less, sign p=0.0119 | Spearman with displacement rho=-0.22 p=0.0231
+    current language (1 mostly Arabic .. 3 mostly English) vs AI-attributed decrease, Spearman: WorkStudy 0.37 (p=0.0001); Writing 0.30 (p=0.0019); Self 0.43 (p=<.0001); Personal 0.31 (p=0.0016); Family 0.29 (p=0.0033); Fusha 0.33 (p=0.0009); Religion 0.27 (p=0.0069); Consume 0.30 (p=0.0021)
+    childhood home languages include Arabic: n=104 (1 without)
 ================================================================================================
 
 H3 (displacement over writing, self, personal, family only - the 27 Sep plan, HC3)

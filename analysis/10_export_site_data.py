@@ -87,7 +87,6 @@ grew_other_arab = int(d.Country_GrewUp.isin([2, 3, 4, 5]).sum())
 sample = {
     'n': int(len(d)), 'core_n': int(d.core.sum()), 'moved_since_2022': int((d.Moved_Since2022 == 1).sum()),
     'grew_up_lebanon': int((d.Country_GrewUp == 1).sum()), 'live_lebanon': int((d.Country_Now == 1).sum()),
-    'lebanon_either': int(((d.Country_GrewUp == 1) | (d.Country_Now == 1)).sum()),
     'items': [counts(c) for c in ['Age', 'Gender', 'Education', 'Role', 'Field', 'Eng_Prof', 'Country_GrewUp',
                                   'Country_Now', 'AI_Start', 'AI_Freq', 'AI_TaskShare', 'AI_Lang', 'AI_Breadth',
                                   'AI_Content', 'AI_ContentLang', 'FushaPreAI', 'Events']],
@@ -177,12 +176,16 @@ def fam_b(df, disp='Displacement', cov=('Age25', 'EventMove')):
 
 
 d['SocialLoss'] = -d.SocialMedia
+_h4 = d.dropna(subset=['AbilityDecline', 'Displacement', 'Age25', 'EventMove'])
+_cook = smf.ols('AbilityDecline ~ Displacement + Age25 + EventMove', _h4).fit().get_influence().cooks_distance[0]
+noinf = d.drop(index=_h4.index[int(np.argmax(_cook))])       # the respondent with the largest Cook's distance in H4
 SPECS = [('Primary specification', d, {}), ("Four-domain score", d, {'disp': 'Displacement4'}),
          ('Dialect domains only', d, {'disp': 'DialectLoss'}), ('Age as the only covariate', d, {'cov': ('Age25',)}),
          ('No covariates', d, {'cov': ()}), ('Adding English proficiency', d, {'cov': ('Age25', 'EventMove', 'Eng_Prof')}),
+         ('Adding field and AI tenure', d, {'cov': ('Age25', 'EventMove', 'Computing', 'AI_TenureRank')}),
          ('Adding social-media attribution', d, {'cov': ('Age25', 'EventMove', 'SocialLoss')}),
          ('Without straight-line responders', d[d.straightline == 0], {}),
-         ('Without the most influential case', d[d.id != 21], {}), ('Core sample', core, {})]
+         ('Without the most influential case', noinf, {}), ('Core sample', core, {})]
 fb = fam_b(d)
 specs = [dict(label=lab, **fam_b(df, **kw)) for lab, df, kw in SPECS]
 assert abs(fb['H3b']['b'] - 0.169198) < 1e-5 and abs(fb['H4']['p'] - 0.053237) < 1e-5
@@ -195,8 +198,9 @@ for m in re.finditer(r'a  \(X->M\)\s+= (\S+)\s+HC3 p=(\S+)\n\s+b  \(M->Y \| X\) 
                'c_direct': float(m.group(5)), 'c_total': float(m.group(7)), 'indirect': float(m.group(8)),
                'ci': [float(m.group(9)), float(m.group(10))]})
 assert len(h5) == 2
-infl = grab(r'H4 influence \(all respondents\): largest Cook\'s distances .*?: id 21: (\S+),', PS)
-loo = grab(r'leave-one-out over all 104: p from \S+ to (\S+); single removals giving p > \.0125 [^:]*: (\d+)', PS)
+infl = grab(r'H4 influence \(all respondents\): largest Cook\'s distances [^:]*: (\S+),', PS)
+assert abs(float(infl.group(1)) - _cook.max()) < .006
+loo = grab(r'leave-one-out over all 104: p from \S+ to (\S+); single removals giving p < \.0167 \(.*?\): (\d+)', PS)
 rel = {}
 for m in re.finditer(r'^\s{4}(\w+) \(([^)]+)\)\s+\(all respondents\)\s+n=(\d+)\s+omega=(\S+) \[(\S+), (\S+)\]\s+alpha=(\S+)', PS, re.M):
     rel[m.group(1)] = {'items': m.group(2), 'n': int(m.group(3)), 'omega': float(m.group(4)),
@@ -209,10 +213,10 @@ hyp = {
     'wild_holm': {'H3b': pv(wild.group(1)), 'H4': pv(wild.group(2))}, 'firth_english_p': pv(firth.group(1)),
     'h4_spearman': float(grab(r'Spearman Displacement-AbilityDecline rho=(\S+)', PS).group(1)),
     'h4_influence': {'cooks_d': float(infl.group(1)), 'loo_max_p': pv(loo.group(1)),
-                     'loo_above_holm': int(loo.group(2))},
+                     'loo_below_holm': int(loo.group(2))},
     'h5': {'primary': h5[0], 'core': h5[1]}, 'reliability': rel,
     'english_share_vs_proficiency_rho': float(eng_rho.statistic),
-    'age25': {'n': int(len(age)), 'no_change': int((age.DomainsLost == 0).sum()),
+    'age25': {'n': int(len(age)), 'no_decrease': int((age.DomainsLost == 0).sum()),
               'disp_mean': float(age.Displacement.mean()), 'disp_mean_under25': float(d[d.Age25 == 0].Displacement.mean())},
     'power_min_r': float(grab(r'smallest correlation detectable .*? is r = (\S+)', PS).group(1)),
 }
@@ -252,7 +256,7 @@ ML_LABEL = {'DomainsLost': 'Domains with a decrease (count)', 'AnyFormalLoss': '
             'Loss_Personal': 'Personal matters', 'Loss_Family': 'Family and friends', 'Loss_Fusha': 'Fusha (formal texts)',
             'Loss_Religion': 'Religious texts', 'Loss_Consume': 'Following content',
             'Substitution': 'Substitution (English instead of Arabic)', 'ExpectedLoss': 'Expected decrease in two years (count)',
-            'AnyDifficulty': 'Any difficulty without AI'}
+            'AnyDifficulty': 'Net difficulty without AI'}
 TXT_LABEL = {'DomainsLost': 'domains lost (count)', 'AnyFormalLoss': 'any formal-domain loss',
              **{'Loss_' + x: 'loss: ' + x for x in DOM},
              'Substitution': 'substitution (English instead of Arabic because of AI)',
@@ -308,6 +312,12 @@ for tgt in ML_LABEL:
         fr = tab[(tab.target == tgt) & (tab.model == name) & (tab.features == 'M1 + AI use')]
         if len(fr):
             item['blocks']['with_ai_' + name] = {'score': float(fr.iloc[0].score)}
+    if kind == 'clf':                       # Hanley-McNeil 95% CI of the headline AUC
+        A, n1 = item['blocks']['with_ai']['score'], item['n_yes']
+        n2 = item['n'] - n1
+        q1, q2 = A / (2 - A), 2 * A * A / (1 + A)
+        se = np.sqrt((A * (1 - A) + (n1 - 1) * (q1 - A * A) + (n2 - 1) * (q2 - A * A)) / (n1 * n2))
+        item['auc_ci'] = [float(A - 1.96 * se), float(min(1.0, A + 1.96 * se))]
     item['delta_ai'] = delta(tgt)
     item['usability'] = usability(USE if r0.src == '05' else USE_06, tgt)
     targets.append(item)
@@ -328,7 +338,7 @@ assert sum(t['usability']['usable'] for t in targets) == 3
 STRATS = ['none', 'class weights', 'random duplication', 'SMOTENC to balance', 'SMOTENC amplified x5', 'SMOTENC + Tomek',
           'noise augmentation x5']
 OVER_LABEL = {'ANY FORMAL-DOMAIN LOSS': 'Any formal-domain decrease', 'LOSS: WRITING': 'Messages and posts',
-              'SUBSTITUTION': 'Substitution (English instead of Arabic)', 'HARDER WITHOUT AI': 'Any difficulty without AI'}
+              'SUBSTITUTION': 'Substitution (English instead of Arabic)', 'HARDER WITHOUT AI': 'Net difficulty without AI'}
 over = []
 for m in re.finditer(r'^([A-Z][A-Z :-]+?)\s+\(n=(\d+): (\d+) yes / (\d+) no\)\n(.*?)(?=\n\n)', OVR, re.M | re.S):
     rows = []
@@ -407,49 +417,12 @@ assert len(REFS) >= 35 and REFS['kubrak2025']['short'] == 'Kubrak et al.', REFS.
 assert '\\' not in json.dumps(REFS, ensure_ascii=False), 'a LaTeX command survived in the references'
 
 # ------------------------------------------------------------------ SPSS against Python (crosscheck_spss.py)
-SPSS_LABEL = {
-    'alpha, Displacement (primary)': ('Reliability', 'Cronbach’s α, decrease score (8 areas)'),
-    'alpha, Ability decline (primary)': ('Reliability', 'Cronbach’s α, difficulty without AI'),
-    'alpha, Quality gap (primary)': ('Reliability', 'Cronbach’s α, perceived quality gap (4 items)'),
-    'alpha, Quality gap, 3 items (primary)': ('Reliability', 'Cronbach’s α, perceived quality gap (3 items)'),
-    'Wilcoxon Z, H1a Fusha (primary)': ('Direction and order', 'Wilcoxon z, H1a Fusha'),
-    'Wilcoxon p, H1a Fusha (primary)': ('Direction and order', 'Wilcoxon p, H1a Fusha'),
-    'Wilcoxon Z, H1b work/study (primary)': ('Direction and order', 'Wilcoxon z, H1b work or study'),
-    'Wilcoxon p, H1b work/study (primary)': ('Direction and order', 'Wilcoxon p, H1b work or study'),
-    'Wilcoxon Z, H2a work/study vs family (primary, complete cases)': ('Direction and order', 'Wilcoxon z, H2a work or study vs family'),
-    'Wilcoxon p, H2a work/study vs family (primary, complete cases)': ('Direction and order', 'Wilcoxon p, H2a work or study vs family'),
-    'Wilcoxon Z, H2b Fusha vs dialect (primary)': ('Direction and order', 'Wilcoxon z, H2b Fusha vs dialect'),
-    'Wilcoxon p, H2b Fusha vs dialect (primary)': ('Direction and order', 'Wilcoxon p, H2b Fusha vs dialect'),
-    'sign test p, H1a Fusha (primary)': ('Direction and order', 'Sign test p, H1a Fusha'),
-    'sign test p, H1b work/study (primary)': ('Direction and order', 'Sign test p, H1b work or study'),
-    'Friedman chi-square, H2a (primary)': ('Direction and order', 'Friedman χ², H2a order'),
-    'Mann-Whitney p, stable vs changed (primary)': ('Group comparisons', 'Mann–Whitney p, unchanged vs changed setting'),
-    'Mann-Whitney p, stable vs changed (primary, under 25)': ('Group comparisons', 'Mann–Whitney p, same, under 25 only'),
-    'B EnglishShare in "Displacement ~ ... EventMove"': ('Regression', 'English share → decrease (H3)'),
-    'B AI_Intensity in "Displacement ~ ... EventMove"': ('Regression', 'AI-use intensity → decrease (H3)'),
-    'B Displacement in "AbilityDecline ~ ... EventMove"': ('Regression', 'Decrease → difficulty (H4)'),
-    'B EnglishShare in "Displacement ~ ... SocialLoss"': ('Regression', 'English share, social media controlled'),
-    'B stable in "d_WorkStudy ~ ... Age25"': ('Regression', 'Unchanged setting → work/study change, age controlled'),
-    'B EnglishShare in "Displacement ~ ... QualityGap"': ('Regression', 'English share, no covariates'),
-    'B Displacement in "AbilityDecline ~ ...AbilityDecline ~ Displa': ('Regression', 'Decrease → difficulty, no covariates'),
-    'B EnglishShare in "Displacement4 ~ ... EventMove"': ('Regression', 'English share, four-area score'),
-    'B Displacement4 in "AbilityDecline ~ ... EventMove"': ('Regression', 'Decrease → difficulty, four-area score'),
-    'B EnglishShare in "Displacement ~ ... EventMove" (core sample)': ('Regression', 'English share, core sample'),
-    'B Displacement in "AbilityDecline ~ ... EventMove" (core sampl': ('Regression', 'Decrease → difficulty, core sample'),
-    'B EnglishShare, H3 without straight-liners': ('Regression', 'English share, without straight-line responders'),
-    'B Displacement, H4 without straight-liners': ('Regression', 'Decrease → difficulty, without straight-line responders'),
-    'mean d_WorkStudy (primary)': ('Means', 'Mean change, work or study'),
-    'mean d_Fusha (primary)': ('Means', 'Mean change, Fusha'),
-    'mean d_Religion (primary)': ('Means', 'Mean change, religious texts'),
-    'mean d_Family (primary)': ('Means', 'Mean change, family and friends'),
-}
 with open(os.path.join(RES, 'spss_crosscheck.json'), encoding='utf-8') as _f:
     _cc = json.load(_f)
 assert _cc['n'] == len(d) and _cc['agree'] == _cc['total'], 'SPSS and Python disagree, or the cross-check is stale'
-assert {c['statistic'] for c in _cc['checks']} <= set(SPSS_LABEL), 'a cross-checked statistic has no label'
 SPSS = {'n': _cc['n'], 'agree': _cc['agree'], 'total': _cc['total'],
-        'checks': [{'group': SPSS_LABEL[c['statistic']][0], 'label': SPSS_LABEL[c['statistic']][1],
-                    'spss': c['spss'], 'python': c['python']} for c in _cc['checks']]}
+        'checks': [{'group': c['group'], 'label': c['statistic'], 'spss': c['spss'], 'python': c['python']}
+                   for c in _cc['checks']]}
 
 # ------------------------------------------------------------------ the questionnaire, as fielded (questions and options only)
 from instrument_data import S as SCALES, T as TEXTS  # noqa: E402
@@ -462,10 +435,10 @@ def clean(t):
 def questionnaire():
     out = []
     for sec in SECTIONS:
-        if sec['id'] == 'consent':                 # the information page, not a question
-            continue
         items = []
         for it in sec['items']:
+            if sec['id'] == 'consent' and it['type'] == 'text':    # the information page stays out
+                continue
             help_ = it.get('help')
             note = TEXTS[help_] if isinstance(help_, str) else help_
             if it['type'] == 'text':

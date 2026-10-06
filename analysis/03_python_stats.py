@@ -44,6 +44,7 @@ os.makedirs(os.path.dirname(OUT), exist_ok=True)
 DOM = ['WorkStudy', 'Writing', 'Self', 'Personal', 'Family', 'Fusha', 'Religion', 'Consume']
 COV = ['Age25', 'EventMove']                      # confounders: age, and starting English-medium study/work or moving
 BOOT, SEED = 5000, 20261002
+MED_BOOT = 100000                                  # H5 mediation: the CI's lower limit sits near 0, so Monte Carlo error must be small
 lines = []
 say = lambda *a: lines.append(' '.join(str(x) for x in a))
 fmtp = lambda p: '<.0001' if p < .0001 else '%.4f' % p
@@ -190,22 +191,29 @@ def family_b(data, label, covs=COV, disp='Displacement', abil='AbilityDecline', 
 
 
 def firth(formula, data):
-    """Firth-penalised logistic regression (the standard remedy for separation), with penalised
-    likelihood-ratio tests for each coefficient."""
+    """Firth-penalised logistic regression (the standard remedy for separation), with profile penalised
+    likelihood-ratio tests: each coefficient is fixed at 0 while the penalty keeps the FULL design, as in R's
+    logistf. (Refitting without the column instead gives each restricted model its own penalty, which makes
+    the p-value depend on the predictor's units: fixed 6 Oct 2026.)"""
     y, X = patsy.dmatrices(formula, data, return_type='dataframe')
     yv, names = y.values.ravel(), list(X.columns)
+    Xv = X.values
+    k = Xv.shape[1]
 
-    def fit(Xv):
-        b = np.zeros(Xv.shape[1])
-        def pll(b):
-            p = 1 / (1 + np.exp(-Xv @ b)); W = p * (1 - p)
-            return np.sum(yv * np.log(p) + (1 - yv) * np.log(1 - p)) + 0.5 * np.linalg.slogdet(Xv.T @ (Xv * W[:, None]))[1]
+    def pll(b):
+        p = 1 / (1 + np.exp(-Xv @ b)); W = p * (1 - p)
+        return np.sum(yv * np.log(p) + (1 - yv) * np.log(1 - p)) + 0.5 * np.linalg.slogdet(Xv.T @ (Xv * W[:, None]))[1]
+
+    def fit(free):   # coefficients not in 'free' stay at 0; penalty and hat values from the full design
+        b = np.zeros(k)
         for _ in range(200):
             p = 1 / (1 + np.exp(-Xv @ b)); W = p * (1 - p)
-            inv = np.linalg.inv(Xv.T @ (Xv * W[:, None]))
+            info = Xv.T @ (Xv * W[:, None]); inv = np.linalg.inv(info)
             Xs = Xv * np.sqrt(W)[:, None]
             h = np.einsum('ij,jk,ik->i', Xs, inv, Xs)
-            step = inv @ (Xv.T @ (yv - p + h * (0.5 - p)))
+            U = Xv.T @ (yv - p + h * (0.5 - p))
+            step = np.zeros(k)
+            step[free] = np.linalg.solve(info[np.ix_(free, free)], U[free])
             old = pll(b)
             while pll(b + step) < old - 1e-12 and np.max(np.abs(step)) > 1e-10:
                 step /= 2
@@ -213,12 +221,8 @@ def firth(formula, data):
             if np.max(np.abs(step)) < 1e-9:
                 break
         return b, pll(b), np.sqrt(np.diag(inv))
-    Xv = X.values
-    b, ll, se = fit(Xv)
-    out = []
-    for j, nm in enumerate(names):
-        _, ll0, _ = fit(np.delete(Xv, j, axis=1))
-        out.append((nm, b[j], se[j], stats.chi2.sf(2 * (ll - ll0), 1)))
+    b, ll, se = fit(list(range(k)))
+    out = [(nm, b[j], se[j], stats.chi2.sf(2 * (ll - fit([i for i in range(k) if i != j])[1]), 1)) for j, nm in enumerate(names)]
     return out, int(len(yv)), int(yv.sum())
 
 
@@ -229,19 +233,24 @@ def mediation(df, x, m, y, covs, title):
     fb = smf.ols('%s ~ %s + %s%s' % (y, x, m, c), df).fit(cov_type='HC3', use_t=True)
     fc = smf.ols('%s ~ %s%s' % (y, x, c), df).fit(cov_type='HC3', use_t=True)
     a, b = fa.params[x], fb.params[m]
+    # percentile bootstrap, MED_BOOT resamples of whole cases; OLS by least squares on the resampled rows
+    one = np.ones(len(df))
+    Xa = np.column_stack([one, df[x].values] + [df[v].values for v in covs])
+    Xb = np.column_stack([one, df[x].values, df[m].values] + [df[v].values for v in covs])
+    mv, yv = df[m].values, df[y].values
     rng = np.random.default_rng(SEED)
-    ind = np.empty(BOOT)
-    for i in range(BOOT):
-        s = df.iloc[rng.integers(0, len(df), len(df))].reset_index(drop=True)
-        ind[i] = smf.ols('%s ~ %s%s' % (m, x, c), s).fit().params[x] * smf.ols('%s ~ %s + %s%s' % (y, x, m, c), s).fit().params[m]
+    ind = np.empty(MED_BOOT)
+    for i in range(MED_BOOT):
+        r = rng.integers(0, len(df), len(df))
+        ind[i] = np.linalg.lstsq(Xa[r], mv[r], rcond=None)[0][1] * np.linalg.lstsq(Xb[r], yv[r], rcond=None)[0][2]
     lo, hi = np.percentile(ind, [2.5, 97.5])
     say('\n' + title)
     say('    n=%d  covariates: %s' % (len(df), ', '.join(covs) or 'none'))
     say('    a  (X->M)     = %+.3f  HC3 p=%s' % (a, fmtp(fa.pvalues[x])))
     say('    b  (M->Y | X) = %+.3f  HC3 p=%s' % (b, fmtp(fb.pvalues[m])))
     say("    c' (direct)   = %+.3f  HC3 p=%s   c (total) = %+.3f" % (fb.params[x], fmtp(fb.pvalues[x]), fc.params[x]))
-    say('    indirect a*b  = %+.4f  95%% percentile CI [%+.4f, %+.4f]  (%d resamples, seed %d)  -> %s'
-        % (a * b, lo, hi, BOOT, SEED, 'excludes 0' if lo > 0 or hi < 0 else 'includes 0'))
+    say('    indirect a*b  = %+.4f  95%% percentile CI [%+.4f, %+.4f]  (%d resamples, seed %d)  -> %s; share of resamples <= 0: %.4f'
+        % (a * b, lo, hi, MED_BOOT, SEED, 'excludes 0' if lo > 0 or hi < 0 else 'includes 0', np.mean(ind <= 0)))
     say('    standardized indirect = %+.3f' % (a * b * df[x].std() / df[y].std()))
 
 
@@ -271,16 +280,15 @@ def influence(data, label):
     cook = pd.Series(smf.ols(f, h).fit().get_influence().cooks_distance[0], index=h.id.values).sort_values(ascending=False)
     cut = 4 / len(cook)
     say("    H4 influence %s: largest Cook's distances (rule of thumb 4/n = %.2f): %s"
-        % (label, cut, ', '.join('id %d: %.2f' % (i, v) for i, v in cook.head(3).items())))
-    for drop in [[cook.index[0]], [cook.index[1]], list(cook[cook > cut].index)]:
+        % (label, cut, ', '.join('%.2f' % v for v in cook.head(3).values)))
+    for lab, drop in [('the largest', [cook.index[0]]), ('the second largest', [cook.index[1]]),
+                      ('all %d above 4/n' % int((cook > cut).sum()), list(cook[cook > cut].index))]:
         m = smf.ols(f, h[~h.id.isin(drop)]).fit(cov_type='HC3', use_t=True)
-        say('      without id(s) %-14s b=%+.3f p=%s n=%d' % (','.join(str(int(i)) for i in drop), m.params['Displacement'],
-                                                            fmtp(m.pvalues['Displacement']), int(m.nobs)))
+        say('      without %-20s b=%+.3f p=%s n=%d' % (lab, m.params['Displacement'], fmtp(m.pvalues['Displacement']), int(m.nobs)))
     loo = pd.Series({i: smf.ols(f, h[h.id != i]).fit(cov_type='HC3', use_t=True).pvalues['Displacement'] for i in h.id})
-    say('      leave-one-out over all %d: p from %s to %s; single removals giving p > .0125 (the smallest Holm threshold'
-        ' of four tests): %d %s; giving p > .05: %d'
-        % (len(loo), fmtp(loo.min()), fmtp(loo.max()), int((loo > .0125).sum()),
-           sorted(int(i) for i in loo[loo > .0125].index)[:10], int((loo > .05).sum())))
+    say('      leave-one-out over all %d: p from %s to %s; single removals giving p < .0167 (H4\'s Holm threshold: it ranks'
+        ' second of the four Family B tests): %d; giving p < .05: %d'
+        % (len(loo), fmtp(loo.min()), fmtp(loo.max()), int((loo < .05 / 3).sum()), int((loo < .05).sum())))
 
 
 def omega(X, boot=2000):
@@ -311,14 +319,13 @@ say('=' * 96)
 
 say('\nPARTICIPANTS')
 say('    submitted %d -> consented %d -> eligible %d -> analysed %d' % (len(ALL), int(ALL.Consent.sum()), int(ALL.Eligible.sum()), len(d)))
-def _why(r):
-    w = []
-    if r.Country_GrewUp == 6: w.append('grew up outside the Arab world')
-    if r.Country_Now == 6: w.append('lives outside the Arab world')
-    if r.Moved_Since2022 == 1: w.append('moved since 2022')
-    if r.Events_5 == 1 and r.Moved_Since2022 != 1: w.append('ticked "moved" among life events')
-    return '%d: %s' % (r.id, ', '.join(w))
-say('    outside the core sample (%d): %s' % ((ALL.core == 0).sum(), '; '.join(_why(r) for r in ALL[ALL.core == 0].itertuples())))
+_nc = ALL[ALL.core == 0]
+say('    outside the core sample (%d; reasons overlap): grew up outside the Arab world %d, live outside it %d, moved since 2022 %d,'
+    ' ticked "moved" among life events only %d'
+    % (len(_nc), int((_nc.Country_GrewUp == 6).sum()), int((_nc.Country_Now == 6).sum()), int((_nc.Moved_Since2022 == 1).sum()),
+       int(((_nc.Events_5 == 1) & (_nc.Moved_Since2022 != 1)).sum())))
+_ans = [c for c in ALL.columns if c[:2] not in ('d_',) and c not in ('id',)]
+say('    duplicate submissions (identical answers to every item): %d' % int(ALL.drop(columns=['id']).duplicated().sum()))
 say('    analysed sample: grew up (1 Lebanon, 3 Gulf, 6 outside the Arab world) %s; live now %s; under 25: %d;'
     ' computing/IT: %d; wrote Fusha before AI (yes or sometimes): %d'
     % (d.Country_GrewUp.value_counts().sort_index().to_dict(), d.Country_Now.value_counts().sort_index().to_dict(),
@@ -331,10 +338,11 @@ say('    EventMove in the analysed sample: n=%d (started studying or working in 
     % (d.EventMove.sum(), d.Events_4.sum(), d.Events_5.sum()))
 say('    same work/study setting throughout the AI period: strict n=%d; counting graduation as the same setting n=%d'
     % (d.stable.sum(), d.stable_grad.sum()))
-say('    straight-liners (every change row "much less" or every row "much more"): %s'
-    % ('; '.join('id %d (%d applicable domains, displacement %s)' % (r.id, r.DomainsValid,
-                 'missing' if pd.isna(r.Displacement) else '%.2f' % r.Displacement)
-                 for r in d[d.straightline == 1].itertuples()) or 'none'))
+_sl = d[d.straightline == 1]
+say('    straight-liners (every change row "much less" or every row "much more"): %d, of whom %d have a displacement score'
+    % (len(_sl), int(_sl.Displacement.notna().sum())))
+say('    domains with a decrease: mean %.2f over all %d; %.2f among the %d with at least one'
+    % (d.DomainsLost.mean(), len(d), d.loc[d.DomainsLost > 0, 'DomainsLost'].mean(), int((d.DomainsLost > 0).sum())))
 say('    power: with n=%d, the smallest correlation detectable at 80%% power (alpha .05, two-sided) is r = %.2f'
     % (len(d), np.tanh((1.959964 + 0.841621) / np.sqrt(len(d) - 3))))
 
@@ -378,6 +386,9 @@ def family_a(data, label):
     w = wilcoxon_signed(X.Disp_WorkStudy - X.Disp_Family)
     say('        Friedman chi2(2)=%.2f p=%s Kendall W=%.2f n=%d | work/study vs family Wilcoxon z=%+.2f p=%s (%s)'
         % (fr.statistic, fmtp(fr.pvalue), fr.statistic / (len(X) * 2), len(X), w['z'], fmtp(w['p']), w['method']))
+    w1, w2 = wilcoxon_signed(X.Disp_WorkStudy - X.Disp_Personal), wilcoxon_signed(X.Disp_Personal - X.Disp_Family)
+    say('        steps: work/study vs personal Wilcoxon z=%+.2f p=%s | personal vs family z=%+.2f p=%s (%s)'
+        % (w1['z'], fmtp(w1['p']), w2['z'], fmtp(w2['p']), w2['method']))
     w = wilcoxon_signed(data.Disp_Fusha - data.DialectLoss)
     say('    H2b Fusha vs dialect Wilcoxon on (Fusha loss - dialect loss) z=%+.2f p=%s (%s) r=%+.2f n=%d (mean difference %+.2f)'
         % (w['z'], fmtp(w['p']), w['method'], w['r'], w['n'], (data.Disp_Fusha - data.DialectLoss).mean()))
@@ -388,7 +399,7 @@ def family_a(data, label):
 
 family_a(d, LAB)
 family_b(d, LAB[:-1] + ', HC3)', wild=True)
-say('\nH5  X = AI_Intensity, M = Displacement, Y = AbilityDecline (PROCESS model 4 logic). Underpowered at this n.')
+say('\nH5  X = AI_Intensity, M = Displacement, Y = AbilityDecline (PROCESS model 4 logic; cross-sectional, so not a test of causal order).')
 mediation(d, 'AI_Intensity', 'Displacement', 'AbilityDecline', COV, '    primary')
 
 # ------------------------------------------------------------------ robustness
@@ -434,15 +445,22 @@ z1, p1 = mann_whitney(d.loc[d.stable == 1, 'd_WorkStudy'], d.loc[d.stable == 0, 
 u = d[d.Age25 == 0]
 z2, p2 = mann_whitney(u.loc[u.stable == 1, 'd_WorkStudy'], u.loc[u.stable == 0, 'd_WorkStudy'])
 say('    stable vs changed, Mann-Whitney: all Z=%+.2f p=%s | under 25 only (means %+.2f, n=%d vs %+.2f, n=%d) Z=%+.2f p=%s'
-    % (z1, fmtp(p1), u.loc[u.stable == 1, 'd_WorkStudy'].mean(), int((u.stable == 1).sum()),
-       u.loc[u.stable == 0, 'd_WorkStudy'].mean(), int((u.stable == 0).sum()), z2, fmtp(p2)))
+    % (z1, fmtp(p1), u.loc[u.stable == 1, 'd_WorkStudy'].mean(), int(u.loc[u.stable == 1, 'd_WorkStudy'].notna().sum()),
+       u.loc[u.stable == 0, 'd_WorkStudy'].mean(), int(u.loc[u.stable == 0, 'd_WorkStudy'].notna().sum()), z2, fmtp(p2)))
 _o = d[(d.stable == 1) & (d.Age25 == 1)]
-say('    (%d of the %d strictly stable respondents are aged 25+; of those, %d report no change in any domain)'
+say('    (%d of the %d strictly stable respondents are aged 25+; of those, %d report no decrease in any domain)'
     % (len(_o), int(d.stable.sum()), int((_o.DomainsLost == 0).sum())))
+_s = d[(d.stable == 1) & (d.Events_4 != 1)]
+w, sg = wilcoxon_signed(_s.d_WorkStudy), sign_test(_s.d_WorkStudy)
+say('    stable, also without starting English-medium study or work: n=%d | Wilcoxon p=%s (%s) | sign %d less vs %d more p=%s'
+    % (w['n'], fmtp(w['p']), w['method'], sg['less'], sg['more'], fmtp(sg['p'])))
+_cc = d.loc[d.stable == 1, ['Disp_Family', 'Disp_Personal', 'Disp_WorkStudy']].dropna()
+say('    stable group, complete-case mean decrease: work/study %+.2f, personal %+.2f, family %+.2f (n=%d)'
+    % (_cc.Disp_WorkStudy.mean(), _cc.Disp_Personal.mean(), _cc.Disp_Family.mean(), len(_cc)))
 ols('d_WorkStudy ~ stable + Age25', d, '    work/study change on stable setting, adjusted for age')
 page(d[d.stable == 1], ['Disp_Family', 'Disp_Personal', 'Disp_WorkStudy'], '(strictly stable only)')
 
-say('\n(e) Without the straight-liners (ids %s)' % d.loc[d.straightline == 1, 'id'].tolist())
+say('\n(e) Without the straight-liners (%d)' % int((d.straightline == 1).sum()))
 ns = d[d.straightline == 0]
 w = wilcoxon_signed(ns.d_Fusha)
 say('    H1a Fusha: Wilcoxon z=%+.2f p=%s n=%d' % (w['z'], fmtp(w['p']), w['n']))
@@ -457,6 +475,45 @@ family_b(d, '(+ English proficiency, HC3)', covs=COV + ['Eng_Prof'])
 # ------------------------------------------------------------------ sensitivity: alternative definitions
 say('\n' + '=' * 96)
 say('SENSITIVITY: the alternative at each decision point')
+# ------------------------------------------------------------------ checks requested in review (6 Oct 2026)
+say('\n(h) Checks requested in review')
+_h3 = d.dropna(subset=['Displacement', 'AI_Intensity', 'EnglishShare', 'QualityGap'] + COV)
+for v in ['AI_Intensity', 'QualityGap']:
+    m = smf.ols('Displacement ~ %s%s' % (v, cv(COV)), _h3).fit(cov_type='HC3', use_t=True)
+    r = stats.spearmanr(_h3[v], _h3.EnglishShare)
+    say('    %-13s alone (with the covariates, n=%d): b=%+.3f p=%s | Spearman with the English share rho=%.2f'
+        % (v, int(m.nobs), m.params[v], fmtp(m.pvalues[v]), r.statistic))
+_z = d[['AI_TaskShare', 'AI_BreadthCount']].dropna()
+say('    intensity components: task share vs breadth r=%.2f (n=%d)' % (_z.corr().iloc[0, 1], len(_z)))
+_st = (_h3[['AI_Intensity', 'EnglishShare', 'QualityGap'] + COV + ['Displacement']] - _h3[['AI_Intensity', 'EnglishShare', 'QualityGap'] + COV + ['Displacement']].mean()) / _h3[['AI_Intensity', 'EnglishShare', 'QualityGap'] + COV + ['Displacement']].std()
+_ms = smf.ols('Displacement ~ AI_Intensity + EnglishShare + QualityGap%s' % cv(COV), _st).fit(cov_type='HC3', use_t=True)
+say('    standardised H3 coefficients (HC3 95% CI): ' + '; '.join('%s %+.2f [%+.2f, %+.2f]' % (t, _ms.params[t], *_ms.conf_int().loc[t])
+                                                        for t in ['AI_Intensity', 'EnglishShare', 'QualityGap']))
+family_b(d, '(+ started university, graduated, new job, HC3)', covs=COV + ['Events_1', 'Events_2', 'Events_3'])
+try:
+    from statsmodels.miscmodels.ordinal_model import OrderedModel
+    _o4 = d.dropna(subset=['AbilityDecline', 'Displacement'] + COV).copy()
+    _o4['AbilCat'] = pd.cut(_o4.AbilityDecline, [-np.inf, -1e-9, 1e-9, 1 / 3 + 1e-9, np.inf], labels=False)
+    _om = OrderedModel(_o4.AbilCat, _o4[['Displacement'] + COV], distr='logit').fit(method='bfgs', disp=False)
+    say('    H4 as an ordinal (proportional-odds) model, difficulty in 4 ordered bands: easier, no change, slightly harder, harder (n=%d): Displacement b=%+.3f p=%s'
+        % (len(_o4), _om.params['Displacement'], fmtp(_om.pvalues['Displacement'])))
+except Exception as e:
+    say('    ordinal H4 model failed: %s' % e)
+_sw = d.Switch_Mode.dropna()
+_r = stats.spearmanr(d.Switch_Mode, d.Displacement, nan_policy='omit')
+say('    switching between Arabic and English (change row): %d more vs %d less, sign p=%s | Spearman with displacement rho=%.2f p=%s'
+    % ((_sw > 0).sum(), (_sw < 0).sum(), fmtp(sign_test(-_sw)['p']), _r.statistic, fmtp(_r.pvalue)))
+_cu = []
+for dom, cur in [('WorkStudy', 'CurUse_WorkStudy'), ('Writing', 'CurUse_Writing'), ('Self', 'CurUse_Self'), ('Personal', 'CurUse_Personal'),
+                 ('Family', 'CurUse_Family'), ('Fusha', 'CurUse_Formal'), ('Religion', 'CurUse_Religion'), ('Consume', 'CurUse_Consume')]:
+    x = d[[cur, 'd_' + dom]].dropna()
+    x = x[x[cur].isin([1, 2, 3])]
+    r = stats.spearmanr(x[cur], -x['d_' + dom])
+    _cu.append('%s %.2f (p=%s)' % (dom, r.statistic, fmtp(r.pvalue)))
+say('    current language (1 mostly Arabic .. 3 mostly English) vs AI-attributed decrease, Spearman: ' + '; '.join(_cu))
+_l1 = d[d.L1_Home_1 == 1]
+say('    childhood home languages include Arabic: n=%d (%d without)' % (len(_l1), len(d) - len(_l1)))
+
 say('=' * 96)
 family_b(d, '(displacement over writing, self, personal, family only - the 27 Sep plan, HC3)', disp='Displacement4', wild=True)
 family_b(d, '(dialect-only displacement: self, personal, family, HC3)', disp='DialectLoss')

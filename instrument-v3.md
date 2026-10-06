@@ -34,7 +34,7 @@ Variety tags: L = spoken dialect, H = Fusha, M = mixed/any, R = reverse-coded, �
 
 - EN: You are currently…
 - AR: أنت حالياً…
-- Options (EN): A student / Employed / Both / Neither
+- Options (EN): A student / An employee / Both / Other
 - Options (AR): طالب / موظف / طالب وموظف / غير ذلك
 
 **Education** (mc; role: covariate (sensitivity) / ML)
@@ -137,7 +137,7 @@ Variety tags: L = spoken dialect, H = Fusha, M = mixed/any, R = reverse-coded, �
 - Options (EN): Always Arabic / Mostly Arabic / Depends on the topic / Mostly English / Always English
 - Options (AR): العربية دائماً / العربية غالباً / بحسب الموضوع / الإنجليزية غالباً / الإنجليزية دائماً
 
-**Events** (check; role: covariate (EventMove / EventOther); also defines stable work/study status for ArUse_WorkStudy: stable = none of started university, graduated, new job, and Role != Neither)
+**Events** (check; role: covariate (EventMove / EventOther); also defines stable work/study status for ArUse_WorkStudy: stable = none of started university, graduated, new job, and Role != Other)
 
 - EN: Since you started using AI regularly, did any of these also happen? (tick all that apply)
 - AR: منذ أن بدأت باستخدام الذكاء الاصطناعي بانتظام، هل حدث لك أيضاً أيٌّ مما يلي؟ (اختر كل ما ينطبق)
@@ -189,7 +189,7 @@ Variety tags: L = spoken dialect, H = Fusha, M = mixed/any, R = reverse-coded, �
 | ArUse_WorkStudy | M | Using Arabic in my work or studies | استخدام العربية في عملي أو دراستي |
 | ArUse_Writing | M | Writing messages or posts in Arabic | كتابة الرسائل أو المنشورات بالعربية |
 | ArUse_Self | L | Using Arabic when I talk to myself or write my own notes | استخدام العربية عندما أحدّث نفسي أو أكتب ملاحظاتي الخاصة |
-| ArUse_Personal | L | Using Arabic for personal matters | استخدام العربية في الحديث عن أموري الشخصية |
+| ArUse_Personal | L | Using Arabic when talking about my personal matters | استخدام العربية في الحديث عن أموري الشخصية |
 | ArUse_Family | L | Using Arabic with my family or friends | استخدام العربية مع عائلتي أو أصدقائي |
 | ArUse_Fusha | H | Reading or writing Fusha (news, documents, articles) | قراءة الفصحى أو كتابتها (أخبار، وثائق، مقالات) |
 | ArUse_Religion | H | Reading or listening to religious texts | قراءة نصوص دينية أو الاستماع إليها |
@@ -220,7 +220,7 @@ Variety tags: L = spoken dialect, H = Fusha, M = mixed/any, R = reverse-coded, �
 
 | Code | Var. | English | العربية |
 |---|---|---|---|
-| Abil_Lexical | L | Finding the everyday Arabic word I need | تذكّر الكلمة العربية اليومية التي أحتاجها |
+| Abil_Lexical | L | Recalling the everyday Arabic word I need | تذكّر الكلمة العربية اليومية التي أحتاجها |
 | Abil_Fluency | L | Speaking my dialect smoothly, without pausing for words | التحدث بلهجتي بطلاقة دون التوقف بحثاً عن الكلمات |
 | Abil_ArabicOnly | M | Saying what I mean fully in Arabic, without English words | التعبير عمّا أريده بالعربية كاملاً دون كلمات إنجليزية |
 | Abil_Register | H | Writing a formal text in Fusha (e.g. a letter or report) | كتابة نص رسمي بالفصحى (مثل رسالة أو تقرير) |

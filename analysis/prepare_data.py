@@ -6,7 +6,7 @@ Run:   python analysis/prepare_data.py
 Reads:  analysis/data/responses-raw-2026-10-04.xlsx  (frozen copy of the final export, 105 responses;
         earlier exports of 40 and 65 responses are identical to its first rows)
 Writes: analysis/data/coded.csv            numeric codes only, one row per respondent
-        analysis/data/open_answers.md      the optional free-text answers, for quoting
+        analysis/data/open_answers.md      the optional free-text answers, kept locally, not analysed (consent: group results only)
         analysis/data/scored.csv           coded.csv + every computed score (for the Python/ML side)
         analysis/spss/01_import_and_score.sps   imports coded.csv, labels it, computes scores, saves .sav
 
@@ -136,7 +136,7 @@ def main():
 
     out.to_csv(OUT_CSV, index=False)
 
-    # ---- open answers, for quoting
+    # ---- open answers: kept locally, not analysed or quoted (the consent page promised group results only)
     para = [c for c in spec if c['kind'] == 'para'][0]
     pcol = raw[raw.columns[spec.index(para) + 1]]
     with io.open(OUT_OPEN, 'w', encoding='utf-8') as f:
@@ -201,7 +201,7 @@ def score(d):
     d['Expected'] = Fu.mean(axis=1).where(nv(Fu) >= 6)                        # change; negative = less Arabic expected
     d['AI_BreadthCount'] = d[['AI_Breadth_%d' % i for i in range(1, 9)]].sum(axis=1)
     z = lambda s: (s - s.mean()) / s.std(ddof=1)
-    d['AI_Intensity'] = pd.concat([z(d['AI_TaskShare']), z(d['AI_BreadthCount'])], axis=1).mean(axis=1)    # frequency left out: 82% at its ceiling
+    d['AI_Intensity'] = pd.concat([z(d['AI_TaskShare']), z(d['AI_BreadthCount'])], axis=1).mean(axis=1)    # frequency left out: 79 of 105 (75%) at its ceiling
     d['AI_Intensity3'] = pd.concat([z(d['AI_Freq']), z(d['AI_TaskShare']), z(d['AI_BreadthCount'])], axis=1).mean(axis=1)  # sensitivity
     d['EnglishShare'] = d['AI_Lang'].where(d['AI_Lang'] != 6)                 # 6 = another language -> missing (plan 7.1)
     d['AI_TenureRank'] = 6 - d['AI_Start']               # 5 = started 2022 or earlier (longest use)
@@ -267,16 +267,16 @@ def write_sps(meta, names):
         if mv:
             w('MISSING VALUES %s (%s).' % (n, ','.join(str(x) for x in mv)))
     w('')
-    w('* ---------------------------------------------------------------- flags (plan 6.2 and 7.0).')
+    w('* ---------------------------------------------------------------- flags.')
     w('COMPUTE excl_region = (Country_GrewUp = 6 OR Country_Now = 6).')
     w('COMPUTE moved = (Moved_Since2022 = 1 OR Events_5 = 1).')
-    w('* core: the plan\'s core sample (sensitivity) - grew up and lives in the Arab region, no move since 2022.')
-    w('* The primary analysis uses all respondents (decision of 3 Oct 2026, ANALYSIS-DECISIONS.md).')
+    w('* core: sensitivity sample - grew up and lives in the Arab region, no move since 2022.')
+    w('* The primary analysis uses all respondents.')
     w('COMPUTE core = (excl_region = 0 AND moved = 0).')
     w('* stable: same workplace or university throughout the AI period (no new university, graduation or job; role not "other").')
     w('COMPUTE stable = (Events_1 = 0 AND Events_2 = 0 AND Events_3 = 0 AND Role <> 4).')
     g9 = ', '.join(['ArUse_' + x for x in DOMAINS] + ['Switch_Mode'])
-    w('* straightline: every change row "much less" or every row "much more" (plan 7.0.5; sensitivity only).')
+    w('* straightline: every change row "much less" or every row "much more" (sensitivity only).')
     w('COMPUTE straightline = (MAX(%s) = -2 OR MIN(%s) = 2).' % (g9, g9))
     w('')
     w('* ---------------------------------------------------------------- domain change, filtered.')
@@ -293,7 +293,7 @@ def write_sps(meta, names):
     dc = ', '.join('d_' + x for x in DOMAINS)
     w('')
     w('* ---------------------------------------------------------------- scores.')
-    w('* Loss and decline scores: HIGHER = MORE LOSS (plan 7.1). d_X stay raw change (negative = less Arabic).')
+    w('* Loss and decline scores: HIGHER = MORE LOSS. d_X stay raw change (negative = less Arabic).')
     w('* Suffix 4 or 3 = sensitivity variant; the unsuffixed score is the primary one (see ANALYSIS-DECISIONS.md).')
     w('COMPUTE DomainsValid = NVALID(%s).' % dc)
     w('COMPUTE Displacement = -MEAN.6(%s).' % dc)
@@ -324,7 +324,7 @@ def write_sps(meta, names):
     w('COMPUTE EventMove = (Events_4 = 1 OR Events_5 = 1).')
     w('COMPUTE Medium = (ANY(Sch_SciLang, 2, 3) OR ANY(Uni_Lang, 2, 3, 4)).')
     w('DESCRIPTIVES AI_Freq AI_TaskShare AI_BreadthCount /SAVE.')
-    w('* AI intensity = mean of z(task share) and z(breadth). Frequency is descriptive only, as planned.')
+    w('* AI intensity = mean of z(task share) and z(breadth). Frequency is descriptive only.')
     w('COMPUTE AI_Intensity = MEAN(ZAI_TaskShare, ZAI_BreadthCount).')
     w('COMPUTE AI_Intensity3 = MEAN(ZAI_Freq, ZAI_TaskShare, ZAI_BreadthCount).')
     w('EXECUTE.')

@@ -19,7 +19,7 @@ export function home(main, S) {
         h("a", { class: "btn ghost", href: "#paper" }, "Read the paper"))),
     card({ title: "The short answer", span2: true },
       h("p", { class: "answer" }, "About two thirds say yes, in at least one part of their lives: mostly at work or study and in writing, "
-        + "hardly with family or in religion. What goes with it is not how much people use AI, but the language they use it in."),
+        + "hardly with family or in religion. What goes with it is mainly the language people use AI in, more than how much they use it."),
       kpis([
         { n: pct(r.any_decrease / S.sample.n), l: `report less Arabic somewhere because of AI (${r.any_decrease} of ${S.sample.n})` },
         { n: `${pct(ws.less)} vs ${pct(ws.more)}`, l: "less vs more Arabic in work or study" },
@@ -54,14 +54,14 @@ export function question(main, S) {
       prose("English was moving into Arabic speakers’ lives well before generative AI. Each step reached a different part of life."),
       timeline(S, [
         { when: "University", title: "English leads higher education", text: "English dominates higher education in the UAE, and students at English-medium universities report weaker academic Arabic.", cites: ["albataineh2021", "masri2019"] },
-        { when: "Study and work", title: "English seen as more useful", text: "Qatar University students rate English more useful than Arabic for scientific and professional communication; in Lebanon, English runs across education and professional life.", cites: ["mustafawi2022", "mehio2026"] },
-        { when: "Online", title: "Arabizi on social media", text: "Social networking sites moved young Arabs’ informal writing toward English and Latin script.", cites: ["alghamdi2018"] },
+        { when: "Study and work", title: "English seen as more useful", text: "Qatar University students rate English more useful than Arabic for scientific and professional communication; in Lebanon, where English has spread alongside French, a small interview study found English used across education and professional life.", cites: ["mustafawi2022", "esseili2017", "mehio2026"] },
+        { when: "Online", title: "Arabizi on social media", text: "Social networking sites moved young Arabs’ informal writing into Latin script, often mixed with English, as documented in Saudi Arabia and Jordan.", cites: ["alghamdi2018", "bianchi2012"] },
         { when: "Now", title: "Generative AI", text: "Tools that work better in English arrive in daily study and work. This study asks whether they are the next step.", now: true },
       ]),
       h("div", { class: "gap" }, h("div", { class: "evlabel" }, "The gap"),
         h("p", null, "Research on AI and language has looked at people learning a second language ", c("saarela2026"),
           ", and the closest work on Arabic records which language people choose with ChatGPT ", c("bouzayenne2026"),
-          ". No study had asked Arabic speakers whether AI has changed their own Arabic."))),
+          ". To our knowledge, no study had asked Arabic speakers whether AI has changed their own Arabic."))),
     sec("Two ideas from linguistics",
       grid(
         card({ title: "Domains" }, prose(["Language use is organised by domains: family, friendship, religion, education, work. "
@@ -144,8 +144,8 @@ export function study(main, S) {
         h("ul", null,
           h("li", null, h("b", null, "Direction (H1): "), "Wilcoxon signed-rank tests against zero, with exact sign tests alongside."),
           h("li", null, h("b", null, "Order (H2): "), "Page’s one-sided test of the predicted order, with Friedman’s test and Kendall’s W."),
-          h("li", null, h("b", null, "Predictors (H3, H4): "), "regression with HC3 robust standard errors, adjusted for age and an English-medium start; a wild bootstrap checked every p-value."),
-          h("li", null, h("b", null, "Mediation (H5): "), "PROCESS model 4 logic with a 5,000-resample percentile bootstrap."),
+          h("li", null, h("b", null, "Predictors (H3, H4): "), "regression with HC3 robust standard errors, adjusted for age and an English-medium start or a move abroad; a wild bootstrap checked the p-values."),
+          h("li", null, h("b", null, "Mediation (H5): "), "PROCESS model 4 logic with a 100,000-resample percentile bootstrap."),
           h("li", null, h("b", null, "Multiple testing: "), "Holm’s correction within each family of hypotheses."),
           h("li", null, h("b", null, "Machine learning: "), "repeated 10×5-fold cross-validation, permutation tests, and four usability criteria fixed in advance (Chapter 6)."),
           h("li", null, h("b", null, "Software: "), "SPSS 23 and Python, below."))))),
@@ -185,8 +185,8 @@ function spssSection(S) {
   const groups = [...new Set(X.checks.map((c) => c.group))];
   const fmtv = (v) => (Math.abs(v) < 0.0001 ? "< 0.0001" : f(v, 4));
   return sec("Two programs, one answer",
-    prose(`The analysis was run twice, in two programs written independently: SPSS 23, through syntax files that anyone can rerun, and Python. `
-      + `On all ${X.n} respondents, the ${X.total} statistics computed in both agree to four decimal places.`),
+    prose(`The analysis was run in two programs: SPSS 23, through the two syntax files below, and Python. `
+      + `On all ${X.n} respondents, the ${X.total} statistics computed in both agree to six significant digits. The syntax needs the individual responses, which are not shared.`),
     h("div", { class: "spssband" },
       h("div", { class: "spssbig" }, h("b", null, `${X.agree} / ${X.total}`), h("span", null, "statistics agree between SPSS and Python")),
       h("div", { class: "spsslinks" },
@@ -197,12 +197,12 @@ function spssSection(S) {
     grid(
       card({ title: "In SPSS 23", sub: "Two syntax files: the first imports, labels and scores the data; the second runs the tests." },
         h("ul", { class: "findings" },
-          h("li", null, "Descriptives and frequencies of every item"),
+          h("li", null, "Descriptives and frequencies of the items"),
           h("li", null, "Reliability (Cronbach’s α) of every score"),
-          h("li", null, "Wilcoxon signed-rank and sign tests (H1, H2)"),
+          h("li", null, "Wilcoxon signed-rank and sign tests (H1, H2) and Kendall’s W"),
           h("li", null, "Friedman’s test of the order (H2a)"),
           h("li", null, "Mann–Whitney comparisons"),
-          h("li", null, "Regressions for H3 and H4, in every specification, and in the core sample"),
+          h("li", null, "Regressions for H3 and H4, in every specification of the robustness table, with Cook’s distance"),
           h("li", null, "Spearman correlations of the main scores"))),
       card({ title: "In Python", sub: "What SPSS 23 cannot compute, and the machine learning." },
         h("ul", { class: "findings" },

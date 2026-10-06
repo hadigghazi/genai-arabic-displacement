@@ -38,7 +38,7 @@ T['Less, total'] = T['Much less'] + T['Less']
 T = T.sort_values('Less, total', ascending=True).reset_index(drop=True)      # most loss at the top
 T.round(1).to_csv(os.path.join(OUT, 'fig1_domain_profile.csv'), index=False)
 
-plt.rcParams.update({'font.family': 'DejaVu Sans', 'font.size': 9})
+plt.rcParams.update({'font.family': 'DejaVu Sans', 'font.size': 9, 'pdf.fonttype': 42, 'ps.fonttype': 42})   # TrueType, not Type 3 (IEEE PDF eXpress)
 fig, ax = plt.subplots(figsize=(6.6, 3.9))
 fig.patch.set_facecolor(SURFACE); ax.set_facecolor(SURFACE)
 y = np.arange(len(T))

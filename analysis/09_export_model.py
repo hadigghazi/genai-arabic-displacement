@@ -4,9 +4,16 @@ Fits the usable models (results/ml_usability.txt) on all respondents and exports
 
 Each model is the exact pipeline of 05_ml.py (linear background + AI use: StandardScaler -> SMOTENC ->
 L2 logistic regression, same seed), fitted once on everyone. Only the numbers needed to score a new
-person are exported: the scaler's means and standard deviations and the logistic coefficients. The fitted
-pipeline itself is NOT saved, because SMOTENC keeps the training rows (its nearest-neighbour index), and
-individual responses must never leave this machine.
+person are exported, folded into one formula per model: a weight per unit of each answer, and the model's
+logit at a shared reference profile (the respondents' average answers, rounded to one decimal). The scalers'
+means are NOT exported: the models were fitted on slightly different respondents (104 or 105), and their exact
+means differ by one person's answers. The fitted pipeline itself is not saved either, because SMOTENC keeps the
+training rows (its nearest-neighbour index); individual responses must never leave this machine.
+
+Each model has its own threshold for "likely". The scores come from models trained on oversampled (balanced)
+data, so they run high for a rare outcome: out of fold, a score of 0.5 or more on self-talk meant that only 46%
+had reported it (base rate 27%), while 0.6 or more meant 56%. For the two formal-domain models (base rates near
+50%), 0.5 or more meant 75% and 72%.
 
 The export is checked against scikit-learn: the JSON formula must reproduce predict_proba for every
 respondent, and the app's tests replay synthetic answer profiles (not respondents) with their expected scores.
@@ -75,7 +82,7 @@ SYNTHETIC = [  # invented answer profiles for the app's tests - not respondents
      'AI_TaskShare': 5, 'AI_Breadth': [1, 2, 3, 4, 5, 6, 7, 8], 'AI_Lang': 5, 'AI_Content': 5, 'AI_ContentLang': 5},
     {'Age': 3, 'Education': 1, 'Field': 5, 'Eng_Prof': 2, 'Events': [6], 'AI_Start': 5, 'AI_Freq': 1,
      'AI_TaskShare': 1, 'AI_Breadth': [3], 'AI_Lang': 1, 'AI_Content': 1, 'AI_ContentLang': 1},
-    {'Age': 1, 'Education': 2, 'Field': 2, 'Eng_Prof': 4, 'Events': [], 'AI_Start': 3, 'AI_Freq': 3,
+    {'Age': 1, 'Education': 2, 'Field': 2, 'Eng_Prof': 4, 'Events': [6], 'AI_Start': 3, 'AI_Freq': 3,
      'AI_TaskShare': 3, 'AI_Breadth': [1, 3, 5, 7], 'AI_Lang': 3, 'AI_Content': 3, 'AI_ContentLang': 3},
     {'Age': 2, 'Education': 3, 'Field': 3, 'Eng_Prof': 3, 'Events': [3, 5], 'AI_Start': 2, 'AI_Freq': 2,
      'AI_TaskShare': 4, 'AI_Breadth': [2, 4], 'AI_Lang': 4, 'AI_Content': 4, 'AI_ContentLang': 2},
@@ -84,6 +91,9 @@ SYNTHETIC = [  # invented answer profiles for the app's tests - not respondents
 ]
 
 # ------------------------------------------------------------------ fit and export
+THRESHOLD = {'AnyFormalLoss': 0.5, 'Loss_WorkStudy': 0.5, 'Loss_Self': 0.6}   # out-of-fold majority, see above
+REF = {c: round(float(prim[c].mean()), 1) for c in M1}                               # shared reference profile
+ref = np.array([REF[c] for c in M1])
 models = []
 for tgt in ['AnyFormalLoss', 'Loss_WorkStudy', 'Loss_Self']:
     X, y = data(prim, tgt, M1)
@@ -94,18 +104,21 @@ for tgt in ['AnyFormalLoss', 'Loss_WorkStudy', 'Loss_Self']:
     manual = 1 / (1 + np.exp(-(((X - mean) / scale) @ coef + b0)))
     assert np.max(np.abs(manual - pipe.predict_proba(X)[:, 1])) < 1e-12, tgt
     row = tab[(tab.target == tgt) & (tab.features == 'M1 + AI use') & (tab.model == 'linear')].iloc[0]
+    per_unit = np.round(coef / scale, 4)
+    at_ref = round(float(b0 + ((ref - mean) / scale) @ coef), 4)
+    exported = 1 / (1 + np.exp(-(at_ref + (X - ref) @ per_unit)))
+    assert np.max(np.abs(exported - pipe.predict_proba(X)[:, 1])) < 2e-3, tgt   # rounding moves no score by .002
     tests = []
     for prof in SYNTHETIC:
-        f = features(prof)
-        tests.append({'answers': prof,
-                      'score': float(pipe.predict_proba(np.array([[f[c] for c in M1]], float))[0, 1])})
+        f = np.array([features(prof)[c] for c in M1], float)
+        tests.append({'answers': prof, 'score': float(1 / (1 + np.exp(-(at_ref + (f - ref) @ per_unit)))),
+                      'sklearn_score': float(pipe.predict_proba(f[None, :])[0, 1])})
     models.append({
         'id': tgt, 'label': LABELS[tgt], 'n_yes': int(y.sum()), 'n_no': int(len(y) - y.sum()),
         'cv': dict({'auc': round(float(row.score), 4), 'balanced_accuracy_headline': round(float(row.bal_acc), 4)},
                    **usability(tgt)),
-        'intercept': b0,
-        'features': [{'name': c, 'mean': float(m), 'sd': float(s), 'coef': float(w)}
-                     for c, m, s, w in zip(M1, mean, scale, coef)],
+        'threshold': THRESHOLD[tgt], 'logit_at_reference': at_ref,
+        'features': [{'name': c, 'per_unit': float(w)} for c, w in zip(M1, per_unit)],
         'tests': tests})
     print('%-15s n=%d (%d yes)  CV AUC %.2f  intercept %+.3f' % (tgt, len(y), y.sum(), row.score, b0))
 
@@ -119,6 +132,9 @@ for code in ITEMS:
     opts = [{'code': i + 1, 'en': en, 'ar': ar} for i, (en, ar) in enumerate(zip(it['o']['en'], it['o']['ar']))]
     if code == 'AI_Lang':
         opts = [o for o in opts if o['code'] != 6]   # "another language" was set to missing in the analysis
+    for o in opts:   # options nobody in the sample chose: the model has not seen such answers
+        if code != 'AI_Breadth' and code != 'Events' and not (prim[code] == o['code']).any():
+            o['unseen'] = True
     questions.append({'code': code, 'type': 'check' if it['type'] == 'check' else 'single',
                       'q': it['q'], 'options': opts})
 
@@ -143,7 +159,7 @@ out = {
               'collected': '30 September to 4 October 2026'},
     'method': 'L2 logistic regression (C = 1) on standardised features, SMOTENC oversampling inside training; '
               'evaluated by repeated 10x5-fold cross-validation and permutation tests; fitted on all respondents.',
-    'threshold': 0.5,
+    'reference_profile': REF,
     'feature_order': M1,
     'feature_text': FEATURE_TEXT,
     'questions': questions,

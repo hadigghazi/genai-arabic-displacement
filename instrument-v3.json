@@ -76,9 +76,9 @@
     "help_ar": "",
     "opts_en": [
      "A student",
-     "Employed",
+     "An employee",
      "Both",
-     "Neither"
+     "Other"
     ],
     "opts_ar": [
      "طالب",
@@ -430,7 +430,7 @@
    {
     "code": "Events",
     "type": "check",
-    "role": "covariate (EventMove / EventOther); also defines stable work/study status for ArUse_WorkStudy: stable = none of started university, graduated, new job, and Role != Neither",
+    "role": "covariate (EventMove / EventOther); also defines stable work/study status for ArUse_WorkStudy: stable = none of started university, graduated, new job, and Role != Other",
     "q_en": "Since you started using AI regularly, did any of these also happen? (tick all that apply)",
     "q_ar": "منذ أن بدأت باستخدام الذكاء الاصطناعي بانتظام، هل حدث لك أيضاً أيٌّ مما يلي؟ (اختر كل ما ينطبق)",
     "help_en": "",
@@ -615,7 +615,7 @@
      },
      {
       "code": "ArUse_Personal",
-      "en": "Using Arabic for personal matters",
+      "en": "Using Arabic when talking about my personal matters",
       "ar": "استخدام العربية في الحديث عن أموري الشخصية",
       "variety": "L"
      },
@@ -724,7 +724,7 @@
     "rows": [
      {
       "code": "Abil_Lexical",
-      "en": "Finding the everyday Arabic word I need",
+      "en": "Recalling the everyday Arabic word I need",
       "ar": "تذكّر الكلمة العربية اليومية التي أحتاجها",
       "variety": "L"
      },

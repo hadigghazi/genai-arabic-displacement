@@ -8,18 +8,20 @@ const T = {
     formTitle: "Your answers", formSub: "The same questions, with the same options, as the survey.",
     multi: "tick all that apply", submit: "See the results", reset: "Clear",
     missing: "Please answer every question marked in red.", failed: "The model could not be reached. Please try again.",
-    resultsTitle: "Results", resultsSub: "Each bar places you between people who did not report the decrease and people who did. The score orders people; it is not a percentage chance.",
+    resultsTitle: "Results", resultsSub: "Each bar places you between people who did not report the decrease and people who did; the line marks the model’s cut-off. The score orders people; it is not a percentage chance.",
     likely: "Likely to report this", unlikely: "Unlikely to report this", lower: "did not report it", higher: "reported it",
-    moved: "What moved your score most", raises: "raises", lowers: "lowers",
+    moved: "What moved your score most, compared with an average respondent", raises: "raises", lowers: "lowers",
+    unseen: "No respondent chose this, so the model has not seen it.",
     tested: (m) => `On people it was not trained on, it ranked someone who reported this above someone who did not ${pct(m.cv.auc)} of the time and classified ${pct(m.cv.balanced_accuracy)} correctly (balanced). ${m.n_yes} of ${m.n_yes + m.n_no} respondents reported it.`,
   },
   ar: {
     formTitle: "إجاباتك", formSub: "الأسئلة نفسها والخيارات نفسها كما في الاستبيان.",
     multi: "اختر كل ما ينطبق", submit: "اعرض النتائج", reset: "مسح",
     missing: "يرجى الإجابة عن كل سؤال مظلَّل بالأحمر.", failed: "تعذّر الوصول إلى النموذج. يرجى المحاولة مرة أخرى.",
-    resultsTitle: "النتائج", resultsSub: "يضعك كل شريط بين من لم يُفيدوا بهذا التراجع ومن أفادوا به. النتيجة ترتّب الأشخاص، وليست نسبة احتمال.",
+    resultsTitle: "النتائج", resultsSub: "يضعك كل شريط بين من لم يُفيدوا بهذا التراجع ومن أفادوا به، ويشير الخط إلى حدّ القرار في النموذج. النتيجة ترتّب الأشخاص، وليست نسبة احتمال.",
     likely: "يُرجَّح أن تُفيد بهذا", unlikely: "لا يُرجَّح أن تُفيد بهذا", lower: "لم يُفيدوا به", higher: "أفادوا به",
-    moved: "أكثر ما أثّر في نتيجتك", raises: "يرفع", lowers: "يخفض",
+    moved: "أكثر ما أثّر في نتيجتك مقارنةً بمشارك متوسّط", raises: "يرفع", lowers: "يخفض",
+    unseen: "لم يختر أيّ مشارك هذا الخيار، لذا لم يرَه النموذج.",
     tested: (m) => `عند اختباره على أشخاص لم يُدرَّب عليهم، رتّب من أفاد بهذا فوق من لم يُفد به في ${pct(m.cv.auc)} من الحالات، وصنّف ${pct(m.cv.balanced_accuracy)} تصنيفاً صحيحاً (دقة متوازنة). أفاد به ${m.n_yes} من أصل ${m.n_yes + m.n_no} مشاركاً.`,
   },
 };
@@ -94,8 +96,9 @@ function question(q, i, holder) {
       return h("label", { class: "opt", for: id },
         h("input", { type: q.type === "check" ? "checkbox" : "radio", name: q.code, id, value: o.code, checked,
           onchange: (e) => onChange(q, o.code, e.target.checked, holder) }),
-        h("span", { class: "chip" }, o[state.lang]));
-    })));
+        h("span", { class: "chip", title: o.unseen ? t.unseen : null }, o[state.lang], o.unseen ? h("sup", { "aria-label": t.unseen }, " *") : null));
+    })),
+    q.options.some((o) => o.unseen) ? h("p", { class: "fine" }, "* " + t.unseen) : null);
 }
 
 function onChange(q, code, checked, holder) {
@@ -117,7 +120,7 @@ function onChange(q, code, checked, holder) {
 
 async function submit(holder) {
   const c = state.card;
-  state.missing = new Set(c.questions.filter((q) => q.type === "single" && state.answers[q.code] === undefined).map((q) => q.code));
+  state.missing = new Set(c.questions.filter((q) => (q.type === "single" ? state.answers[q.code] === undefined : !(state.answers[q.code] || []).length)).map((q) => q.code));
   if (state.missing.size) {
     state.error = "missing";
     render(holder);
@@ -150,7 +153,7 @@ function resultsCard() {
       return h("article", { class: "result" + (r.likely ? " likely" : "") },
         h("h4", null, r.label[state.lang]),
         h("span", { class: "verdict" }, r.likely ? t.likely : t.unlikely),
-        h("div", null, h("div", { class: "meter" }, h("div", { class: "mid" }), mark),
+        h("div", null, h("div", { class: "meter" }, h("div", { class: "mid", style: { insetInlineStart: (100 * r.threshold).toFixed(0) + "%" } }), mark),
           h("div", { class: "ends", style: { marginTop: "8px" } }, h("span", null, t.lower), h("span", null, t.higher))),
         h("div", null, h("div", { class: "muted", style: { fontWeight: 600, marginBottom: "4px" } }, t.moved),
           h("ul", { class: "moves" }, r.contributions.slice(0, 3).map((x) => h("li", { class: x.contribution >= 0 ? "up" : "down" },
@@ -175,7 +178,7 @@ function aboutCard() {
       ], ms)),
     card({ title: "What the score means" },
       h("div", { class: "prose" },
-        h("p", null, "Each model is a logistic regression on the 12 answers. The score places you among the survey’s respondents; at 0.5 or above, people with answers like yours mostly reported the decrease."),
+        h("p", null, "Each model is a logistic regression on the 12 answers. The score places you among the survey’s respondents. Above the model’s cut-off (0.5 for the two formal-domain models, 0.6 for self-talk), most respondents with similar scores, scored by models that had not seen them, reported the decrease."),
         h("p", null, "It predicts what people ", h("b", null, "report"), ", not how their Arabic actually changed, and it was validated within this sample only."),
         h("p", null, "Answers about AI use did not make the models significantly more accurate than background answers alone."))));
 }

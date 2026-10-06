@@ -50,14 +50,14 @@ export function prediction(main, S) {
     sec("Background and AI use overlap", grid(gain, relies),
       prose("Answers about AI use alone predict about as well as background alone, and adding one to the other changes little. "
         + "The two carry overlapping information: English level, a background answer, goes with writing to AI in English. "
-        + `The comparison could detect gains of about ${f(S.ml.min_detectable_gain.auc)} AUC, so small gains cannot be ruled out.`)),
+        + `The comparison could detect gains of about ${f(S.ml.min_detectable_gain.auc)} AUC, so gains below that cannot be ruled out.`)),
     sec("A note on oversampling",
       prose("With few people in some groups, it is tempting to create synthetic respondents. Six ways of doing so were compared with none, "
         + "applied correctly, inside the training data only, and incorrectly, to everyone before the data are split."),
       grid(ov[0], ov[1]),
       takeaway(`Applied correctly, oversampling gained at most ${sg(bestGain)} AUC. Applied before the split, it reached ${f(maxLeak)}: synthetic copies of test people leak into training, and the model recognises them instead of predicting them.`)),
     howWeKnow("Models, validation and tests", h("div", { class: "prose" }, h("ul", null,
-      h("li", null, h("b", null, "Question: "), "does information about AI use improve prediction beyond background characteristics (age, field, education, English level, an English-medium start)?"),
+      h("li", null, h("b", null, "Question: "), "does information about AI use improve prediction beyond background characteristics (age, field, education, English level, an English-medium start or a move abroad)?"),
       h("li", null, h("b", null, "Models: "), "L2 logistic or ridge regression with fixed settings; random forests and gradient boosting as checks, which never beat the linear models."),
       h("li", null, h("b", null, "Validation: "), "repeated 10×5-fold cross-validation, with SMOTENC oversampling inside the training folds only."),
       h("li", null, h("b", null, "Tests: "), "Nadeau–Bengio corrected t-tests for comparisons between models; permutation tests (500, the whole pipeline refitted) against chance; Holm’s correction."),

@@ -459,8 +459,8 @@ from the same alternative's M0)
   DomainsLost
     decision 12 alternative (n/a dropped only with "no change"), M0    n=105  Q2 +0.07  | permutation p 0.002
     decision 12 alternative (n/a dropped only with "no change"), M1    n=105  Q2 +0.08  | vs M0 +0.011 [-0.153, +0.176] p 0.889
-    without the straight-liners (ids [13, 29]), M0                     n=103  Q2 +0.06  | permutation p 0.002
-    without the straight-liners (ids [13, 29]), M1                     n=103  Q2 +0.05  | vs M0 -0.013 [-0.201, +0.174] p 0.887
+    without the straight-liners (2)        , M0                     n=103  Q2 +0.06  | permutation p 0.002
+    without the straight-liners (2)        , M1                     n=103  Q2 +0.05  | vs M0 -0.013 [-0.201, +0.174] p 0.887
     core sample (the plan's rule), M0                                  n=89  Q2 +0.06  | permutation p 0.002
     core sample (the plan's rule), M1                                  n=89  Q2 +0.14  | vs M0 +0.084 [-0.128, +0.297] p 0.428
     compact AI block (the H3 predictors: intensity, English share)     n=105  Q2 +0.07  | vs M0 +0.017 [-0.081, +0.115] p 0.731
@@ -469,8 +469,8 @@ from the same alternative's M0)
   AnyFormalLoss
     decision 12 alternative (n/a dropped only with "no change"), M0    n=105  AUC +0.73  bal acc 0.65  BSS +0.13  | permutation p 0.002
     decision 12 alternative (n/a dropped only with "no change"), M1    n=105  AUC +0.77  bal acc 0.71  BSS +0.17  | vs M0 +0.036 [-0.048, +0.120] p 0.397
-    without the straight-liners (ids [13, 29]), M0                     n=103  AUC +0.73  bal acc 0.66  BSS +0.13  | permutation p 0.002
-    without the straight-liners (ids [13, 29]), M1                     n=103  AUC +0.73  bal acc 0.69  BSS +0.13  | vs M0 +0.007 [-0.076, +0.090] p 0.865
+    without the straight-liners (2)        , M0                     n=103  AUC +0.73  bal acc 0.66  BSS +0.13  | permutation p 0.002
+    without the straight-liners (2)        , M1                     n=103  AUC +0.73  bal acc 0.69  BSS +0.13  | vs M0 +0.007 [-0.076, +0.090] p 0.865
     core sample (the plan's rule), M0                                  n=88  AUC +0.72  bal acc 0.63  BSS +0.12  | permutation p 0.002
     core sample (the plan's rule), M1                                  n=88  AUC +0.79  bal acc 0.73  BSS +0.22  | vs M0 +0.071 [-0.037, +0.179] p 0.193
     compact AI block (the H3 predictors: intensity, English share)     n=104  AUC +0.76  bal acc 0.70  BSS +0.19  | vs M0 +0.030 [-0.042, +0.102] p 0.402
