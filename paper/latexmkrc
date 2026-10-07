@@ -1,0 +1,2 @@
+# Overleaf and latexmk: compile with XeLaTeX (needed for the Arabic text)
+$pdf_mode = 5;

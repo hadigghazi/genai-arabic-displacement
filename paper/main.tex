@@ -1,8 +1,12 @@
 % IEEE conference template (IEEEtran). Compile with XeLaTeX for the Arabic text:
 %   latexmk -xelatex main.tex      (or: xelatex, bibtex, xelatex, xelatex)
+% On Overleaf: Menu > Compiler > XeLaTeX (latexmkrc also selects it). The fonts are loaded by file name,
+% so the output is the same on Windows and on Overleaf: TeX Gyre Termes (Times metrics, in every TeX
+% distribution) and Amiri for the Arabic (fonts/, SIL Open Font License).
 \documentclass[conference]{IEEEtran}
 \usepackage{fontspec}
-\setmainfont{Times New Roman}
+\setmainfont{texgyretermes}[Extension=.otf, UprightFont=*-regular, BoldFont=*-bold,
+  ItalicFont=*-italic, BoldItalicFont=*-bolditalic]
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{graphicx}
@@ -15,7 +19,8 @@
 % Arabic: XeTeX's own right-to-left support (TeX--XeT) instead of polyglossia/bidi, which would
 % override IEEEtran's caption style.
 \TeXXeTstate=1
-\newfontfamily\arabicfont[Script=Arabic,Scale=1.15]{Sakkal Majalla}
+\newfontfamily\arabicfont{Amiri}[Script=Arabic, Scale=0.8, Path=fonts/, Extension=.ttf,
+  UprightFont=*-Regular, BoldFont=*-Bold]
 
 \usepackage[hidelinks]{hyperref}
 
@@ -56,7 +61,7 @@ Generative AI tools perform less well in most languages than in English, Arabic 
 
 Research on generative AI and its users' language skills has looked almost entirely at second-language learning, e.g., \cite{saarela2026}. The closest work on Arabic records which language Tunisian and Jordanian users choose with ChatGPT, mostly English among the more proficient \cite{bouzayenne2026,younes2026}, but does not ask whether that choice affects their Arabic elsewhere. A search of OpenAlex and Crossref in October 2026 (ten queries pairing generative AI or ChatGPT with Arabic and language use, shift, attrition, choice or diglossia; 1,497 titles since 2022 screened) found work on AI in Arabic teaching, translation and model performance, but none asking Arabic speakers whether they attribute changes in their own Arabic use to AI.
 
-This study asks Lebanese Arabic--English bilinguals in which domains, and in which direction, they report that AI has changed their use of Arabic (RQ1); whether AI-use intensity, the English share of AI use and the perceived Arabic--English quality gap predict that change (RQ2); whether the change goes with perceived difficulty using Arabic without AI and mediates the link from AI use (RQ3); and whether AI-use information improves out-of-sample prediction of who reports a decrease beyond background characteristics (RQ4). The outcome is the change that respondents attribute to AI, not a measure of language loss.
+This study asks Lebanese Arabic--English bilinguals in which domains, and in which direction, they report that AI has changed their use of Arabic (RQ1); whether AI-use intensity, the English share of AI use and the perceived Arabic--English quality gap predict that change (RQ2); whether the change goes with perceived difficulty using Arabic without AI and mediates the link from AI use (RQ3); and whether AI-use information improves out-of-sample prediction of who reports a decrease beyond background characteristics (RQ4). The outcome is the change respondents attribute to AI, not measured language loss.
 
 % =====================================================================================================
 \section{Background and Hypotheses}
@@ -99,7 +104,7 @@ Sixty-eight of the 105 respondents (65\%) reported an AI-attributed decrease in 
 
 \begin{figure}[t]
 \centerline{\includegraphics[width=\columnwidth]{fig1_domain_profile_column.pdf}}
-\caption{AI-attributed change in Arabic use by domain (all respondents), centred on ``no change''; $n$ in parentheses excludes respondents who marked the domain not applicable.}
+\caption{AI-attributed change in Arabic use by domain (all respondents), centred on ``no change''; $n$ in parentheses excludes those who marked the domain not applicable.}
 \label{fig:profile}
 \end{figure}
 
@@ -209,7 +214,7 @@ Net difficulty without AI (34/71; AUC) & 0.66 & 0.60 & 0.53 & $-0.06$ [$-0.16$, 
 \bottomrule
 \end{tabular}
 \begin{tablenotes}[flushleft]\footnotesize
-\item Means over repeated 10$\times$5-fold cross-validation; chance: AUC 0.50; $Q^2=1-\mathrm{MSE}/\mathrm{Var}(y)$, 0 for predicting the mean. Brackets: Hanley--McNeil 95\% CI \cite{hanley1982}. $\Delta$: with minus without AI use, Nadeau--Bengio CI. Usable: all four criteria (Section~III-D). Last three rows: further targets. Other domains: AUC 0.50--0.69. Holm over 13 targets: usable 0.026.
+\item Means over repeated 10$\times$5-fold cross-validation; chance: AUC 0.50; $Q^2=1-\mathrm{MSE}/\mathrm{Var}(y)$, 0 for predicting the mean. Brackets: Hanley--McNeil 95\% CI \cite{hanley1982}. $\Delta$: gain from AI use, Nadeau--Bengio CI. Usable: all four criteria; Holm over 13 targets 0.026.
 \end{tablenotes}
 \end{threeparttable}
 \end{table*}
@@ -236,7 +241,7 @@ Two thirds of the Lebanese bilinguals in this study report that generative AI ha
 \section*{Appendix: Key Items as Fielded}
 {\scriptsize
 \setlength{\tabcolsep}{2pt}
-\noindent\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.57\columnwidth}>{\raggedleft\arraybackslash}p{0.41\columnwidth}@{}}
+\noindent\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.56\columnwidth}>{\raggedleft\arraybackslash}p{0.42\columnwidth}@{}}
 \toprule
 \emph{Because of AI, do you now do each of these less or more?} & \ar{بسبب الذكاء الاصطناعي، هل أصبحت تقوم بكلٍّ مما يلي أقل أم أكثر؟} \\
 Using Arabic in my work or studies & \ar{استخدام العربية في عملي أو دراستي} \\
