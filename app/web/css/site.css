@@ -85,7 +85,6 @@ nav.pages { padding: 10px 10px 20px; display: flex; flex-direction: column; gap:
   flex-shrink: 0; text-transform: capitalize; border: 1px solid var(--rule); background: var(--surface-2);
   color: var(--ink-2); border-radius: 6px; padding: 4px 10px; font-size: 11.5px; cursor: pointer;
 }
-.sidefoot { margin-top: auto; padding: 14px 20px 18px; border-top: 1px solid var(--rule-2); font-size: 11.5px; color: var(--muted); line-height: 1.5; }
 
 /* ---- Main ---- */
 main { margin-left: 248px; min-width: 0; padding: 30px 36px 64px; max-width: 1180px; }
