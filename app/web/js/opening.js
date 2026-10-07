@@ -60,8 +60,8 @@ export function question(main, S) {
       ]),
       h("div", { class: "gap" }, h("div", { class: "evlabel" }, "The gap"),
         h("p", null, "Research on AI and language has looked at people learning a second language ", c("saarela2026"),
-          ", and the closest work on Arabic records which language people choose with ChatGPT ", c("bouzayenne2026"),
-          ". To our knowledge, no study had asked Arabic speakers whether AI has changed their own Arabic."))),
+          ", and the closest work on Arabic records which language people choose with ChatGPT ", c("bouzayenne2026"), " ", c("younes2026"),
+          ". A search of OpenAlex and Crossref in October 2026 (1,497 titles) found no study that had asked Arabic speakers whether AI has changed their own Arabic."))),
     sec("Two ideas from linguistics",
       grid(
         card({ title: "Domains" }, prose(["Language use is organised by domains: family, friendship, religion, education, work. "
@@ -83,7 +83,7 @@ export function question(main, S) {
           c("wirtz2025"), ", and such ratings track real change only partly ", c("schwaba2023"), ". So the findings describe what bilinguals experience, "
           + "which is where any longer study of AI and Arabic would start."))),
     sec("Sources for this chapter", card({ title: "Cited in this chapter", span2: true }, sources(S, ["kubrak2025", "sallam2024", "albataineh2021", "masri2019",
-      "mustafawi2022", "mehio2026", "alghamdi2018", "saarela2026", "bouzayenne2026", "fishman1965", "fishman1972", "ferguson1959", "wirtz2025", "schwaba2023"]))),
+      "mustafawi2022", "mehio2026", "alghamdi2018", "saarela2026", "bouzayenne2026", "younes2026", "fishman1965", "fishman1972", "ferguson1959", "wirtz2025", "schwaba2023"]))),
     storyNav("question"));
 }
 

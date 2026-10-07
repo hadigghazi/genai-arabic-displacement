@@ -6,12 +6,12 @@ const BASE = "research/";
 function size(n) { return n >= 1e6 ? `${(n / 1e6).toFixed(1)} MB` : `${Math.round(n / 1e3)} kB`; }
 function day(iso) { return iso ? new Date(iso).toLocaleDateString("en-GB", { year: "numeric", month: "long", day: "numeric" }) : ""; }
 const REF_GROUPS = [
-  ["AI and language", ["kubrak2025", "sallam2024", "saarela2026", "bouzayenne2026"]],
-  ["Arabic, English and language shift", ["albataineh2021", "masri2019", "mustafawi2022", "mehio2026", "alghamdi2018", "fishman1965", "fishman1972", "ferguson1959", "hargittai2002"]],
+  ["AI and language", ["ahuja2023", "kubrak2025", "sallam2024", "saarela2026", "bouzayenne2026", "younes2026"]],
+  ["Arabic, English and language shift", ["albataineh2021", "masri2019", "mustafawi2022", "esseili2017", "mehio2026", "alghamdi2018", "bianchi2012", "fishman1965", "fishman1972", "ferguson1959", "hargittai2002"]],
   ["First-language attrition", ["chaouch2025", "gallo2025", "aycicegi2015"]],
-  ["Measuring perceived change", ["wirtz2025", "schwaba2023"]],
-  ["Statistics", ["holm1979", "page1963", "long2000", "davidson2008", "hayes2022", "fritz2007", "firth1993", "dunn2014"]],
-  ["Machine learning", ["nadeau2003", "chawla2002", "vandewiele2021", "santos2018", "pedregosa2011", "lemaitre2017"]],
+  ["Measuring perceived change", ["wirtz2025", "schwaba2023", "podsakoff2003"]],
+  ["Statistics", ["holm1979", "page1963", "long2000", "davidson2008", "hayes2022", "fritz2007", "firth1993", "dunn2014", "hanley1982"]],
+  ["Machine learning", ["nadeau2003", "chawla2002", "vandewiele2021", "pedregosa2011", "lemaitre2017"]],
   ["Software", ["seabold2010", "virtanen2020", "spss23"]],
 ];
 const ch = (id, n, text) => h("a", { href: "#" + id }, text || `Chapter ${n}`);

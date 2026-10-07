@@ -1,0 +1,697 @@
+Literature search, run 2026-10-07
+
+OpenAlex  generative AI Arabic language use                       matches    12838, kept 100
+Crossref  generative AI Arabic language use                       matches  1239418, kept 100
+OpenAlex  ChatGPT Arabic language use                             matches    10632, kept 100
+Crossref  ChatGPT Arabic language use                             matches   814146, kept 100
+OpenAlex  ChatGPT Arabic language shift                           matches     5347, kept 100
+Crossref  ChatGPT Arabic language shift                           matches   468960, kept 100
+OpenAlex  generative AI Arabic language attrition                 matches      292, kept 100
+Crossref  generative AI Arabic language attrition                 matches   872554, kept 100
+OpenAlex  large language model Arabic speakers language choice    matches    13867, kept 100
+Crossref  large language model Arabic speakers language choice    matches  1467213, kept 100
+OpenAlex  ChatGPT Arabic English bilingual                        matches     2202, kept 100
+Crossref  ChatGPT Arabic English bilingual                        matches   558241, kept 100
+OpenAlex  artificial intelligence Arabic language loss            matches    12665, kept 100
+Crossref  artificial intelligence Arabic language loss            matches  1140774, kept 100
+OpenAlex  generative AI first language use survey                 matches   171906, kept 100
+Crossref  generative AI first language use survey                 matches  1575990, kept 100
+OpenAlex  AI chatbot Arabic diglossia                             matches       72, kept 72
+Crossref  AI chatbot Arabic diglossia                             matches   472422, kept 100
+OpenAlex  ChatGPT Lebanon language                                matches     1934, kept 100
+Crossref  ChatGPT Lebanon language                                matches   418644, kept 100
+
+unique titles kept: OpenAlex 829, Crossref 747, both databases combined 1497; mentioning Arabic 664
+
+Titles mentioning Arabic (screened by hand):
+  - &lt;b&gt;Artificial Intelligence in Arabic Language Learning: Exploring Students’ Usage Patterns, Purposes, Benefits, and Perceptions&lt;/b&gt;&lt;b&gt;&lt;/b&gt;
+  - &lt;p&gt;Demetaphorization, Diglossia, and Diacritics: Translation Strategies for Working with Economic Terminology in English and Arabic&lt;/p&gt;
+  - 1 The Study of Arabic
+  - 10 Arabic Diglossia
+  - 10 The Study of the Arabic Dialects
+  - 11 The Dialects of Arabic
+  - 11 The Impact of Diglossia on Arabic Teaching and Learning
+  - 12 The Emergence of Modern Standard Arabic
+  - 15 Arabic as a Minority Language
+  - 16 Arabic Pidgins and Creoles
+  - 17 Arabic as a World Language
+  - 2 Arabic as a Semitic Language
+  - 3 Arabs and Arabic: The Epigraphic Record
+  - 3D Alphanumeric Recognition in Arabic Sign Language Using WiLoR-Based 3D Hand Pose Features
+  - 5 The Emergence of New Arabic
+  - 6 The Development of Classical Arabic
+  - 7 The Structure of Arabic
+  - 8 The Arabic Linguistic Tradition
+  - 9 Middle Arabic
+  - <scp>AI</scp>
+                    and Arabic Education: Barriers and Opportunities for Generative
+                    <scp>AI</scp>
+                    in K‐12 Arabic Education
+  - A Back Translation Analysis of AI-Generated Arabic-English Texts Using ChatGPT: Exploring Accuracy and Meaning Retention
+  - A Brief Review on Preprocessing Text in Arabic Language Dataset: Techniques and Challenges
+  - A Cloud-Based 3D Digital Twin for Arabic Sign Language Alphabet Using Machine Learning Object Detection Model
+  - A Comparative Study of AI-Powered Tools for Arabic-English and English-Arabic Translation
+  - A Comparison of the Accuracy of Generative Artificial Intelligence Models in Taṣrīf and the Explanation of Wazan Meanings: A Study on Their Application in Arabic Morphology (Ṣarf)
+  - A Comprehensive Analysis of Arabic Natural Language Processing Research: Trends, Topic Evolution, and Research Gaps -- A Bibliometric and Topic-Based Study
+  - A Contrastive Analysis of Netflix Arabic Subtitles and ChatGPT Responses for Gyeongsang Dialect Expressions: Exploring Their Potential as Low-resource Regional Language Education Data
+  - A Deep Learning based Approach for Recognition of Arabic Sign Language Letters
+  - A Dual-Task Large Language Model for Adding Diacritics and Translating Jordanian Arabic to Modern Standard Arabic
+  - A Future Vision for Designing Arabic Language Textbooks in Light of Cognitive Strategy Activators Using Artificial Intelligence
+  - A Hybrid Large Language Model-Graph Neural Network Framework for Arabic Sentiment Analysis
+  - A Linguistic Investigation for a Case Study of ChatGPT and Google Translate in Rendering Special Needs Texts from English into Arabic: A Synchronic Case Study
+  - A Multidimensional Analysis of Human and ChatGPT-Generated English Translations of Arabic Film
+  - A Narrative Inquiry of Student’s Public Speaking Ability by Bilingual (English &amp; Arabic) at Boarding School of the Al-Mashduqiyah Kraksaan
+  - A Review of Question-Answering Systems Using Deep Learning in the Arabic Language
+  - A Robust Model for Translating Arabic Sign Language into Spoken Arabic Using Deep Learning
+  - A Scoping Review of Arabic Natural Language Processing for Mental Health
+  - A Study of the English Translation of Arabic Sharia Terms in Legislative Documents: Human versus Artificial
+  - A Study on the Usability of Korean-Arabic Machine Translation for Speeches: Comparison of Google, ChatGPT, and Papago
+  - A Stylistic and Semantic Study of Artificial Intelligence and Human Literary Translation of Salinger's The Catcher in the Rye into Arabic
+  - A Survey of Code-switched Arabic NLP: Progress, Challenges, and Future Directions
+  - A Survey of Large Language Models for Arabic Language and its Dialects
+  - A bilingual fine-tuned language model for measuring digital technology integration in Arabic and English annual report narrative
+  - A contrastive analysis of emotions and thoughts across Arabic and English as foreign languages in narratives written by bilingual Jordanian university students studying in Hungary
+  - A dual-architecture deep learning pipeline for real-time high-accuracy Arabic sign language recognition
+  - AGE-RELATED ARTICULATORY VARIATIONS OF ARABIC /dˤ/: ACOUSTIC ANALYSIS IN ELDERLY NON-NATIVE SPEAKERS
+  - AI Chatbot as an Adaptive Conversational Medium: Enhancing Arabic Speaking Skills  in Digital Communication Contexts
+  - AI Tools and Grammatical Performance in Arabic: A Student Perspective
+  - AI Tools in Translation: Bridging Literalism and Cultural Fluency in English-Arabic Idioms – A Comparative Analysis of ChatGPT and DeepSeek
+  - AI Versus Human Lexicographers: A Comparative Analysis of Translation Strategies for Arabic Collocations and Cultural References
+  - AI and Bilingual Dictionary Compilation: Advancing Arabic - English Lexicography
+  - AI-Assisted Learning in Arabic Grammar: Investigating the Use of ChatGPT and Digital Platforms in Arabic Learning
+  - AI-Based Arabic Sign Language to Voice Translation System
+  - AI-Generated Text Detector for Arabic Language Using Encoder-Based Transformer Architecture
+  - AI-Mediated Discourse in Arabic Grammar Acquisition: Linguistic Interaction Patterns in ChatGPT-Assisted Nahwu Learning
+  - AI-Powered Idiom Translation Between English and Arabic: A Comparative Study of ChatGPT, DeepSeek, and Gemini
+  - AIRABIC: Arabic Dataset for Performance Evaluation of AI Detectors
+  - AL-QASIDA: Analyzing LLM Quality and Accuracy Systematically in Dialectal Arabic
+  - ALLaM: Large Language Models for Arabic and English
+  - ARABIC USE IN MOROCCAN ENGLISH LANGUAGE CLASSROOMS: A MIXED-METHODS STUDY
+  - ARHAHA 2026: The Shared Task on Arabic Humor Automatic Generation
+  - ARTIFICIAL INTELLIGENCE (AI) IN LANGUAGE LEARNING (ENGLISH AND ARABIC CLASS): STUDENTS’ AND TEACHERS’ EXPERIENCE AND PERCEPTIONS
+  - ARTIFICIAL INTELLIGENCE AND ITS ROLE IN ASSESSING ARABIC LANGUAGE SKILLS FOR NON-NATIVE SPEAKERS (A PROPOSED APPLICATIONS)
+  - ARTIFICIAL INTELLIGENCE-DRIVEN ROLE-PLAYING COMMUNICATIVE LEARNING: A TRANSFORMATIVE MODEL TO ENHANCE LEARNERSâ€™ SPEAKING SKILLS IN AN ARABIC LANGUAGE COURSE
+  - ASSESSING THE CGPT TRANSLATION ACCURACY OF ARABIC ANIMAL IDIOMS INTO ENGLISH
+  - Acceptability and Effectiveness Analysis of Large Language Model-Based Artificial Intelligence Chatbot Among Arabic Learners
+  - Accuracy evaluation of ChatGPT, Gemini, and Perplexity in refining Arabic writing structures based on linguistic error taxonomy
+  - AceGPT, Localizing Large Language Models in Arabic
+  - Acquisition and attrition in bilingual vowel systems: evidence from Arabic and English
+  - Acquisition of Arabic Guttural Consonants in Jordanian Arabic-English Bilingual Preschoolers
+  - Advancements in Arabic Text-to-Speech Systems: A 22-Year Literature Review
+  - Advancing Arabic Handwritten Digit Recognition with AI-Enhanced Neural Network Architectures
+  - Adversarial examples in Arabic language
+  - AlGhafa Evaluation Benchmark for Arabic Language Models
+  - AlcLaM: Arabic Dialectal Language Model
+  - AlclaM: Arabic Dialect Language Model
+  - Allocating Decision Rights in Generative AI-Assisted Arabic Writing: A Stage-Gated Human-in-the-Loop Framework for Beginner Learners of Arabic as a Foreign Language
+  - An Arabic Financial Sentiment Dictionary: Bilingual Corporate Disclosures and Market Reaction on the Saudi Stock Exchange
+  - An Arabic gamified quiz to improve parental recognition of early developmental red flags: a pre-post pilot study
+  - An Empirical Study of Transformer-Based Neural Machine Translation for English to Arabic
+  - An Exploration of Language Learning Strategies by Non-native Arabic Speakers: Identifying Effective Approaches
+  - An Intelligent Large Language Model Framework for Context-Aware Translation of Natural-Phenomenon Connotations from English into Arabic
+  - Analisis Kesalahan Morfologi Penerjemahan Arab–Indonesia pada ChatGPT
+  - Analysis Of The Impact Of Chatgpt Use On Arabic Text Translation Skills: A Case Study Of Arabic Language Education Students Of The State Islamic University Of North Sumatra
+  - Analysis of Arabic Language Learning Planning Model
+  - Analysis of Pronunciation Errors in Reading Arabic Language Texts: Case Study of Islamic Educational Management Students
+  - Analysis of Speaking Dificulties in the Drilling Arabic Program (DAP) Subject for Class X MA Bilingual Junwangi Students for Non-Islamic Boarding School Graduate
+  - Analyzing Difficulties in Speaking Arabic and Their Solutions Based on the Book Standards of Arabic Language Skills for Non-Native Speakers
+  - Analyzing the Performance of Gemini, ChatGPT, and Google TranslateinRendering English Idioms into Arabic
+  - Anatomical inspection of similar articulations in Arabic language using dynamic MRI
+  - AraCovTexFinder: Leveraging the transformer-based language model for Arabic COVID-19 text identification
+  - AraEval: An Arabic Multi-Task Evaluation Suite for Large Language Models
+  - AraLingBench A Human-Annotated Benchmark for Evaluating Arabic Linguistic Capabilities of Large Language Models
+  - AraLingBench: A Human-Annotated Benchmark for Evaluating Arabic Linguistic Capabilities of Large Language Models
+  - Arabian Nights or English Days? Accuracy of Large Language Models in Answering Bilingual Dental Multiple‐Choice Questions
+  - ArabianGPT: An Arabic Language Adaptation of GPT-2
+  - ArabianGPT: Native Arabic GPT-based Large Language Model
+  - Arabic Automatic Story Generation with Large Language Models
+  - Arabic ChatGPT Tweets Classification Using RoBERTa and BERT Ensemble Model
+  - Arabic Chatbot Evaluation Based on Extractive Question-Answering Transfer Learning and Language Transformers
+  - Arabic Day Madrasah Aliyah Bilingual Junwangi Krian Sidoarjo: Flagship Arabic Language Development Program for Students
+  - Arabic Educational Neural Network Chatbot
+  - Arabic Hack: Arabic Language Learning Methods in the Digital Era
+  - Arabic Humor as a Diagnostic Probe for Large Language Models
+  - Arabic Language Characteristics that Make its Automatic Processing Challenging
+  - Arabic Language Learning Strategies of Non-Native Speakers at Yarmouk University
+  - Arabic Language Learning in a Multicultural Context at Pesantren
+  - Arabic Language Processing: Current Status And Future Prospects Of Artificial Intelligence
+  - Arabic Language Teachers' Use of TikTok Media to Improve Generation Z's Speaking Skills at Madrasah
+  - Arabic Language Teaching in Arabic Preparatory Schools
+  - Arabic Language for the Indonesian Migrant Workers in Arabic Countries
+  - Arabic Offensive Language and Hate Speech Detection Using Ensemble Transformers and Data Augmentation
+  - Arabic Question Generation Based on the Arabic Language's Structural Characteristics
+  - Arabic Sentiment Analysis for ChatGPT Using Machine Learning Classification Algorithms: A Hyperparameter Optimization Technique
+  - Arabic Sign Language Alphabet Classification via Transfer Learning
+  - Arabic Slang Language Use in Pesantren: An Interpretive Case Study
+  - Arabic Topic Classification in the Generative and AutoML Era
+  - Arabic WikiTableQA: Benchmarking Question Answering over Arabic Tables Using Large Language Models
+  - Arabic as a Semitic Language
+  - Arabic as a home language in Sweden: family language practices and beliefs
+  - Arabic diglossia: advocating for a non-deficit model in comparative analysis of reading and language acquisition
+  - Arabic language education students’ perceptions of the use of artificial intelligence (AI) in Arabic language learning
+  - Arabic language learning resources for russian  speakers
+  - Arabic natural language processing for Qur’anic research: a systematic review
+  - Arabic speech intelligibility: Perception of spoken Arabic by native and non-native speakers
+  - Arabic-Centric Large Language Models for Dialectal Arabic Sentiment Analysis Task
+  - Arabic-English Bilingual Language Preference in Jordan Context
+  - Arabic-English Code-Switching as a Means of Communication Among Speakers of Different Arabic Varieties
+  - Arabic-English-Arabic Literary Translation
+  - ArabicMMLU: Assessing Massive Multitask Language Understanding in Arabic
+  - ArabicSense: A Benchmark for Evaluating Commonsense Reasoning in Arabic with Large Language Models
+  - Artificial Authorship in Contemporary Arabic Poetry: A Stylistic and Computational Analysis of Human–AI Collaborative Texts
+  - Artificial Intelligence And Arabic Translation:, Overcoming Linguistic Complexities
+  - Artificial Intelligence Driven Computational Framework for Evaluating Arabic Literary Text Generation Using ChatGPT
+  - Artificial Intelligence Literacy Among Arabic Language Education Students: Influencing Factors and Pedagogical Implications
+  - Artificial Intelligence Model to Detect and Classify Arabic Dialects
+  - Artificial Intelligence Tools for Analyzing Forensic Linguistic Features of Arabic Texts in a Comparative Case Study
+  - Artificial Intelligence Translation of Arabic Funny Comics by ChatGPT and Transmonkey.
+  - Artificial Intelligence and Arabic Language Processing:
+ A Study on Challenges and Prospects
+  - Artificial Intelligence and Educational Psychology in Love-Based Arabic Language Learning
+  - Artificial Intelligence and Language: Bridging Arabic and English with Technology
+  - Artificial Intelligence and the Transformation of Learning Practices in Arabic Language Education: Student Perceptions, Benefits, Risks, and Ethical Challenges
+  - Artificial Intelligence and the Zone of Proximal Development: Investigating ChatGPT as Digital Scaffolding in Arabic Language Learning
+  - Artificial Intelligence as a Safe Space for Linguistic Expression: A Phenomenological Study of Introverted Arabic Language Learners
+  - Artificial Intelligence for Personalized Language Learning in UAE Higher Education: Optimizing Vocabulary Acquisition Among Arabic-Speaking EFL Learners
+  - Artificial Intelligence for Text Analysis in the Arabic and Related Middle Eastern Languages: Progress, Trends, and Future Recommendations
+  - Artificial Intelligence in Arabic Language Education: A Conceptual Review of Trends, Applications, Challenges, and Future Research in the Era of Generative AI.
+  - Artificial Intelligence in Arabic Language Education: Applications, Perceptions, and Pedagogical Integration
+  - Artificial Intelligence in Arabic Language Education: Opportunities, Challenges and Future Directions
+  - Artificial Intelligence in Arabic Language Learning: A Systematic Literature Review of Educational Trends and Future Directions
+  - Artificial Intelligence in Arabic language education: current applications, challenges, and future perspectives
+  - Artificial Intelligence in Arabic-English Literary Translation: Technological Innovations, Linguistic Accuracy, and Ethical Implications
+  - Artificial Intelligence in Translating Literary : An Accuracy and Satirical Representation of the Arabic Short Story
+  - Artificial Intelligence-Assisted Arabic Language Learning In Islamic Schools: Teachers’ Readiness, Challenges, And Pedagogical Opportunities
+  - Artificial intelligence risk management framework (AI RMF 1.0) - Arabic translation
+  - Assessing DeepSeek R1 and ChatGPT 4.5 in Arabic-English literary translation: performance, challenges, and implications
+  - Assessing English-Arabic Translation of Verb Phrase Ellipsis: A Comparative Study of Google Translate and ChatGPT-4o
+  - Assessing Learning after Generative AI Support: A Framework for Arabic Language Education
+  - Assessing the Accuracy of ChatGPT in Translating English Journalistic Texts into Arabic
+  - Assessing the Arabic Parsing Capabilities of ChatGPT and Cloude: An Expert-Based Comparative Study
+  - Assessing the Performance of ChatGPT-4, Fine-tuned BERT and Traditional ML Models on Moroccan Arabic Sentiment Analysis
+  - Assessing the Quality of ChatGPT-Generating Arabic Subtitles: A Functional and Linguistic Analysis
+  - Assessing the Reliability of Machine Translation in Rendering English Medical Terminology into Standardized Arabic
+  - Assessment and Evaluation in Arabic Language Teaching: A Systematic Literature Review
+  - Assessment of ChatGPT in extracting Arabic morphology: active and passive participles
+  - Atlas-Chat: Adapting Large Language Models for Low-Resource Moroccan Arabic Dialect
+  - Attention-Enriched Mini-BERT Fake News Analyzer Using the Arabic Language
+  - Attitudes of Saudi students in the US towards Arabic diglossia
+  - Authorship Attribution of Arabic Criminal Texts Using Large Language Models: A Comparative Evaluation of ChatGPT, DeepSeek, and Gemini
+  - Automated Building of a Multidialectal Parallel Arabic Corpus Using Large Language Models
+  - Automated Scoring of Arabic Text Using Large Language Models: A Literature Review
+  - Automatic Arabic Sign Language Recognition: A Comprehensive and Critical Review of Methods, Datasets, Challenges, and Future Directions
+  - Automatic Identification and Translation of the French Impersonal Pronoun on into Jordanian Arabic
+  - Automation in Education: What AI Offers for Arabic Language Learning
+  - BALSAM: A Platform for Benchmarking Arabic Large Language Models
+  - Badawi’s Arabic Language Levels Between Theory and Application:
+  - Behavioral Determinants of AI-Driven Arabic Language Learning: Insights from the Extended UTAUT2 Model
+  - Benchmarking Frontier LLMs on Arabic Cultural and Sociolinguistic Knowledge: A Cross-Evaluation Framework with Human SME Ground Truth
+  - Benchmarking Large Language Models for Arabic Diacritization Accuracy
+  - Beyond Cultural Knowledge: Evaluating Arabic Cultural Appropriateness of Large Language Models
+  - Beyond English: Evaluating LLMs for Arabic Grammatical Error Correction
+  - Beyond Poetry: Can Large Language Models Generate Classical Arabic Maqamat?
+  - Beyond Prescriptive Purity in Egypt: Pedagogical Approaches to Standard and Non-Standard Varieties in Arabic (L1 Diglossia), English, and French Classrooms
+  - Bilingual Fake News Detection: Leveraging Deep Learning for Arabic and English Media
+  - Bilingual Learning Strategies of Arabic and English: A Perspective of Noam Chomsky's Linguistic Thought
+  - Breaking language barriers with ChatGPT: enhancing low-resource machine translation between algerian arabic and MSA
+  - Bridging Linguistic and Cultural Nuances: A Comparative Study of Human and AI Translations of Arabic Dialect Poetry
+  - Bridging Traditional Language Pedagogy and AI: Lessons from Arabic Language Programs in Indonesia
+  - Bridging the gap: The role of artificial intelligence in enhancing Arabic language learning, translation, and speech recognition
+  - Bringing ChatGPT into Arabic Language Learning
+  - Building a Bilingual Environment: The Role of Hostel Environment Management in Creating an Immersive Arabic Language Ecosystem
+  - Building an Annotated L1 Arabic/L2 English Bilingual Writer Corpus: The Qatari Corpus of Argumentative Writing (QCAW)
+  - Building the ArabNER Corpus for Arabic Named Entity Recognition Using ChatGPT and Bard
+  - CHAPTER 1. ARABIC AS CHRISTIAN LANGUAGE AND ARABIC AS THE LANGUAGE OF CHRISTIANS
+  - CUET-823 at MAHED 2025 Shared Task: Large Language Model-Based Framework for Emotion, Offensive, and Hate Detection in Arabic
+  - CamelEval: Advancing Benchmarks for Arabic Language Models in Generative Tasks
+  - CamelEval: Advancing Culturally Aligned Arabic Language Models and Benchmarks
+  - Can ChatGPT capture swearing nuances? Evidence from translating Arabic oaths
+  - Challenges and Strategies in Implementing Artificial Intelligence-Based Maharah al-Kalam Learning in Arabic Language Education Study Program
+  - Challenges of Arabic Language Education Students in The 4&lt;sup&gt;th&lt;/sup&gt; Semester of STIT Madani Yogyakarta in Learning Arabic Based on The Use of Technology
+  - ChatGPT across Arabic Twitter: A Study of Topics, Sentiments, and Sarcasm
+  - ChatGPT as a Feedback Provider: Arab Students' Perceptions of AI-Based Writing Evaluation in Academic English
+  - ChatGPT as a New Frontier in Arabic Education Technology
+  - ChatGPT enhances reading comprehension for children with dyslexia in Arabic language
+  - ChatGPT for Arabic Grammatical Error Correction
+  - ChatGPT for Arabic-English Translation: Evaluating the Accuracy
+  - ChatGPT for Identifying Saudi Arabic Dialects
+  - ChatGPT in English-Arabic Translation: Learner Perceptions and the Treatment of Humour and Empathy
+  - ChatGPT in the Academic World: A Study on the Dependence and Ethics of Undergraduate Arabic Language Students' Final Year Projects (FYP)
+  - ChatGPT vs Gemini: Which Digs Deeper into Arabic Semantics?
+  - ChatGPT-AI Technology In Teaching Arabic For Specific Purposes From The Arabic Expert’s Perspective: تكنولوجية تشات جي بي تي (ChatGPT) والذكاء الاصطناعي في تعليم اللغة العربية لأغراض خاصة من منظور خبراء اللغة
+  - Chinese generative AI models (DeepSeek and Qwen) rival ChatGPT-4 in ophthalmology queries with excellent performance in Arabic and English
+  - Claude in Arabic Language Learning: Critical AI Literacy, Self-Regulation, and Process-Oriented Pedagogy
+  - Code-Switching Elicitation Task in Standard Arabic, Dialectal Arabic, and English Among Bilingual Saudi Arabian Students in the United States
+  - Comparative Analysis of Phonetic Errors in Speech of Qolloquial in Arabic Song by Non Arabic Speakers
+  - Comparative Repetition Pedagogy: Integrating Drama, Role Play, and Task-Based Learning in Bilingual Arabic-English University Efl Classrooms
+  - Comparing Measuring Methods for Speech Timing During Rapid Automatic Naming Tasks Using Arabic and English Bilingual Adults
+  - Comparing Measuring Methods for Speech Timing During Rapid Automatic Naming Tasks by Arabic and English Bilingual Adults
+  - Comparing Speech Timing Measuring Methods During Rapid Automatic Naming Tasks: Arabic and English Bilingual Adults
+  - Comprehension of English Conditionals by Advanced Arabic-English Bilingual Speakers
+  - Contribution to Sarcasm Detection in Arabic Using Natural Language Processing Techniques
+  - Copilot and Gemini’s Translation of English and Arabic "Half" -Based Expressions
+  - Corpus-based Arabic language pedagogy for Turkish learners: A bilingual Arabic–Turkish model for data-driven learning
+  - Correction: Investigating the role of Arabic diglossia-centered multi-domain intervention (ADMIN) in enhancing Palestinian-Arabic speaking kindergarten children’s emergent literacy
+  - Critical AI Literacy in Arabic Language Education: Rethinking Teacher Roles, Ethics, and Curriculum in the Age of Generative AI
+  - Cross-cultural adaptation, validation, and arabic translation of the rhinoplasty outcome evaluation
+  - Cross-dialectal Arabic translation: comparative analysis on large language models
+  - Cue weighting in the perception and production of English stop voicing by Arabic-speaking learners: phonological context and immediate post-instruction adjustment
+  - Cultura-Arabica: Probing and Enhancing Arabic Cultural Awareness in Large Language Models via LoRA
+  - Cultural Challenges in Translating English Marketing Terminology into Arabic: A Case Study on Arabic Translation Practices
+  - Cybersecurity Challenges and the Protection of the Arabic Language in the Age of Artificial Intelligence: Digital Security and Safeguarding Methods
+  - DIFFICULTIES OF READING ARABIC AS A FOREIGN LANGUAGE
+  - DIGLOSSIA IN ARABIC LANGUAGE LEARNING: INSIGHTS FROM FOREIGN STUDENTS IN TUNIS
+  - Dallah: A Dialect-Aware Multimodal Large Language Model for Arabic
+  - DarijaBanking: A new resource for overcoming language barriers in banking intent detection for Moroccan Arabic speakers
+  - Dataset Generation for Egyptian Arabic Sign Language
+  - Dawafi' istikhdam ChatGPT lada tullab Qism al-Lughah al-'Arabiyyah bi al-Jami'ah al-Islamiyyah al-'Alamiyyah bi Maliziya
+  - Dawafi' istikhdam ChatGPT lada tullab qism al-lughah al-'Arabiyyah bi al-Jami'ah al-Islamiyyah al-'Alamiyyah bi Maliziya = The main reasons for using ChatGPT among Arabic language department students at the International Islamic University of Malaysia
+  - Definiteness in Levantine Arabic Heritage Speakers of English
+ How Heritage Language Affects Cognition
+  - Delving Into Bilingual Dialogue: The Realm of Code Switching and Mixing in Arabic-English Societies
+  - Delving into Bilingual Dialogue: The Realm of Code Switching and Mixing in Arabic-English Societies
+  - Demotivating Factors and Self-Perceived Communicative Confidence in Arabic Language Learning: A Self-Determination and Expectancy Value Perspective
+  - Depression detection for twitter users using sentiment analysis in English and Arabic tweets
+  - Design a smart platform translating Arabic sign language to English language
+  - Design and Evaluation Framework for a Custom GPT Model for Teaching the Kuwaiti Arabic Dialect
+  - Design of Arabic Sign Language Recognition Model
+  - Design of CEFR-Based Arabic Language Proficiency Test Indicators In The Arabic Language Education Department
+  - Detecting Hate Speech Targeting Protected Groups in Arabic Using Hypothesis Engineering and Zero-Shot Learning with Ground Validation via ChatGPT
+  - Detecting Human-to-AI Author Change in Arabic Text
+  - Detection of Hateful Social Media Content for Arabic Language
+  - Developing Instructional Media Artificial Intelligence Of Arabic Language Teaching and Learning
+  - Developing a Bilingual English-Arabic Dataset for Textbook  Question Answering: A Hybrid Translation and Validation Approach
+  - Developing an Educational Program Based on Artificial Intelligence to Improve Understanding and Comprehension among Fourth-Grade Students in the Arabic Language
+  - Development of Android Education Application for Arabic Alphabet with Artificial Intelligence for Children
+  - Development of Educational Media Using the 4D Model  in Arabic Language Learning
+  - Development of a ChatGpt Script-Based Learning Website for Arabic Language Learning at Nurul Huda Middle School, Malang City
+  - Development of an Arabic-Language Virtual Assistant for Public Services to Improve Accessibility of Government Services for Iraqis
+  - DialectalArabicMMLU: Benchmarking Dialectal Capabilities in Arabic and Multilingual Language Models
+  - Digital Assessment Tools in Arabic Language Learning: Test and Non-Test Based Technology
+  - Digital Natives and the Call for Innovation in Arabic Language Education
+  - Digitization of the Arabic manuscript in the light of artificial intelligence technologies-from preservation to investment
+  - Diglossia And The Magic Of Arabic Pronunciation In One Thousand And One Nights
+  - Diglossia and Identity in Oman: a Sociolinguistic Investigation of Language Choice in Omani Arabic Dialects
+  - Diglossia and Orthographic Complexity as Multiplicative but not Additive Challenges in Arabic: A Critical Review
+  - Diglossia between Edge and Bridge in Arabic Science Fiction: Reinventing Narrative after the Arab Spring
+  - Diglossia in Arabic
+  - Diglossia in Translating Proverbs between  Arabic and English: A Linguistic Perspective
+  - Does AI Understand Arabic? Evaluating The Politics Behind the Algorithmic Arabic Content Moderation
+  - Does the Arabic Literary Language Disclose the Mind of Its Speakers?
+  - EVALUATING AN AI MODEL’S QUR’ANIC RECALL AND CITATION IN ARABIC AND SAHIH INTERNATIONAL ENGLISH: A REAL-DATA PILOT ETHICAL AND ANALYTICAL REVIEW
+  - EXPERT PROGRAMMING TECHNOLOGY IN THE ARABIC LANGUAGE
+  - EXPLORING THE POTENTIAL OF CHATGPT AS A TECHNOLOGY-BASED TOOL FOR ARABIC LANGUAGE LEARNING: BENEFITS AND RISKS
+  - Editorial: Emerging techniques in Arabic natural language processing
+  - Educational Technology Based on Artificial Intelligence in Supporting Distance Learning in Arabic Language Learning in Higher Education
+  - Empathy-Driven Arabic Conversational Chatbot Using a Pre-Trained Transformer Model
+  - Empirical Evaluation of Language Models for Arabic Financial Sentiment Analysis: A Comparative Study of Pretrained and General Large Language Models
+  - Employing Artificial Intelligence in the educational of Arabic language - Audiovisual Programs as a Model-
+  - Employing artificial intelligence in teaching the Arabic language to non-native speakers remotely
+  - Empowering Arabic Educators in the Digital Era: Evaluating an AI-TPACK Professional Training Model
+  - English to Arabic Translation of Medical Texts: A Review of Research (2015-2025)
+  - English-Arabic Language Dynamics: A Systematic Self-Review of English Hegemony in Educational and Sociolinguistic Landscapes
+  - Enhancing Arabic Chatbots: Addressing Dialectal Challenges and Proposed Solutions Using Generative AI
+  - Enhancing Arabic Speaking Skills via ChatGPT: An Exploratory Study at Nahdlatul Ulama Sunan Giri University
+  - Enhancing Arabic Speech Therapy with AI: A Specialized AI-Based System for Arabic Stuttering Classification
+  - Enhancing Medical Support in the Arabic Language Through Personalized ChatGPT Assistance
+  - Enhancing Semantic Similarity Understanding in Arabic NLP with Nested Embedding Learning
+  - Enhancing the Use of ChatGPT for Self-Talk Practice: Integrating Gamification and Artificial Intelligence into Arabic Language Education
+  - Enhancing translation teaching for L2 learners through ChatGPT: A study of AI-assisted Arabic-German translation
+  - Error Analysis of Pretrained Language Models (PLMs) in English-to-Arabic Machine Translation
+  - Ethnography of Code-Switching: A Classroom-Based Study in Bilingual (English–Arabic) Islamic Boarding Schools
+  - Evaluating Algorithmic Fairness in AI Detection Tools for Arabic and English Student Writing
+  - Evaluating ChatGPT and Bard AI on Arabic Sentiment Analysis
+  - Evaluating ChatGPT performance in Arabic dialects: A comparative study showing defects in responding to Jordanian and Tunisian general health prompts
+  - Evaluating English-Arabic translation: Human translators vs. Google Translate and ChatGPT
+  - Evaluating Large Language Models using Arabic Prompts to Generate Python Codes
+  - Evaluating Terminological Consistency in AI-Generated English–Arabic Political Translation
+  - Evaluating Translation Quality: A Qualitative and Quantitative Assessment of Machine and LLM-Driven Arabic–English Translations
+  - Evaluating the Accuracy of ChatGPT-4 in Editing Arabic Writing: A Comparative Study With Human Editors
+  - Evaluating the Accuracy of Machine Translation in Rendering Arabic Idioms into English: A Case Study on Google Translate and ChatGPT
+  - Evaluating the Performance of LLMs When Translating Saudi Arabic as Low Resource Language
+  - Evaluating the Reliability of Large Language Models in Literary Analysis of Arabic Novels: A Structured Benchmark Using Grounded Textual Evidence
+  - Evaluation of AI-generated reading comprehension materials for Arabic language teaching
+  - Evaluation of Adversarial Robustness in Arabic Language Models
+  - Evaluation of Small Language Models for Arabic Language Processing
+  - Evaluation of Speaker Verification Models in Arabic Datasets
+  - Evaluation of an Arabic Chatbot Based on Extractive Question-Answering Transfer Learning and Language Transformers
+  - ExaAUAC: Arabic Twitter user age prediction corpus based on language and metadata features
+  - Examining the Influence of Diglossia on Arabic-Speaking Students' Progress in Modern Standard Arabic
+  - Exploring AI’s Capability in Translating English Metaphors Into Arabic
+  - Exploring Ai-Assisted Transcription as Scaffolding In Arabic Listening Comprehension
+  - Exploring Arabic Diglossia in Learning Kalām: Bridging the Gap in Daily Communication
+  - Exploring Arabic Language Learning in the Age of AI Chatbots: A Conceptual Framework
+  - Exploring ChatGPT as corrective feedback in Arabic writing: A phenomenological study of Indonesian university students’ experiences
+  - Exploring Language Attitudes and Identity Construction in Arabic Diglossia
+  - Exploring Pedagogical Approaches for Teaching Arabic as a Foreign Language : Case of Turkish Students in the Department of Arabic Literature at Istanbul University
+  - Exploring Students' Usage Patterns of the Arabic Language in International Schools and Parental Perceptions of Arabic Language Importance
+  - Exploring narrative proficiency in Arabic speakers: A literature review
+  - Exploring self-directed learning practices through ChatGPT among non-native Arabic learners at a Saudi university
+  - Exploring the Application of Artificial Intelligence in Arabic Language Learning: Perspectives of Students and Teachers
+  - Exploring the Impact of Arabic Diglossia on Social-Emotional Skills: A Multilingual Context
+  - Exploring the Impact of ChatGPT on Non-native Learners of Arabic Language: Challenges and Opportunities
+  - Exploring the Use of ChatGPT in Teaching Arabic Case Endings: Effectiveness, Challenges and Recommendations
+  - Facilitating the Teaching of Arabic to Non-Native Speakers Using Computers: A Computational Linguistic Study
+  - Factors influencing the acceptance and use of ChatGPT among English as a foreign language learners in Saudi Arabia
+  - Family Language Policies for Maintaining Arabic as a Home Language in Italy: The AHLI Project
+  - Fanar 2.0: Arabic Generative AI Stack
+  - Fanar: An Arabic-Centric Multimodal Generative AI Platform
+  - FanarGuard: A Culturally-Aware Moderation Filter for Arabic Language Models
+  - Fine-tuning Arabic-English NMT Engines for Investment Laws
+  - From Vocabulary to Voice: How Generative AI Shapes Arabic Learning for Non-Native Speakers
+  - From declarative knowledge to procedural fluency: a generative AI tutor for Arabic agreement rules
+  - GATmath and GATLc: Comprehensive benchmarks for evaluating Arabic large language models
+  - GPTAraEval: A Comprehensive Evaluation of ChatGPT on Arabic NLP
+  - Gamification for teaching the Arabic language to non-native speakers: a systematic literature review
+  - Gamified naming therapy versus traditional speech-language pathology for post-stroke anomia in Arabic speakers
+  - Gender Issues between Gemini and ChatGPT: The Case of English-Arabic Translation
+  - Generational shifts in bilingual communication: A comparative study of English-Arabic code-mixing in Saudi Arabia
+  - Generative AI Implementation and Assessment in Arabic Language Teaching
+  - Generative AI competency of Arabic language and literature students: a four-dimension questionnaire dataset with open-ended responses
+  - Generative AI in Arabic Grammar Learning: A Critical Review of Pedagogical Benefits and Linguistic Limitations
+  - Generative AI in the Academic Ecosystem: Transforming Pedagogies and Arabic Writing Productivity
+  - Generative artificial intelligence in topic-sentiment classification for Arabic text: a comparative study with possible future directions
+  - Global Spelling Correction in Context using Language Models: Application to the Arabic Language
+  - Google Translate Then and Now: Translations From Five Languages into English and Arabic (2012–2025)
+  - Grammatical Error Patterns in ChatGPT-Generated Modern Standard Arabic Texts: A Linguistic Analysis of Recurrent Patterns
+  - Graph convolution-based techniques for pragmatic Arabic figurative language classification
+  - HUMAINChat: A Deep Dive into Saudi Arabia's Sovereign AI Chatbot
+  - Hajj-FQA: A benchmark Arabic dataset for developing question-answering systems on Hajj fatwas
+  - Hallucination Analysis in Large Language Models for Arabic Question Answering
+  - Hallucination Detection in Arabic Scientific Content Generated by Large Language Models
+  - Hamyaria at PalmX2025: Leveraging Large Language Models to Improve Arabic Multiple-Choice Questions in Cultural and Islamic Domains
+  - Harnessing Artificial Intelligence for the Advancement of the Arabic Language: Challenges and Future Opportunities
+  - Hasil Terjemahan ChatGPT: Analisis Akurasi, Akseptabilitas dan Keterbacaan pada Berita Sky News Arabia
+  - How well can LLMs Grade Essays in Arabic?
+  - How well can LLMs grade essays in Arabic?
+  - Human vs. ChatGPT’s translation strategies: A comparative study of religious terms in children’s literature from English into Arabic
+  - Human, ChatGPT and DeepSeek Translation of Arabic Taboo  Expressions in the Novel “Woman at Point Zero” into English
+  - Hyperbole in Arabic YouTube: a pragmalinguistic study of artificial intelligence discourse
+  - INTEGRATING ARTIFICIAL INTELLIGENCE INTO ARABIC LANGUAGE EDUCATION: PEDAGOGICAL STRATEGIES AND LEARNING OUTCOMES
+  - Impact of Artificial Intelligence on the Quality of Arabic Language
+  - Implementation of Drilling Arabic Program (DAP) in Learning Speaking Skills at Madrasah Aliyah Bilingual Junwangi Krian Sidoarjo
+  - Implementation of the Use of Instagram @gramatika_arab in Developing Arabic Language Skills for Students of Arabic Language Education of UIN Sunan Kalijaga
+  - Improving Arabic Language Proficiency and Competence of Arabic Language Education Using AI Technology
+  - Improving Arabic Literacy with ChatGPT and Gamification: A Case Study at Alif Laam Miim Islamic School
+  - Indonesian–Arabic Academic Translation Quality: A Comparative Content Analysis of ChatGPT and Google Translate
+  - InfectA-Chat, an Arabic Large Language Model for Infectious Diseases: Comparative Analysis
+  - InfectA-Chat: Large Language Model for Infectious Diseases in Arabic Language (Preprint)
+  - Informed Prompts And Improving ChatGPT English To Arabic Translation
+  - Innovative Arabic Language Learning: Redefining Language Archetypes Using Artificial Intelligence
+  - Inquiring Arabic-Islamic Debatable Terms to ChatGPT: Will it Take a Side?
+  - Instrumental Analysis of English Vowels Produced by Male and Female Zilfaawi Arabic Speakers
+  - Integrated Mediapipe with a CNN Model for Arabic Sign Language Recognition
+  - Integrating Artificial Intelligence (AI)  in Diacritic Restoration and Arabic Text Translation: an Implementation of Chatgpt and Copilot in Digital Language Learning
+  - Integrating Artificial Intelligence Into Arabic Language Curriculum Evaluation
+  - Integrating Artificial Intelligence in Arabic Language Education: Challenges and Opportunities
+  - Integrating Artificial Intelligence in Teaching Arabic as a Foreign Language (TAFL) at MTsN 1 Surabaya
+  - Integrating Artificial Intelligence into Arabic Language Education: Socio-Technical Perspectives from Islamic Institutions in Southeast Asia
+  - Integrating Corpora and AI Tools in the Teaching, Learning, and Assessing of Arabic/English Legal Translation
+  - Integrating Large Language Models in the Prevention of Radicalisation Among Non-Arabic Proficient Muslim Learners
+  - Integration of Artificial Intelligence and Big Data in Arabic Language Learning: A New Paradigm for Personalization
+  - Intellectual humility and language attitudes: the case of Hebrew speakers’ views towards Arabic and multilingualism
+  - Interference of Speakers in Arabic Podcast: Darunnajah 6th Language Competition Arabic For Boys – Darunnajah 8
+  - Introducing the Arabic Visual Language Quality Index (AVLQI):&amp;nbsp;A Conceptual Framework for Evaluating Arabic Visual Language Quality Based on the Eid Normative Model (ENM)
+  - Introduction Arabic as a Contact Language
+  - Investigating the Accuracy of ChatGPT in Translating Some Arabic Literary and Cultural Terms into English
+  - Investigating the Effectiveness of ChatGPT OpenAI, Google Gemini and Human Translation in Translating Colloquial Libyan-Arabic Cultural Expressions: A Comparative Study
+  - Investigating the Impact of Utilizing the ChatGPT for Arabic Sentiment Analysis
+  - Investigating the Role of Artificial Intelligence Voice Assistants for Arabic-Speaking Users within the Context of Knowledge-Based Systems
+  - Investigating the Translation Dynamics of Arabic-English Code-Switching by AI and EFL University Students in Saudi Arabia
+  - Investigating the Use of Different Recurrent Neural Networks for Natural Language Inference in Arabic
+  - Investigating the role of Arabic diglossia-centered multi-domain intervention (ADMIN) in enhancing Palestinian-Arabic speaking kindergarten children’s emergent literacy
+  - Investing In Artificial Intelligence Algorithms In Processing The Arabic Language At The Grammatical Level
+  - Is 50% of Arabic Enough to Teach English? The Problematic Use of Translation in the 21st Century Moroccan English Classroom
+  - Is ChatGPT a Good English to Arabic Machine Translation Tool?
+  - Is There an Effect of Diglossia on Executive Functions? An Investigation among Adult Diglossic Speakers of Arabic
+  - Jais 2: A Family of Arabic-Centric Open Large Language Models
+  - Jais and Jais-chat: Arabic-Centric Foundation and Instruction-Tuned Open Generative Large Language Models
+  - LAraBench: Benchmarking Arabic AI with Large Language Models
+  - LLMs as a Compiler for an Arabic Programming Language
+  - Language Attitudes among Second-Generation Arabic Speakers in Italy
+  - Language Maintenance and Language Shift among Algerian Arabic Speakers in France
+  - Language Maintenance and Shift among Teenager Migrants: A Case Study of Arabic and Persian Communities in Australia
+  - Language and Identity in Kuwait: Examining Arabic Diglossia amongst Generation X and Generation Z
+  - Language and Thought in the Era of Artificial Intelligence: A Philosophy of Science Inquiry into the New Linguistic Paradigm in Arabic Language Education
+  - Language and identity of second-generation Arabic speakers in Italy
+                     1
+  - Language anxiety in learning Arabic as a second Language: A Case Study of Female Learners at the Arabic Language Institute for Speakers of Other Languages in King Abdulaziz University
+  - Language as power in the therapy room: A study of bilingual (Arabic–English) therapists' experiences
+  - Language choice in ChatGPT interaction among Jordanian Arabic–English bilinguals: The role of English proficiency
+  - Language discrepancies in the performance of generative artificial intelligence models: an examination of infectious disease queries in English and Arabic
+  - Language shift in teaching Arabic as a second language
+  - Language, academic adjustment, and help-seeking perceptions among Arab students from East Jerusalem in Israeli higher education
+  - Large Language Model Dissonance: Evaluating Gulf AI and Cyber Policies with Arabic and Western Tuned Models
+  - Large Language Models and Arabic Content: A Review
+  - Large Language Models as Legal Translators of Arabic Legislation: Do ChatGPT and Gemini Care for Context and Terminology?
+  - Large Language Models as Legal Translators of Arabic Legislatives: Does ChatGPT and Gemini Care for Context and Terminology?
+  - Large Language Models for Arabic Automated Essay Scoring
+  - Large language models in high-stakes Arabic-to-English legal translation: a contextual terminology study of ChatGPT 5.2 and DeepSeek
+  - Learning to Read in Arabic Diglossia: The Relation of Spoken and Standard Arabic Language in Kindergarten to Reading Skills in First Grade
+  - Lecturers’ Experiences with Artificial Intelligence in Arabic Language Education: A Narrative Inquiry
+  - Leveraging Artificial Intelligence and Digital Technologies to Enhance Sociolinguistic Competence and Arabic Language Skills
+  - Leveraging BERT Language Model for Arabic Long Document Classification
+  - Leveraging ChatGPT for Enhancing Arabic NLP: Application for Semantic Role Labeling and Cross-Lingual Annotation Projection
+  - Leveraging Large Language Models to Enhance Arabic Prompting and Response Generation in ChatGPT
+  - Lexical and Phonological Levelling in the Speech of Qassimi Arabic Speakers
+  - Linguistic Strategies in English and Arabic Language Advertising: A Case Study of Zarqa Market
+  - MGKM at StanceEval2024 Fine-Tuning Large Language Models for Arabic Stance Detection
+  - MODERN ISSUES OF BILINGUAL RUSSIAN ARABIC AND ARABIC RUSSIAN LEXICOGRAPHY: ELECTRONIC MEDIA VERSUS MATERIAL
+  - Machine Translation Quality Assessment : A Quantitative-Qualitative Analysis of English- into- Arabic Translation in The Climate Change Discourse
+  - Management of the Arabic Language Teaching Program for Non-Native Speakers
+  - Mastering English Multiple Adjectives Ordering among Early versus Late Second Language Speakers: Evidence from Arabic-English Bilinguals
+  - Measuring Large Language Models Dependency: Validating the Arabic Version of the LLM-D12 Scale
+  - MedArabiQ: Benchmarking Large Language Models on Arabic Medical Tasks
+  - MedLingua at MedArabiQ2025: Zero- and Few-Shot Prompting of Large Language Models for Arabic Medical QA
+  - Metaphor interpretation in Jordanian Arabic, Emirati Arabic and Classical Arabic: artificial intelligence vs. humans
+  - Minat Mahasiswa Menggunakan ChatGPT dalam Pembelajaran Bahasa Arab: Studi pada Mahasiswa PBA UINSI Samarinda
+  - Misinterpretation Of Artificial Intelligence In Arabic Language
+  - Mizan: A National Benchmark for Evaluating Large Language Models on Iraqi Arabic and the Iraqi Civic Context
+  - Modeling the Psychological and Technical Factors Influencing the Use of Artificial Intelligence Tools among Non-Native Arabic Learners: A Comparative Study in Egypt, Saudi Arabia, and Jordan.
+  - Modern Standard Arabic Attrition and State Stability: Why Prescriptive Arabic is Losing Ground to Arabī CSSA
+  - Module 3: Arabic and English Grammar in Translation
+  - Morphological Processing of L2 Arabic by Indonesian Speakers
+  - Motivating children to learn the Arabic language through classic Arabic books
+  - Motivations for Learning Arabic for Non-native Speakers in Sudan and their Justifications: A Field Study of Students at the Arabic Language Institute at the Arab States University in Sudan, and Students at the Arabic Language Institute for Non-Native Speakers at the Sudan Open University
+  - Multi-lingual Document Extraction and Validation Using Optical Character Recognition and Generative AI: Specific Focus on Arabic and English Texts
+  - NLP-Based Automatic Depression Detection on Social Media: An Overview with a Focus on Arabic-Language Data
+  - NYUAD at AraHealthQA Shared Task: Benchmarking the Medical Understanding and Reasoning of Large Language Models in Arabic Healthcare Tasks
+  - Navigating Digital Shifts in Arabic Language Education: A Contextual Inquiry in Indonesian Islamic Primary Schools
+  - Navigating Innovation and Cultural Diversity: The Role of Artificial Intelligence in Enhancing Arabic Language Learning Across Global Contexts
+  - Navigating the shift, adapting to change: a narrative inquiry into Arabic language teachers’ teaching experiences
+  - Nile-Chat: Egyptian Language Models for Arabic and Latin Scripts
+  - Noticing and metalinguistic awareness in the L2 writing process: A translation-based writing task for L1 Arabic speakers preparing to teach Hebrew as a second language
+  - Off-Topic Response Identification in an Arabic-Language Auto-Grading Platform
+  - Offline Bilingual Arabic–English Voice-Controlled Smart Home Automation Using Embedded Hardware and RF Communication
+  - On Compulsiveness and Excessiveness: ‘Arabic’
+  - On LLM Prompting Techniques for Arabic Language Arithmetic Reasoning
+  - On the effectiveness of limited-data large language model fine-tuning for Arabic
+  - Online Arabic Language Teaching Model Based on Collaborative Learning in Indonesian Senior High Schools
+  - Optimising Arabic Language Localisation In E-Commerce Marketing: A Qualitative Study Of User Experience, Trust, And Cultural Adaptation
+  - Optimizing Quranic Literacy with the Tamam Method: Leveraging Artificial Intelligence for Handwritten Arabic Recognition
+  - Origins of the association between spoken numbers and Arabic numerals: evidence from pre-school children who are bilingual in Arabic and English
+  - Overviewing Biases in Generative AI-Powered Models in the Arabic Language
+  - PICT at StanceEval2024: Stance Detection in Arabic using Ensemble of Large Language Models
+  - Paradigm Shifts in Arabic Translation and the Role of Artificial Intelligence in Translation
+  - Parenting for Early Literacy in an Arabic–English Bilingual Society
+  - Patterns of Language Maintenance Among Algerian-Arabic Speakers in France
+  - Peer Review Report For: AI Tools and Grammatical Performance in Arabic: A Student Perspective [version 1; peer review: 3 approved]
+  - Pengaruh Artificial Intelligence (AI) terhadap Willingness to Communicate pada Pembelajaran Bahasa Arab
+  - Perceived professional empowerment in “Tawjeeh,” an Arabic-delivered certified career counselor program: an explanatory mixed-methods study of Qatari women
+  - Performance of ChatGPT in Israeli Arabic-language OBGYN national medical licensure exam
+  - Phonological whole-word measures in bilingual Arabic-English speaking children
+  - Plagiarism detection across languages: a comprehensive study of Arabic and English-to-Arabic long documents
+  - Politeness Strategies in Human–AI Interaction: A Comparative Pragmatic Analysis of Arabic Responses Produced by ChatGPT and Human Participants
+  - Pre- Trained Language Models for Mental Health: An Empirical Study on Arabic Q&A Classification
+  - Predictive Artificial Intelligence and Legislative Gaps in Arabic Legal Texts
+  - Problems Of Artificial Intelligence Applications In Digitizing The Arabic Language In The Areas Of Grammar And Morphology And Methods To Resolve It/ مشكلات تطبيقات الذكاء الاصطناعي في رقمنة اللغة العربية  بمجالي النحو والصرف وطرق معالجتها
+  - Proficiency, phonological context, and distributional control in Arabic L1 learners' English stop voicing
+  - Prospek Pembelajaran Bahasa Arab di Era Generative Artificial Intelligence
+  - REDEFINING ARABIC TEACHER COMPETENCIES FOR DIGITAL LEARNING: A CONCEPTUAL REVIEW BASED ON TPACK AND DIGCOMPEDU
+  - Reading Comprehension in the Arabic Diglossia: The SVR Between the Spoken and Literary Varieties
+  - Reading Loss in Arabic Language During COVID-19 in the UAE and Proposed Solutions: The Perspectives of Primary-Grade Arabic Language Teachers
+  - Reconfiguring Language Curriculum Paradigms: A Critical Comparative Study of English and Arabic for Foreign Language Learners
+  - Reflections on Translating Poetry through ChatGPT: Insights from Arabic, English, and French
+  - Resource-Aware Arabic LLM Creation
+  - Respon Mahasiswa Pembelajar Bahasa Arab di UM Sumatera Barat tentang Penggunaan ChatGPT dalam Menterjemahkan Kosa Kata BahasaArab
+  - Review on Artificial Intelligence Techniques for Recognizing Arabic Sign Language
+  - Reviving the Arabic Language Instinct: A Psycholinguistic and AI Synergy
+  - Revolutionizing Arabic Language Learning: Innovative Teaching Strategies for Non-Native Speakers
+  - Revolutionizing Arabic Language Learning: The Transformation of Artificial Intelligence (AI)-Based and Multimedia Cognitive Methods
+  - Rhetoric, Creativity, and Machine Limits: ChatGPT 4.5 Plus as a Model for Comparing Human and AI-Generated Arabic Prose
+  - Robustness and Explainability in Arabic Authorship Models: Tackling the Challenge of AI-Generated Texts
+  - Sanskrit, Classical Arabic, Latin and now English – a case of a special kind of lingua franca use and status
+  - Sarcasm Detection in Arabic Text using Artificial Intelligence-Based Modeling
+  - Scaling Arabic Medical Chatbots Using Synthetic Data: Enhancing Generative AI with Synthetic Patient Records
+  - Scientometrics of Language Policy in Sustaining Arabic Learning in Indonesia
+  - Second Language (Arabic) Acquisition of LLMs via Progressive Vocabulary Expansion
+  - Second language learners’ experiences communicating in Arabic with native speakers during a study abroad
+                    program
+  - Second-Language Acquisition and First-Language Attrition of Speech: The Production of Arabic and English Short Vowels
+  - Semantic Shift in the Meaning of the Arabic word tamma
+  - Simultaneous Interpretation Generated by Artificial Intelligence. An Arabic-Spanish Case Study
+  - Six NMT Systems, One Language Pair: Which Best Translates Arabic-English?
+  - Socio-cognitive mindfulness and academic burnout: A study of international students in an intensive Arabic program
+  - Specialized Translation Quality: A Comparative Study of Google Translate, DeepL, and ChatGPT in Translating Food Safety Regulations from English to Arabic
+  - Statistical Analysis of Arabic Teachers’ Use of ChatGPT in Teaching in Oman
+  - Strategies of Rendering Metaphor from Arabic into English: A Comparative Study of ChatGPT and Matecat
+  - Strategies of Translating Euphemistic Expressions from Arabic into English: A Comparative Study of Artificial Intelligence Models with Human Translation
+  - Student's Academic Ethics In Using Chatgpt In Completing Arabic Language Assignments
+  - Students' Perceptions of ChatGPT as a Learning Aid in Arabic Language Education at Universitas Islam KH. Ruhiat Cipasung
+  - Students' perceptions of the use of generative artificial intelligence in learning Arabic at Princess Nourah bint Abdulrahman University, Saudi Arabia
+  - Students’ Perspectives on the Use of Chat-GPT in the Fields of Phonology, Morphology, and Syntactics in Arabic Language Learning
+  - Summarizing Arabic Articles using Large Language Models
+  - Superior Performance of Artificial Intelligence Models in English Compared to Arabic in Infectious Disease Queries
+  - Supplemental role of ChatGPT in enhancing writing ability for children with dysgraphia in the Arabic language
+  - Supporting English as a Foreign Language and L1 Language Skills Among Arabic Students from Low Socio-economic Status: An Exploratory Study
+  - Synthetic Visuality in the Activity of Pro-Russian Arabic-Language Accounts on X
+  - Systematic review: the application of ChatGPT on Arabic language text processing
+  - TARJAMAT: Evaluation of Bard and ChatGPT on Machine Translation of Ten Arabic Varieties
+  - THE CHALLENGE OF TRANSLATING ARABIC IN THE DIGITAL AGE: TESTING THE ACCURACY OF CONVENTIONAL TRANSLATION VERSUS ARTIFICIAL INTELLIGENCE
+  - THE CHALLENGES OF LEARNING ARABIC LANGUAGE USING INSTRUCTIONAL VIDEOS FOR NON-NATIVE SPEAKERS OF ARABIC: A CASE STUDY OF THE NEW HOPE COLLEGE
+  - THE EXTENT OF THE DEVELOPMENT OF AN EDUCATIONAL PROGRAM BASED ON ARTIFICIAL INTELLIGENCE TO IMPROVE THE LEVEL OF UNDERSTANDING AND UNDERSTANDING OF FOURTH GRADE STUDENTS IN THE ARABIC LANGUAGE SUBJECT
+  - THE ROLE OF DIGITAL LEARNING, ARTIFICIAL INTELLIGENCE (AI), AND SOCIAL MEDIA IN DEVELOPING TEACHING METHODS FOR ARABIC GRAMMAR
+  - THE USE OF GOOGLE TRANSLATE IN ARABIC LANGUAGE LEARNING AMONG GRADE X STUDENTS AT MAS MUTIARA AULIA MEDAN
+  - TRANSLANGUAGING PRACTICES IN PESANTREN-BASED BILINGUAL EDUCATION: BRIDGING ARABIC, ENGLISH, AND LOCAL LANGUAGES
+  - Talk like a Local: Evaluating Large Language Models for Arabic Dialect Translation Using Similarity Scores
+  - Taqyim: Evaluating Arabic NLP Tasks Using ChatGPT Models
+  - Tayseer: A Novel AI-Powered Arabic Chatbot Framework for Technical and Vocational Student Helpdesk Services and Enhancing Student Interactions
+  - Teachers’ Perceptions, Knowledge, Attitudes, and Practices in Integrating Artificial Intelligence into Arabic Language Teaching
+  - Teaching the Skills of Expression According to Theory of Gerjanis’s Systems and Generation Chomsky: From the Perspective of Arabic Language Engineering for Non-Arabic Speakers
+  - Term Extraction Methodology Based on Ad Hoc Parallel Corpora for Conference Interpreting Training in the English–Arabic Language Pair
+  - Text-to-SQL for Low-Resource Languages: A Unified Large Language Model Framework Evaluated on Arabic, Japanese, and Vietnamese
+  - The  Influence of Generative AI on Student Engagement and Academic Outcomes in Arabic Language Learning
+  - The AI Revolution in Arabic Language Learning: An Analysis of ChatGPT’s Role in Autonomous Learning
+  - The Advantages and Disadvantages of Teaching the Arabic Language to Native Speakers of Slavic Languages
+  - The Arabic AI-GPR Index: Measuring Geopolitical Risk from Arabic-Language News
+  - The Arabic Research Institute, ArabicResearch.org
+  - The Arabic language in contemporary Arab media: challenges and opportunities
+  - The Common between Malay Language and the Qur'an  A model of curriculum for teaching Arabic to Malay speakers
+  - The Contribution of Artificial Intelligence Technologies in Refining the Arabic Language Skills of Its Native Speakers:  Achieved and Possible
+  - The Contribution of Artificial Intelligence Technologies in Refining the Arabic Language Skills of Its Native Speakers: Achieved and Possible
+  - The Contribution of Artificial Intelligence to Learning the Arabic Language
+  - The Contributions of the Arabic Language to Islamic Studies
+  - The Curriculum Of Arabic Language Skills For Non-Native Speakers In Sri Lankan Government Universities
+  - The Diglossic-Bilingual of English-Arabic Second-Language Eventualities in Madurese-Scholar's Society
+  - The Effect of Using the Artificial Intelligence Application ChatGPT on Remediating Written Linguistic Errors among Learners of Arabic as a Second Language.
+  - The Effectiveness of Artificial Intelligence and Deep Learning Tools in Enhancing Academic Journal Writing: A Mixed Methods Study of Arabic Language Education Students in Indonesia
+  - The Effectiveness of Using Plotagon Story Media to Improve Listening Skills for Non-Arabic Speakers
+  - The Effectiveness of the Use of AI (Artificial Intelligence) as a Learning Medium in Arabic Language at Senior High School
+  - The Employment of the Generative Artificial intelligence in Analyzing the Classical Arabic Poetry
+  - The Geometry of Arabic Poetry Rhythm (An Energy-Based Artificial Intelligence Approach to Sub-Meter Detection)
+  - The IMPLEMENTATION OF A DIFFERENTIATED APPROACH IN ARABIC ONLINE INTERACTION SKILLS LEARNING VIA CHATGPT AT MAN 1 MUSI BANYUASIN  SOUTH SUMATRA
+  - The Impact Of The Arabic Language Curriculum  For Malay-Speakers And Qur'anic Words  In The Development Of Language And Literary Skills
+  - The Impact Of Using Bionic Font In Speech-To-Text Tools On The Accuracy Of English-Into-Arabic Interpretation
+  - The Impact of Arabic Diglossia on L2 Learners Studying in Iraq: the Difficulties Encountered and the Appropriate Arabic Approach to Teach
+  - The Impact of Arabic Diglossia on Social-Emotional Skills in the Fifth and Seventh Grades
+  - The Impact of ChatGPT Integration on Arabic Language Learning Among Generation Z Students
+  - The Impact of Diglossia in Arabic on Word Reading Development
+  - The Impact of Diglossia in Arabic onWord Reading Development
+  - The Impact of Diglossia on Executive Functions and on Reading in Arabic
+  - The Impact of Language Immersion on Arabic Language Acquisition for Speakers of Other Languages: “Enhancing Arabic Language Skills for Speakers of Other Langugaes” Program as a Model
+  - The Impact of Prompt Engineering of Generative AI Tools on the Quality of Arabic Marketing Text Content Production
+  - The Influence of Artificial Intelligence on Contemporary Arabic Literary Creativity
+  - The Influence of Generative AI on Student Engagement and Academic Outcomes in Arabic Language Learning
+  - The Influence of Internal and External Factors on Arabic Language Learning Interest among Arabic Language Education Students
+  - The Landscape of Arabic Large Language Models (ALLMs): A New Era for Arabic Language Technology
+  - The Language of Subtitles for Arabic-English Bilingual Speakers in the United Arab Emirates
+  - The Mind-Machine Duality in Carving Meaning: ChatGPT and Self Regulated Learning in Arabic Research
+  - The Perceptions of Native-Arabic Speaking Students towards Using  ChatGPT for Learning English as a Second Language
+  - The Perceptions of Native-Arabic Speaking Students towards Using ChatGPT for Learning English as a Second Language
+  - The Performance of OpenAI ChatGPT-4 and Google Gemini in Virology Multiple-Choice Questions: A Comparative Analysis of English and Arabic Responses
+  - The Potential of Use Artificial Intelligence in Implementing Character Education in Arabic Language Subjects
+  - The Production of Laterals by English-Arabic Bilingual Children
+  - The Qiyas Benchmark: Measuring ChatGPT Mathematical and Language Understanding in Arabic
+  - The Quality of ChatGPT’s Arabic-Indonesian Translation of Matan al-Ghayah wa at-Taqrib: Implications for Arabic Language Learning in Pesantren
+  - The Quality of Google Translate and ChatGPT English to Arabic Translation The Case of Scientific Text Translation
+  - The Reality Of Automatic Translation For The Arabic Language From The Perspective Of Artificial Intelligence
+  - The Relationship between Language Attitude and Communicative Performance in Arabic Language Learning
+  - The Role of Artificial Intelligence In Understanding And Answering Investors' Questions In Arabic
+  - The Role of Artificial Intelligence in Arabic Language Processing: Ethical Challenges and Development Prospects
+  - The Role of ChatGPT as an AI-Assisted Learning Tool in Teaching Arabic to Students at Higher Education Institution Malang
+  - The Role of ChatGPT in Enhancing Academic Arabic Writing Skills among Students of Arabic Language Education
+  - The Shift toward Fusha (Classical Arabic Language) Reconstruction of the Concept
+  - The Syntactic Exoskeleton: How Generative AI Homogenizes the Structure of Arabic-L1 English Academic Writing
+  - The Use of AI ChatBots to Increase Student Enthusiasm for Writing Arabic Theses at Mataram Islamic University
+  - The Use of Artificial Intelligence-Based Generative Learning Media to Improve Arabic Language Learning Strategies
+  - The Use of ChatGPT AI Audio in Mastering Arabic Speaking Skills at the Beginner Level
+  - The Use of ChatGPT Platform in Arabic Learning Based on Cognitive Theory a Content Analysis
+  - The Use of ChatGPT among Arabic Language and Literature Students: Opportunities and Challenges
+  - The Use of ChatGPT in Madrasah: A Study of Arabic Teachers in Kerinci Regency and Sungai Penuh City
+  - The Use of Classical and Modern Arabic Short Stories as a Strategy for Improving Arabic Language Skills
+  - The Use of Digital Dictionary Applications in Improving Understanding of Arabic Vocabulary: Case Study Of Arabic Language Education Students UINSU Medan
+  - The Use of Generative Artificial Intelligence (AI) in Arabic Language Education: Insights and Implications between Malaysia and Indonesia
+  - The Use of Lumi Education Application in Improving Arabic Language Skills for Students at Man 2 Makassar
+  - The Use of the Structural Analytic Synthetic Method in Arabic Language Learning: Insights from Islamic Elementary Schools in Indonesia
+  - The Utilization Of Artificial Intelligence In Arabic Language Instruction At Islamic Higher Education Institutions
+  - The Utilization of Google Translate and ChatGPT as Supporting Media in The Arabic Text Translation Process
+  - The deep integration of artificial intelligence technology in the teaching and learning of the Arabic language
+  - The effect of Arabic language type on banking chatbots adoption
+  - The impact of L2 English on choice perception, interpretation, and preference for L1 Arabic speakers
+  - The implementation of English and Arabic practices at an Islamic bilingual boarding school
+  - The influence of language on the formation of number concepts: Evidence from preschool children who are bilingual in English and Arabic
+  - The performance of OpenAI ChatGPT-4 and Google Gemini in virology multiple-choice questions: a comparative analysis of English and Arabic responses
+  - The use of Generative Artificial Intelligence (Gen AI) Applications among the Arabic students: A Preliminary Study
+  - Tibyan Corpus: Balanced and Comprehensive Error Coverage Corpus Using ChatGPT for Arabic Grammatical Error Correction
+  - TounsiBench: Benchmarking Large Language Models for Tunisian Arabic
+  - Towards Automatic Arabic Test Scoring: Leveraging ChatGPT for Prompt Design
+  - Toxic language detection: A systematic review of Arabic datasets
+  - Toxic language detection: a systematic review of Arabic datasets
+  - Traditional Method vs AI Chatbot-Assisted in Arabic Learning
+  - Transformasi Kurikulum Bahasa Arab Menuju Standar Global: Kajian Sistematis atas Mobilitas Akademik dan Kolaborasi Internasional
+  - Transformational-Generative Theory Perspective in Teaching The Four Language Skills of Arabic
+  - Transformer-based Arabic language lemmatization
+  - Transformer-driven chatbot for Arabic agricultural knowledge
+  - Transforming Arabic Language Learning With Artificial Intelligence: Teacher Perspectives And Student Experiences
+  - Transforming Arabic Language Learning in the Era of Artificial Intelligence: Opportunities and Challenges in Higher Education
+  - Transforming Arabic Language Learning in the Era of Industry 5.0: Integrating Digital Technology and Humanistic Approaches
+  - Transforming Arabic Language Learning with AI Integration: Empowering Self-Efficacy in Language Mastery
+  - Transforming Learner Autonomy in Arabic Language Learning Through Artificial Intelligence
+  - Transl[iter]ating Dubai’s linguistic landscape: a bilingual translation perspective between English and Arabic against a backdrop of globalisation
+  - Translating Arabic Free Poetry Texts into English by ChatGPT: Success and Failure
+  - Translating Arabic Text into English: Form and Meaning
+  - Translating Arabic-English Collocations Proficiency among EFL Jordanian Learners
+  - Translating Islamic Media Discourse from Arabic into English: An Analysis of Translation Process
+  - Translating classical Arabic verse: human translation vs. AI large language models (Gemini and ChatGPT)
+  - Translating culture through AI: Evaluating the performance of ChatGPT and Gemini in rendering Arabic and English proverbs
+  - Translating dialects between ChatGPT and DeepSeek: Yemeni Sana’ani Arabic terms as a case-in-point
+  - Translating food idioms across the english arabic language divide:A comparative study of human translators, ChatGPT, and Gemini
+  - Translation Transformation: Quillbot and the Shifting Landscape of Arabic Language Learning
+  - Translation of English and Arabic “Sleep” Terms and Formulaic Expressions by Artificial Intelligence: A Comparison of Copilot and DeepSeek
+  - Trend of Arabic Language Use in Indonesian Brands: Onomastic Studies on Arabic Shop Names in Tulungagung
+  - Trends and challenges of Arabic Chatbots: Literature review
+  - Trust-Driven Adoption of Ai-Powered Translation Tools Among Arabic Language Students In Malaysian Higher Education
+  - UTILIZING CHATGPT FOR ANALYZING ARABIC TEXTS IN THE STUDY OF NAHWU (ARABIC GRAMMAR)
+  - Understanding students’ experiences with generative AI in Arabic language education at Islamic universities in Indonesia
+  - Unlocking language boundaries: AraCLIP - transforming Arabic language and image understanding through cross-lingual models
+  - Unveiling Arabic named entity recognition using natural language processing with artificial intelligence approach on Moroccan dialect
+  - Unveiling the New Frontier: ChatGPT-3 Powered Translation for Arabic-English Language Pairs
+  - Upaya at ArabicNLU Shared-Task: Arabic Lexical Disambiguation using Large Language Models
+  - Use of AI artificial intelligence chatGPT for arabic language learning media
+  - Use of AI in Learning Arabic Language by Non-Arabic Speakers
+  - Use of Artificial Intelligence Platforms in Middle School Level Arabic Language Learning
+  - Use of Artificial Intelligence in Arabic Language Instruction among Higher institutions in Niger State: Pros, Cons, and Opportunities
+  - Use of ChatGpt as an Arabic Translation Tool: A Study of BLEU Metrics Quality and Human Assessment
+  - Use of Lughatul Fasli among Arabic Language Training Teachers at Sultan Idris Education University
+  - Use of the Thunkable Platform in Preparing a Digital Arabic-Indonesian Dictionary as a Learning Resource for Arabic Language Learners
+  - Using Artificial Intelligence in Arabic Learning: Opportunities and Challenges
+  - Using ChatGPT in Teaching Arabic as a Foreign Language
+  - Using LSTM and GRU With a New Dataset for Named Entity Recognition in the Arabic Language
+  - Utilization of AI Technology in Translation Among Arabic Language Students at PTKIN in North Sumatra
+  - Utilization of the Use ChatGPT among Students the Arabic Language Education Department North Sumatera State Islamic University Medan
+  - Utilization of the Use of Google Forms as an Online Quiz to Increase Vocabulary in Arabic Language Learning
+  - Utilizing Artificial Intelligence in Teaching Arabic Language Skills (Visions and Expectations)
+  - Utilizing ChatGPT to Develop Arabic Speaking Skills through Deep Learning Approach
+  - VALIDITY AND RELIABILITY OF A GENERATIVE ARTIFICIAL INTELLIGENCE (GEN AI) INSTRUMENT FOR ARABIC LANGUAGE STUDENTS AT PUBLIC UNIVERSITIES IN THE KLANG VALLEY: A PILOT STUDY
+  - Verb–subject gender agreement in Standard Arabic: L2 acquisition by Arabic heritage speakers and French-speaking learners of Arabic
+  - Violet: A Vision-Language Model for Arabic Image Captioning with Gemini Decoder
+  - Vision Transformers and Transfer Learning Approaches for Arabic Sign Language Recognition
+  - Voice onset time in Arabic L1 learners of English and Spanish: evidence for stability, interaction, and phonetic drift in multilingual speech
+  - Wheelchair skills test questionnaire for manual and powered wheelchair users: arabic translation, adaptation, and validation
+  - Why AI Struggles to Understand Arabic Grammar: A Techno-Pedagogical Review of Computational and Linguistic Challenges
+  - Within- and cross-language contributions of metalinguistic awareness to vocabulary knowledge in Arabic- German bilingual learners
+  - Word Reading Accuracy and Fluency: Their Relations and Their Cross-Linguistic Transfer in Arabic-English Sequential Bilingual Children
+  - Writing direction and language activation affect how Arabic-English bilingual speakers map time onto space
+  - rematchka at ArabicNLU2024: Evaluating Large Language Models for Arabic Word Sense and Location Sense Disambiguation
+  - تطبيقات الذكاء الاصطناعي في معالجة اللغة العربية دراسة في تقنيات المعالجة الحاسوبية للنصوص العربية Artificial Intelligence Applications in Arabic Language Processing A Study in Arabic Text Processing Techniques
+  - “Alexa learned Arabic”: A translanguaging and multimodal perspective on language and media ideologies

@@ -150,6 +150,7 @@ A full audit of data, instrument, statistics, SPSS, machine learning, paper and 
 - **Instrument glosses** (English only; the fielded Arabic is unchanged): Role option 4 "Other" (was
   "Neither"), "An employee", "Using Arabic when talking about my personal matters", "Recalling the everyday
   Arabic word I need".
+- **Novelty statement (7 Oct 2026).** "To our knowledge" was replaced by the search behind it: `literature_search.py` ran ten queries in OpenAlex and Crossref (works since 30 Nov 2022, 100 most relevant records per query and database, 1,497 titles; `results/literature_search.txt`). Every title mentioning Arabic was screened; none asked Arabic speakers whether AI changed their own Arabic use. The search found Younes et al. 2026 (language choice with ChatGPT among Jordanian bilinguals), now cited.
 - **References** added after Crossref checks: Ahuja et al. 2023 (MEGA), Esseili 2017, Podsakoff et al. 2003,
   Bianchi 2012, Hanley and McNeil 1982. Alghamdi and Petraki 2018 documents Arabizi (Latin script) in Saudi
   Arabia, not a move to English; the paper now cites it for script and Bianchi for the English mixing.
